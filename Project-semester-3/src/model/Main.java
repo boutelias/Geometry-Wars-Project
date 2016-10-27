@@ -11,11 +11,14 @@ import javax.swing.JFrame;
 public class Main {
 
     int fps = 60;
-    JFrame frame;
+    int x = 200,y = 200;
     int gameHeight= 400;
     int gameWidth = 600;
     
+    
+    JFrame frame;
     Graphics g;
+    Graphics g2;
     BufferedImage i;
     
     public static void main(String[] args) {
@@ -54,10 +57,19 @@ public class Main {
         //frame.setLocation(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        
+        
+        
+        //graphic stuff
+        
+        i = new BufferedImage(gameWidth,gameHeight, BufferedImage.TYPE_INT_RGB);
+        g = i.getGraphics();
+        g2 = frame.getGraphics();
     }
     
     void update(){
-    
+    x++;
+    y++;
     }
     
     void draw(){
@@ -67,7 +79,9 @@ public class Main {
         g.fillRect(0, 0, gameWidth, gameHeight);
         
         g.setColor(Color.CYAN);
-        g.fillOval(250, 250, 50, 50);
+        g.fillOval(x, y, 50, 50);
+        
+        g2.drawImage(i,0,0,frame);
     }
     
 }
