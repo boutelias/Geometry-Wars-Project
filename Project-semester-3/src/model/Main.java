@@ -3,6 +3,7 @@ package model;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ public class Main {
     int gameHeight= 400;
     int gameWidth = 600;
     
+    InputHandler handler;
     
     JFrame frame;
     Graphics g;
@@ -58,7 +60,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         
-        
+        handler = new InputHandler(frame);
         
         //graphic stuff
         
@@ -68,8 +70,22 @@ public class Main {
     }
     
     void update(){
-    x++;
-    y++;
+        if(handler.isKeyDown(KeyEvent.VK_RIGHT)){
+            x++;
+        }
+        if(handler.isKeyDown(KeyEvent.VK_LEFT)){
+            x--;
+        }
+        if(handler.isKeyDown(KeyEvent.VK_UP)){
+            y--;
+        }
+        if(handler.isKeyDown(KeyEvent.VK_DOWN)){
+            y++;
+        }
+        if(handler.isMouseDown(1)){
+            x = handler.getEvent(1).getX();
+            y = handler.getEvent(1).getY();
+        }
     }
     
     void draw(){
