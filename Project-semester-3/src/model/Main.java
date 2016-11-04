@@ -12,10 +12,10 @@ import javax.swing.JFrame;
 public class Main {
 
     int fps = 60;
-    int x = 200,y = 200;
     int gameHeight= 400;
     int gameWidth = 600;
     
+    Character character;
     InputHandler handler;
     
     JFrame frame;
@@ -61,30 +61,32 @@ public class Main {
         frame.setVisible(true);
         
         handler = new InputHandler(frame);
-        
+        character = new Character();
         //graphic stuff
         
         i = new BufferedImage(gameWidth,gameHeight, BufferedImage.TYPE_INT_RGB);
         g = i.getGraphics();
         g2 = frame.getGraphics();
+        
+        
     }
     
     void update(){
         if(handler.isKeyDown(KeyEvent.VK_RIGHT)){
-            x++;
+            character.moveRight();
         }
         if(handler.isKeyDown(KeyEvent.VK_LEFT)){
-            x--;
+            character.moveLeft();
         }
         if(handler.isKeyDown(KeyEvent.VK_UP)){
-            y--;
+            character.moveUp();
         }
         if(handler.isKeyDown(KeyEvent.VK_DOWN)){
-            y++;
-        }
+            character.moveDown();
+        }        
         if(handler.isMouseDown(1)){
-            x = handler.getEvent(1).getX();
-            y = handler.getEvent(1).getY();
+            System.out.println(handler.getEvent(1).getX());
+            System.out.println(handler.getEvent(1).getY());
         }
     }
     
@@ -94,8 +96,8 @@ public class Main {
         g.setColor(Color.black);
         g.fillRect(0, 0, gameWidth, gameHeight);
         
-        g.setColor(Color.CYAN);
-        g.fillOval(x, y, 50, 50);
+        g.setColor(Color.YELLOW);
+        g.fillOval(character.getPosX(), character.getPosY(), 50, 50);
         
         g2.drawImage(i,0,0,frame);
     }
