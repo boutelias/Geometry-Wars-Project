@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.awt.Component;
@@ -10,11 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-/**
- *
- * @author Tobias
- */
 public class InputHandler {
     
     boolean[] keys = new boolean[256];
@@ -55,7 +47,7 @@ public class InputHandler {
                 mouse[e.getButton()] = false;
                 mEvent[e.getButton()] = e;
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent e) {}
 
