@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
-public class Main {
+public class Game {
     
     int fps = 60;
     int gameHeight= 800;
@@ -23,15 +23,17 @@ public class Main {
     InputHandler handler;
     
     List<Bullet> bullets = new ArrayList();
+    List<Enemy> enemys = new ArrayList();
+    
     long lastBulletFired = 0;
     
     GameGui gameGui;
     
     public static void main(String[] args) {
-        new Main();
+        new Game();
     }
     
-    public Main(){
+    public Game(){
         run();
         System.exit(-1);
     }
@@ -57,7 +59,8 @@ public class Main {
     }
     
     void init(){
-
+        enemys.add(new Enemy());
+        
         gameGui = new GameGui(gameWidth,gameHeight);
         
         character = new Character();
@@ -68,12 +71,12 @@ public class Main {
     void update(){
         updateCharacterPos();
         updateBullets();
-        /*update enemys*/
-        /*collision detection*/
+        updateEnemys();
+        collisionDetection();
     }
     
     void draw(){
-        gameGui.draw(character, bullets);
+        gameGui.draw(character, bullets, enemys);
     }
 
     private void updateCharacterPos() {
@@ -94,25 +97,70 @@ public class Main {
     private void updateBullets(){
         List<Bullet> needToRemove = new ArrayList();
         
-        if(handler.isMouseDown(1)){            
-            if(lastBulletFired + (60.0/character.getBulletsPerMinute()*1000)<System.currentTimeMillis()){
-                //Moeten we echt height en witdh meegeven of kunnen we er anders aan?
-                Bullet newBullet = new Bullet(character.getPosX(),character.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),gameHeight,gameWidth);
-                bullets.add(newBullet);
-                lastBulletFired = System.currentTimeMillis();
-            }
-        }
+        addBullets();
         
         for(Bullet bullet: bullets){
             bullet.updatePos();
             
-            if(bullet.getIsOutOfScreen()==true){
+            if(bullet.getIsOutOfScreen()){
                 needToRemove.add(bullet);
             }
         }
         
         for(Bullet bullet: needToRemove){
             bullets.remove(bullet);
+        }
+    }
+    
+    private void addBullets(){
+        if(handler.isMouseDown(1)){            
+            if(lastBulletFired + (60.0/character.getBulletsPerMinute()*1000)<System.currentTimeMillis()){
+                //Moeten we echt height en witdh meegeven of kunnen we er anders aan?
+                Bullet newBullet = new Bullet(character.getPosX(),character.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),gameHeight,gameWidth);
+                bullets.add(newBullet);
+                lastBulletFired = System.currentTimeMillis();
+                enemys.add(new Enemy());
+            }
+        }
+    }
+    
+    private void updateEnemys(){
+        for(Enemy enemy: enemys){
+            enemy.updatePos(character.getPosX(),character.getPosY());
+        }
+    }
+    
+    private void collisionDetection(){
+        /*bullets vs enemysdetection*/
+        List<Bullet> bulletsToRemove = new LinkedList();
+        List<Enemy> enemysToRemove = new LinkedList();
+        
+        for(Bullet bullet: bullets){
+            for(Enemy enemy: enemys){
+                if(bullet.getBounds().intersects(enemy.getBounds())){
+                    bulletsToRemove.add(bullet);
+                    enemysToRemove.add(enemy);
+                }
+            }
+        }
+        
+        for(Bullet bullet: bulletsToRemove){
+            bullets.remove(bullet);
+        }
+        for(Enemy enemy: enemysToRemove){
+                enemys.remove(enemy);
+        }
+        
+        /*enemys vs character detection*/
+        Enemy hittedChar = null;
+        for(Enemy enemy: enemys){
+            if(character.getBounds().intersects(enemy.getBounds())){
+                System.out.println("you dead");
+                hittedChar = enemy;
+            }
+        }
+        if(hittedChar!= null){
+            enemys.remove(hittedChar);
         }
     }
     

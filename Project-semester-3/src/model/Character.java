@@ -1,12 +1,18 @@
 package model;
 
+import java.awt.Rectangle;
+
 public class Character {
+    private int width = 50;
+    private int height = 50;
     private int posX;
     private int posY;
     //the sprite of the character would be nice to store here
+    private int movementSpeed = 2;
     private int damage;
     private int lives;
     private int bulletsPerMinute;
+   
     
     
     public Character(){
@@ -14,25 +20,34 @@ public class Character {
         //middle of the screen? -- variables in parameter of construcor
         posX = 100;
         posY = 100;
-        bulletsPerMinute = 300;
+        bulletsPerMinute = 800;
     }
     
     public void moveUp(){
-        posY --;
+        posY -= movementSpeed;
     }
     public void moveDown(){
-        posY ++;
+        posY += movementSpeed;
     }
     public void moveLeft(){
-        posX --;
+        posX -= movementSpeed;
     }
     public void moveRight(){
-        posX ++;
+        posX += movementSpeed;
     }
+
     
     
+    
+
     /*GETTERS AND SETTERS*/
-    public int getPosX(){
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public int getPosX() {
         return posX;
     }
     
@@ -41,5 +56,8 @@ public class Character {
     }
     public int getBulletsPerMinute(){
         return bulletsPerMinute;
+    }
+    public Rectangle getBounds(){
+        return new Rectangle(posX-(width/2),posY-(height/2),width,height);
     }
 }

@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import javax.swing.JFrame;
 import model.Bullet;
+import model.Enemy;
 import model.InputHandler;
 
 /**
@@ -54,7 +55,7 @@ public class GameGui {
         
     }
     
-    public void draw(Character character, List<Bullet> bullets){
+    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemys){
         this.character = character;
         this.bullets = bullets;
         
@@ -62,12 +63,17 @@ public class GameGui {
         g.fillRect(0, 0, gameWidth, gameHeight);
         
         g.setColor(Color.YELLOW);
-        g.fillOval(character.getPosX()-25, character.getPosY()-25, 50, 50);
+        g.fillOval(character.getPosX()-(character.getHeight()/2), character.getPosY()-(character.getWidth()/2), character.getHeight(), character.getWidth());
         
         g.setColor(Color.green);
         
         for(Bullet bullet: bullets){
             g.fillOval(bullet.getPosX()-10, bullet.getPosY()-10,20,20);
+        }
+        
+        g.setColor(Color.red);
+        for(Enemy enemy: enemys){
+            g.fillOval(enemy.getPosX()-10, enemy.getPosY()-10,20,20);
         }
         
         g2.drawImage(i,0,0,frame);
