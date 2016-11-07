@@ -22,13 +22,13 @@ public class Character {
         //middle of the screen? -- variables in parameter of construcor
         this.maxX = maxX;
         this.maxY = maxY;
-        posX = 100;
-        posY = 100;
+        posX = 200;
+        posY = 200;
         bulletsPerMinute = 80;
     }
     
     public void moveUp(){
-        if(posY-movementSpeed>(34+movementSpeed+(height/2))){
+        if(posY-movementSpeed>(34+40+movementSpeed+(height/2))){
             posY -= movementSpeed;
         }
     }

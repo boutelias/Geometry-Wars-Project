@@ -62,11 +62,11 @@ public class GameGui {
         this.bullets = bullets;
         
         
-        g.setColor(Color.black);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, gameWidth, gameHeight);
         
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/img/banner-top.jpg");
-        g.drawImage(img1, 0, 20,null);
+        g.drawImage(img1, 0, 38,null);
         
         g.setColor(Color.YELLOW);
         g.fillOval(character.getPosX()-(character.getHeight()/2), character.getPosY()-(character.getWidth()/2), character.getHeight(), character.getWidth());
