@@ -16,8 +16,8 @@ import javax.swing.JFrame;
 public class Game {
     
     int fps = 60;
-    int gameHeight= 800;
-    int gameWidth = 1000;
+    int gameHeight= 1080;
+    int gameWidth = 1920;
     
     Character character;
     InputHandler handler;

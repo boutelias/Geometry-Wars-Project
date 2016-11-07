@@ -11,6 +11,8 @@ import model.Bullet;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import javax.swing.JFrame;
@@ -62,6 +64,9 @@ public class GameGui {
         
         g.setColor(Color.black);
         g.fillRect(0, 0, gameWidth, gameHeight);
+        
+        Image img1 = Toolkit.getDefaultToolkit().getImage("src/img/banner-top.jpg");
+        g.drawImage(img1, 0, 20,null);
         
         g.setColor(Color.YELLOW);
         g.fillOval(character.getPosX()-(character.getHeight()/2), character.getPosY()-(character.getWidth()/2), character.getHeight(), character.getWidth());
