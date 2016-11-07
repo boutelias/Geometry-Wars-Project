@@ -10,12 +10,17 @@ package model;
  * @author Tobias
  */
 public class Bullet {
-    private int posX;
-    private int posY;
-    private int maxY;
+    private float posX;
+    private float posY;
+    
     private int maxX;
-    private int deltaX;
-    private int deltaY;
+    private int maxY;
+
+    private float deltaX;
+    private float deltaY;
+    
+    private int bulletSpeed = 5;
+    
     private boolean isOutOfScreen = false;
     //how to implement speed?
     
@@ -32,12 +37,22 @@ public class Bullet {
        deltaX = clickX - posX;
        deltaY = clickY - posY;
        
+       int absDeltaX = (int) Math.abs(deltaX);
+       int absDeltaY = (int) Math.abs(deltaY);
        //TODO make sure that the speed for every bullet is the same
-   }
+       if(absDeltaX>absDeltaY){
+           deltaY = (float) deltaY/absDeltaX;
+           deltaX = deltaX/absDeltaX;
+       }else{
+           deltaX = (float) deltaX/absDeltaY;
+           deltaY = deltaY/absDeltaY;
+       }
+       
+    }
     
     public void updatePos(){
-        posX += deltaX;
-        posY += deltaY;
+        posX += deltaX * bulletSpeed;
+        posY += deltaY * bulletSpeed;
         
         if(posX>maxX || posX<0 || posY>maxY || posY<0){
             isOutOfScreen = true;
@@ -48,11 +63,11 @@ public class Bullet {
     
     /*GETTERS AND SETTERS*/
     public int getPosX() {
-        return posX;
+        return Math.round(posX);
     }
 
     public int getPosY() {
-        return posY;
+        return Math.round(posY);
     }
     
     public boolean getIsOutOfScreen(){

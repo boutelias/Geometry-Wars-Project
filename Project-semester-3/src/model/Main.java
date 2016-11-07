@@ -49,7 +49,6 @@ public class Main {
             draw();
             
             time = (1000 / fps) - (System.currentTimeMillis() - time);
-            
             if(time > 0){
                 try {
                     Thread.sleep(time);

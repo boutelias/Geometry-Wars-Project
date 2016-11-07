@@ -14,7 +14,7 @@ public class Character {
         //middle of the screen? -- variables in parameter of construcor
         posX = 100;
         posY = 100;
-        bulletsPerMinute = 60;
+        bulletsPerMinute = 300;
     }
     
     public void moveUp(){
