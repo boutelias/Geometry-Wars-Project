@@ -10,6 +10,8 @@ public class Enemy {
     private float deltaX;
     private float deltaY;
     
+    private int value = 15;
+    
     public Enemy(){
         posX = 300;
         posY = 300;
@@ -51,5 +53,8 @@ public class Enemy {
     }
     public Rectangle getBounds(){
         return new Rectangle(getPosX()-(width/2),getPosY()-(height/2),width,height);
+    }
+    public int getValue(){
+        return value;
     }
 }

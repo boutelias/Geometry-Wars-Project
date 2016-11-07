@@ -64,7 +64,7 @@ public class GameGui {
         
     }
     
-    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemys){
+    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemies){
         this.character = character;
         this.bullets = bullets;
         
@@ -87,7 +87,7 @@ public class GameGui {
         }
         
         g.setColor(Color.red);
-        for(Enemy enemy: enemys){
+        for(Enemy enemy: enemies){
             g.fillOval(enemy.getPosX()-10, enemy.getPosY()-10,20,20);
         }
         

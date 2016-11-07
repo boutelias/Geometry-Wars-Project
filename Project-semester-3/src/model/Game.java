@@ -23,7 +23,7 @@ public class Game {
     InputHandler handler;
     
     List<Bullet> bullets = new ArrayList();
-    List<Enemy> enemys = new ArrayList();
+    List<Enemy> enemies = new ArrayList();
     
     long lastBulletFired = 0;
     
@@ -60,7 +60,7 @@ public class Game {
     }
     
     void init(){
-        enemys.add(new Enemy());
+        enemies.add(new Enemy());
         
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
@@ -74,12 +74,12 @@ public class Game {
     void update(){
         updateCharacterPos();
         updateBullets();
-        updateEnemys();
+        updateEnemies();
         collisionDetection();
     }
     
     void draw(){
-        gameGui.draw(character, bullets, enemys);
+        gameGui.draw(character, bullets, enemies);
     }
 
     private void updateCharacterPos() {
@@ -122,27 +122,28 @@ public class Game {
                 Bullet newBullet = new Bullet(character.getPosX(),character.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),gameHeight,gameWidth);
                 bullets.add(newBullet);
                 lastBulletFired = System.currentTimeMillis();
-                enemys.add(new Enemy());
+                enemies.add(new Enemy());
             }
         }
     }
     
-    private void updateEnemys(){
-        for(Enemy enemy: enemys){
+    private void updateEnemies(){
+        for(Enemy enemy: enemies){
             enemy.updatePos(character.getPosX(),character.getPosY());
         }
     }
     
     private void collisionDetection(){
-        /*bullets vs enemysdetection*/
+        /*bullets vs enemiesdetection*/
         List<Bullet> bulletsToRemove = new LinkedList();
-        List<Enemy> enemysToRemove = new LinkedList();
+        List<Enemy> enemiesToRemove = new LinkedList();
         
         for(Bullet bullet: bullets){
-            for(Enemy enemy: enemys){
+            for(Enemy enemy: enemies){
                 if(bullet.getBounds().intersects(enemy.getBounds())){
+                    character.addPoints(enemy.getValue());
                     bulletsToRemove.add(bullet);
-                    enemysToRemove.add(enemy);
+                    enemiesToRemove.add(enemy);
                 }
             }
         }
@@ -150,20 +151,20 @@ public class Game {
         for(Bullet bullet: bulletsToRemove){
             bullets.remove(bullet);
         }
-        for(Enemy enemy: enemysToRemove){
-                enemys.remove(enemy);
+        for(Enemy enemy: enemiesToRemove){
+                enemies.remove(enemy);
         }
         
-        /*enemys vs character detection*/
+        /*enemies vs character detection*/
         Enemy hittedChar = null;
-        for(Enemy enemy: enemys){
+        for(Enemy enemy: enemies){
             if(character.getBounds().intersects(enemy.getBounds())){
                 character.lifeLess();
                 hittedChar = enemy;
             }
         }
         if(hittedChar!= null){
-            enemys.remove(hittedChar);
+            enemies.remove(hittedChar);
         }
     }
     

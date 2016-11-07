@@ -14,6 +14,7 @@ public class Character {
     private int damage;
     private int lives = 3;
     private int bulletsPerMinute;
+    private long score = 0;
    
     
     
@@ -28,30 +29,34 @@ public class Character {
     }
     
     public void moveUp(){
-        if(posY-movementSpeed>(34+40+movementSpeed+(height/2))){
+        if(posY-movementSpeed>(40+movementSpeed+(height/2))){
             posY -= movementSpeed;
         }
     }
     public void moveDown(){
-        if(posY+movementSpeed<(maxY-6-movementSpeed-(height/2))){
+        if(posY+movementSpeed<(maxY-movementSpeed-(height/2))){
             posY += movementSpeed;
             
         }
     }
     public void moveLeft(){
-        if(posX-movementSpeed>(6+movementSpeed+(width/2))){
+        if(posX-movementSpeed>(movementSpeed+(width/2))){
             posX -= movementSpeed;
             
         }
     }
     public void moveRight(){
-        if(posX-movementSpeed<(maxX-10-movementSpeed-(width/2))){
+        if(posX-movementSpeed<(maxX-movementSpeed-(width/2))){
             posX += movementSpeed;
         }
     }
     
     public void lifeLess(){
         lives -= 1;
+    }
+    
+    public void addPoints(int numberOfPoints){
+        score += numberOfPoints;
     }
     
     
@@ -78,6 +83,9 @@ public class Character {
     }
     public int getLives(){
         return lives;
+    }
+    public long getScore(){
+        return score;
     }
     
 }
