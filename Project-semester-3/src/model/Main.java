@@ -1,5 +1,6 @@
 package model;
 
+import gui.GameGui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -24,11 +25,7 @@ public class Main {
     List<Bullet> bullets = new ArrayList();
     long lastBulletFired = 0;
     
-    JFrame frame;
-    
-    Graphics g;
-    Graphics g2;
-    BufferedImage i;
+    GameGui gameGui;
     
     public static void main(String[] args) {
         new Main();
@@ -60,43 +57,23 @@ public class Main {
     }
     
     void init(){
-        frame = new JFrame("Crazy Scientist Game");
-        frame.setSize(new Dimension(gameWidth,gameHeight));
-        //frame.setLocation(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+
+        gameGui = new GameGui(gameWidth,gameHeight);
         
-        handler = new InputHandler(frame);
         character = new Character();
-        //graphic stuff
-        
-        i = new BufferedImage(gameWidth,gameHeight, BufferedImage.TYPE_INT_RGB);
-        g = i.getGraphics();
-        g2 = frame.getGraphics();
-        
-        
+       
+        handler = new InputHandler(gameGui.getFrame());   
     }
     
     void update(){
         updateCharacterPos();
         updateBullets();
-        
+        /*update enemys*/
+        /*collision detection*/
     }
     
     void draw(){
-        g.setColor(Color.black);
-        g.fillRect(0, 0, gameWidth, gameHeight);
-        
-        g.setColor(Color.YELLOW);
-        g.fillOval(character.getPosX()-25, character.getPosY()-25, 50, 50);
-        
-        g.setColor(Color.green);
-        
-        for(Bullet bullet: bullets){
-            g.fillOval(bullet.getPosX()-10, bullet.getPosY()-10,20,20);
-        }
-        
-        g2.drawImage(i,0,0,frame);
+        gameGui.draw(character, bullets);
     }
 
     private void updateCharacterPos() {
