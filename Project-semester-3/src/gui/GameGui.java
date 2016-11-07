@@ -59,11 +59,14 @@ public class GameGui {
         this.character = character;
         this.bullets = bullets;
         
+        
         g.setColor(Color.black);
         g.fillRect(0, 0, gameWidth, gameHeight);
         
         g.setColor(Color.YELLOW);
         g.fillOval(character.getPosX()-(character.getHeight()/2), character.getPosY()-(character.getWidth()/2), character.getHeight(), character.getWidth());
+        
+        /*g.fillRect(10, 38, 10, 10);*/
         
         g.setColor(Color.green);
         

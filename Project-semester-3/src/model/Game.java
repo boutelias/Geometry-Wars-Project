@@ -29,6 +29,7 @@ public class Game {
     
     GameGui gameGui;
     
+    
     public static void main(String[] args) {
         new Game();
     }
@@ -41,7 +42,7 @@ public class Game {
     void run(){
         init();
         
-        while(true){
+        while(character.getLives()>0){
             long time = System.currentTimeMillis();
             
             update();
@@ -63,7 +64,7 @@ public class Game {
         
         gameGui = new GameGui(gameWidth,gameHeight);
         
-        character = new Character();
+        character = new Character(gameWidth,gameHeight);
        
         handler = new InputHandler(gameGui.getFrame());   
     }
@@ -155,7 +156,7 @@ public class Game {
         Enemy hittedChar = null;
         for(Enemy enemy: enemys){
             if(character.getBounds().intersects(enemy.getBounds())){
-                System.out.println("you dead");
+                character.lifeLess();
                 hittedChar = enemy;
             }
         }
