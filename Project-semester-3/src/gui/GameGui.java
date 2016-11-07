@@ -37,16 +37,23 @@ public class GameGui {
     Character character;
     List<Bullet> bullets;
         
-    public GameGui(int gameWidth, int gameHeight){
-        this.gameWidth = gameWidth;
-        this.gameHeight = gameHeight;
-        
+    public GameGui(){        
         frame = new JFrame("Crazy Scientist Game");
-        frame.setSize(new Dimension(gameWidth,gameHeight));
-        //frame.setLocation(null);
+        //frame.setSize(new Dimension(gameWidth,gameHeight));
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        frame.setUndecorated(true);
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
         frame.setVisible(true);
         
+        gameWidth = (int) frame.getBounds().getWidth();
+        gameHeight = (int) frame.getBounds().getHeight();
+        
+        
+        System.out.println(gameWidth);
+        System.out.println(gameHeight);
+ 
         
         
          //graphic stuff
@@ -66,7 +73,7 @@ public class GameGui {
         g.fillRect(0, 0, gameWidth, gameHeight);
         
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/img/banner-top.jpg");
-        g.drawImage(img1, 0, 38,null);
+        g.drawImage(img1, 0, 0,null);
         
         g.setColor(Color.YELLOW);
         g.fillOval(character.getPosX()-(character.getHeight()/2), character.getPosY()-(character.getWidth()/2), character.getHeight(), character.getWidth());
@@ -91,4 +98,14 @@ public class GameGui {
     public JFrame getFrame(){
         return frame;
     }
+
+    public int getGameWidth() {
+        return gameWidth;
+    }
+
+    public int getGameHeight() {
+        return gameHeight;
+    }
+    
+    
 }

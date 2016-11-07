@@ -16,8 +16,8 @@ import javax.swing.JFrame;
 public class Game {
     
     int fps = 60;
-    int gameHeight= 1080;
-    int gameWidth = 1920;
+    int gameHeight;
+    int gameWidth;
     
     Character character;
     InputHandler handler;
@@ -62,7 +62,9 @@ public class Game {
     void init(){
         enemys.add(new Enemy());
         
-        gameGui = new GameGui(gameWidth,gameHeight);
+        gameGui = new GameGui();
+        gameWidth = gameGui.getGameWidth();
+        gameHeight = gameGui.getGameHeight();
         
         character = new Character(gameWidth,gameHeight);
        
