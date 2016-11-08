@@ -38,21 +38,44 @@ public class InputHandler {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                System.out.println("mouse pressed");
+                System.out.println("in listener event " + e.getButton());
+                if(!mouse[e.getButton()]){
+                    mEvent[e.getButton()] = e;
+                    
+                }
+               
                 mouse[e.getButton()] = true;
-                mEvent[e.getButton()] = e;
+                
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 mouse[e.getButton()] = false;
                 mEvent[e.getButton()] = e;
+                
+                System.out.println("mouse relesed");
             }
             
             @Override
             public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseExited(MouseEvent me) {}
+            public void mouseExited(MouseEvent e) {}
+        });
+        
+        c.addMouseMotionListener(new MouseMotionListener(){
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                
+                System.out.println("in listener event " + e.getButton());
+                mEvent[1]= e;                
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+            }
+        
         });
     }
     
@@ -72,6 +95,7 @@ public class InputHandler {
     
     public MouseEvent getEvent(int event){
         if(event>=0 && event<4){
+            System.out.println("in get event " + mEvent[event].getX());
             return mEvent[event];
         }
         return null;
