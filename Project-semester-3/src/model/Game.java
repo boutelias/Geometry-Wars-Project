@@ -9,12 +9,13 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Game {
-    
+    Random randomGenerator = new Random();
     int fps = 60;
     int gameHeight;
     int gameWidth;
@@ -24,6 +25,7 @@ public class Game {
     
     List<Bullet> bullets = new ArrayList();
     List<Enemy> enemies = new ArrayList();
+    List<Geom> geoms = new ArrayList();
     
     long lastBulletFired = 0;
     
@@ -79,7 +81,7 @@ public class Game {
     }
     
     void draw(){
-        gameGui.draw(character, bullets, enemies);
+        gameGui.draw(character, bullets, enemies, geoms);
     }
 
     private void updateCharacterPos() {
@@ -119,7 +121,7 @@ public class Game {
         if(handler.isMouseDown(1)){            
             if(lastBulletFired + (60.0/character.getBulletsPerMinute()*1000)<System.currentTimeMillis()){
                 //Moeten we echt height en witdh meegeven of kunnen we er anders aan?
-                Bullet newBullet = new Bullet(character.getPosX(),character.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),gameHeight,gameWidth);
+                Bullet newBullet = new Bullet(character.getPosX(),character.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),character.getDamage(),gameHeight,gameWidth);
                 bullets.add(newBullet);
                 lastBulletFired = System.currentTimeMillis();
                 enemies.add(new Enemy());
@@ -141,9 +143,22 @@ public class Game {
         for(Bullet bullet: bullets){
             for(Enemy enemy: enemies){
                 if(bullet.getBounds().intersects(enemy.getBounds())){
-                    character.addPoints(enemy.getValue());
-                    bulletsToRemove.add(bullet);
-                    enemiesToRemove.add(enemy);
+                    
+                    checkdamage(bullet, enemy);
+                    
+                    if(enemy.getHp()==0){
+                        if(dropGeom(enemy.getDroprate())){
+                            Geom geom = new Geom(enemy.getPosX(),enemy.getPosY());
+                            geoms.add(geom);
+                        }
+                        enemiesToRemove.add(enemy);
+                        character.addPoints(enemy.getValue());
+                    }
+                    if(bullet.getDamage()==0){
+                        bulletsToRemove.add(bullet);
+                        
+                    }
+                    
                 }
             }
         }
@@ -166,6 +181,53 @@ public class Game {
         if(hittedChar!= null){
             enemies.remove(hittedChar);
         }
+        
+        
+        /* character vs geoms */
+        Geom hittedGeom = null;
+        for(Geom geom: geoms){
+            if(character.getBounds().intersects(geom.getBounds())){
+                character.addGeom();
+                System.out.println(character.getNumberOfGeoms());
+                hittedGeom = geom;
+            }
+        }
+        if(hittedGeom!= null){
+            geoms.remove(hittedGeom);
+        }
     }
+    
+    private void checkdamage(Bullet bullet, Enemy enemy) {
+        int bulletdamage = bullet.getDamage();
+        int enemyhp = enemy.getHp();
+        
+        
+        if(bulletdamage>enemyhp){
+            bullet.setDamage(bulletdamage - enemyhp);
+            enemy.setHp(0);
+            
+        }else if(bulletdamage<enemyhp){
+            enemy.setHp(enemyhp - bulletdamage);
+            bullet.setDamage(0);
+        }else{
+            enemy.setHp(0);
+            bullet.setDamage(0);
+        }
+    }
+
+    private boolean dropGeom(double droprate){
+        int maxint = (int) (droprate * 100);
+        
+        int randomInt = randomGenerator.nextInt(100);
+        
+        if(randomInt<maxint){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+    }
+
     
 }

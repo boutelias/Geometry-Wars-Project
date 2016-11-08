@@ -23,6 +23,10 @@ public class InputHandler {
             @Override
             public void keyPressed(KeyEvent e) {
                 keys[e.getKeyCode()] = true;
+                
+                if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+                    System.exit(-1);
+                }
             }
 
             @Override
@@ -38,8 +42,6 @@ public class InputHandler {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                System.out.println("mouse pressed");
-                System.out.println("in listener event " + e.getButton());
                 if(!mouse[e.getButton()]){
                     mEvent[e.getButton()] = e;
                     
@@ -54,7 +56,6 @@ public class InputHandler {
                 mouse[e.getButton()] = false;
                 mEvent[e.getButton()] = e;
                 
-                System.out.println("mouse relesed");
             }
             
             @Override
@@ -67,8 +68,6 @@ public class InputHandler {
         c.addMouseMotionListener(new MouseMotionListener(){
             @Override
             public void mouseDragged(MouseEvent e) {
-                
-                System.out.println("in listener event " + e.getButton());
                 mEvent[1]= e;                
             }
 
@@ -95,7 +94,6 @@ public class InputHandler {
     
     public MouseEvent getEvent(int event){
         if(event>=0 && event<4){
-            System.out.println("in get event " + mEvent[event].getX());
             return mEvent[event];
         }
         return null;

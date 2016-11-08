@@ -18,13 +18,16 @@ public class Bullet {
     private int bulletSpeed = 5;
     
     private boolean isOutOfScreen = false;
+    
+    private int damage;
     //how to implement speed?
     
-    public Bullet(int startX, int startY, int clickX,int clickY, int maxY, int maxX){
+    public Bullet(int startX, int startY, int clickX,int clickY, int bulletDamage , int maxY, int maxX){
         this.posX = startX;
         this.posY = startY;
         this.maxY = maxY;
         this.maxX = maxX;
+        this.damage = bulletDamage;
         
         calculateDirection(clickX,clickY);
     }
@@ -72,6 +75,14 @@ public class Bullet {
     
     public Rectangle getBounds(){
         return new Rectangle(getPosX()-(width/2),getPosY()-(height/2),width,height);
+    }
+    
+    public int getDamage(){
+        return damage;
+    }
+    
+    public void setDamage(int damage){
+        this.damage = damage;
     }
     
 }

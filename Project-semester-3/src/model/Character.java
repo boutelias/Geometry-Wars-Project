@@ -11,10 +11,11 @@ public class Character {
     private int maxY;
     //the sprite of the character would be nice to store here
     private int movementSpeed = 2;
-    private int damage;
+    private int damage = 30;
     private int lives = 3;
     private int bulletsPerMinute;
     private long score = 0;
+    private int numberOfGeoms = 0;
    
     
     
@@ -25,7 +26,7 @@ public class Character {
         this.maxY = maxY;
         posX = 200;
         posY = 200;
-        bulletsPerMinute = 80;
+        bulletsPerMinute = 120;
     }
     
     public void moveUp(){
@@ -59,6 +60,9 @@ public class Character {
         score += numberOfPoints;
     }
     
+    public void addGeom(){
+        numberOfGeoms ++;
+    }
     
 
     /*GETTERS AND SETTERS*/
@@ -87,5 +91,13 @@ public class Character {
     public long getScore(){
         return score;
     }
+    public int getDamage(){
+        return damage;
+    }
+
+    public int getNumberOfGeoms() {
+        return numberOfGeoms;
+    }
+    
     
 }

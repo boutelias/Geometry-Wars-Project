@@ -9,9 +9,10 @@ public class Enemy {
     private float posY;
     private float deltaX;
     private float deltaY;
+    private double droprate = 0.20;
     
     private int value = 15;
-    
+    private int hp = 15;
     public Enemy(){
         posX = 300;
         posY = 300;
@@ -43,6 +44,7 @@ public class Enemy {
     }
     
     
+    
     /* Getters and Setters */
     public int getPosX() {
         return Math.round(posX);
@@ -57,4 +59,14 @@ public class Enemy {
     public int getValue(){
         return value;
     }
+    public int getHp() {
+        return hp;
+    }
+    public void setHp(int hp){
+        this.hp = hp;
+    }
+    public double getDroprate(){
+        return droprate;
+    }
+    
 }
