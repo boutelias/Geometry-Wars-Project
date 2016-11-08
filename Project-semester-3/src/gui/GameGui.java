@@ -75,8 +75,8 @@ public class GameGui {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, gameWidth, gameHeight);
         
-        Image img1 = Toolkit.getDefaultToolkit().getImage("src/img/banner-top.jpg");
-        g.drawImage(img1, 0, 0,null);
+        Image bannerTop = Toolkit.getDefaultToolkit().getImage("src/img/banner-top.jpg");
+        g.drawImage(bannerTop, 0, 0,null);
         
         g.setColor(Color.YELLOW);
         g.fillOval(character.getPosX()-(character.getHeight()/2), character.getPosY()-(character.getWidth()/2), character.getHeight(), character.getWidth());
@@ -91,9 +91,12 @@ public class GameGui {
             g.fillOval(bullet.getPosX()-10, bullet.getPosY()-10,20,20);
         }
         
+        
+        Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/bomber.png");
+        
         g.setColor(Color.red);
         for(Enemy enemy: enemies){
-            g.fillOval(enemy.getPosX()-10, enemy.getPosY()-10,20,20);
+            g.drawImage(enemySprite,enemy.getPosX()-10, enemy.getPosY()-10,20,20,null);
         }
         Color kleur = new Color(25,139,193);
         g.setFont(new Font("Comic Sans",Font.BOLD,26));

@@ -8,6 +8,7 @@ import java.util.List;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -151,9 +152,33 @@ public class Game {
     }
     
     private void updateEnemies(){
-        for(Enemy enemy: enemies){
-            enemy.updatePos(character.getPosX(),character.getPosY());
+        boolean mayMove = true;
+        
+        for(Enemy currentEnemy: enemies){
+            mayMove = true;
+            for(Enemy otherEnemy: enemies){
+                if(currentEnemy.getBounds().intersects(otherEnemy.getBounds())){
+                double distanceCurrentEnemy = Math.sqrt((currentEnemy.getPosX() - character.getPosX())^2 + (currentEnemy.getPosY() - character.getPosY())) ;
+                double distanceOtherEnemy = Math.sqrt((otherEnemy.getPosX() - character.getPosX())^2 + (otherEnemy.getPosY() - character.getPosY())) ;
+                
+                if(distanceCurrentEnemy>distanceOtherEnemy){
+                    mayMove = false;
+                }
+                }
+                }
+        if(mayMove){
+            currentEnemy.updatePos(character.getPosX(),character.getPosY());
         }
+        }
+        
+        
+        
+//        for(Enemy enemy: enemies){
+//            enemy.updatePos(character.getPosX(),character.getPosY());
+//        }
+        
+        
+        
     }
     
     private void collisionDetection(){

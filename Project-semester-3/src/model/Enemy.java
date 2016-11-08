@@ -68,5 +68,7 @@ public class Enemy {
     public double getDroprate(){
         return droprate;
     }
+
+    
     
 }
