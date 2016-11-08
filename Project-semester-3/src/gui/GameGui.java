@@ -94,6 +94,11 @@ public class GameGui {
             g.fillOval(enemy.getPosX()-10, enemy.getPosY()-10,20,20);
         }
         
+        g.drawString(Integer.toString(character.getLives()), 1015, 20);
+        
+        g.drawString(Long.toString(character.getScore()), 130, 20);
+        
+        g.drawString(Integer.toString(character.getNumberOfGeoms()), 1715, 20);
         
         
         g2.drawImage(i,0,0,frame);

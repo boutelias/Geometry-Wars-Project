@@ -26,7 +26,7 @@ public class Character {
         this.maxY = maxY;
         posX = 200;
         posY = 200;
-        bulletsPerMinute = 120;
+        bulletsPerMinute = 180;
     }
     
     public void moveUp(){
