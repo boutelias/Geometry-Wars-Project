@@ -19,6 +19,9 @@ public class Game {
     int fps = 60;
     int gameHeight;
     int gameWidth;
+    int spawnEnemyX;
+    int spawnEnemyY;
+           
     
     Character character;
     InputHandler handler;
@@ -62,8 +65,6 @@ public class Game {
     }
     
     void init(){
-        enemies.add(new Enemy());
-        
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
         gameHeight = gameGui.getGameHeight();
@@ -82,6 +83,25 @@ public class Game {
     
     void draw(){
         gameGui.draw(character, bullets, enemies, geoms);
+    }
+    
+    void randomSpawnGenerator(){
+       int randomInt = randomGenerator.nextInt(4);
+       switch(randomInt){
+           case 0 : spawnEnemyX = 0;
+               spawnEnemyY = 40 + randomGenerator.nextInt(gameHeight-40);
+               break;
+           case 1 :  spawnEnemyY = 0;
+                spawnEnemyX = randomGenerator.nextInt(gameWidth);
+                break;
+           case 2 : spawnEnemyX = gameWidth;
+                spawnEnemyY = 40 + randomGenerator.nextInt(gameHeight-40);
+                break;
+           case 3 : spawnEnemyY = gameHeight;
+                spawnEnemyX = randomGenerator.nextInt(gameWidth);
+                break;
+               
+       }
     }
 
     private void updateCharacterPos() {
@@ -124,7 +144,8 @@ public class Game {
                 Bullet newBullet = new Bullet(character.getPosX(),character.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),character.getDamage(),gameHeight,gameWidth);
                 bullets.add(newBullet);
                 lastBulletFired = System.currentTimeMillis();
-                enemies.add(new Enemy());
+                randomSpawnGenerator();
+                enemies.add(new Enemy(spawnEnemyX,spawnEnemyY));
             }
         }
     }
@@ -184,16 +205,16 @@ public class Game {
         
         
         /* character vs geoms */
-        Geom hittedGeom = null;
+        List<Geom> hittedGeoms = new ArrayList();
         for(Geom geom: geoms){
             if(character.getBounds().intersects(geom.getBounds())){
                 character.addGeom();
                 System.out.println(character.getNumberOfGeoms());
-                hittedGeom = geom;
+                hittedGeoms.add(geom);
             }
         }
-        if(hittedGeom!= null){
-            geoms.remove(hittedGeom);
+        for(Geom geom: hittedGeoms){
+            geoms.remove(geom);
         }
     }
     

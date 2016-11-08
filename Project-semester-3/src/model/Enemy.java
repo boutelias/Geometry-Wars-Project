@@ -13,9 +13,9 @@ public class Enemy {
     
     private int value = 15;
     private int hp = 15;
-    public Enemy(){
-        posX = 300;
-        posY = 300;
+    public Enemy(int posX,int posY){
+        this.posX = posX;
+        this.posY = posY;
     }
 
 
