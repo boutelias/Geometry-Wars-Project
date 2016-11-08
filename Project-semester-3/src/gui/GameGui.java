@@ -10,6 +10,7 @@ import model.Bullet;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -20,6 +21,7 @@ import model.Bullet;
 import model.Enemy;
 import model.Geom;
 import model.InputHandler;
+import java.awt.Color;
 
 /**
  *
@@ -93,12 +95,15 @@ public class GameGui {
         for(Enemy enemy: enemies){
             g.fillOval(enemy.getPosX()-10, enemy.getPosY()-10,20,20);
         }
+        Color kleur = new Color(25,139,193);
+        g.setFont(new Font("Comic Sans",Font.BOLD,26));
+        g.setColor(kleur);
+        g.drawString(Integer.toString(character.getLives()), 1015, 30);
         
-        g.drawString(Integer.toString(character.getLives()), 1015, 20);
         
-        g.drawString(Long.toString(character.getScore()), 130, 20);
+        g.drawString(Long.toString(character.getScore()), 130, 30);
         
-        g.drawString(Integer.toString(character.getNumberOfGeoms()), 1715, 20);
+        g.drawString(Integer.toString(character.getNumberOfGeoms()), 1735, 30);
         
         
         g2.drawImage(i,0,0,frame);
