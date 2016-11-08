@@ -16,7 +16,7 @@ public class guitester {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        StartFrame frame = new StartFrame();
+        ShopFrame frame = new ShopFrame();
         frame.setVisible(true);
     }
     

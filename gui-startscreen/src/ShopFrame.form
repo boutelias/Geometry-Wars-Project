@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1920, 1080]"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="true"/>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="btnBack">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="100" y="260" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="100" y="360" width="525" height="-1"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanelShip">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Ship">
+                <Property name="tabTitle" type="java.lang.String" value="Ship"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblAfbeeldingSchip" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+                              <Component id="lblShipsName" min="-2" pref="140" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblShipsName" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="135" max="32767" attributes="0"/>
+                      <Component id="lblAfbeeldingSchip" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblShipsName">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ship&apos;s Name"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblAfbeeldingSchip">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/button.jpg"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Afbeelding Schip"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanelBuddy">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Buddy">
+                <Property name="tabTitle" type="java.lang.String" value="Buddy"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
+                      <Component id="lblBuddiesName" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace pref="166" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="lblAfbeeldingBuddy" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="lblBuddiesName" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="330" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+                          <Component id="lblAfbeeldingBuddy" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="64" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblBuddiesName">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buddies Name"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblAfbeeldingBuddy">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/button.jpg"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Afbeelding Buddy"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanelCurrency">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1060" y="210" width="300" height="550"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblSpeed" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBulletPower" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBulletSpeed" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFireRate" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblHitpoints" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblSpeedCoins" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBulletPowerCoins" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBulletSpeedCoins" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFireRateCoins" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblHitPointsCoins" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace pref="46" max="32767" attributes="0"/>
+                          <Component id="lblCoins" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                          <Component id="lblContentCoins" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+                          <Component id="lblGems" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="43" pref="43" max="-2" attributes="0"/>
+                  <Component id="lblContentGems" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblCoins" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblContentCoins" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblGems" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblContentGems" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="lblSpeed" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
+                          <Component id="lblBulletPower" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="64" pref="64" max="-2" attributes="0"/>
+                          <Component id="lblBulletSpeed" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="64" pref="64" max="-2" attributes="0"/>
+                          <Component id="lblFireRate" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="64" pref="64" max="-2" attributes="0"/>
+                          <Component id="lblHitpoints" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="lblSpeedCoins" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="54" pref="54" max="-2" attributes="0"/>
+                          <Component id="lblBulletPowerCoins" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="54" pref="54" max="-2" attributes="0"/>
+                          <Component id="lblBulletSpeedCoins" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="64" pref="64" max="-2" attributes="0"/>
+                          <Component id="lblFireRateCoins" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="64" pref="64" max="-2" attributes="0"/>
+                          <Component id="lblHitPointsCoins" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="77" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblCoins">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblContentCoins">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="10000"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblGems">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gems:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblContentGems">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="250"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSpeed">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Speed"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBulletPower">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bullet Power"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBulletSpeed">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="BulletSpeed"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFireRate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fire Rate"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHitpoints">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Hitpoints"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSpeedCoins">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Coins"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBulletPowerCoins">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Coins"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBulletSpeedCoins">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Coins"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFireRateCoins">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Coins"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHitPointsCoins">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Coins"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblBackground">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/crazy-scientist.jpg"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Achtergrond"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1920, 1080]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1920, 1080]"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="0" y="0" width="1920" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+  </SubComponents>
+</Form>
