@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Enemy;
 import model.Player;
-import static multiplayer.Server.socket;
 
 
 public class Client {
@@ -31,14 +30,18 @@ public class Client {
         
         System.out.println("Receiving information...");
               
-        
+        while(true){
+            try{
             DataForClient data = (DataForClient) in.readObject();
             
             gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());
-            
+            }catch(Exception e){
+                
+            }
+        }
         //DataForClient data = (DataForClient) in.readObject();
         //Player player = (Player) in.readObject();
-        System.out.println(data.getPlayer().getPosX());
+        //System.out.println(data.getPlayer().getPosX());
         
     }
 }

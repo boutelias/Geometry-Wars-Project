@@ -19,11 +19,47 @@ import model.Player;
  */
 public class Server {
     
-    static ServerSocket serverSocket;
-    static Socket socket;
-    static ObjectOutputStream out;
+    private ServerSocket serverSocket;
+    private Socket socket;
+    private ObjectOutputStream out;
+    DataForClient data = new DataForClient();
     
-    public static void main(String[] args) throws IOException{
+    public Server() throws IOException{
+        
+        serverSocket = new ServerSocket(7777);
+    }
+    
+    public void sendDataToClient(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException{
+        socket = serverSocket.accept();
+        data.updateDataForClient(player, bullets, enemys, geoms);
+        out = new ObjectOutputStream(socket.getOutputStream());
+        out.writeObject(data);
+    }
+    
+        /*while (true)
+        {
+            socket = serverSocket.accept();
+
+
+            System.out.println("Connection from: "+ socket.getInetAddress());
+
+            data.updateDataForClient(player, bullets, enemys, geoms);
+            
+            out = new ObjectOutputStream(socket.getOutputStream());
+
+            out.writeObject(data);
+            System.out.println("data send");
+        }
+    }*/
+    
+    
+    
+    
+    
+    
+    
+    
+    /*public static void main(String[] args) throws IOException{
         Player player = new Player(1920,1080);
         Enemy enemy = new Enemy(200,200);
         Bullet bullet = new Bullet(250, 250, 300, 300, 5, 1080, 1920);
@@ -38,25 +74,11 @@ public class Server {
         DataForClient data = new DataForClient();
             
         System.out.println("Starting server");
-        serverSocket = new ServerSocket(7777);
+        
         
         System.out.println("Server started");
         
         
-        
-        while (true)
-        {
-            socket = serverSocket.accept();
-
-
-            System.out.println("Connection from: "+ socket.getInetAddress());
-
-            data.updateDataForClient(player, bullets, enemys, geoms);
-            
-            out = new ObjectOutputStream(socket.getOutputStream());
-
-            out.writeObject(data);
-            System.out.println("data send");
-        }
-    }
+        */
+    
 }

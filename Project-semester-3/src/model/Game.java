@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.util.List;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import multiplayer.Server;
 
 public class Game implements Serializable{
     Random randomGenerator = new Random();
@@ -38,7 +40,7 @@ public class Game implements Serializable{
     long lastBulletFired = 0;
     
     GameGui gameGui;
-    
+    Server server;
     
     public static void main(String[] args) {
         new Game();
@@ -49,7 +51,7 @@ public class Game implements Serializable{
         System.exit(-1);
     }
     
-    void run(){
+    private void run(){
         init();
         makeWaves(waves);
             
@@ -57,13 +59,17 @@ public class Game implements Serializable{
         waveCounter = 0;
         while(player.getLives()>0){
             
-            
-            
             long time = System.currentTimeMillis();
             
             update();
             
             draw();
+            
+            try {
+                sendDataToClient();
+            } catch (IOException ex) {
+                System.out.println("failed to send data");
+            }
             
             time = (1000 / fps) - (System.currentTimeMillis() - time);
             if(time > 0){
@@ -76,7 +82,13 @@ public class Game implements Serializable{
         }
     }
     
-    void init(){
+    private void init(){
+        try {
+            server = new Server();
+        } catch (IOException ex) {
+            System.out.println("failed to make server");
+        }
+        
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
         gameHeight = gameGui.getGameHeight();
@@ -86,7 +98,7 @@ public class Game implements Serializable{
         handler = new InputHandler(gameGui.getFrame());   
     }
     
-    void update(){
+    private void update(){
         spawnEnemy();
         updatePlayerPos();
         updateBullets();
@@ -94,11 +106,11 @@ public class Game implements Serializable{
         collisionDetection();
     }
     
-    void draw(){
+    private void draw(){
         gameGui.draw(player, bullets, enemies, geoms);
     }
     
-    void randomSpawnGenerator(){
+    private void randomSpawnGenerator(){
        int randomInt = randomGenerator.nextInt(4);
        switch(randomInt){
            case 0 : spawnEnemyX = 0;
@@ -117,7 +129,7 @@ public class Game implements Serializable{
        }
     }
     
-    void makeWaves(List<Wave> waves){
+    private void makeWaves(List<Wave> waves){
         //TODO alle waves uit de databank halen 
         /*Wave wave1 = new Wave(2,1,enemies,5);
         Wave wave2 = new Wave(3,1,enemies,5);
@@ -135,7 +147,7 @@ public class Game implements Serializable{
         }
     }
     
-    void spawnEnemy(){
+    private void spawnEnemy(){
         
         Wave wave = waves.get(waveCounter);
             if(System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft()!= 0){
@@ -324,6 +336,10 @@ public class Game implements Serializable{
             return false;
         }
         
+    }
+    
+    private void sendDataToClient() throws IOException{
+        server.sendDataToClient(player, bullets, enemies, geoms);
     }
 
     
