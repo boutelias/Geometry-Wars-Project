@@ -38,7 +38,7 @@ public class Bullet {
        
        int absDeltaX = (int) Math.abs(deltaX);
        int absDeltaY = (int) Math.abs(deltaY);
-       //TODO make sure that the speed for every bullet is the same
+       
        if(absDeltaX>absDeltaY){
            deltaY = (float) deltaY/absDeltaX;
            deltaX = deltaX/absDeltaX;
@@ -53,7 +53,7 @@ public class Bullet {
         posX += deltaX * bulletSpeed;
         posY += deltaY * bulletSpeed;
         
-        if(posX>maxX || posX<0 || posY>maxY || posY<0){
+        if(posX>maxX || posX<0 || posY>maxY || posY<40 + height/2){
             isOutOfScreen = true;
         }
     }
