@@ -1,8 +1,9 @@
 package model;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class Bullet {
+public class Bullet implements Serializable {
     private int width = 20;
     private int height = 20;
     

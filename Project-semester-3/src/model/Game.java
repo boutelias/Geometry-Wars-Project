@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.util.List;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -15,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
-public class Game {
+public class Game implements Serializable{
     Random randomGenerator = new Random();
     int fps = 60;
     int gameHeight;
@@ -118,7 +119,7 @@ public class Game {
     
     void makeWaves(List<Wave> waves){
         //TODO alle waves uit de databank halen 
-        Wave wave1 = new Wave(2,1,enemies,5);
+        /*Wave wave1 = new Wave(2,1,enemies,5);
         Wave wave2 = new Wave(3,1,enemies,5);
         Wave wave3 = new Wave(4,1,enemies,5);
         Wave wave4 = new Wave(5,1,enemies,5);
@@ -126,11 +127,16 @@ public class Game {
         waves.add(wave1);
         waves.add(wave2);
         waves.add(wave3);
-        waves.add(wave4);
+        waves.add(wave4);*/
+        
+        for(int i = 0; i < 200 ; i++){
+            Wave wave = new Wave(i,1,enemies,5);
+            waves.add(wave);
+        }
     }
     
     void spawnEnemy(){
-        System.out.println(waveCounter);
+        
         Wave wave = waves.get(waveCounter);
             if(System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft()!= 0){
                 
@@ -143,10 +149,10 @@ public class Game {
             if(wave.getNumberOfEnemiesLeft()==0 && waveCounter < waves.size()-1){
                 int delay = wave.getDelay();
                 // TODO use this delay (maybe an upgrade screen after 2 seconds ?
-                System.out.println("ga jij hierin ?");
+                
                 
                 waveCounter ++;
-                System.out.println(waveCounter);
+                
             }
     }
 

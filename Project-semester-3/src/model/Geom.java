@@ -2,8 +2,9 @@
 package model;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class Geom {
+public class Geom implements Serializable {
     private int posX;
     private int posY;
     

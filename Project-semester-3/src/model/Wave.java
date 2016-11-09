@@ -1,10 +1,11 @@
 
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class Wave {
+public class Wave implements Serializable{
     
     private int numberOfEnemiesLeft;
     private int spawnRate;

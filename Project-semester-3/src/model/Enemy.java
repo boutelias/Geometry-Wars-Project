@@ -1,8 +1,9 @@
 package model;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class Enemy {
+public class Enemy implements Serializable{
     private int width = 20;
     private int height = 20;
     private float posX;
