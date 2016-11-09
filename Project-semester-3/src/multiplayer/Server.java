@@ -27,13 +27,18 @@ public class Server {
     public Server() throws IOException{
         
         serverSocket = new ServerSocket(7777);
+        socket = serverSocket.accept();
     }
     
     public void sendDataToClient(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException{
-        socket = serverSocket.accept();
+       
         data.updateDataForClient(player, bullets, enemys, geoms);
         out = new ObjectOutputStream(socket.getOutputStream());
-        out.writeObject(data);
+        
+        //out.writeObject(data);
+        out.writeInt(player.getPosX());
+        
+        
     }
     
         /*while (true)
