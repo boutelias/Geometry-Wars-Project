@@ -1,5 +1,9 @@
 package model;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import gui.GameGui;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +11,7 @@ import java.awt.Graphics;
 import java.util.List;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +20,15 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
+import sun.applet.Main;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 /*import multiplayer.Server;*/
 
 public class Game implements Serializable{
@@ -36,6 +49,7 @@ public class Game implements Serializable{
     private List<Wave> waves = new ArrayList<>(); 
     private long lastBulletFired = 0;
     private GameGui gameGui;
+    private long previousTime;
     /*private Server server;*/
     
     public static void main(String[] args) {
@@ -54,10 +68,17 @@ public class Game implements Serializable{
         long spawnTimer = System.currentTimeMillis();
         waveCounter = 0;
         while(player.getLives()>0){
-            
+            long differenceTime;
             long time = System.currentTimeMillis();
+            if(time-previousTime < 20){
+                differenceTime = time - previousTime;
+            }
+            else {
+                differenceTime = 0;
+            }
             
-            update();
+            
+            update(differenceTime);
             
             draw();
             
@@ -66,7 +87,7 @@ public class Game implements Serializable{
             } catch (IOException ex) {
                 System.out.println("failed to send data");
             }*/
-            
+            previousTime = time;
             time = (1000 / fps) - (System.currentTimeMillis() - time);
             if(time > 0){
                 try {
@@ -74,6 +95,7 @@ public class Game implements Serializable{
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
+                
             }
         }
     }
@@ -92,14 +114,17 @@ public class Game implements Serializable{
         player = new Player(gameWidth,gameHeight);
        
         handler = new InputHandler(gameGui.getFrame());  
-        companion = new Companion(30,30,"Shield",player);
+        companion = new Companion(30,30,"LifeSaver",player);
     }
     
-    private void update(){
-        
+ 
+    
+    
+    private void update(long time){
+        updateCompanionPos(time);
         spawnEnemy();
         updatePlayerPos();
-        updateCompanionPos();
+        
         updateBullets();
         updateEnemies();
         collisionDetection();
@@ -128,13 +153,15 @@ public class Game implements Serializable{
        }
     }
     
-    private void updateCompanionPos(){
-        if(player.getBounds().intersects(companion.getBounds())){
-            
+    private void updateCompanionPos(long time){
+        
+        
+        if(!player.getBounds().intersects(companion.getBounds())){
+            companion.updateCompanion(player.getPosX(),player.getPosY(),time); 
         }
-        else {
-           companion.updateCompanion(player.getPosX(),player.getPosY()); 
-        }
+        
+           
+        
         
     }
     

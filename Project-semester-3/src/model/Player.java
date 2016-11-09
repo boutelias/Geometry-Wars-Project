@@ -56,7 +56,11 @@ public class Player implements Serializable{
     }
     
     public void lifeLess(){
-        lives -= 1;
+        lives --;
+    }
+    
+    public void lifeExtra(){
+        lives ++;
     }
     
     public void addPoints(int numberOfPoints){
