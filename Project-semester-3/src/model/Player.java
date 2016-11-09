@@ -28,11 +28,13 @@ public class Player implements Serializable{
         posX = 200;
         posY = 200;
         bulletsPerMinute = 180;
+        
     }
     
     public void moveUp(){
         if(posY-movementSpeed>(40+movementSpeed+(height/2))){
             posY -= movementSpeed;
+            
         }
     }
     public void moveDown(){
@@ -98,6 +100,9 @@ public class Player implements Serializable{
 
     public int getNumberOfGeoms() {
         return numberOfGeoms;
+    }
+    public int getMovementSpeed(){
+        return movementSpeed;
     }
     
     

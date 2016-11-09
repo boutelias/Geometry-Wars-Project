@@ -22,6 +22,7 @@ import model.Enemy;
 import model.Geom;
 import model.InputHandler;
 import java.awt.Color;
+import model.Companion;
 
 /**
  *
@@ -39,6 +40,7 @@ public class GameGui {
     int gameHeight;
     Player character;
     List<Bullet> bullets;
+    Companion companion;
         
     public GameGui(){        
         frame = new JFrame("Crazy Scientist Game");
@@ -67,7 +69,7 @@ public class GameGui {
         
     }
     
-    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion){
         this.character = character;
         this.bullets = bullets;
         
@@ -90,6 +92,9 @@ public class GameGui {
         for(Bullet bullet: bullets){
             g.fillOval(bullet.getPosX()-10, bullet.getPosY()-10,20,20);
         }
+        
+        g.setColor(Color.WHITE);
+        g.fillOval(companion.getPosX()-(companion.getHeight()/2), companion.getPosY()-(companion.getWidth()/2),companion.getHeight() , companion.getWidth());
         
         
         Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/bomber.png");

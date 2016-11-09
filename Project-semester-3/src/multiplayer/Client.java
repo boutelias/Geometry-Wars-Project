@@ -34,7 +34,7 @@ public class Client {
             try{
             DataForClient data = (DataForClient) in.readObject();
             
-            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());
+            /*gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());*/
             }catch(Exception e){
                 
             }

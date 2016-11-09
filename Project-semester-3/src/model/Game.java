@@ -16,31 +16,27 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import multiplayer.Server;
+/*import multiplayer.Server;*/
 
 public class Game implements Serializable{
-    Random randomGenerator = new Random();
-    int fps = 60;
-    int gameHeight;
-    int gameWidth;
-    int spawnEnemyX;
-    int spawnEnemyY;
-    int waveCounter;
-    long spawnTimer;
-           
-    
-    Player player;
-    InputHandler handler;
-    
-    List<Bullet> bullets = new ArrayList();
-    List<Enemy> enemies = new ArrayList();
-    List<Geom> geoms = new ArrayList();
-    List<Wave> waves = new ArrayList<>();
-     
-    long lastBulletFired = 0;
-    
-    GameGui gameGui;
-    Server server;
+    private Random randomGenerator = new Random();
+    private int fps = 60;
+    private int gameHeight;
+    private int gameWidth;
+    private int spawnEnemyX;
+    private int spawnEnemyY;
+    private int waveCounter;
+    private long spawnTimer;
+    private Companion companion;
+    private Player player;
+    private InputHandler handler;
+    private List<Bullet> bullets = new ArrayList();
+    private List<Enemy> enemies = new ArrayList();
+    private List<Geom> geoms = new ArrayList();
+    private List<Wave> waves = new ArrayList<>(); 
+    private long lastBulletFired = 0;
+    private GameGui gameGui;
+    /*private Server server;*/
     
     public static void main(String[] args) {
         new Game();
@@ -65,11 +61,11 @@ public class Game implements Serializable{
             
             draw();
             
-            try {
+            /*try {
                 sendDataToClient();
             } catch (IOException ex) {
                 System.out.println("failed to send data");
-            }
+            }*/
             
             time = (1000 / fps) - (System.currentTimeMillis() - time);
             if(time > 0){
@@ -83,11 +79,11 @@ public class Game implements Serializable{
     }
     
     private void init(){
-        try {
+        /*try {
             server = new Server();
         } catch (IOException ex) {
             System.out.println("failed to make server");
-        }
+        }*/
         
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
@@ -95,19 +91,22 @@ public class Game implements Serializable{
         
         player = new Player(gameWidth,gameHeight);
        
-        handler = new InputHandler(gameGui.getFrame());   
+        handler = new InputHandler(gameGui.getFrame());  
+        companion = new Companion(30,30,"Shield",player,gameWidth,gameHeight);
     }
     
     private void update(){
+        
         spawnEnemy();
         updatePlayerPos();
+        updateCompanionPos();
         updateBullets();
         updateEnemies();
         collisionDetection();
     }
     
     private void draw(){
-        gameGui.draw(player, bullets, enemies, geoms);
+        gameGui.draw(player, bullets, enemies, geoms, companion);
     }
     
     private void randomSpawnGenerator(){
@@ -127,6 +126,16 @@ public class Game implements Serializable{
                 break;
                
        }
+    }
+    
+    private void updateCompanionPos(){
+        if(player.getBounds().intersects(companion.getBounds())){
+            
+        }
+        else {
+           companion.updateCompanion(player.getPosX(),player.getPosY()); 
+        }
+        
     }
     
     private void makeWaves(List<Wave> waves){
@@ -171,15 +180,20 @@ public class Game implements Serializable{
     private void updatePlayerPos() {
         if(handler.isKeyDown(KeyEvent.VK_RIGHT)){
             player.moveRight();
+            
+            
         }
         if(handler.isKeyDown(KeyEvent.VK_LEFT)){
             player.moveLeft();
+            
         }
         if(handler.isKeyDown(KeyEvent.VK_UP)){
             player.moveUp();
+            
         }
         if(handler.isKeyDown(KeyEvent.VK_DOWN)){
             player.moveDown();
+            
         }
     }
     
@@ -338,9 +352,9 @@ public class Game implements Serializable{
         
     }
     
-    private void sendDataToClient() throws IOException{
+    /*private void sendDataToClient() throws IOException{
         server.sendDataToClient(player, bullets, enemies, geoms);
-    }
+    }*/
 
     
 }
