@@ -92,7 +92,7 @@ public class Game implements Serializable{
         player = new Player(gameWidth,gameHeight);
        
         handler = new InputHandler(gameGui.getFrame());  
-        companion = new Companion(30,30,"Shield",player,gameWidth,gameHeight);
+        companion = new Companion(30,30,"Shield",player);
     }
     
     private void update(){

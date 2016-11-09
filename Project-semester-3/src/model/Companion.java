@@ -10,23 +10,15 @@ public class Companion {
     private int width;
     private int height;
     private String type;
-    private int playerX;
-    private int playerY;
     private Player player;
-    private int timer;
     private int movementSpeed;
-    private int gameWidth;
-    private int gameHeight;
     
-    
-    public Companion(int width, int height, String type,Player player,int gameWidth,int gameHeight){
+    public Companion(int width, int height, String type,Player player){
         this.width = width;
         this.height = height;
         this.type = type;
         this.player = player;
         this.movementSpeed = player.getMovementSpeed();
-        this.gameWidth = gameWidth;
-        this.gameHeight = gameHeight;
         initialPos();
         
     }
