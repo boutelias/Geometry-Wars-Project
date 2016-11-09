@@ -30,7 +30,8 @@ public class Game {
     List<Bullet> bullets = new ArrayList();
     List<Enemy> enemies = new ArrayList();
     List<Geom> geoms = new ArrayList();
-    
+    List<Wave> waves = new ArrayList<>();
+     
     long lastBulletFired = 0;
     
     GameGui gameGui;
@@ -47,8 +48,28 @@ public class Game {
     
     void run(){
         init();
-        
+        makeWaves(waves);
+            
+        long spawnTimer = System.currentTimeMillis();
+        int waveCounter = 0;
         while(player.getLives()>0){
+            
+            Wave wave = waves.get(waveCounter);
+            if(System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs()){
+                
+                randomSpawnGenerator();
+                enemies.add(new Enemy(spawnEnemyX,spawnEnemyY));
+                spawnTimer = System.currentTimeMillis();
+                wave.reduceNumberOfEnemiesLeft();
+            }
+            if(wave.getNumberOfEnemiesLeft()==0){
+                int delay = wave.getDelay();
+                // TODO use this delay (maybe an upgrade screen after 2 seconds ?
+                
+                
+                waveCounter ++;
+            }
+            
             long time = System.currentTimeMillis();
             
             update();
@@ -76,6 +97,7 @@ public class Game {
     }
     
     void update(){
+        spawnEnemy();
         updatePlayerPos();
         updateBullets();
         updateEnemies();
@@ -103,6 +125,23 @@ public class Game {
                 break;
                
        }
+    }
+    
+    void makeWaves(List<Wave> waves){
+        //TODO alle waves uit de databank halen 
+        Wave wave1 = new Wave(5,1,enemies,5);
+        Wave wave2 = new Wave(10,1,enemies,5);
+        Wave wave3 = new Wave(15,1,enemies,5);
+        Wave wave4 = new Wave(20,1,enemies,5);
+        
+        waves.add(wave1);
+        waves.add(wave2);
+        waves.add(wave3);
+        waves.add(wave4);
+    }
+    
+    void spawnEnemy(){
+        
     }
 
     private void updatePlayerPos() {
@@ -145,8 +184,8 @@ public class Game {
                 Bullet newBullet = new Bullet(player.getPosX(),player.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),player.getDamage(),gameHeight,gameWidth);
                 bullets.add(newBullet);
                 lastBulletFired = System.currentTimeMillis();
-                randomSpawnGenerator();
-                enemies.add(new Enemy(spawnEnemyX,spawnEnemyY));
+                /*randomSpawnGenerator();
+                enemies.add(new Enemy(spawnEnemyX,spawnEnemyY));*/
             }
         }
     }
