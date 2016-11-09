@@ -1,15 +1,16 @@
 package model;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class Character {
+public class Player implements Serializable{
     private int width = 50;
     private int height = 50;
     private int posX;
     private int posY;
     private int maxX;
     private int maxY;
-    //the sprite of the character would be nice to store here
+    //the sprite of the player would be nice to store here
     private int movementSpeed = 2;
     private int damage = 30;
     private int lives = 3;
@@ -19,7 +20,7 @@ public class Character {
    
     
     
-    public Character(int maxX, int maxY){
+    public Player(int maxX, int maxY){
         //where are we going to start?
         //middle of the screen? -- variables in parameter of construcor
         this.maxX = maxX;

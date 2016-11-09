@@ -24,7 +24,7 @@ public class Game {
     int spawnEnemyY;
            
     
-    Character character;
+    Player player;
     InputHandler handler;
     
     List<Bullet> bullets = new ArrayList();
@@ -48,7 +48,7 @@ public class Game {
     void run(){
         init();
         
-        while(character.getLives()>0){
+        while(player.getLives()>0){
             long time = System.currentTimeMillis();
             
             update();
@@ -70,20 +70,20 @@ public class Game {
         gameWidth = gameGui.getGameWidth();
         gameHeight = gameGui.getGameHeight();
         
-        character = new Character(gameWidth,gameHeight);
+        player = new Player(gameWidth,gameHeight);
        
         handler = new InputHandler(gameGui.getFrame());   
     }
     
     void update(){
-        updateCharacterPos();
+        updatePlayerPos();
         updateBullets();
         updateEnemies();
         collisionDetection();
     }
     
     void draw(){
-        gameGui.draw(character, bullets, enemies, geoms);
+        gameGui.draw(player, bullets, enemies, geoms);
     }
     
     void randomSpawnGenerator(){
@@ -92,7 +92,7 @@ public class Game {
            case 0 : spawnEnemyX = 0;
                spawnEnemyY = 40 + randomGenerator.nextInt(gameHeight-40);
                break;
-           case 1 :  spawnEnemyY = 0;
+           case 1 :  spawnEnemyY = 40;
                 spawnEnemyX = randomGenerator.nextInt(gameWidth);
                 break;
            case 2 : spawnEnemyX = gameWidth;
@@ -105,18 +105,18 @@ public class Game {
        }
     }
 
-    private void updateCharacterPos() {
+    private void updatePlayerPos() {
         if(handler.isKeyDown(KeyEvent.VK_RIGHT)){
-            character.moveRight();
+            player.moveRight();
         }
         if(handler.isKeyDown(KeyEvent.VK_LEFT)){
-            character.moveLeft();
+            player.moveLeft();
         }
         if(handler.isKeyDown(KeyEvent.VK_UP)){
-            character.moveUp();
+            player.moveUp();
         }
         if(handler.isKeyDown(KeyEvent.VK_DOWN)){
-            character.moveDown();
+            player.moveDown();
         }
     }
     
@@ -140,9 +140,9 @@ public class Game {
     
     private void addBullets(){
         if(handler.isMouseDown(1)){            
-            if(lastBulletFired + (60.0/character.getBulletsPerMinute()*1000)<System.currentTimeMillis()){
+            if(lastBulletFired + (60.0/player.getBulletsPerMinute()*1000)<System.currentTimeMillis()){
                 //Moeten we echt height en witdh meegeven of kunnen we er anders aan?
-                Bullet newBullet = new Bullet(character.getPosX(),character.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),character.getDamage(),gameHeight,gameWidth);
+                Bullet newBullet = new Bullet(player.getPosX(),player.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),player.getDamage(),gameHeight,gameWidth);
                 bullets.add(newBullet);
                 lastBulletFired = System.currentTimeMillis();
                 randomSpawnGenerator();
@@ -158,8 +158,8 @@ public class Game {
             mayMove = true;
             for(Enemy otherEnemy: enemies){
                 if(currentEnemy.getBounds().intersects(otherEnemy.getBounds())){
-                double distanceCurrentEnemy = Math.sqrt((currentEnemy.getPosX() - character.getPosX())^2 + (currentEnemy.getPosY() - character.getPosY())) ;
-                double distanceOtherEnemy = Math.sqrt((otherEnemy.getPosX() - character.getPosX())^2 + (otherEnemy.getPosY() - character.getPosY())) ;
+                double distanceCurrentEnemy = Math.sqrt((currentEnemy.getPosX() - player.getPosX())^2 + (currentEnemy.getPosY() - player.getPosY())) ;
+                double distanceOtherEnemy = Math.sqrt((otherEnemy.getPosX() - player.getPosX())^2 + (otherEnemy.getPosY() - player.getPosY())) ;
                 
                 if(distanceCurrentEnemy>distanceOtherEnemy){
                     mayMove = false;
@@ -167,14 +167,14 @@ public class Game {
                 }
                 }
         if(mayMove){
-            currentEnemy.updatePos(character.getPosX(),character.getPosY());
+            currentEnemy.updatePos(player.getPosX(),player.getPosY());
         }
         }
         
         
         
 //        for(Enemy enemy: enemies){
-//            enemy.updatePos(character.getPosX(),character.getPosY());
+//            enemy.updatePos(player.getPosX(),player.getPosY());
 //        }
         
         
@@ -198,7 +198,7 @@ public class Game {
                             geoms.add(geom);
                         }
                         enemiesToRemove.add(enemy);
-                        character.addPoints(enemy.getValue());
+                        player.addPoints(enemy.getValue());
                     }
                     if(bullet.getDamage()==0){
                         bulletsToRemove.add(bullet);
@@ -216,11 +216,11 @@ public class Game {
                 enemies.remove(enemy);
         }
         
-        /*enemies vs character detection*/
+        /*enemies vs player detection*/
         Enemy hittedChar = null;
         for(Enemy enemy: enemies){
-            if(character.getBounds().intersects(enemy.getBounds())){
-                character.lifeLess();
+            if(player.getBounds().intersects(enemy.getBounds())){
+                player.lifeLess();
                 hittedChar = enemy;
             }
         }
@@ -229,12 +229,12 @@ public class Game {
         }
         
         
-        /* character vs geoms */
+        /* player vs geoms */
         List<Geom> hittedGeoms = new ArrayList();
         for(Geom geom: geoms){
-            if(character.getBounds().intersects(geom.getBounds())){
-                character.addGeom();
-                System.out.println(character.getNumberOfGeoms());
+            if(player.getBounds().intersects(geom.getBounds())){
+                player.addGeom();
+                System.out.println(player.getNumberOfGeoms());
                 hittedGeoms.add(geom);
             }
         }

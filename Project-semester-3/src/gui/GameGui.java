@@ -5,7 +5,7 @@
  */
 package gui;
 
-import model.Character;
+import model.Player;
 import model.Bullet;
 
 import java.awt.Color;
@@ -37,7 +37,7 @@ public class GameGui {
     
     int gameWidth;
     int gameHeight;
-    Character character;
+    Player character;
     List<Bullet> bullets;
         
     public GameGui(){        
@@ -67,7 +67,7 @@ public class GameGui {
         
     }
     
-    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
         this.character = character;
         this.bullets = bullets;
         
