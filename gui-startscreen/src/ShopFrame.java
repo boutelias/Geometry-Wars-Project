@@ -27,392 +27,204 @@ public class ShopFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
-        jPanelUpgrades = new javax.swing.JPanel();
-        lblSpeed = new javax.swing.JLabel();
-        lblBulletPower = new javax.swing.JLabel();
-        lblBulletSpeed = new javax.swing.JLabel();
-        lblFireRate = new javax.swing.JLabel();
-        lblHitpoints = new javax.swing.JLabel();
-        lblSpeedGems = new javax.swing.JLabel();
-        lblBulletPowerGems = new javax.swing.JLabel();
-        lblBulletSpeedGems = new javax.swing.JLabel();
-        lblFireRateGems = new javax.swing.JLabel();
-        lblHitPointsGems = new javax.swing.JLabel();
-        lblUpgradeBarSpeed = new javax.swing.JLabel();
-        lblUpgradeBarFireRate = new javax.swing.JLabel();
-        lblUpgradeBarHitpoints = new javax.swing.JLabel();
-        lblUpgradeBarBulletPower = new javax.swing.JLabel();
-        lblUpgradeBarBulletSpeed = new javax.swing.JLabel();
-        lblIconSpeed = new javax.swing.JLabel();
-        lblIconSpeed1 = new javax.swing.JLabel();
-        lblIconSpeed2 = new javax.swing.JLabel();
-        lblIconSpeed3 = new javax.swing.JLabel();
-        lblIconSpeed4 = new javax.swing.JLabel();
-        lblIconGemsSpeed = new javax.swing.JLabel();
-        lblIconGemsBulletSpeed = new javax.swing.JLabel();
-        lblIconGemsBulletPower = new javax.swing.JLabel();
-        lblIconGemsFireRate = new javax.swing.JLabel();
-        lblIconGemsHitpoints = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelShip = new javax.swing.JPanel();
         lblShipsName = new javax.swing.JLabel();
         lblAfbeeldingSchip = new javax.swing.JLabel();
-        jPanelCompanion = new javax.swing.JPanel();
-        lblCompanionName = new javax.swing.JLabel();
+        jPanelBuddy = new javax.swing.JPanel();
+        lblBuddiesName = new javax.swing.JLabel();
         lblAfbeeldingBuddy = new javax.swing.JLabel();
         jPanelCurrency = new javax.swing.JPanel();
         lblCoins = new javax.swing.JLabel();
         lblContentCoins = new javax.swing.JLabel();
         lblGems = new javax.swing.JLabel();
         lblContentGems = new javax.swing.JLabel();
-        btnShip = new javax.swing.JButton();
-        btnCompanion = new javax.swing.JButton();
-        lblShip = new javax.swing.JLabel();
-        lblCompanion = new javax.swing.JLabel();
+        lblSpeed = new javax.swing.JLabel();
+        lblBulletPower = new javax.swing.JLabel();
+        lblBulletSpeed = new javax.swing.JLabel();
+        lblFireRate = new javax.swing.JLabel();
+        lblHitpoints = new javax.swing.JLabel();
+        lblSpeedCoins = new javax.swing.JLabel();
+        lblBulletPowerCoins = new javax.swing.JLabel();
+        lblBulletSpeedCoins = new javax.swing.JLabel();
+        lblFireRateCoins = new javax.swing.JLabel();
+        lblHitPointsCoins = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1080));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
         getContentPane().setLayout(null);
 
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
         btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(340, 100));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
         getContentPane().add(btnBack);
-        btnBack.setBounds(90, 760, 330, 80);
+        btnBack.setBounds(100, 260, 59, 25);
 
-        jPanelUpgrades.setBackground(new java.awt.Color(0, 102, 0));
-
-        lblSpeed.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblSpeed.setText("Speed");
-
-        lblBulletPower.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblBulletPower.setText("Bullet Power");
-
-        lblBulletSpeed.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblBulletSpeed.setText("BulletSpeed");
-
-        lblFireRate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblFireRate.setText("Fire Rate");
-
-        lblHitpoints.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblHitpoints.setText("Hitpoints");
-
-        lblSpeedGems.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblSpeedGems.setText("Gems");
-
-        lblBulletPowerGems.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblBulletPowerGems.setText("Gems");
-
-        lblBulletSpeedGems.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblBulletSpeedGems.setText("Gems");
-
-        lblFireRateGems.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblFireRateGems.setText("Gems");
-
-        lblHitPointsGems.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblHitPointsGems.setText("Gems");
-
-        lblUpgradeBarSpeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeBar/bar-1.png"))); // NOI18N
-
-        lblUpgradeBarFireRate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeBar/bar-1.png"))); // NOI18N
-
-        lblUpgradeBarHitpoints.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeBar/bar-1.png"))); // NOI18N
-
-        lblUpgradeBarBulletPower.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeBar/bar-1.png"))); // NOI18N
-
-        lblUpgradeBarBulletSpeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeBar/bar-1.png"))); // NOI18N
-
-        lblIconSpeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeIcons/speed.png"))); // NOI18N
-        lblIconSpeed.setText("jLabel1");
-
-        lblIconSpeed1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeIcons/bulletSpeed.png"))); // NOI18N
-        lblIconSpeed1.setText("jLabel1");
-
-        lblIconSpeed2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeIcons/hitpoints.png"))); // NOI18N
-        lblIconSpeed2.setText("jLabel1");
-
-        lblIconSpeed3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeIcons/fireRate.png"))); // NOI18N
-        lblIconSpeed3.setText("jLabel1");
-
-        lblIconSpeed4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeIcons/bulletPower.png"))); // NOI18N
-        lblIconSpeed4.setText("jLabel1");
-
-        lblIconGemsSpeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/geomSprite.png"))); // NOI18N
-
-        lblIconGemsBulletSpeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/geomSprite.png"))); // NOI18N
-
-        lblIconGemsBulletPower.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/geomSprite.png"))); // NOI18N
-
-        lblIconGemsFireRate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/geomSprite.png"))); // NOI18N
-
-        lblIconGemsHitpoints.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/geomSprite.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanelUpgradesLayout = new javax.swing.GroupLayout(jPanelUpgrades);
-        jPanelUpgrades.setLayout(jPanelUpgradesLayout);
-        jPanelUpgradesLayout.setHorizontalGroup(
-            jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblIconSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSpeed2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSpeed3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBulletPower)
-                    .addComponent(lblBulletSpeed)
-                    .addComponent(lblFireRate)
-                    .addComponent(lblHitpoints)
-                    .addComponent(lblSpeed))
-                .addGap(74, 74, 74)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblUpgradeBarFireRate)
-                    .addComponent(lblUpgradeBarHitpoints)
-                    .addComponent(lblUpgradeBarBulletPower)
-                    .addComponent(lblUpgradeBarBulletSpeed)
-                    .addComponent(lblUpgradeBarSpeed))
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblIconGemsSpeed)
-                            .addComponent(lblIconGemsBulletSpeed)
-                            .addComponent(lblIconGemsBulletPower)))
-                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIconGemsHitpoints)
-                            .addComponent(lblIconGemsFireRate))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSpeedGems)
-                    .addComponent(lblBulletPowerGems)
-                    .addComponent(lblBulletSpeedGems)
-                    .addComponent(lblFireRateGems)
-                    .addComponent(lblHitPointsGems))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-        jPanelUpgradesLayout.setVerticalGroup(
-            jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblUpgradeBarSpeed)
-                    .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblSpeed)
-                        .addComponent(lblIconSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblSpeedGems)
-                        .addComponent(lblIconGemsSpeed)))
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblBulletSpeed)
-                                .addComponent(lblIconSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblIconGemsBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblUpgradeBarBulletSpeed))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
-                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(lblBulletPowerGems)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblBulletPower)
-                                    .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUpgradeBarBulletPower, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblIconGemsBulletPower, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblFireRate)
-                                .addComponent(lblIconSpeed3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblIconGemsFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblUpgradeBarFireRate))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(lblBulletSpeedGems)
-                        .addGap(61, 61, 61)
-                        .addComponent(lblFireRateGems)))
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblUpgradeBarHitpoints)
-                                .addComponent(lblHitpoints))
-                            .addComponent(lblIconSpeed2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIconGemsHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(lblHitPointsGems)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanelUpgrades);
-        jPanelUpgrades.setBounds(870, 320, 810, 400);
-
-        jPanelShip.setBackground(new java.awt.Color(0, 102, 0));
-
-        lblShipsName.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblShipsName.setText("Ship's Name");
 
+        lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/button.jpg"))); // NOI18N
         lblAfbeeldingSchip.setText("Afbeelding Schip");
 
         javax.swing.GroupLayout jPanelShipLayout = new javax.swing.GroupLayout(jPanelShip);
         jPanelShip.setLayout(jPanelShipLayout);
         jPanelShipLayout.setHorizontalGroup(
             jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelShipLayout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
-                .addComponent(lblShipsName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
             .addGroup(jPanelShipLayout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(lblAfbeeldingSchip)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelShipLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblAfbeeldingSchip))
+                    .addGroup(jPanelShipLayout.createSequentialGroup()
+                        .addGap(179, 179, 179)
+                        .addComponent(lblShipsName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanelShipLayout.setVerticalGroup(
             jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelShipLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblShipsName)
-                .addGap(136, 136, 136)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addComponent(lblAfbeeldingSchip)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addGap(103, 103, 103))
         );
 
-        getContentPane().add(jPanelShip);
-        jPanelShip.setBounds(90, 320, 700, 400);
+        jTabbedPane1.addTab("Ship", jPanelShip);
 
-        jPanelCompanion.setBackground(new java.awt.Color(0, 102, 0));
+        lblBuddiesName.setText("Buddies Name");
 
-        lblCompanionName.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lblCompanionName.setText("Companion's Name");
-
+        lblAfbeeldingBuddy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/button.jpg"))); // NOI18N
         lblAfbeeldingBuddy.setText("Afbeelding Buddy");
 
-        javax.swing.GroupLayout jPanelCompanionLayout = new javax.swing.GroupLayout(jPanelCompanion);
-        jPanelCompanion.setLayout(jPanelCompanionLayout);
-        jPanelCompanionLayout.setHorizontalGroup(
-            jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(lblCompanionName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addComponent(lblAfbeeldingBuddy)))
-                .addContainerGap(179, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanelBuddyLayout = new javax.swing.GroupLayout(jPanelBuddy);
+        jPanelBuddy.setLayout(jPanelBuddyLayout);
+        jPanelBuddyLayout.setHorizontalGroup(
+            jPanelBuddyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBuddyLayout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addComponent(lblBuddiesName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(166, Short.MAX_VALUE))
+            .addGroup(jPanelBuddyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelBuddyLayout.createSequentialGroup()
+                    .addGap(124, 124, 124)
+                    .addComponent(lblAfbeeldingBuddy)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        jPanelCompanionLayout.setVerticalGroup(
-            jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                .addComponent(lblCompanionName)
-                .addGap(143, 143, 143)
-                .addComponent(lblAfbeeldingBuddy)
-                .addContainerGap(197, Short.MAX_VALUE))
+        jPanelBuddyLayout.setVerticalGroup(
+            jPanelBuddyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBuddyLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(lblBuddiesName)
+                .addContainerGap(330, Short.MAX_VALUE))
+            .addGroup(jPanelBuddyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelBuddyLayout.createSequentialGroup()
+                    .addGap(203, 203, 203)
+                    .addComponent(lblAfbeeldingBuddy)
+                    .addContainerGap(64, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(jPanelCompanion);
-        jPanelCompanion.setBounds(90, 320, 700, 400);
+        jTabbedPane1.addTab("Buddy", jPanelBuddy);
 
-        jPanelCurrency.setBackground(new java.awt.Color(0, 102, 0));
+        getContentPane().add(jTabbedPane1);
+        jTabbedPane1.setBounds(100, 360, 525, 397);
 
-        lblCoins.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/coinSprite.png"))); // NOI18N
         lblCoins.setText("C:");
 
-        lblContentCoins.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblContentCoins.setText("10000");
 
-        lblGems.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/geomSprite.png"))); // NOI18N
+        lblGems.setText("Gems:");
 
-        lblContentGems.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblContentGems.setText("250");
+
+        lblSpeed.setText("Speed");
+
+        lblBulletPower.setText("Bullet Power");
+
+        lblBulletSpeed.setText("BulletSpeed");
+
+        lblFireRate.setText("Fire Rate");
+
+        lblHitpoints.setText("Hitpoints");
+
+        lblSpeedCoins.setText("Coins");
+
+        lblBulletPowerCoins.setText("Coins");
+
+        lblBulletSpeedCoins.setText("Coins");
+
+        lblFireRateCoins.setText("Coins");
+
+        lblHitPointsCoins.setText("Coins");
 
         javax.swing.GroupLayout jPanelCurrencyLayout = new javax.swing.GroupLayout(jPanelCurrency);
         jPanelCurrency.setLayout(jPanelCurrencyLayout);
         jPanelCurrencyLayout.setHorizontalGroup(
             jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCurrencyLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lblCoins, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblContentCoins)
-                .addGap(44, 44, 44)
-                .addComponent(lblGems)
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCurrencyLayout.createSequentialGroup()
+                .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelCurrencyLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSpeed)
+                            .addComponent(lblBulletPower)
+                            .addComponent(lblBulletSpeed)
+                            .addComponent(lblFireRate)
+                            .addComponent(lblHitpoints))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSpeedCoins)
+                            .addComponent(lblBulletPowerCoins)
+                            .addComponent(lblBulletSpeedCoins)
+                            .addComponent(lblFireRateCoins)
+                            .addComponent(lblHitPointsCoins)))
+                    .addGroup(jPanelCurrencyLayout.createSequentialGroup()
+                        .addContainerGap(46, Short.MAX_VALUE)
+                        .addComponent(lblCoins)
+                        .addGap(27, 27, 27)
+                        .addComponent(lblContentCoins)
+                        .addGap(35, 35, 35)
+                        .addComponent(lblGems)))
+                .addGap(43, 43, 43)
                 .addComponent(lblContentGems)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
         jPanelCurrencyLayout.setVerticalGroup(
             jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCurrencyLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addGap(76, 76, 76)
+                .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCoins)
+                    .addComponent(lblContentCoins)
+                    .addComponent(lblGems)
+                    .addComponent(lblContentGems))
+                .addGap(65, 65, 65)
                 .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCoins, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblContentGems)
-                        .addComponent(lblGems))
-                    .addComponent(lblContentCoins))
-                .addGap(24, 24, 24))
+                    .addGroup(jPanelCurrencyLayout.createSequentialGroup()
+                        .addComponent(lblSpeed)
+                        .addGap(44, 44, 44)
+                        .addComponent(lblBulletPower)
+                        .addGap(64, 64, 64)
+                        .addComponent(lblBulletSpeed)
+                        .addGap(64, 64, 64)
+                        .addComponent(lblFireRate)
+                        .addGap(64, 64, 64)
+                        .addComponent(lblHitpoints))
+                    .addGroup(jPanelCurrencyLayout.createSequentialGroup()
+                        .addComponent(lblSpeedCoins)
+                        .addGap(54, 54, 54)
+                        .addComponent(lblBulletPowerCoins)
+                        .addGap(54, 54, 54)
+                        .addComponent(lblBulletSpeedCoins)
+                        .addGap(64, 64, 64)
+                        .addComponent(lblFireRateCoins)
+                        .addGap(64, 64, 64)
+                        .addComponent(lblHitPointsCoins)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelCurrency);
-        jPanelCurrency.setBounds(1520, 30, 320, 80);
+        jPanelCurrency.setBounds(1060, 210, 300, 550);
 
-        btnShip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/ship-nonActive.png"))); // NOI18N
-        btnShip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShipActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnShip);
-        btnShip.setBounds(260, 250, 200, 50);
-
-        btnCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/companion-nonActive.png"))); // NOI18N
-        btnCompanion.setText("jButton2");
-        btnCompanion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCompanionActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCompanion);
-        btnCompanion.setBounds(460, 250, 200, 50);
-
-        lblShip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/ship-active.png"))); // NOI18N
-        getContentPane().add(lblShip);
-        lblShip.setBounds(260, 250, 200, 50);
-
-        lblCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/companion-active.png"))); // NOI18N
-        getContentPane().add(lblCompanion);
-        lblCompanion.setBounds(460, 250, 200, 50);
-
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/shop-bg.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crazy-scientist.jpg"))); // NOI18N
         lblBackground.setText("Achtergrond");
         lblBackground.setMaximumSize(new java.awt.Dimension(1920, 1080));
         lblBackground.setMinimumSize(new java.awt.Dimension(1920, 1080));
@@ -421,34 +233,6 @@ public class ShopFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        jPanelCompanion.setVisible(false);
-        btnShip.setVisible(false);
-        lblCompanion.setVisible(false);
-    }//GEN-LAST:event_formWindowOpened
-
-    private void btnShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipActionPerformed
-       jPanelCompanion.setVisible(false);
-       jPanelShip.setVisible(true);
-       btnShip.setVisible(false);
-       lblShip.setVisible(true);
-       btnCompanion.setVisible(true);
-       lblCompanion.setVisible(false);
-    }//GEN-LAST:event_btnShipActionPerformed
-
-    private void btnCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanionActionPerformed
-       jPanelCompanion.setVisible(true);
-       jPanelShip.setVisible(false);
-       btnShip.setVisible(true);
-       lblShip.setVisible(false);
-       btnCompanion.setVisible(false);
-       lblCompanion.setVisible(true);
-    }//GEN-LAST:event_btnCompanionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -487,47 +271,28 @@ public class ShopFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCompanion;
-    private javax.swing.JButton btnShip;
-    private javax.swing.JPanel jPanelCompanion;
+    private javax.swing.JPanel jPanelBuddy;
     private javax.swing.JPanel jPanelCurrency;
     private javax.swing.JPanel jPanelShip;
-    private javax.swing.JPanel jPanelUpgrades;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAfbeeldingBuddy;
     private javax.swing.JLabel lblAfbeeldingSchip;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblBuddiesName;
     private javax.swing.JLabel lblBulletPower;
-    private javax.swing.JLabel lblBulletPowerGems;
+    private javax.swing.JLabel lblBulletPowerCoins;
     private javax.swing.JLabel lblBulletSpeed;
-    private javax.swing.JLabel lblBulletSpeedGems;
+    private javax.swing.JLabel lblBulletSpeedCoins;
     private javax.swing.JLabel lblCoins;
-    private javax.swing.JLabel lblCompanion;
-    private javax.swing.JLabel lblCompanionName;
     private javax.swing.JLabel lblContentCoins;
     private javax.swing.JLabel lblContentGems;
     private javax.swing.JLabel lblFireRate;
-    private javax.swing.JLabel lblFireRateGems;
+    private javax.swing.JLabel lblFireRateCoins;
     private javax.swing.JLabel lblGems;
-    private javax.swing.JLabel lblHitPointsGems;
+    private javax.swing.JLabel lblHitPointsCoins;
     private javax.swing.JLabel lblHitpoints;
-    private javax.swing.JLabel lblIconGemsBulletPower;
-    private javax.swing.JLabel lblIconGemsBulletSpeed;
-    private javax.swing.JLabel lblIconGemsFireRate;
-    private javax.swing.JLabel lblIconGemsHitpoints;
-    private javax.swing.JLabel lblIconGemsSpeed;
-    private javax.swing.JLabel lblIconSpeed;
-    private javax.swing.JLabel lblIconSpeed1;
-    private javax.swing.JLabel lblIconSpeed2;
-    private javax.swing.JLabel lblIconSpeed3;
-    private javax.swing.JLabel lblIconSpeed4;
-    private javax.swing.JLabel lblShip;
     private javax.swing.JLabel lblShipsName;
     private javax.swing.JLabel lblSpeed;
-    private javax.swing.JLabel lblSpeedGems;
-    private javax.swing.JLabel lblUpgradeBarBulletPower;
-    private javax.swing.JLabel lblUpgradeBarBulletSpeed;
-    private javax.swing.JLabel lblUpgradeBarFireRate;
-    private javax.swing.JLabel lblUpgradeBarHitpoints;
-    private javax.swing.JLabel lblUpgradeBarSpeed;
+    private javax.swing.JLabel lblSpeedCoins;
     // End of variables declaration//GEN-END:variables
 }
