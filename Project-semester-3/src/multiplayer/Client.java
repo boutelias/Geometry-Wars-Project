@@ -1,17 +1,24 @@
 package multiplayer;
 
+import gui.GameGui;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Enemy;
 import model.Player;
+import static multiplayer.Server.socket;
 
 
 public class Client {
     
     static Socket socket;
     static ObjectInputStream in;
+    
+    static private GameGui gameGui = new GameGui();
     
     public static void main(String[] args) throws IOException, ClassNotFoundException{
         
@@ -24,8 +31,14 @@ public class Client {
         
         System.out.println("Receiving information...");
               
-        Player player = (Player) in.readObject();
-        System.out.println("String from server " + Integer.toString(player.getLives()));
+        
+            DataForClient data = (DataForClient) in.readObject();
+            
+            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());
+            
+        //DataForClient data = (DataForClient) in.readObject();
+        //Player player = (Player) in.readObject();
+        System.out.println(data.getPlayer().getPosX());
         
     }
 }
