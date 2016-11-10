@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.ArrayList;
 import model.Bullet;
+import model.Companion;
 import model.Enemy;
 import model.Geom;
 import model.Player;
@@ -30,9 +31,9 @@ public class Server {
         socket = serverSocket.accept();
     }
     
-    public void sendDataToClient(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException{
+    public void sendDataToClient(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms, Companion companion) throws IOException{
        
-        data.updateDataForClient(player, bullets, enemys, geoms);
+        data.updateDataForClient(player, bullets, enemys, geoms,companion);
         out = new ObjectOutputStream(socket.getOutputStream());
         
         //out.writeObject(data);

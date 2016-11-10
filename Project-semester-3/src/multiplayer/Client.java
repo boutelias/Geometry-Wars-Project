@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Bullet;
+import model.Companion;
 import model.Enemy;
 import model.Geom;
 import model.Player;
@@ -41,7 +42,8 @@ public class Client {
             List<Bullet> bullets = data.getBullets();
             List<Enemy> enemys = data.getEnemies();
             List<Geom> geoms = data.getGeoms();
-            gameGui.draw( player , bullets, enemys, geoms);
+            Companion companion = data.getCompanion();
+            gameGui.draw( player , bullets, enemys, geoms, companion);
             
         }
         //DataForClient data = (DataForClient) in.readObject();
