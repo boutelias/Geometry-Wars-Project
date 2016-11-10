@@ -121,12 +121,13 @@ public class Game implements Serializable{
     
     
     private void update(long time){
-        updateCompanionPos(time);
+        
         spawnEnemy();
         updatePlayerPos();
         
         updateBullets();
         updateEnemies();
+        updateCompanionPos(time);
         collisionDetection();
     }
     
@@ -154,11 +155,11 @@ public class Game implements Serializable{
     }
     
     private void updateCompanionPos(long time){
-        
-        
         if(!player.getBounds().intersects(companion.getBounds())){
             companion.updateCompanion(player.getPosX(),player.getPosY(),time); 
         }
+        
+        
         
            
         

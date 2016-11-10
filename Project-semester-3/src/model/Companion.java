@@ -15,6 +15,7 @@ public class Companion {
     private long timeExtraLife;
     private long getExtraLife = 5000;
     
+    
     public Companion(int width, int height, String type,Player player){
         this.width = width;
         this.height = height;
@@ -23,7 +24,6 @@ public class Companion {
         this.movementSpeed = player.getMovementSpeed();
         initialPos();
         timeExtraLife =0;
-        
     }
     
     public void initialPos(){
@@ -32,31 +32,32 @@ public class Companion {
     }
     
     public void updateCompanion(int playerX , int playerY,long time){
-       System.out.println(time);
-       moveCompanion(playerX,playerY);
+       if(!type.equals("Collector")){
+           moveCompanion(playerX,playerY);
+       }
        timeExtraLife += time;
-       
-       
+
         switch(type){
-            case "shield" : 
+            case "Shield" : 
                 break;
             case "LifeSaver" :
-                
-                if(timeExtraLife > getExtraLife){
-                    
+                if(timeExtraLife > getExtraLife){  
                     player.lifeExtra();
                     timeExtraLife = 0;
                 } 
                     
                 break;
+            case "Collector" :
+                break;
+               
                 
                 
         }
     }
     
-    public void moveCompanion(int playerX,int playerY){
-        float deltaX = playerX - posX;
-       float deltaY = playerY - posY;
+    public void moveCompanion(int targetX,int targetY){
+       float deltaX = targetX - posX;
+       float deltaY = targetY - posY;
        
        int absDeltaX = (int) Math.abs(deltaX);
        int absDeltaY = (int) Math.abs(deltaY);
