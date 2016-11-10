@@ -6,13 +6,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Bullet;
-import model.Companion;
 import model.Enemy;
-import model.Geom;
 import model.Player;
 
 
@@ -22,6 +18,7 @@ public class Client {
     static ObjectInputStream in;
     
     static private GameGui gameGui = new GameGui();
+    static private DataForClient data;
     
     public static void main(String[] args) throws IOException, ClassNotFoundException{
         
@@ -35,16 +32,15 @@ public class Client {
         System.out.println("Receiving information...");
               
         while(true){
+            try{
+            data = (DataForClient) in.readObject();
+            System.out.println("Data received");
+            System.out.println(data.getPlayer().getPosX());
             
-            DataForClient data = (DataForClient) in.readObject();
-            System.out.println("Reading data");
-            Player player = data.getPlayer();
-            List<Bullet> bullets = data.getBullets();
-            List<Enemy> enemys = data.getEnemies();
-            List<Geom> geoms = data.getGeoms();
-            Companion companion = data.getCompanion();
-            gameGui.draw( player , bullets, enemys, geoms, companion);
-            
+            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
         }
         //DataForClient data = (DataForClient) in.readObject();
         //Player player = (Player) in.readObject();
