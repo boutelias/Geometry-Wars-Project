@@ -108,6 +108,20 @@ public class Player implements Serializable{
     public int getMovementSpeed(){
         return movementSpeed;
     }
+    public void setMovementSpeedHigher(){
+        movementSpeed ++;
+    }
+    
+    public void setMovementSpeedLower(){
+        if(movementSpeed>1){
+            movementSpeed --;
+        }
+        
+    }
+    
+    public void setBPM(){
+        bulletsPerMinute += 5;
+    }
     
     
 }

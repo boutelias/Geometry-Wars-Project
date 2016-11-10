@@ -23,6 +23,10 @@ public class Wave implements Serializable{
         numberOfEnemiesLeft --;
     }
     
+    public void addExtraEnemies(int extraEnemies){
+        numberOfEnemiesLeft += extraEnemies;
+    }
+    
     
     
     public int getNumberOfEnemiesLeft(){

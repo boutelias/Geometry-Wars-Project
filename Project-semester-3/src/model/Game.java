@@ -156,7 +156,7 @@ public class Game implements Serializable{
     
     private void updateCompanionPos(long time){
         if(!player.getBounds().intersects(companion.getBounds())){
-            companion.updateCompanion(player.getPosX(),player.getPosY(),time); 
+            companion.updateCompanion(player.getPosX(),player.getPosY(),time,player.getMovementSpeed()); 
         }
         
         
@@ -298,9 +298,25 @@ public class Game implements Serializable{
                     checkdamage(bullet, enemy);
                     
                     if(enemy.getHp()==0){
-                        if(dropGeom(enemy.getDroprate())){
+                        if(drop(enemy.getDropRateGeom())){
                             Geom geom = new Geom(enemy.getPosX(),enemy.getPosY());
                             geoms.add(geom);
+                        }
+                        if(drop(enemy.getDropRateSpeedBoost())){
+                            System.out.println("speed gaat omhoog !!");
+                            player.setMovementSpeedHigher();
+                        }
+                        if(drop(enemy.getDropRateBPM())){
+                            System.out.println("rate of fire gaat omhoog !!");
+                            player.setBPM();
+                        }
+                        if(drop(enemy.getDropRateExtraEnemy())){
+                            Wave wave = waves.get(waveCounter);
+                            // TODO get the amount of extra enemies
+                            wave.addExtraEnemies(2);
+                        }
+                        if(drop(enemy.getDroprateSpeedDown())){
+                            player.setMovementSpeedLower();
                         }
                         enemiesToRemove.add(enemy);
                         player.addPoints(enemy.getValue());
@@ -366,7 +382,11 @@ public class Game implements Serializable{
         }
     }
 
-    private boolean dropGeom(double droprate){
+    
+        
+    
+    
+    private boolean drop(double droprate){
         int maxint = (int) (droprate * 100);
         
         int randomInt = randomGenerator.nextInt(100);
@@ -379,6 +399,8 @@ public class Game implements Serializable{
         }
         
     }
+    
+    
     
     /*private void sendDataToClient() throws IOException{
         server.sendDataToClient(player, bullets, enemies, geoms);

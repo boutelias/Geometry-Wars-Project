@@ -10,8 +10,11 @@ public class Enemy implements Serializable{
     private float posY;
     private float deltaX;
     private float deltaY;
-    private double droprate = 0.20;
-    
+    private double dropRateGeom = 0.20; //TODO dit uit database 
+    private double dropRateSpeedBoost = 0.00001; // TODO dit ook uit database
+    private double dropRateBPM = 0.00001;
+    private double dropRateExtraEnemy = 0.00001;
+    private double dropRateSpeedDown = 0.00001;
     private int value = 15;
     private int hp = 15;
     public Enemy(int posX,int posY){
@@ -66,9 +69,24 @@ public class Enemy implements Serializable{
     public void setHp(int hp){
         this.hp = hp;
     }
-    public double getDroprate(){
-        return droprate;
+    public double getDropRateGeom(){
+        return dropRateGeom;
     }
+    
+    public double getDropRateSpeedBoost(){
+        return dropRateSpeedBoost;
+    }
+    
+    public double getDropRateBPM(){
+        return dropRateBPM;
+    }
+    public double getDropRateExtraEnemy(){
+        return dropRateExtraEnemy;
+    }
+    public double getDroprateSpeedDown(){
+        return dropRateSpeedDown;
+    }
+    
 
     
     

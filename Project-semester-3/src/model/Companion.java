@@ -31,7 +31,8 @@ public class Companion {
         posY = player.getPosY()-player.getHeight()-height;
     }
     
-    public void updateCompanion(int playerX , int playerY,long time){
+    public void updateCompanion(int playerX , int playerY,long time,int movementspeed){
+       movementSpeed = movementspeed; 
        if(!type.equals("Collector")){
            moveCompanion(playerX,playerY);
        }
