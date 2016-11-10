@@ -30,7 +30,6 @@ public class StartFrame extends javax.swing.JFrame {
         btnLogIn = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
         btnHighscores = new javax.swing.JButton();
-        btnSettings = new javax.swing.JButton();
         logInPanel = new javax.swing.JPanel();
         lblUsernameLogIn = new javax.swing.JLabel();
         lblPasswordLogIn = new javax.swing.JLabel();
@@ -45,6 +44,13 @@ public class StartFrame extends javax.swing.JFrame {
         txtPasswordSignUp = new javax.swing.JPasswordField();
         txtConfirmPasswordSignUp = new javax.swing.JPasswordField();
         btnConfirmSignUp = new javax.swing.JButton();
+        HighscoresPanel = new javax.swing.JPanel();
+        lblHighscores = new javax.swing.JLabel();
+        GameModePanel = new javax.swing.JPanel();
+        btnSinglePlayer = new javax.swing.JButton();
+        btnMultiPlayer = new javax.swing.JButton();
+        btnShop = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,9 +86,11 @@ public class StartFrame extends javax.swing.JFrame {
 
         btnHighscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/highscores.png"))); // NOI18N
         btnHighscores.setText("jButton1");
-
-        btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/settings.png"))); // NOI18N
-        btnSettings.setText("jButton1");
+        btnHighscores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHighscoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
         startPanel.setLayout(startPanelLayout);
@@ -93,9 +101,8 @@ public class StartFrame extends javax.swing.JFrame {
                 .addGroup(startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(100, 100, 100))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         startPanelLayout.setVerticalGroup(
             startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,9 +113,7 @@ public class StartFrame extends javax.swing.JFrame {
                 .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         getContentPane().add(startPanel);
@@ -143,6 +148,11 @@ public class StartFrame extends javax.swing.JFrame {
         txtPasswordLogIn.setText("Insertpasswordhere");
 
         btnConfirmLogIn.setText("Confirm");
+        btnConfirmLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmLogInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout logInPanelLayout = new javax.swing.GroupLayout(logInPanel);
         logInPanel.setLayout(logInPanelLayout);
@@ -253,10 +263,83 @@ public class StartFrame extends javax.swing.JFrame {
         getContentPane().add(SignUpPanel);
         SignUpPanel.setBounds(1220, 330, 540, 650);
 
+        HighscoresPanel.setMinimumSize(new java.awt.Dimension(540, 750));
+        HighscoresPanel.setOpaque(false);
+        HighscoresPanel.setPreferredSize(new java.awt.Dimension(540, 600));
+
+        lblHighscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/highscores.png"))); // NOI18N
+
+        javax.swing.GroupLayout HighscoresPanelLayout = new javax.swing.GroupLayout(HighscoresPanel);
+        HighscoresPanel.setLayout(HighscoresPanelLayout);
+        HighscoresPanelLayout.setHorizontalGroup(
+            HighscoresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HighscoresPanelLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+        HighscoresPanelLayout.setVerticalGroup(
+            HighscoresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HighscoresPanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(600, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(HighscoresPanel);
+        HighscoresPanel.setBounds(1220, 330, 540, 600);
+
+        GameModePanel.setMinimumSize(new java.awt.Dimension(540, 750));
+        GameModePanel.setOpaque(false);
+        GameModePanel.setPreferredSize(new java.awt.Dimension(540, 600));
+
+        btnSinglePlayer.setText("Single Player");
+
+        btnMultiPlayer.setText("Multi Player");
+
+        btnShop.setText("Shop");
+
+        javax.swing.GroupLayout GameModePanelLayout = new javax.swing.GroupLayout(GameModePanel);
+        GameModePanel.setLayout(GameModePanelLayout);
+        GameModePanelLayout.setHorizontalGroup(
+            GameModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GameModePanelLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(GameModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnShop, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMultiPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSinglePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+        GameModePanelLayout.setVerticalGroup(
+            GameModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GameModePanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnSinglePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnMultiPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnShop, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(340, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(GameModePanel);
+        GameModePanel.setBounds(1220, 330, 540, 600);
+
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
+        btnBack.setText("Back");
+        btnBack.setPreferredSize(new java.awt.Dimension(340, 100));
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(60, 890, 330, 80);
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/start-bg.png"))); // NOI18N
-        background.setText("jLabel2");
         getContentPane().add(background);
-        background.setBounds(0, 10, 1965, 1080);
+        background.setBounds(0, 0, 1920, 1080);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -264,17 +347,22 @@ public class StartFrame extends javax.swing.JFrame {
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         startPanel.setVisible(false);
         logInPanel.setVisible(true);
+        btnBack.setVisible(true);
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         startPanel.setVisible(false);
         SignUpPanel.setVisible(true);
+        btnBack.setVisible(true);
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         startPanel.setVisible(true);
         logInPanel.setVisible(false);
         SignUpPanel.setVisible(false);
+        GameModePanel.setVisible(false);
+        HighscoresPanel.setVisible(false);
+        btnBack.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void txtUsernameLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameLogInActionPerformed
@@ -288,6 +376,26 @@ public class StartFrame extends javax.swing.JFrame {
     private void txtConfirmPasswordSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmPasswordSignUpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConfirmPasswordSignUpActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        startPanel.setVisible(true);
+        logInPanel.setVisible(false);
+        SignUpPanel.setVisible(false);
+        GameModePanel.setVisible(false);
+        HighscoresPanel.setVisible(false);
+        btnBack.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnHighscoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighscoresActionPerformed
+        startPanel.setVisible(false);
+        HighscoresPanel.setVisible(true);
+        btnBack.setVisible(true);
+    }//GEN-LAST:event_btnHighscoresActionPerformed
+
+    private void btnConfirmLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmLogInActionPerformed
+        GameModePanel.setVisible(true);
+        logInPanel.setVisible(false);
+    }//GEN-LAST:event_btnConfirmLogInActionPerformed
     
 
     /**
@@ -327,15 +435,21 @@ public class StartFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel GameModePanel;
+    private javax.swing.JPanel HighscoresPanel;
     private javax.swing.JPanel SignUpPanel;
     private javax.swing.JLabel background;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnConfirmLogIn;
     private javax.swing.JButton btnConfirmSignUp;
     private javax.swing.JButton btnHighscores;
     private javax.swing.JButton btnLogIn;
-    private javax.swing.JButton btnSettings;
+    private javax.swing.JButton btnMultiPlayer;
+    private javax.swing.JButton btnShop;
     private javax.swing.JButton btnSignUp;
+    private javax.swing.JButton btnSinglePlayer;
     private javax.swing.JLabel lblConfirmPasswordSignUp;
+    private javax.swing.JLabel lblHighscores;
     private javax.swing.JLabel lblPasswordLogIn;
     private javax.swing.JLabel lblPasswordSignUp;
     private javax.swing.JLabel lblUsernameLogIn;

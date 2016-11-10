@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /*
@@ -29,7 +30,6 @@ public class ShopFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBack = new javax.swing.JButton();
         jPanelUpgrades = new javax.swing.JPanel();
         lblSpeed = new javax.swing.JLabel();
         lblBulletPower = new javax.swing.JLabel();
@@ -64,9 +64,13 @@ public class ShopFrame extends javax.swing.JFrame {
         jPanelShip = new javax.swing.JPanel();
         lblShipsName = new javax.swing.JLabel();
         lblAfbeeldingSchip = new javax.swing.JLabel();
+        btnNextShip = new javax.swing.JButton();
+        btnPreviousShip = new javax.swing.JButton();
         jPanelCompanion = new javax.swing.JPanel();
         lblCompanionName = new javax.swing.JLabel();
         lblAfbeeldingBuddy = new javax.swing.JLabel();
+        btnNextCompanion = new javax.swing.JButton();
+        btnPreviousCompanion = new javax.swing.JButton();
         jPanelCurrency = new javax.swing.JPanel();
         lblCoins = new javax.swing.JLabel();
         lblContentCoins = new javax.swing.JLabel();
@@ -76,6 +80,10 @@ public class ShopFrame extends javax.swing.JFrame {
         btnCompanion = new javax.swing.JButton();
         lblShip = new javax.swing.JLabel();
         lblCompanion = new javax.swing.JLabel();
+        btnStartGame = new javax.swing.JButton();
+        btnClan = new javax.swing.JButton();
+        btnSettings = new javax.swing.JButton();
+        btnHighscores = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,17 +94,6 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
-
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
-        btnBack.setText("Back");
-        btnBack.setPreferredSize(new java.awt.Dimension(340, 100));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBack);
-        btnBack.setBounds(90, 760, 330, 80);
 
         jPanelUpgrades.setBackground(new java.awt.Color(0, 102, 0));
         jPanelUpgrades.setMinimumSize(new java.awt.Dimension(900, 400));
@@ -323,27 +320,51 @@ public class ShopFrame extends javax.swing.JFrame {
         lblShipsName.setText("Ship's Name");
 
         lblAfbeeldingSchip.setText("Afbeelding Schip");
+        lblAfbeeldingSchip.setOpaque(true);
+
+        btnNextShip.setText(">");
+        btnNextShip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextShipActionPerformed(evt);
+            }
+        });
+
+        btnPreviousShip.setText("<");
+        btnPreviousShip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousShipActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelShipLayout = new javax.swing.GroupLayout(jPanelShip);
         jPanelShip.setLayout(jPanelShipLayout);
         jPanelShipLayout.setHorizontalGroup(
             jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelShipLayout.createSequentialGroup()
+                .addComponent(btnPreviousShip)
+                .addGap(57, 57, 57)
+                .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(btnNextShip))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelShipLayout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblShipsName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(205, 205, 205))
-            .addGroup(jPanelShipLayout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(lblAfbeeldingSchip)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelShipLayout.setVerticalGroup(
             jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelShipLayout.createSequentialGroup()
                 .addComponent(lblShipsName)
-                .addGap(136, 136, 136)
-                .addComponent(lblAfbeeldingSchip)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelShipLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNextShip)
+                            .addComponent(btnPreviousShip)))
+                    .addGroup(jPanelShipLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelShip);
@@ -356,27 +377,35 @@ public class ShopFrame extends javax.swing.JFrame {
 
         lblAfbeeldingBuddy.setText("Afbeelding Buddy");
 
+        btnNextCompanion.setText(">");
+
+        btnPreviousCompanion.setText("<");
+
         javax.swing.GroupLayout jPanelCompanionLayout = new javax.swing.GroupLayout(jPanelCompanion);
         jPanelCompanion.setLayout(jPanelCompanionLayout);
         jPanelCompanionLayout.setHorizontalGroup(
             jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(lblCompanionName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addComponent(lblAfbeeldingBuddy)))
+                .addGap(171, 171, 171)
+                .addComponent(lblCompanionName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(179, Short.MAX_VALUE))
+            .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                .addComponent(btnPreviousCompanion)
+                .addGap(196, 196, 196)
+                .addComponent(lblAfbeeldingBuddy)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNextCompanion))
         );
         jPanelCompanionLayout.setVerticalGroup(
             jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCompanionLayout.createSequentialGroup()
                 .addComponent(lblCompanionName)
                 .addGap(143, 143, 143)
-                .addComponent(lblAfbeeldingBuddy)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAfbeeldingBuddy)
+                    .addComponent(btnNextCompanion)
+                    .addComponent(btnPreviousCompanion))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelCompanion);
@@ -433,7 +462,7 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnShip);
-        btnShip.setBounds(260, 250, 200, 50);
+        btnShip.setBounds(250, 270, 200, 50);
 
         btnCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/companion-nonActive.png"))); // NOI18N
         btnCompanion.addActionListener(new java.awt.event.ActionListener() {
@@ -442,15 +471,32 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCompanion);
-        btnCompanion.setBounds(460, 250, 200, 50);
+        btnCompanion.setBounds(450, 270, 200, 50);
 
         lblShip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/ship-active.png"))); // NOI18N
         getContentPane().add(lblShip);
-        lblShip.setBounds(260, 250, 200, 50);
+        lblShip.setBounds(250, 270, 200, 50);
 
         lblCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/companion-active.png"))); // NOI18N
         getContentPane().add(lblCompanion);
-        lblCompanion.setBounds(460, 250, 200, 50);
+        lblCompanion.setBounds(450, 270, 200, 50);
+
+        btnStartGame.setText("Start Game");
+        getContentPane().add(btnStartGame);
+        btnStartGame.setBounds(1440, 770, 335, 100);
+
+        btnClan.setText("Clan");
+        getContentPane().add(btnClan);
+        btnClan.setBounds(460, 770, 335, 100);
+
+        btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/settings.png"))); // NOI18N
+        btnSettings.setText("jButton1");
+        getContentPane().add(btnSettings);
+        btnSettings.setBounds(90, 770, 335, 100);
+
+        btnHighscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/highscores.png"))); // NOI18N
+        getContentPane().add(btnHighscores);
+        btnHighscores.setBounds(830, 770, 335, 100);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/shop-bg.png"))); // NOI18N
         lblBackground.setText("Achtergrond");
@@ -461,10 +507,6 @@ public class ShopFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jPanelCompanion.setVisible(false);
@@ -504,6 +546,14 @@ public class ShopFrame extends javax.swing.JFrame {
        lblCompanion.setVisible(true);
     }//GEN-LAST:event_btnCompanionActionPerformed
 
+    private void btnNextShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextShipActionPerformed
+        lblAfbeeldingSchip.setBackground(Color.yellow);
+    }//GEN-LAST:event_btnNextShipActionPerformed
+
+    private void btnPreviousShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousShipActionPerformed
+        lblAfbeeldingSchip.setBackground(Color.CYAN);
+    }//GEN-LAST:event_btnPreviousShipActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -540,14 +590,21 @@ public class ShopFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnClan;
     private javax.swing.JButton btnCompanion;
+    private javax.swing.JButton btnHighscores;
+    private javax.swing.JButton btnNextCompanion;
+    private javax.swing.JButton btnNextShip;
     private javax.swing.JButton btnPlusBulletPower;
     private javax.swing.JButton btnPlusBulletSpeed;
     private javax.swing.JButton btnPlusFireRate;
     private javax.swing.JButton btnPlusHitpoints;
     private javax.swing.JButton btnPlusSpeed;
+    private javax.swing.JButton btnPreviousCompanion;
+    private javax.swing.JButton btnPreviousShip;
+    private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnShip;
+    private javax.swing.JButton btnStartGame;
     private javax.swing.JPanel jPanelCompanion;
     private javax.swing.JPanel jPanelCurrency;
     private javax.swing.JPanel jPanelShip;
