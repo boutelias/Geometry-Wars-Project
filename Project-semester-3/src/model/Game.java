@@ -31,7 +31,7 @@ import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 /*import multiplayer.Server;*/
 
-public class Game implements Serializable{
+public class Game  implements Serializable{
     private Random randomGenerator = new Random();
     private int fps = 60;
     private int gameHeight;
@@ -50,6 +50,10 @@ public class Game implements Serializable{
     private long lastBulletFired = 0;
     private GameGui gameGui;
     private long previousTime;
+    private int bulletsPerMinute;
+    private int posXForBullet;
+    private int posYForBullet;
+    private int bulletDamage;
     /*private Server server;*/
     
     public static void main(String[] args) {
@@ -114,7 +118,7 @@ public class Game implements Serializable{
         player = new Player(gameWidth,gameHeight);
        
         handler = new InputHandler(gameGui.getFrame());  
-        companion = new Companion(30,30,"LifeSaver",player);
+        companion = new Companion(30,30,"Shooter",player);
     }
     
  
@@ -228,7 +232,10 @@ public class Game implements Serializable{
     private void updateBullets(){
         List<Bullet> needToRemove = new ArrayList();
         
-        addBullets();
+        addBullets(true);
+        if(companion.getType().equals("Shooter")){
+            addBullets(false);
+        }
         
         for(Bullet bullet: bullets){
             bullet.updatePos();
@@ -242,14 +249,36 @@ public class Game implements Serializable{
             bullets.remove(bullet);
         }
     }
-    
-    private void addBullets(){
-        if(handler.isMouseDown(1)){            
-            if(lastBulletFired + (60.0/player.getBulletsPerMinute()*1000)<System.currentTimeMillis()){
+    // maybe refactor this as this is a lot of duplication
+    private void addBullets(boolean t){
+        if(handler.isMouseDown(1)){
+            if(t){
+               lastBulletFired = player.getLastBulletFired();
+               bulletsPerMinute = player.getBulletsPerMinute();
+               posXForBullet = player.getPosX();
+               posYForBullet = player.getPosY();
+               bulletDamage = player.getDamage();
+               
+            }
+            else{
+                lastBulletFired =  companion.getLastBulletFired();
+                bulletsPerMinute = companion.getBulletsPerMinute();
+                posXForBullet = companion.getPosX();
+                posYForBullet = companion.getPosY();
+                bulletDamage = companion.getDamage();
+            }
+            if(lastBulletFired + (60.0/bulletsPerMinute*1000)<System.currentTimeMillis()){
                 //Moeten we echt height en witdh meegeven of kunnen we er anders aan?
-                Bullet newBullet = new Bullet(player.getPosX(),player.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),player.getDamage(),gameHeight,gameWidth);
+                Bullet newBullet = new Bullet(posXForBullet,posYForBullet,handler.getEvent(1).getX(),handler.getEvent(1).getY(),bulletDamage,gameHeight,gameWidth);
                 bullets.add(newBullet);
                 lastBulletFired = System.currentTimeMillis();
+                if(t){
+                    player.setLastBulletFired(lastBulletFired);
+                }
+                else {
+                    companion.setLastBulletFired(lastBulletFired);
+                }
+                
                 /*randomSpawnGenerator();
                 enemies.add(new Enemy(spawnEnemyX,spawnEnemyY));*/
             }

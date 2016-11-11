@@ -17,6 +17,8 @@ public class Player implements Serializable{
     private int bulletsPerMinute;
     private long score = 0;
     private int numberOfGeoms = 0;
+    private long lastBulletFired = 0;
+    
    
     
     
@@ -121,6 +123,14 @@ public class Player implements Serializable{
     
     public void setBPM(){
         bulletsPerMinute += 5;
+    }
+
+    public long getLastBulletFired() {
+        return lastBulletFired;
+    }
+
+    public void setLastBulletFired(long lastBulletFired) {
+        this.lastBulletFired = lastBulletFired;
     }
     
     

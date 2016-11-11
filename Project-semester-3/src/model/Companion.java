@@ -14,7 +14,9 @@ public class Companion {
     private int movementSpeed;
     private long timeExtraLife;
     private long getExtraLife = 5000;
-    
+    private long lastBulletFired = 0;
+    private int bulletsPerMinute;
+    private int damage;
     
     public Companion(int width, int height, String type,Player player){
         this.width = width;
@@ -24,6 +26,8 @@ public class Companion {
         this.movementSpeed = player.getMovementSpeed();
         initialPos();
         timeExtraLife =0;
+        bulletsPerMinute= 90;
+        damage = 15;
     }
     
     public void initialPos(){
@@ -50,6 +54,8 @@ public class Companion {
                 break;
             case "Collector" :
                 break;
+            
+            
                
                 
                 
@@ -95,6 +101,28 @@ public class Companion {
     public Rectangle getBounds(){
         return new Rectangle(getPosX()-(width/2),getPosY()-(height/2),width,height);
     }
+
+    public long getLastBulletFired() {
+        return lastBulletFired;
+    }
+
+    public void setLastBulletFired(long lastBulletFired) {
+        this.lastBulletFired = lastBulletFired;
+    }
+    
+    public int getBulletsPerMinute(){
+        return bulletsPerMinute;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+    
+    
     
     
     
