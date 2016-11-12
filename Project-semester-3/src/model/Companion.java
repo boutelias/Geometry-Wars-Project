@@ -16,7 +16,10 @@ public class Companion {
     private long getExtraLife = 5000;
     private long lastBulletFired = 0;
     private int bulletsPerMinute;
-    private int damage;
+    private int mineDamage;
+    private int bulletDamage;
+    private int minesPerMinute;
+    private long lastMineFired = 0;
     
     public Companion(int width, int height, String type,Player player){
         this.width = width;
@@ -26,8 +29,10 @@ public class Companion {
         this.movementSpeed = player.getMovementSpeed();
         initialPos();
         timeExtraLife =0;
-        bulletsPerMinute= 90;
-        damage = 15;
+        bulletsPerMinute = 90;
+        minesPerMinute = 6;
+        bulletDamage = 15;
+        mineDamage= 20;
     }
     
     public void initialPos(){
@@ -54,6 +59,7 @@ public class Companion {
                 break;
             case "Collector" :
                 break;
+               
             
             
                
@@ -117,9 +123,24 @@ public class Companion {
     public String getType() {
         return type;
     }
+    public int getMineDamage(){
+        return mineDamage;
+    }
+    
+    public int getBulletDamage() {
+        return bulletDamage;
+    }
 
-    public int getDamage() {
-        return damage;
+    public int getMinesPerMinute() {
+        return minesPerMinute;
+    }
+
+    public long getLastMineFired() {
+        return lastMineFired;
+    }
+
+    public void setLastMineFired(long lastMineFired) {
+        this.lastMineFired = lastMineFired;
     }
     
     

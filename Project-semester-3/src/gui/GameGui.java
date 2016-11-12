@@ -23,6 +23,7 @@ import model.Geom;
 import model.InputHandler;
 import java.awt.Color;
 import model.Companion;
+import model.Mine;
 
 /**
  *
@@ -69,7 +70,7 @@ public class GameGui {
         
     }
     
-    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion){
+    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){
         this.character = character;
         this.bullets = bullets;
         
@@ -91,6 +92,11 @@ public class GameGui {
         g.setColor(Color.green);
         for(Bullet bullet: bullets){
             g.fillOval(bullet.getPosX()-10, bullet.getPosY()-10,20,20);
+        }
+        
+        g.setColor(Color.darkGray);
+        for(Mine mine: mines){
+            g.fillOval(mine.getPosX()-(mine.getHeight()/2),mine.getPosY() - (mine.getWidth()/2) , mine.getHeight(), mine.getWidth());
         }
         
         g.setColor(Color.WHITE);

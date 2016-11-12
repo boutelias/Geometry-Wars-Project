@@ -17,6 +17,8 @@ public class Enemy implements Serializable{
     private double dropRateSpeedDown = 0.00001;
     private int value = 15;
     private int hp = 15;
+    
+    
     public Enemy(int posX,int posY){
         this.posX = posX;
         this.posY = posY;

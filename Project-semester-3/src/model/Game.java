@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.List;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -46,7 +47,8 @@ public class Game  implements Serializable{
     private List<Bullet> bullets = new ArrayList();
     private List<Enemy> enemies = new ArrayList();
     private List<Geom> geoms = new ArrayList();
-    private List<Wave> waves = new ArrayList<>(); 
+    private List<Wave> waves = new ArrayList<>();
+    private List<Mine> mines = new ArrayList<>();
     private long lastBulletFired = 0;
     private GameGui gameGui;
     private long previousTime;
@@ -118,7 +120,7 @@ public class Game  implements Serializable{
         player = new Player(gameWidth,gameHeight);
        
         handler = new InputHandler(gameGui.getFrame());  
-        companion = new Companion(30,30,"Shooter",player);
+        companion = new Companion(30,30,"Miner",player);
     }
     
  
@@ -128,7 +130,7 @@ public class Game  implements Serializable{
         
         spawnEnemy();
         updatePlayerPos();
-        
+        updateMines();
         updateBullets();
         updateEnemies();
         updateCompanionPos(time);
@@ -136,7 +138,7 @@ public class Game  implements Serializable{
     }
     
     private void draw(){
-        gameGui.draw(player, bullets, enemies, geoms, companion);
+        gameGui.draw(player, bullets, enemies, geoms, companion,mines);
     }
     
     private void randomSpawnGenerator(){
@@ -156,6 +158,24 @@ public class Game  implements Serializable{
                 break;
                
        }
+    }
+    
+    private void updateMines(){
+        if(companion.getType().equals("Miner")){
+            addMine();
+        }
+        
+    }
+    
+    private void addMine(){
+        if(handler.isMouseDown(MouseEvent.BUTTON3)){
+            if(companion.getLastMineFired() + (60.0/companion.getMinesPerMinute()*1000)<System.currentTimeMillis()){
+                System.out.println("Dit mag maar 6 keer per minuut");
+                Mine newmine = new Mine(companion.getPosX(),companion.getPosY(),companion.getMineDamage());
+                mines.add(newmine);
+                companion.setLastMineFired(System.currentTimeMillis());
+            }
+        }
     }
     
     private void updateCompanionPos(long time){
@@ -265,7 +285,7 @@ public class Game  implements Serializable{
                 bulletsPerMinute = companion.getBulletsPerMinute();
                 posXForBullet = companion.getPosX();
                 posYForBullet = companion.getPosY();
-                bulletDamage = companion.getDamage();
+                bulletDamage = companion.getBulletDamage();
             }
             if(lastBulletFired + (60.0/bulletsPerMinute*1000)<System.currentTimeMillis()){
                 //Moeten we echt height en witdh meegeven of kunnen we er anders aan?
@@ -319,6 +339,8 @@ public class Game  implements Serializable{
         /*bullets vs enemiesdetection*/
         List<Bullet> bulletsToRemove = new LinkedList();
         List<Enemy> enemiesToRemove = new LinkedList();
+        List<Mine> minesToRemove = new LinkedList();
+        
         
         for(Bullet bullet: bullets){
             for(Enemy enemy: enemies){
@@ -362,9 +384,7 @@ public class Game  implements Serializable{
         for(Bullet bullet: bulletsToRemove){
             bullets.remove(bullet);
         }
-        for(Enemy enemy: enemiesToRemove){
-                enemies.remove(enemy);
-        }
+        
         
         /*enemies vs player detection*/
         Enemy hittedChar = null;
@@ -390,6 +410,40 @@ public class Game  implements Serializable{
         }
         for(Geom geom: hittedGeoms){
             geoms.remove(geom);
+        }
+        /* enemies vs mine */
+        
+        for(Enemy enemy : enemies){
+            for(Mine mine : mines){
+                if(enemy.getBounds().intersects(mine.getBounds())){
+                    int newhp = enemy.getHp() - mine.getDamage();
+                    if(newhp <= 0){
+                        enemiesToRemove.add(enemy);
+                        
+                        
+                    }
+                    else{
+                        enemy.setHp(newhp);
+                    }
+                    minesToRemove.add(mine);
+                    
+                }
+            }
+        }
+        for(Enemy enemy: enemiesToRemove){
+                enemies.remove(enemy);
+        }
+        
+        /* player vs mine */
+        for (Mine mine: mines){
+            if(mine.getBounds().intersects(player.getBounds())){
+                player.lifeLess();
+                minesToRemove.add(mine);
+                
+            }
+        }
+        for(Mine mine : minesToRemove){
+            mines.remove(mine);
         }
     }
     
