@@ -30,7 +30,7 @@ public class Player implements Serializable{
         posX = 200;
         posY = 200;
         bulletsPerMinute = 180;
-        
+        lastBulletFired = System.currentTimeMillis();
     }
     
     public void moveUp(){
@@ -57,11 +57,11 @@ public class Player implements Serializable{
         }
     }
     
-    public void lifeLess(){
+    public void removeLife(){
         lives --;
     }
     
-    public void lifeExtra(){
+    public void addLife(){
         lives ++;
     }
     

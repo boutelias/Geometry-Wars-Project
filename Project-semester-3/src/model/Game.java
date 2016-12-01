@@ -1,35 +1,15 @@
 package model;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import gui.GameGui;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.util.List;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.JFrame;
-import sun.applet.Main;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
+import model.companions.Companion;
+import model.companions.LifeSaver;
+import model.companions.Miner;
 /*import multiplayer.Server;*/
 
 public class Game  implements Serializable{
@@ -41,7 +21,6 @@ public class Game  implements Serializable{
     private int spawnEnemyY;
     private int waveCounter;
     private long spawnTimer;
-    private Companion companion;
     private Player player;
     private InputHandler handler;
     private List<Bullet> bullets = new ArrayList();
@@ -49,14 +28,13 @@ public class Game  implements Serializable{
     private List<Geom> geoms = new ArrayList();
     private List<Wave> waves = new ArrayList<>();
     private List<Mine> mines = new ArrayList<>();
-    private long lastBulletFired = 0;
     private GameGui gameGui;
-    private long previousTime;
-    private int bulletsPerMinute;
-    private int posXForBullet;
-    private int posYForBullet;
-    private int bulletDamage;
+    
+    /*this is for te companions not for the game*/
+    //private long previousTime;
     /*private Server server;*/
+    
+    Companion theNewCompanion;
     
     public static void main(String[] args) {
         new Game();
@@ -74,17 +52,9 @@ public class Game  implements Serializable{
         long spawnTimer = System.currentTimeMillis();
         waveCounter = 0;
         while(player.getLives()>0){
-            long differenceTime;
             long time = System.currentTimeMillis();
-            if(time-previousTime < 20){
-                differenceTime = time - previousTime;
-            }
-            else {
-                differenceTime = 0;
-            }
-            
-            
-            update(differenceTime);
+
+            update();
             
             draw();
             
@@ -93,7 +63,7 @@ public class Game  implements Serializable{
             } catch (IOException ex) {
                 System.out.println("failed to send data");
             }*/
-            previousTime = time;
+
             time = (1000 / fps) - (System.currentTimeMillis() - time);
             if(time > 0){
                 try {
@@ -120,25 +90,27 @@ public class Game  implements Serializable{
         player = new Player(gameWidth,gameHeight);
        
         handler = new InputHandler(gameGui.getFrame());  
-        companion = new Companion(30,30,"Miner",player);
+        
+        theNewCompanion = new Miner(player,mines,handler,30,30,10,20);
+        theNewCompanion = new LifeSaver(player,30,30,60);
     }
     
  
     
     
-    private void update(long time){
+    private void update(){
         
         spawnEnemy();
         updatePlayerPos();
-        updateMines();
         updateBullets();
         updateEnemies();
-        updateCompanionPos(time);
+        theNewCompanion.doMove();
+        theNewCompanion.doSpecialAction();
         collisionDetection();
     }
     
     private void draw(){
-        gameGui.draw(player, bullets, enemies, geoms, companion,mines);
+        gameGui.draw(player, bullets, enemies, geoms, theNewCompanion,mines);
     }
     
     private void randomSpawnGenerator(){
@@ -158,36 +130,6 @@ public class Game  implements Serializable{
                 break;
                
        }
-    }
-    
-    private void updateMines(){
-        if(companion.getType().equals("Miner")){
-            addMine();
-        }
-        
-    }
-    
-    private void addMine(){
-        if(handler.isMouseDown(MouseEvent.BUTTON3)){
-            if(companion.getLastMineFired() + (60.0/companion.getMinesPerMinute()*1000)<System.currentTimeMillis()){
-                System.out.println("Dit mag maar 6 keer per minuut");
-                Mine newmine = new Mine(companion.getPosX(),companion.getPosY(),companion.getMineDamage());
-                mines.add(newmine);
-                companion.setLastMineFired(System.currentTimeMillis());
-            }
-        }
-    }
-    
-    private void updateCompanionPos(long time){
-        if(!player.getBounds().intersects(companion.getBounds())){
-            companion.updateCompanion(player.getPosX(),player.getPosY(),time,player.getMovementSpeed()); 
-        }
-        
-        
-        
-           
-        
-        
     }
     
     private void makeWaves(List<Wave> waves){
@@ -252,10 +194,7 @@ public class Game  implements Serializable{
     private void updateBullets(){
         List<Bullet> needToRemove = new ArrayList();
         
-        addBullets(true);
-        if(companion.getType().equals("Shooter")){
-            addBullets(false);
-        }
+        addBullets();
         
         for(Bullet bullet: bullets){
             bullet.updatePos();
@@ -269,38 +208,14 @@ public class Game  implements Serializable{
             bullets.remove(bullet);
         }
     }
-    // maybe refactor this as this is a lot of duplication
-    private void addBullets(boolean t){
-        if(handler.isMouseDown(1)){
-            if(t){
-               lastBulletFired = player.getLastBulletFired();
-               bulletsPerMinute = player.getBulletsPerMinute();
-               posXForBullet = player.getPosX();
-               posYForBullet = player.getPosY();
-               bulletDamage = player.getDamage();
-               
-            }
-            else{
-                lastBulletFired =  companion.getLastBulletFired();
-                bulletsPerMinute = companion.getBulletsPerMinute();
-                posXForBullet = companion.getPosX();
-                posYForBullet = companion.getPosY();
-                bulletDamage = companion.getBulletDamage();
-            }
-            if(lastBulletFired + (60.0/bulletsPerMinute*1000)<System.currentTimeMillis()){
-                //Moeten we echt height en witdh meegeven of kunnen we er anders aan?
-                Bullet newBullet = new Bullet(posXForBullet,posYForBullet,handler.getEvent(1).getX(),handler.getEvent(1).getY(),bulletDamage,gameHeight,gameWidth);
+    
+    private void addBullets(){
+        
+        if(handler.isMouseDown(1)){            
+            if(player.getLastBulletFired() + (60.0/player.getBulletsPerMinute()*1000)<System.currentTimeMillis()){
+                Bullet newBullet = new Bullet(player.getPosX(),player.getPosY(),handler.getEvent(1).getX(),handler.getEvent(1).getY(),player.getDamage(),gameHeight,gameWidth);
                 bullets.add(newBullet);
-                lastBulletFired = System.currentTimeMillis();
-                if(t){
-                    player.setLastBulletFired(lastBulletFired);
-                }
-                else {
-                    companion.setLastBulletFired(lastBulletFired);
-                }
-                
-                /*randomSpawnGenerator();
-                enemies.add(new Enemy(spawnEnemyX,spawnEnemyY));*/
+                player.setLastBulletFired(System.currentTimeMillis()); 
             }
         }
     }
@@ -390,7 +305,7 @@ public class Game  implements Serializable{
         Enemy hittedChar = null;
         for(Enemy enemy: enemies){
             if(player.getBounds().intersects(enemy.getBounds())){
-                player.lifeLess();
+                player.removeLife();
                 hittedChar = enemy;
             }
         }
@@ -404,7 +319,6 @@ public class Game  implements Serializable{
         for(Geom geom: geoms){
             if(player.getBounds().intersects(geom.getBounds())){
                 player.addGeom();
-                System.out.println(player.getNumberOfGeoms());
                 hittedGeoms.add(geom);
             }
         }
@@ -437,7 +351,7 @@ public class Game  implements Serializable{
         /* player vs mine */
         for (Mine mine: mines){
             if(mine.getBounds().intersects(player.getBounds())){
-                player.lifeLess();
+                player.removeLife();
                 minesToRemove.add(mine);
                 
             }

@@ -22,8 +22,8 @@ import model.Enemy;
 import model.Geom;
 import model.InputHandler;
 import java.awt.Color;
-import model.Companion;
 import model.Mine;
+import model.companions.Companion;
 
 /**
  *
@@ -41,7 +41,7 @@ public class GameGui {
     int gameHeight;
     Player character;
     List<Bullet> bullets;
-    Companion companion;
+    OldCompanionClass companion;
         
     public GameGui(){        
         frame = new JFrame("Crazy Scientist Game");
@@ -70,6 +70,7 @@ public class GameGui {
         
     }
     
+    //public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, OldCompanionClass companion,List<Mine> mines){
     public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){
         this.character = character;
         this.bullets = bullets;
