@@ -41,7 +41,6 @@ public class GameGui {
     int gameHeight;
     Player character;
     List<Bullet> bullets;
-    OldCompanionClass companion;
         
     public GameGui(){        
         frame = new JFrame("Crazy Scientist Game");

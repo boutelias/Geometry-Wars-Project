@@ -5,43 +5,107 @@
  */
 package model.companions;
 
+import java.awt.Rectangle;
+import java.util.List;
+import model.Bullet;
+import model.InputHandler;
+import model.Player;
+
 /**
  *
  * @author Tobias
  */
 public class Shooter implements Companion {
 
-    
-    
-    
+    int posX;
+    int posY;
+    int width;
+    int height;
+    Player player;
+    InputHandler handler;
+    List<Bullet> bullets;
+    int damage;
+    int movementSpeed;
+    int bulletsPerMinute;
+    long lastBulletFired;
+
+    public Shooter(Player player, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute) {
+        this.player = player;
+        this.handler = handler;
+        this.height = height;
+        this.width = width;
+        this.bullets = bullets;
+        this.damage = damage;
+        this.bulletsPerMinute = bulletsPerMinute;
+
+        this.movementSpeed = player.getMovementSpeed();
+        posX = player.getPosX();
+        posY = player.getPosY();
+
+        this.lastBulletFired = System.currentTimeMillis();
+
+    }
+
     @Override
     public void doMove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(!player.getBounds().intersects(this.getBounds())){       
+            moveCompanion(player.getPosX(),player.getPosY());
+        }
     }
 
     @Override
     public void doSpecialAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (handler.isMouseDown(1)) {
+            if (this.lastBulletFired + (60.0 / this.bulletsPerMinute * 1000) < System.currentTimeMillis()) {
+                Bullet newBullet = new Bullet(posX, posY, handler.getEvent(1).getX(), handler.getEvent(1).getY(), this.damage, 1080, 1920);
+                bullets.add(newBullet);
+                this.lastBulletFired = System.currentTimeMillis();
+            }
+        }
+    }
+    
+    public void moveCompanion(int targetX,int targetY){
+       float deltaX = targetX - posX;
+       float deltaY = targetY - posY;
+       
+       int absDeltaX = (int) Math.abs(deltaX);
+       int absDeltaY = (int) Math.abs(deltaY);
+       
+       if(absDeltaX>absDeltaY){
+           deltaY = (float) deltaY/absDeltaX;
+           deltaX = deltaX/absDeltaX;
+       }else{
+           deltaX = (float) deltaX/absDeltaY;
+           deltaY = deltaY/absDeltaY;
+       }
+       
+       posX += deltaX*movementSpeed;
+       posY += deltaY*movementSpeed;
+        
+    }
+    
+    public Rectangle getBounds() {
+        return new Rectangle(posX-(width/2),posY-(height/2),width,height);
     }
 
     @Override
     public int getPosX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return posX;
     }
 
     @Override
     public int getPosY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return posY;
     }
 
     @Override
     public int getWidth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return width;
     }
 
     @Override
     public int getHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return height;
     }
-    
+
 }
