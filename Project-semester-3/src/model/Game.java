@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+import model.companions.AutoShooter;
 import model.companions.Companion;
 import model.companions.LifeSaver;
 import model.companions.Miner;
@@ -92,11 +93,12 @@ public class Game implements Serializable {
 
         //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
         //companion = new LifeSaver(player, 30, 30, 60);
-        companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
+        //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
+        companion = new AutoShooter(player,bullets,enemies,30,30,30,60);
     }
 
     private void update() {
-
+        
         spawnEnemy();
         updatePlayerPos();
         updateBullets();
@@ -152,10 +154,10 @@ public class Game implements Serializable {
     }
 
     private void spawnEnemy() {
-
+        
         Wave wave = waves.get(waveCounter);
         if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0) {
-
+            
             randomSpawnGenerator();
             enemies.add(new Enemy(spawnEnemyX, spawnEnemyY));
             spawnTimer = System.currentTimeMillis();
