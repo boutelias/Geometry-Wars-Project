@@ -6,6 +6,7 @@
 package model.companions;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 import java.util.List;
 import model.Bullet;
 import model.InputHandler;
@@ -15,7 +16,7 @@ import model.Player;
  *
  * @author Tobias
  */
-public class Shooter implements Companion {
+public class Shooter implements Companion, Serializable {
 
     int posX;
     int posY;

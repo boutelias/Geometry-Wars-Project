@@ -16,7 +16,9 @@ import java.util.logging.Logger;
 import model.Bullet;
 import model.Enemy;
 import model.Geom;
+import model.Mine;
 import model.Player;
+import model.companions.Companion;
 
 /**
  *
@@ -55,13 +57,17 @@ public class Server {
         }
     }
 
-    public void sendDataToClient(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException{
-        out.reset();
-        data.updateDataForClient(player, bullets, enemys, geoms);
-        System.out.println(data.getPlayer().getPosX());
-        System.out.println("data sent");
-        out.writeObject(data);
-        out.flush();
+    public void sendDataToClient(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms,Companion companion, List<Mine> mines){
+        try {
+            out.reset();
+            data.updateDataForClient(player, bullets, enemys, geoms,companion, mines);
+            System.out.println(data.getPlayer().getPosX());
+            System.out.println("data sent");
+            out.writeObject(data);
+            out.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public DataForServer getDataForServer(){

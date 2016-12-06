@@ -1,9 +1,10 @@
 package model.companions;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 import model.Player;
 
-public class LifeSaver implements Companion{
+public class LifeSaver implements Companion, Serializable{
     private long timeWhenLifeNeedsToBeAdded;
     private long timeBetweenLifes;
     private Player player;

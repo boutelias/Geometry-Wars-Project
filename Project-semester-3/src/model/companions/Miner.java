@@ -7,6 +7,7 @@ package model.companions;
 
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 import java.util.List;
 import model.InputHandler;
 import model.Mine;
@@ -16,7 +17,7 @@ import model.Player;
  *
  * @author Tobias
  */
-public class Miner implements Companion{
+public class Miner implements Companion, Serializable{
     List<Mine> mines;
     Player player;
     int movementSpeed;

@@ -3,6 +3,7 @@ package model;
 import gui.GameGui;
 import java.util.List;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,7 +14,7 @@ import model.companions.LifeSaver;
 import model.companions.Miner;
 import model.companions.Shooter;
 
-/*import multiplayer.Server;*/
+import multiplayer.Server;
 
 public class Game implements Serializable {
 
@@ -33,15 +34,17 @@ public class Game implements Serializable {
     private List<Wave> waves = new ArrayList<>();
     private List<Mine> mines = new ArrayList<>();
     private GameGui gameGui;
-
-    /*private Server server;*/
     Companion companion;
+    private boolean multiplayer;
+
+    private Server server;
 
     public static void main(String[] args) {
-        new Game();
+        new Game(false);
     }
 
-    public Game() {
+    public Game(boolean multiplayer) {
+        this.multiplayer = multiplayer;
         run();
         System.exit(-1);
     }
@@ -57,13 +60,12 @@ public class Game implements Serializable {
 
             update();
 
+            if (multiplayer) {
+                sendDataToClient();
+            }
+            
             draw();
 
-            /*try {
-                sendDataToClient();
-            } catch (IOException ex) {
-                System.out.println("failed to send data");
-            }*/
             time = (1000 / fps) - (System.currentTimeMillis() - time);
             if (time > 0) {
                 try {
@@ -77,11 +79,13 @@ public class Game implements Serializable {
     }
 
     private void init() {
-        /*try {
-            server = new Server();
-        } catch (IOException ex) {
-            System.out.println("failed to make server");
-        }*/
+        if (multiplayer) {
+            try {
+                server = new Server();
+            } catch (Exception ex) {
+                System.out.println("failed to make server");
+            }
+        }
 
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
@@ -91,14 +95,15 @@ public class Game implements Serializable {
 
         handler = new InputHandler(gameGui.getFrame());
 
+        
         //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
         //companion = new LifeSaver(player, 30, 30, 60);
         //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
-        companion = new AutoShooter(player,bullets,enemies,30,30,30,60);
+        companion = new AutoShooter(player, bullets, enemies, 30, 30, 30, 60);
     }
 
     private void update() {
-        
+
         spawnEnemy();
         updatePlayerPos();
         updateBullets();
@@ -154,10 +159,10 @@ public class Game implements Serializable {
     }
 
     private void spawnEnemy() {
-        
+
         Wave wave = waves.get(waveCounter);
         if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0) {
-            
+
             randomSpawnGenerator();
             enemies.add(new Enemy(spawnEnemyX, spawnEnemyY));
             spawnTimer = System.currentTimeMillis();
@@ -382,7 +387,7 @@ public class Game implements Serializable {
 
     }
 
-    /*private void sendDataToClient() throws IOException{
-        server.sendDataToClient(player, bullets, enemies, geoms);
-    }*/
+    private void sendDataToClient() {
+        server.sendDataToClient(player, bullets, enemies, geoms,companion,mines);
+    }
 }

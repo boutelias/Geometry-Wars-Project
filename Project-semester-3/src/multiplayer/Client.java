@@ -37,7 +37,7 @@ public class Client {
             System.out.println("Data received");
             System.out.println(data.getPlayer().getPosX());
             
-            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());
+            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms(),data.getCompanion(),data.getMines());
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
