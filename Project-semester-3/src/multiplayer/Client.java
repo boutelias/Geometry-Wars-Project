@@ -6,9 +6,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Enemy;
+import model.InputHandler;
 import model.Player;
 
 
@@ -18,13 +20,14 @@ public class Client {
     static ObjectInputStream in;
     
     static private GameGui gameGui = new GameGui();
+    InputHandler handler = new InputHandler(gameGui.getFrame());
     static private DataForClient data;
     
     public static void main(String[] args) throws IOException, ClassNotFoundException{
         
         
         System.out.println("Connecting ...");
-        socket = new Socket("172.31.16.35",7777);
+        socket = new Socket("localhost",7777);
         
         System.out.println("Connection succesfull");
         in = new ObjectInputStream(socket.getInputStream());
@@ -37,9 +40,9 @@ public class Client {
             System.out.println("Data received");
             System.out.println(data.getPlayer().getPosX());
             
-            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms(),data.getCompanion(),data.getMines());
+            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());
             }catch(Exception e){
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         //DataForClient data = (DataForClient) in.readObject();

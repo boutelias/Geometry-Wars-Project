@@ -70,11 +70,18 @@ public class GameGui {
     }
     
     //public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, OldCompanionClass companion,List<Mine> mines){
-    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){
-        this.character = character;
-        this.bullets = bullets;
-        
-        
+    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){             
+        drawGame(character, bullets, enemies, geoms);
+        drawCompanion(mines, companion);
+        repaint();
+    }
+    
+    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+        drawGame(character, bullets, enemies, geoms);
+        repaint();
+    }
+    
+    private void drawGame(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, gameWidth, gameHeight);
         
@@ -93,16 +100,6 @@ public class GameGui {
         for(Bullet bullet: bullets){
             g.fillOval(bullet.getPosX()-10, bullet.getPosY()-10,20,20);
         }
-        
-        g.setColor(Color.darkGray);
-        for(Mine mine: mines){
-            g.fillOval(mine.getPosX()-(mine.getHeight()/2),mine.getPosY() - (mine.getWidth()/2) , mine.getHeight(), mine.getWidth());
-        }
-        
-        g.setColor(Color.WHITE);
-        g.fillOval(companion.getPosX()-(companion.getHeight()/2), companion.getPosY()-(companion.getWidth()/2),companion.getHeight() , companion.getWidth());
-        
-        
         Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/bomber.png");
         
         g.setColor(Color.red);
@@ -119,7 +116,20 @@ public class GameGui {
         
         g.drawString(Integer.toString(character.getNumberOfGeoms()), 1735, 30);
         
+    }
+    
+    private void drawCompanion(List<Mine> mines, Companion companion){
+        g.setColor(Color.darkGray);
+        for(Mine mine: mines){
+            g.fillOval(mine.getPosX()-(mine.getHeight()/2),mine.getPosY() - (mine.getWidth()/2) , mine.getHeight(), mine.getWidth());
+        }
         
+        g.setColor(Color.WHITE);
+        g.fillOval(companion.getPosX()-(companion.getHeight()/2), companion.getPosY()-(companion.getWidth()/2),companion.getHeight() , companion.getWidth());
+        
+    }
+    
+    private void repaint(){
         g2.drawImage(i,0,0,frame);
     }
     

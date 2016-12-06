@@ -63,7 +63,7 @@ public class Game implements Serializable {
             if (multiplayer) {
                 sendDataToClient();
             }
-            
+
             draw();
 
             time = (1000 / fps) - (System.currentTimeMillis() - time);
@@ -79,14 +79,6 @@ public class Game implements Serializable {
     }
 
     private void init() {
-        if (multiplayer) {
-            try {
-                server = new Server();
-            } catch (Exception ex) {
-                System.out.println("failed to make server");
-            }
-        }
-
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
         gameHeight = gameGui.getGameHeight();
@@ -95,26 +87,38 @@ public class Game implements Serializable {
 
         handler = new InputHandler(gameGui.getFrame());
 
-        
-        //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
-        //companion = new LifeSaver(player, 30, 30, 60);
-        //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
-        companion = new AutoShooter(player, bullets, enemies, 30, 30, 30, 60);
+        if (!multiplayer) {
+            //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
+            //companion = new LifeSaver(player, 30, 30, 60);
+            //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
+            companion = new AutoShooter(player, bullets, enemies, 30, 30, 30, 60);
+        }
+        if (multiplayer) {
+            try {
+                server = new Server(player, bullets, enemies, geoms);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void update() {
-
         spawnEnemy();
         updatePlayerPos();
         updateBullets();
         updateEnemies();
-        companion.doMove();
-        companion.doSpecialAction();
+        if (!multiplayer) {
+            updateCompanion();
+        }
         collisionDetection();
     }
 
     private void draw() {
-        gameGui.draw(player, bullets, enemies, geoms, companion, mines);
+        if (multiplayer) {
+            gameGui.draw(player, bullets, enemies, geoms);
+        } else {
+            gameGui.draw(player, bullets, enemies, geoms, companion, mines);
+        }
     }
 
     private void randomSpawnGenerator() {
@@ -249,6 +253,11 @@ public class Game implements Serializable {
 //        for(Enemy enemy: enemies){
 //            enemy.updatePos(player.getPosX(),player.getPosY());
 //        }
+    }
+
+    private void updateCompanion() {
+        companion.doMove();
+        companion.doSpecialAction();
     }
 
     private void collisionDetection() {
@@ -388,6 +397,6 @@ public class Game implements Serializable {
     }
 
     private void sendDataToClient() {
-        server.sendDataToClient(player, bullets, enemies, geoms,companion,mines);
+        server.sendDataToClient();
     }
 }

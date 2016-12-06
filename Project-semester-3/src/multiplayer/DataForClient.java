@@ -16,19 +16,15 @@ public class DataForClient implements Serializable{
     private List<Bullet> bullets;
     private List<Enemy> enemies;
     private List<Geom> geoms;
-    private Companion companion;
-    private List<Mine> mines;
     public DataForClient(){
         
     }
     
-    public void updateDataForClient(Player player, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){
+    public void updateDataForClient(Player player, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
         this.player = player;
         this.bullets = bullets;
         this.enemies = enemies;
         this.geoms = geoms;
-        this.companion = companion;
-        this.mines = mines;
     }
 
     /*Getters and setters*/
@@ -47,14 +43,4 @@ public class DataForClient implements Serializable{
     public List<Geom> getGeoms() {
         return geoms;
     }
-
-    public Companion getCompanion() {
-        return companion;
-    }
-
-    List<Mine> getMines() {
-        
-        return mines;
-    }
-    
 }

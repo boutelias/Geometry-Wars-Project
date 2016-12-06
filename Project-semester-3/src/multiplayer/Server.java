@@ -32,37 +32,37 @@ public class Server {
     private ObjectInputStream in;
     private DataForServer dataFromClient;
     DataForClient data = new DataForClient();
-    InetAddress ipClient;
     
-    public Server() throws IOException{
+    private Player player;
+    private List<Bullet> bullets;
+    private List<Enemy> enemys;
+    private List<Geom> geoms;
+    
+    
+    public Server(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException{
         
         //to send data
         serverSocket = new ServerSocket(7777);
         
-        
+        System.out.println("servesocket made");
+        System.out.println("waiting for connection");
         socket = serverSocket.accept();
-        ipClient = socket.getInetAddress();
-        out = new ObjectOutputStream(socket.getOutputStream());
+        System.out.println("connection esthabelished");
         
-        //to recieve data
+        out = new ObjectOutputStream(socket.getOutputStream());    
         
-        in = new ObjectInputStream(socket.getInputStream());
+        this.player = player;
+        this.bullets = bullets;
+        this.enemys = enemys;
+        this.geoms = geoms;
         
-        while(true){
-            try {
-                System.out.println(in.readObject().toString());
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
-    public void sendDataToClient(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms,Companion companion, List<Mine> mines){
+    public void sendDataToClient(){
         try {
             out.reset();
-            data.updateDataForClient(player, bullets, enemys, geoms,companion, mines);
-            System.out.println(data.getPlayer().getPosX());
-            System.out.println("data sent");
+            System.out.println(player.getPosX());
+            data.updateDataForClient(player, bullets, enemys, geoms);
             out.writeObject(data);
             out.flush();
         } catch (IOException ex) {
