@@ -1,5 +1,6 @@
 package multiplayer;
 
+import com.sun.glass.events.KeyEvent;
 import gui.GameGui;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -13,41 +14,51 @@ import model.Enemy;
 import model.InputHandler;
 import model.Player;
 
-
 public class Client {
-    
-    static Socket socket;
-    static ObjectInputStream in;
-    
-    static private GameGui gameGui = new GameGui();
-    InputHandler handler = new InputHandler(gameGui.getFrame());
-    static private DataForClient data;
-    
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
+
+    private Socket socket;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
+    private GameGui gameGui ;
+    private InputHandler handler;
+    private DataForClient dataForClient;
+    private DataForServer dataForServer;
+
+    public Client() throws IOException {
+        gameGui = new GameGui();
+        handler = new InputHandler(gameGui.getFrame());
         
         
         System.out.println("Connecting ...");
-        socket = new Socket("localhost",7777);
-        
-        System.out.println("Connection succesfull");
+        socket = new Socket("172.31.28.63", 7777);
+        out = new ObjectOutputStream(socket.getOutputStream());
         in = new ObjectInputStream(socket.getInputStream());
-        
+
+        System.out.println("Connection succesfull");
         System.out.println("Receiving information...");
-              
-        while(true){
-            try{
-            data = (DataForClient) in.readObject();
-            System.out.println("Data received");
-            System.out.println(data.getPlayer().getPosX());
-            
-            gameGui.draw(data.getPlayer(), data.getBullets(), data.getEnemies(), data.getGeoms());
-            }catch(Exception e){
+    }
+    
+    public void run(){
+        while (true) {
+            try {
+                //System.out.println("left: "+handler.isKeyDown(KeyEvent.VK_LEFT));
+                  out.reset();
+                  out.writeObject(handler);
+                //out.writeInt(15);
+                  out.flush();
+                dataForClient = (DataForClient) in.readObject();
+                //System.out.println("Data received");
+                //System.out.println(data.getPlayer().getPosX());
+
+                gameGui.draw(dataForClient.getPlayer(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms());
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        //DataForClient data = (DataForClient) in.readObject();
-        //Player player = (Player) in.readObject();
-        //System.out.println(data.getPlayer().getPosX());
-        
+    }
+    
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Client client = new Client();
+        client.run();
     }
 }

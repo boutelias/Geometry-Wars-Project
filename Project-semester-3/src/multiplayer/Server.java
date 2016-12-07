@@ -2,6 +2,7 @@ package multiplayer;
 
 
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.input.KeyCode;
 import model.Bullet;
 import model.Enemy;
 import model.Geom;
+import model.InputHandler;
 import model.Mine;
 import model.Player;
 import model.companions.Companion;
@@ -24,7 +27,7 @@ import model.companions.Companion;
  *
  * @author Tobias
  */
-public class Server {
+public class Server implements Runnable{
     
     private ServerSocket serverSocket;
     private Socket socket;
@@ -33,13 +36,17 @@ public class Server {
     private DataForServer dataFromClient;
     DataForClient data = new DataForClient();
     
+    boolean keepGoing;
+    
     private Player player;
     private List<Bullet> bullets;
     private List<Enemy> enemys;
     private List<Geom> geoms;
     
+    InputHandler handler;
     
-    public Server(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException{
+    
+    public Server(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException {
         
         //to send data
         serverSocket = new ServerSocket(7777);
@@ -50,18 +57,28 @@ public class Server {
         System.out.println("connection esthabelished");
         
         out = new ObjectOutputStream(socket.getOutputStream());    
+        in = new ObjectInputStream(socket.getInputStream());
         
         this.player = player;
         this.bullets = bullets;
         this.enemys = enemys;
         this.geoms = geoms;
         
+        keepGoing = true;
+        
     }
 
-    public void sendDataToClient(){
+    public void run(){
+        System.out.println("in run");
+        while(this.keepGoing){
+            sendDataToClient();
+            getDataFromClient();
+        }
+    }
+    
+    private void sendDataToClient(){
         try {
             out.reset();
-            System.out.println(player.getPosX());
             data.updateDataForClient(player, bullets, enemys, geoms);
             out.writeObject(data);
             out.flush();
@@ -70,63 +87,18 @@ public class Server {
         }
     }
     
-    public DataForServer getDataForServer(){
+    private void getDataFromClient(){
         
         try {
-            dataFromClient = (DataForServer) in.readObject();
-            return dataFromClient;
+            InputHandler handler = (InputHandler) in.readObject();  
+            this.handler = handler;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            return dataFromClient;
         }
-        
-        
-
     }
     
-        /*while (true)
-        {
-            socket = serverSocket.accept();
-
-
-            System.out.println("Connection from: "+ socket.getInetAddress());
-
-            data.updateDataForClient(player, bullets, enemys, geoms);
-            
-            out = new ObjectOutputStream(socket.getOutputStream());
-
-            out.writeObject(data);
-            System.out.println("data send");
-        }
-    }*/
     
-    
-    
-    
-    
-    
-    
-    
-    /*public static void main(String[] args) throws IOException{
-        Player player = new Player(1920,1080);
-        Enemy enemy = new Enemy(200,200);
-        Bullet bullet = new Bullet(250, 250, 300, 300, 5, 1080, 1920);
-        Geom geom = new Geom(800,800);
-        List<Enemy> enemys = new ArrayList();
-        enemys.add(enemy);
-        List<Bullet> bullets = new ArrayList();
-        bullets.add(bullet);
-        List<Geom> geoms = new ArrayList();
-        geoms.add(geom);
-
-        DataForClient data = new DataForClient();
-            
-        System.out.println("Starting server");
-        
-        
-        System.out.println("Server started");
-        
-        
-        */
-    
+    public InputHandler getHandler(){
+        return this.handler;
+    }            
 }

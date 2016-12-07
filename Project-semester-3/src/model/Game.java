@@ -40,7 +40,7 @@ public class Game implements Serializable {
     private Server server;
 
     public static void main(String[] args) {
-        new Game(false);
+        new Game(true);
     }
 
     public Game(boolean multiplayer) {
@@ -59,10 +59,6 @@ public class Game implements Serializable {
             long time = System.currentTimeMillis();
 
             update();
-
-            if (multiplayer) {
-                sendDataToClient();
-            }
 
             draw();
 
@@ -96,6 +92,8 @@ public class Game implements Serializable {
         if (multiplayer) {
             try {
                 server = new Server(player, bullets, enemies, geoms);
+                Thread t = new Thread(server);
+                t.start();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -394,9 +392,5 @@ public class Game implements Serializable {
             return false;
         }
 
-    }
-
-    private void sendDataToClient() {
-        server.sendDataToClient();
     }
 }
