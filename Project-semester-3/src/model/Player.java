@@ -11,7 +11,7 @@ public class Player implements Serializable{
     private int maxX;
     private int maxY;
     //the sprite of the player would be nice to store here
-    private int movementSpeed = 2;
+    private int movementSpeed = 4;
     private int damage = 30;
     private int lives = 3;
     private int bulletsPerMinute;

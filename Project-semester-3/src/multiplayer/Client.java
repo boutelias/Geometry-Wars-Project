@@ -30,7 +30,7 @@ public class Client {
         
         
         System.out.println("Connecting ...");
-        socket = new Socket("172.31.28.63", 7777);
+        socket = new Socket("localhost", 7777);
         out = new ObjectOutputStream(socket.getOutputStream());
         in = new ObjectInputStream(socket.getInputStream());
 

@@ -45,8 +45,8 @@ public class Enemy implements Serializable{
     
     public void updatePos(int playerX,int playerY){
         calculateDirection(playerX,playerY);
-        posX+= deltaX;
-        posY+= deltaY;
+        posX+= deltaX * 3;
+        posY+= deltaY * 3;
     }
     
     
