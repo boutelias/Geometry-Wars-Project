@@ -6,14 +6,13 @@ import java.io.Serializable;
 public class Player implements Serializable{
     private int width = 50;
     private int height = 50;
-    private int posX;
-    private int posY;
+    private Position pos;
     private int maxX;
     private int maxY;
     //the sprite of the player would be nice to store here
     private int movementSpeed = 4;
     private int damage = 30;
-    private int lives = 3;
+    private int lives = 300;
     private int bulletsPerMinute;
     private long score = 0;
     private int numberOfGeoms = 0;
@@ -27,33 +26,32 @@ public class Player implements Serializable{
         //middle of the screen? -- variables in parameter of construcor
         this.maxX = maxX;
         this.maxY = maxY;
-        posX = 200;
-        posY = 200;
+        pos = new Position(200,200);
         bulletsPerMinute = 180;
         lastBulletFired = System.currentTimeMillis();
     }
     
     public void moveUp(){
-        if(posY-movementSpeed>(40+movementSpeed+(height/2))){
-            posY -= movementSpeed;
+        if(this.pos.getY()-movementSpeed>(40+movementSpeed+(height/2))){
+            pos.setY(pos.getY() - movementSpeed);
             
         }
     }
     public void moveDown(){
-        if(posY+movementSpeed<(maxY-movementSpeed-(height/2))){
-            posY += movementSpeed;
+        if(pos.getY()+movementSpeed<(maxY-movementSpeed-(height/2))){
+            pos.setY(pos.getY() + movementSpeed);
             
         }
     }
     public void moveLeft(){
-        if(posX-movementSpeed>(movementSpeed+(width/2))){
-            posX -= movementSpeed;
+        if(pos.getX()-movementSpeed>(movementSpeed+(width/2))){
+            pos.setX(pos.getX() - movementSpeed);
             
         }
     }
     public void moveRight(){
-        if(posX-movementSpeed<(maxX-movementSpeed-(width/2))){
-            posX += movementSpeed;
+        if(pos.getX()-movementSpeed<(maxX-movementSpeed-(width/2))){
+            pos.setX(pos.getX() + movementSpeed);
         }
     }
     
@@ -82,17 +80,17 @@ public class Player implements Serializable{
         return height;
     }
     public int getPosX() {
-        return posX;
+        return (int) pos.getX();
     }
     
     public int getPosY(){
-        return posY;
+        return (int) pos.getY();
     }
     public int getBulletsPerMinute(){
         return bulletsPerMinute;
     }
     public Rectangle getBounds(){
-        return new Rectangle(posX-(width/2),posY-(height/2),width,height);
+        return new Rectangle(this.getPosX()-(width/2),this.getPosY()-(height/2),width,height);
     }
     public int getLives(){
         return lives;

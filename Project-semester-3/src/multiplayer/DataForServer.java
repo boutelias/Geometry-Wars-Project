@@ -5,41 +5,53 @@
  */
 package multiplayer;
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
+public class DataForServer implements Serializable {
 
-
-class DataForServer {
-    
-    boolean[] keys = new boolean[256];
-    boolean[] mouse = new boolean[4];
-    MouseEvent[] mEvent = new MouseEvent[4];
+    private boolean keyLeft;
+    private boolean keyRight ;
+    private boolean keyUp;
+    private boolean keyDown ;
+    private boolean leftClick;
+    private MouseEvent clickLeft;
 
     public DataForServer(){
-    
-    
+
     }
     
-    public void updateDataForServer(boolean[] keys,boolean[] mouse,MouseEvent[] mEvent ){
-        this.keys = keys;
-        this.mouse = mouse;
-        this.mEvent = mEvent;   
-    }
-    
-    /*Getters and setters*/
-    public boolean[] getKeys() {
-        return keys;
+    public void updateDataForServer(boolean keyLeft,boolean keyRight,boolean keyUp,boolean keyDown,boolean leftClick,MouseEvent clickLeft){
+        this.keyLeft = keyLeft;
+        this.keyRight = keyRight;
+        this.keyUp = keyUp;
+        this.keyDown = keyDown;
+        this.leftClick = leftClick;
+        this.clickLeft = clickLeft;
     }
 
-    public boolean[] getMouse() {
-        return mouse;
+    public boolean isKeyLeft() {
+        return keyLeft;
     }
 
-    public MouseEvent[] getmEvent() {
-        return mEvent;
+    public boolean isKeyRight() {
+        return keyRight;
     }
-    
-    
 
-    
+    public boolean isKeyUp() {
+        return keyUp;
+    }
+
+    public boolean isKeyDown() {
+        return keyDown;
+    }
+
+    public boolean isLeftClick() {
+        return leftClick;
+    }
+
+    public MouseEvent getClickLeft() {
+        return clickLeft;
+    }
 }
