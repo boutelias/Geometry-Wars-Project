@@ -77,6 +77,7 @@ public class Server implements Runnable{
     }
     
     private void sendDataToClient(){
+        
         try {
             out.reset();
             data.updateDataForClient(player, bullets, enemys, geoms);
@@ -90,8 +91,8 @@ public class Server implements Runnable{
     private void getDataFromClient(){
         
         try {
-            InputHandler handler = (InputHandler) in.readObject();  
-            this.handler = handler;
+            DataForServer data = (DataForServer) in.readObject();
+            System.out.println(data.isKeyLeft());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

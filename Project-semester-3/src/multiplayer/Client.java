@@ -2,6 +2,7 @@ package multiplayer;
 
 import com.sun.glass.events.KeyEvent;
 import gui.GameGui;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -19,16 +20,24 @@ public class Client {
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    private GameGui gameGui ;
+    private GameGui gameGui;
     private InputHandler handler;
     private DataForClient dataForClient;
     private DataForServer dataForServer;
+    private DataForServer dataOut;
+    private MouseEvent m;
+    private boolean keyLeft;
+    private boolean keyRight;
+    private boolean keyUp;
+    private boolean keyDown;
+    private boolean leftClick;
 
     public Client() throws IOException {
         gameGui = new GameGui();
         handler = new InputHandler(gameGui.getFrame());
-        
-        
+
+        dataOut = new DataForServer();
+
         System.out.println("Connecting ...");
         socket = new Socket("localhost", 7777);
         out = new ObjectOutputStream(socket.getOutputStream());
@@ -37,15 +46,24 @@ public class Client {
         System.out.println("Connection succesfull");
         System.out.println("Receiving information...");
     }
-    
-    public void run(){
+
+    public void run() {
         while (true) {
             try {
                 //System.out.println("left: "+handler.isKeyDown(KeyEvent.VK_LEFT));
-                  out.reset();
-                  out.writeObject(handler);
+                m = handler.getEvent(1);
+                keyLeft = handler.isKeyDown(KeyEvent.VK_LEFT);
+                keyRight = handler.isKeyDown(KeyEvent.VK_RIGHT);
+                keyUp = handler.isKeyDown(KeyEvent.VK_UP);
+                keyDown = handler.isKeyDown(KeyEvent.VK_DOWN);
+                leftClick = handler.isMouseDown(1);
+                out.reset();
+                //out.writeObject(handler);
+                System.out.println("left : " + keyLeft);
+                dataOut.updateDataForServer(keyLeft, keyRight, keyUp, keyDown, leftClick, m);
+                out.writeObject(dataOut);
                 //out.writeInt(15);
-                  out.flush();
+                out.flush();
                 dataForClient = (DataForClient) in.readObject();
                 //System.out.println("Data received");
                 //System.out.println(data.getPlayer().getPosX());
@@ -56,7 +74,7 @@ public class Client {
             }
         }
     }
-    
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Client client = new Client();
         client.run();
