@@ -6,23 +6,22 @@
 package model.companions;
 
 import java.awt.Rectangle;
-import java.io.Serializable;
 import java.util.List;
 import model.Bullet;
 import model.InputHandler;
-import model.Player;
+import model.Character;
 
 /**
  *
  * @author Tobias
  */
-public class Shooter implements Companion, Serializable {
+public class Shooter implements Companion {
 
     int posX;
     int posY;
     int width;
     int height;
-    Player player;
+    Character player;
     InputHandler handler;
     List<Bullet> bullets;
     int damage;
@@ -30,7 +29,7 @@ public class Shooter implements Companion, Serializable {
     int bulletsPerMinute;
     long lastBulletFired;
 
-    public Shooter(Player player, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute) {
+    public Shooter(Character player, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute) {
         this.player = player;
         this.handler = handler;
         this.height = height;

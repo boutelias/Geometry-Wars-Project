@@ -7,19 +7,18 @@ package model.companions;
 
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.io.Serializable;
 import java.util.List;
 import model.InputHandler;
 import model.Mine;
-import model.Player;
+import model.Character;
 
 /**
  *
  * @author Tobias
  */
-public class Miner implements Companion, Serializable{
+public class Miner implements Companion{
     List<Mine> mines;
-    Player player;
+    Character player;
     int movementSpeed;
     int posX;
     int posY;
@@ -32,7 +31,7 @@ public class Miner implements Companion, Serializable{
     long timeBetween2Mines;
     long lastMineFired;
     
-    public Miner(Player player, List<Mine> mines, InputHandler handler,int width, int height, int minesPerMinute, int damage){
+    public Miner(Character player, List<Mine> mines, InputHandler handler,int width, int height, int minesPerMinute, int damage){
         this.mines = mines;
         this.player= player;
         this.movementSpeed = movementSpeed;

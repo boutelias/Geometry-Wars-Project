@@ -16,8 +16,8 @@ import static org.junit.Assert.*;
  *
  * @author Elias
  */
-public class testPlayer {
-    calculateForPlayer calc = new calculateForPlayer();
+public class testCharacter {
+    calculateForCharacter calc = new calculateForCharacter();
     int movementspeed = calc.getMovementSpeed();
     int iniposX = calc.getInitialPosX();
     int iniposY = calc.getInitialPosY();

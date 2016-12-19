@@ -45,8 +45,8 @@ public class Enemy implements Serializable{
     
     public void updatePos(int playerX,int playerY){
         calculateDirection(playerX,playerY);
-        posX+= deltaX * 3;
-        posY+= deltaY * 3;
+        posX+= deltaX;
+        posY+= deltaY;
     }
     
     
@@ -88,8 +88,15 @@ public class Enemy implements Serializable{
     public double getDroprateSpeedDown(){
         return dropRateSpeedDown;
     }
-    
 
+    public float getDeltaX() {
+        return deltaX;
+    }
+
+    public float getDeltaY() {
+        return deltaY;
+    }
+    
     
     
 }
