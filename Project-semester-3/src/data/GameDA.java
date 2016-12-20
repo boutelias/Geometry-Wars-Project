@@ -116,12 +116,17 @@ public class GameDA {
    public Character getCharacter(int characterid,int maxX, int maxY){
        Character c;
          try {
-             String sql = "SELECT * FROM `Character` WHERE characterid = ?";
+             String sql = "SELECT sprite,firerate,movementspeed,height,width,bulletdamage,bulletspeed,numberOfLives\n" +
+"from sql7150035.Character \n" +
+"join player_character on sql7150035.Character.characterid = player_character.characterid\n" +
+"join characterlives on player_character.leveloflives = characterlives.characterliveslevel\n" +
+"where playerid = 2 and sql7150035.Character.characterid = 1";
              PreparedStatement prep = this.con.prepareStatement(sql);
-             prep.setInt(1,characterid);
+             //prep.setInt(1,characterid);
+             
              ResultSet rs = prep.executeQuery();
              rs.next();
-             c = new Character(maxX,maxY,rs.getInt("lives"),rs.getString("sprite"),rs.getInt("firerate"),rs.getInt("movementspeed"),rs.getInt("height"),rs.getInt("width"),rs.getInt("bulletdamage"),rs.getInt("bulletspeed"));
+             c = new Character(maxX,maxY,rs.getInt("numberoflives"),rs.getString("sprite"),rs.getInt("firerate"),rs.getInt("movementspeed"),rs.getInt("height"),rs.getInt("width"),rs.getInt("bulletdamage"),rs.getInt("bulletspeed"));
              
              prep.close();
              rs.close();
