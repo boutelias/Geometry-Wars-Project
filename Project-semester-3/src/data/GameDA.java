@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Character;
 import model.Player;
+import model.Wave;
 import util.GameException;
 
 /**
@@ -127,6 +128,20 @@ public class GameDA {
              throw new IllegalArgumentException(ex);
          }
          return c;
+   }
+   public List<Wave> getWaves(){
+       List<Wave> waves = new ArrayList<>();
+         try {
+             String sql = "Select * from `Wave`";
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             ResultSet rs = prep.executeQuery();
+             while (rs.next()){
+                 Wave wave = new Wave(rs.getInt("numberofenemies"),rs.getInt("spawndelay"),rs.getInt("enemyid"),rs.getInt("timeafterwave"));
+                 waves.add(wave);
+             } } catch (SQLException ex) {
+             Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return waves;
    }
    
     

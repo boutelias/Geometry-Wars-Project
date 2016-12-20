@@ -33,6 +33,7 @@ public class Game implements Serializable {
     private List<Geom> geoms = new ArrayList();
     private List<Wave> waves = new ArrayList<>();
     private List<Mine> mines = new ArrayList<>();
+    
     private GameGui gameGui;
     private List<Player> players;
 
@@ -53,7 +54,7 @@ public class Game implements Serializable {
 
     private void run() {
         init();
-        makeWaves(waves);
+        makeWaves();
 
         long spawnTimer = System.currentTimeMillis();
         waveCounter = 0;
@@ -99,8 +100,8 @@ public class Game implements Serializable {
 
         //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
         //companion = new LifeSaver(player, 30, 30, 60);
-        //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
-        companion = new AutoShooter(character,bullets,enemies,30,30,30,60);
+        //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60,5);
+        companion = new AutoShooter(character,bullets,enemies,30,30,30,60,5);
         
         players = db.getPlayers();
         
@@ -144,7 +145,7 @@ public class Game implements Serializable {
         }
     }
 
-    private void makeWaves(List<Wave> waves) {
+    private void makeWaves() {
         //TODO alle waves uit de databank halen 
         /*Wave wave1 = new Wave(2,1,enemies,5);
         Wave wave2 = new Wave(3,1,enemies,5);
@@ -155,19 +156,24 @@ public class Game implements Serializable {
         waves.add(wave2);
         waves.add(wave3);
         waves.add(wave4);*/
-
-        for (int i = 0; i < 200; i++) {
+        
+        /*for (int i = 0; i < 200; i++) {
             Wave wave = new Wave(i, 1, enemies, 5);
             waves.add(wave);
-        }
+        }*/
+        
+        waves = db.getWaves();
+        
     }
 
     private void spawnEnemy() {
-        
+        randomSpawnGenerator();
         Wave wave = waves.get(waveCounter);
+        
+        wave.getEnemyID();
         if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0) {
             
-            randomSpawnGenerator();
+            
             enemies.add(new Enemy(spawnEnemyX, spawnEnemyY));
             spawnTimer = System.currentTimeMillis();
             wave.reduceNumberOfEnemiesLeft();
@@ -223,7 +229,7 @@ public class Game implements Serializable {
 
         if (handler.isMouseDown(1)) {
             if (character.getLastBulletFired() + (60.0 / character.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
-                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth);
+                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth,character.getBulletSpeed());
                 bullets.add(newBullet);
                 character.setLastBulletFired(System.currentTimeMillis());
             }

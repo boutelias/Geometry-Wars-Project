@@ -28,8 +28,9 @@ public class Shooter implements Companion {
     int movementSpeed;
     int bulletsPerMinute;
     long lastBulletFired;
+    int bulletspeed;
 
-    public Shooter(Character player, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute) {
+    public Shooter(Character player, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute,int bulletspeed) {
         this.player = player;
         this.handler = handler;
         this.height = height;
@@ -37,6 +38,7 @@ public class Shooter implements Companion {
         this.bullets = bullets;
         this.damage = damage;
         this.bulletsPerMinute = bulletsPerMinute;
+        this.bulletspeed = bulletspeed;
 
         this.movementSpeed = player.getMovementSpeed();
         posX = player.getPosX();
@@ -57,7 +59,7 @@ public class Shooter implements Companion {
     public void doSpecialAction() {
         if (handler.isMouseDown(1)) {
             if (this.lastBulletFired + (60.0 / this.bulletsPerMinute * 1000) < System.currentTimeMillis()) {
-                Bullet newBullet = new Bullet(posX, posY, handler.getEvent(1).getX(), handler.getEvent(1).getY(), this.damage, 1080, 1920);
+                Bullet newBullet = new Bullet(posX, posY, handler.getEvent(1).getX(), handler.getEvent(1).getY(), this.damage, 1080, 1920,bulletspeed);
                 bullets.add(newBullet);
                 this.lastBulletFired = System.currentTimeMillis();
             }

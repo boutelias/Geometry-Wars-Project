@@ -29,8 +29,9 @@ public class AutoShooter implements Companion {
     int movementSpeed;
     int bulletsPerMinute;
     long lastBulletFired;
+    int bulletspeed;
     
-    public AutoShooter(Character player, List<Bullet> bullets, List<Enemy> enemies, int height, int width, int damage, int bulletsPerMinute) {
+    public AutoShooter(Character player, List<Bullet> bullets, List<Enemy> enemies, int height, int width, int damage, int bulletsPerMinute, int bulletspeed) {
         this.player = player;
         this.height = height;
         this.width = width;
@@ -38,6 +39,7 @@ public class AutoShooter implements Companion {
         this.enemies = enemies;
         this.damage = damage;
         this.bulletsPerMinute = bulletsPerMinute;
+        this.bulletspeed = bulletspeed;
 
         this.movementSpeed = player.getMovementSpeed();
         posX = player.getPosX();
@@ -72,7 +74,7 @@ public class AutoShooter implements Companion {
                 }
             }
             if(lastBulletFired + (60.0 / bulletsPerMinute * 1000) < System.currentTimeMillis()) {
-                Bullet newbullet = new Bullet(posX, posY, closestEnemy.getPosX(), closestEnemy.getPosY(), this.damage, 1080, 1920);
+                Bullet newbullet = new Bullet(posX, posY, closestEnemy.getPosX(), closestEnemy.getPosY(), this.damage, 1080, 1920,bulletspeed);
                 bullets.add(newbullet);
                 lastBulletFired = System.currentTimeMillis();
             }

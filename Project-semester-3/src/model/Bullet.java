@@ -16,19 +16,20 @@ public class Bullet implements Serializable {
     private float deltaX;
     private float deltaY;
     
-    private int bulletSpeed = 5;
+    private int bulletSpeed ;
     
     private boolean isOutOfScreen = false;
     
     private int damage;
     //how to implement speed?
     
-    public Bullet(int startX, int startY, int clickX,int clickY, int bulletDamage , int maxY, int maxX){
+    public Bullet(int startX, int startY, int clickX,int clickY, int bulletDamage , int maxY, int maxX, int bulletspeed){
         this.posX = startX;
         this.posY = startY;
         this.maxY = maxY;
         this.maxX = maxX;
         this.damage = bulletDamage;
+        this.bulletSpeed = bulletspeed;
         
         calculateDirection(clickX,clickY);
     }

@@ -12,13 +12,14 @@ public class Character implements Serializable{
     private int maxX;
     private int maxY;
     //the sprite of the player would be nice to store here
-    private int movementSpeed = 2;
+    private int movementSpeed ;
     private int damage = 30;
-    private int lives = 3;
+    private int lives ;
     private int bulletsPerMinute;
     private long score = 0;
     private int numberOfGeoms = 0;
     private long lastBulletFired = 0;
+    private int bulletspeed;
     
    
     
@@ -31,7 +32,13 @@ public class Character implements Serializable{
         posX = maxX/2;
         posY = maxY/2;
         this.lives = lives;
-        bulletsPerMinute = 180;
+        this.bulletsPerMinute = firerate;
+        this.movementSpeed = movementspeed;
+        this.height = height;
+        this.width = width;
+        this.damage = bulletdamage;
+        this.bulletspeed = bulletspeed;
+        
         lastBulletFired = System.currentTimeMillis();
         
     }
@@ -136,6 +143,9 @@ public class Character implements Serializable{
 
     public void setLastBulletFired(long lastBulletFired) {
         this.lastBulletFired = lastBulletFired;
+    }
+    public int getBulletSpeed(){
+        return bulletspeed;
     }
     
     
