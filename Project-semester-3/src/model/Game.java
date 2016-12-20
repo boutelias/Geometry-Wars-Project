@@ -40,7 +40,8 @@ public class Game implements Serializable {
     /*private Server server;*/
     private Companion companion;
     private GameDA db = GameDA.getInstance();
-    private int characterid = 2;
+    private int characterid = 1;
+    private long delaytime;
 
     public static void main(String[] args) {
         new Game();
@@ -171,7 +172,7 @@ public class Game implements Serializable {
         Wave wave = waves.get(waveCounter);
         
         int enemyid = wave.getEnemyID();
-        if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0) {
+        if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0 && System.currentTimeMillis() > delaytime) {
             
             Enemy e = db.getEnemy(enemyid, spawnEnemyX, spawnEnemyY);
             enemies.add(e);
@@ -181,6 +182,8 @@ public class Game implements Serializable {
         }
         if (wave.getNumberOfEnemiesLeft() == 0 && waveCounter < waves.size() - 1) {
             int delay = wave.getDelay();
+            delaytime = System.currentTimeMillis() + delay ;
+            
             // TODO use this delay (maybe an upgrade screen after 2 seconds ?
 
             waveCounter++;
@@ -278,22 +281,12 @@ public class Game implements Serializable {
                             Geom geom = new Geom(enemy.getPosX(), enemy.getPosY());
                             geoms.add(geom);
                         }
-                        /*if (drop(enemy.getDropRateSpeedBoost())) {
-                            System.out.println("speed gaat omhoog !!");
-                            character.setMovementSpeedHigher();
+                        if(drop(enemy.getDropratepowerups())){
+                            
                         }
-                        if (drop(enemy.getDropRateBPM())) {
-                            System.out.println("rate of fire gaat omhoog !!");
-                            character.setBPM();
+                        if(drop(enemy.getDropratepowerdowns())){
+                            
                         }
-                        if (drop(enemy.getDropRateExtraEnemy())) {
-                            Wave wave = waves.get(waveCounter);
-                            // TODO get the amount of extra enemies
-                            wave.addExtraEnemies(2);
-                        }
-                        if (drop(enemy.getDroprateSpeedDown())) {
-                            character.setMovementSpeedLower();
-                        }*/
                         enemiesToRemove.add(enemy);
                         character.addPoints(enemy.getValue());
                     }

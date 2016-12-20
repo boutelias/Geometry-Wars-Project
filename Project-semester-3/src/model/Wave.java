@@ -41,7 +41,7 @@ public class Wave implements Serializable{
     }
     
     public long getSpawnRateInMs(){
-        return spawnRate * 1000;
+        return spawnRate;
     }
     public int getEnemyID(){
         return enemyid;

@@ -4,8 +4,8 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 public class Enemy implements Serializable{
-    private int width = 20;
-    private int height = 20;
+    private int width ;
+    private int height;
     private float posX;
     private float posY;
     private float deltaX;
@@ -91,6 +91,22 @@ public class Enemy implements Serializable{
 
     public float getDeltaY() {
         return deltaY;
+    }
+
+    public int getDropratepowerups() {
+        return dropratepowerups;
+    }
+
+    public int getDropratepowerdowns() {
+        return dropratepowerdowns;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
     
     

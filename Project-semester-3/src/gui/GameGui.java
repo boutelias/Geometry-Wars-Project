@@ -104,7 +104,8 @@ public class GameGui {
         
         g.setColor(Color.red);
         for(Enemy enemy: enemies){
-            g.drawImage(enemySprite,enemy.getPosX()-10, enemy.getPosY()-10,20,20,null);
+            g.drawImage(enemySprite,enemy.getPosX()-(enemy.getWidth()/2), enemy.getPosY()-(enemy.getHeight()/2),enemy.getWidth(),enemy.getHeight(),null);
+            
         }
         Color kleur = new Color(25,139,193);
         g.setFont(new Font("Comic Sans",Font.BOLD,26));
