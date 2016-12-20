@@ -5,7 +5,7 @@
  */
 package gui;
 
-import model.Player;
+import model.Character;
 import model.Bullet;
 
 import java.awt.Color;
@@ -39,7 +39,7 @@ public class GameGui {
     
     int gameWidth;
     int gameHeight;
-    Player character;
+    Character character;
     List<Bullet> bullets;
         
     public GameGui(){        
@@ -70,18 +70,18 @@ public class GameGui {
     }
     
     //public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, OldCompanionClass companion,List<Mine> mines){
-    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){             
+    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){             
         drawGame(character, bullets, enemies, geoms);
         drawCompanion(mines, companion);
         repaint();
     }
     
-    public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
         drawGame(character, bullets, enemies, geoms);
         repaint();
     }
     
-    private void drawGame(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+    private void drawGame(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, gameWidth, gameHeight);
         
