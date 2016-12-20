@@ -120,6 +120,10 @@ public class GameDA {
 "from sql7150035.Character \n" +
 "join player_character on sql7150035.Character.characterid = player_character.characterid\n" +
 "join characterlives on player_character.leveloflives = characterlives.characterliveslevel\n" +
+"join characterfirerate on player_character.leveloffirerate = characterfirerate.characterfireratelevel\n" +
+"join charactermovementspeed on player_character.levelofmovementspeed = charactermovementspeed.charactermovementspeedid\n" +
+"join characterbulletdamage on player_character.levelofbulletdamage = characterbulletdamage.characterbulletdamageid\n" +
+"join characterbulletspeed on player_character.levelofbulletspeed = characterbulletspeed.characterbulletspeedid\n" +
 "where playerid = 2 and sql7150035.Character.characterid = 1";
              PreparedStatement prep = this.con.prepareStatement(sql);
              //prep.setInt(1,characterid);

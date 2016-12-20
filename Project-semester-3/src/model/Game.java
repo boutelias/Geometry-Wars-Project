@@ -45,7 +45,7 @@ public class Game implements Serializable {
     private boolean multiplayer;
 
     public static void main(String[] args) {
-        new Game(true);
+        new Game(false);
     }
 
     public Game(boolean multiplayer) {
