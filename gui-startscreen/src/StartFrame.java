@@ -10,7 +10,7 @@
  */
 public class StartFrame extends javax.swing.JFrame {
 
-    /**
+    /**e
      * Creates new form StartFrame
      */
     public StartFrame() {
@@ -30,6 +30,7 @@ public class StartFrame extends javax.swing.JFrame {
         btnLogIn = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
         btnHighscores = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         logInPanel = new javax.swing.JPanel();
         lblUsernameLogIn = new javax.swing.JLabel();
         lblPasswordLogIn = new javax.swing.JLabel();
@@ -46,17 +47,12 @@ public class StartFrame extends javax.swing.JFrame {
         btnConfirmSignUp = new javax.swing.JButton();
         HighscoresPanel = new javax.swing.JPanel();
         lblHighscores = new javax.swing.JLabel();
-        GameModePanel = new javax.swing.JPanel();
-        btnSinglePlayer = new javax.swing.JButton();
-        btnMultiPlayer = new javax.swing.JButton();
-        btnShop = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 255));
-        setMinimumSize(new java.awt.Dimension(1920, 1080));
-        setUndecorated(true);
+        setMinimumSize(new java.awt.Dimension(800, 650));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -76,7 +72,7 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
 
-        btnSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/singUp.png"))); // NOI18N
+        btnSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/signUp.png"))); // NOI18N
         btnSignUp.setText("jButton1");
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +88,14 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
 
+        btnExit.setText("Exit");
+        btnExit.setActionCommand("btnExit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
         startPanel.setLayout(startPanelLayout);
         startPanelLayout.setHorizontalGroup(
@@ -99,25 +103,28 @@ public class StartFrame extends javax.swing.JFrame {
             .addGroup(startPanelLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         startPanelLayout.setVerticalGroup(
             startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(startPanelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
         );
 
         getContentPane().add(startPanel);
-        startPanel.setBounds(1220, 300, 540, 640);
+        startPanel.setBounds(330, 120, 540, 660);
 
         logInPanel.setMinimumSize(new java.awt.Dimension(540, 750));
         logInPanel.setOpaque(false);
@@ -147,6 +154,7 @@ public class StartFrame extends javax.swing.JFrame {
         txtPasswordLogIn.setForeground(new java.awt.Color(255, 255, 255));
         txtPasswordLogIn.setText("Insertpasswordhere");
 
+        btnConfirmLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/confirm.png"))); // NOI18N
         btnConfirmLogIn.setText("Confirm");
         btnConfirmLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,31 +169,31 @@ public class StartFrame extends javax.swing.JFrame {
             .addGroup(logInPanelLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPasswordLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtUsernameLogIn)
-                        .addComponent(lblUsernameLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(lblPasswordLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUsernameLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(lblUsernameLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(99, 99, 99))
         );
         logInPanelLayout.setVerticalGroup(
             logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(logInPanelLayout.createSequentialGroup()
-                .addComponent(lblUsernameLogIn)
+                .addComponent(lblUsernameLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtUsernameLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(lblPasswordLogIn)
+                .addComponent(lblPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 250, Short.MAX_VALUE))
+                .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 400, Short.MAX_VALUE))
         );
 
         getContentPane().add(logInPanel);
-        logInPanel.setBounds(1220, 330, 540, 600);
+        logInPanel.setBounds(330, 150, 540, 620);
 
         SignUpPanel.setMinimumSize(new java.awt.Dimension(540, 750));
         SignUpPanel.setOpaque(false);
@@ -222,6 +230,7 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
 
+        btnConfirmSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/confirm.png"))); // NOI18N
         btnConfirmSignUp.setText("Confirm");
 
         javax.swing.GroupLayout SignUpPanelLayout = new javax.swing.GroupLayout(SignUpPanel);
@@ -231,37 +240,37 @@ public class StartFrame extends javax.swing.JFrame {
             .addGroup(SignUpPanelLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(SignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(SignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtConfirmPasswordSignUp)
-                        .addComponent(lblConfirmPasswordSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblConfirmPasswordSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtPasswordSignUp)
                         .addComponent(txtUsernameSignUp)
-                        .addComponent(lblUsernameSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addComponent(lblUsernameSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         SignUpPanelLayout.setVerticalGroup(
             SignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SignUpPanelLayout.createSequentialGroup()
-                .addComponent(lblUsernameSignUp)
+                .addComponent(lblUsernameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtUsernameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(lblPasswordSignUp)
+                .addComponent(lblPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(lblConfirmPasswordSignUp)
+                .addComponent(lblConfirmPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtConfirmPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         getContentPane().add(SignUpPanel);
-        SignUpPanel.setBounds(1220, 330, 540, 650);
+        SignUpPanel.setBounds(330, 150, 540, 670);
 
         HighscoresPanel.setMinimumSize(new java.awt.Dimension(540, 750));
         HighscoresPanel.setOpaque(false);
@@ -275,56 +284,19 @@ public class StartFrame extends javax.swing.JFrame {
             HighscoresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HighscoresPanelLayout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         HighscoresPanelLayout.setVerticalGroup(
             HighscoresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HighscoresPanelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(600, Short.MAX_VALUE))
+                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(650, Short.MAX_VALUE))
         );
 
         getContentPane().add(HighscoresPanel);
-        HighscoresPanel.setBounds(1220, 330, 540, 600);
-
-        GameModePanel.setMinimumSize(new java.awt.Dimension(540, 750));
-        GameModePanel.setOpaque(false);
-        GameModePanel.setPreferredSize(new java.awt.Dimension(540, 600));
-
-        btnSinglePlayer.setText("Single Player");
-
-        btnMultiPlayer.setText("Multi Player");
-
-        btnShop.setText("Shop");
-
-        javax.swing.GroupLayout GameModePanelLayout = new javax.swing.GroupLayout(GameModePanel);
-        GameModePanel.setLayout(GameModePanelLayout);
-        GameModePanelLayout.setHorizontalGroup(
-            GameModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GameModePanelLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(GameModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnShop, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMultiPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSinglePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(108, Short.MAX_VALUE))
-        );
-        GameModePanelLayout.setVerticalGroup(
-            GameModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GameModePanelLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(btnSinglePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnMultiPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnShop, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(340, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(GameModePanel);
-        GameModePanel.setBounds(1220, 330, 540, 600);
+        HighscoresPanel.setBounds(330, 150, 540, 620);
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
         btnBack.setText("Back");
@@ -335,11 +307,11 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack);
-        btnBack.setBounds(60, 890, 330, 80);
+        btnBack.setBounds(10, 550, 150, 40);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/start-bg.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/start-bg1.png"))); // NOI18N
         getContentPane().add(background);
-        background.setBounds(0, 0, 1920, 1080);
+        background.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -360,7 +332,6 @@ public class StartFrame extends javax.swing.JFrame {
         startPanel.setVisible(true);
         logInPanel.setVisible(false);
         SignUpPanel.setVisible(false);
-        GameModePanel.setVisible(false);
         HighscoresPanel.setVisible(false);
         btnBack.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
@@ -381,21 +352,24 @@ public class StartFrame extends javax.swing.JFrame {
         startPanel.setVisible(true);
         logInPanel.setVisible(false);
         SignUpPanel.setVisible(false);
-        GameModePanel.setVisible(false);
         HighscoresPanel.setVisible(false);
         btnBack.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnHighscoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighscoresActionPerformed
-        startPanel.setVisible(false);
-        HighscoresPanel.setVisible(true);
-        btnBack.setVisible(true);
+        new HighscoreFrame().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHighscoresActionPerformed
 
     private void btnConfirmLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmLogInActionPerformed
-        GameModePanel.setVisible(true);
         logInPanel.setVisible(false);
+        new StartGameFrame().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnConfirmLogInActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
     
 
     /**
@@ -435,19 +409,16 @@ public class StartFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel GameModePanel;
     private javax.swing.JPanel HighscoresPanel;
     private javax.swing.JPanel SignUpPanel;
     private javax.swing.JLabel background;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnConfirmLogIn;
     private javax.swing.JButton btnConfirmSignUp;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnHighscores;
     private javax.swing.JButton btnLogIn;
-    private javax.swing.JButton btnMultiPlayer;
-    private javax.swing.JButton btnShop;
     private javax.swing.JButton btnSignUp;
-    private javax.swing.JButton btnSinglePlayer;
     private javax.swing.JLabel lblConfirmPasswordSignUp;
     private javax.swing.JLabel lblHighscores;
     private javax.swing.JLabel lblPasswordLogIn;

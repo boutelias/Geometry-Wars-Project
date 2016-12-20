@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -66,11 +67,13 @@ public class ShopFrame extends javax.swing.JFrame {
         lblAfbeeldingSchip = new javax.swing.JLabel();
         btnNextShip = new javax.swing.JButton();
         btnPreviousShip = new javax.swing.JButton();
+        btnUpgradeShip = new javax.swing.JButton();
         jPanelCompanion = new javax.swing.JPanel();
         lblCompanionName = new javax.swing.JLabel();
         lblAfbeeldingBuddy = new javax.swing.JLabel();
         btnNextCompanion = new javax.swing.JButton();
         btnPreviousCompanion = new javax.swing.JButton();
+        btnUpgradeCompanion = new javax.swing.JButton();
         jPanelCurrency = new javax.swing.JPanel();
         lblCoins = new javax.swing.JLabel();
         lblContentCoins = new javax.swing.JLabel();
@@ -84,10 +87,11 @@ public class ShopFrame extends javax.swing.JFrame {
         btnClan = new javax.swing.JButton();
         btnSettings = new javax.swing.JButton();
         btnHighscores = new javax.swing.JButton();
+        btnBackUpgrades = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(800, 650));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -96,8 +100,8 @@ public class ShopFrame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanelUpgrades.setBackground(new java.awt.Color(0, 102, 0));
-        jPanelUpgrades.setMinimumSize(new java.awt.Dimension(900, 400));
-        jPanelUpgrades.setPreferredSize(new java.awt.Dimension(900, 400));
+        jPanelUpgrades.setMinimumSize(new java.awt.Dimension(660, 350));
+        jPanelUpgrades.setPreferredSize(new java.awt.Dimension(660, 350));
 
         lblSpeed.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblSpeed.setText("Speed");
@@ -189,42 +193,61 @@ public class ShopFrame extends javax.swing.JFrame {
         jPanelUpgradesLayout.setHorizontalGroup(
             jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIconSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIconSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSpeed2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIconSpeed3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblIconSpeed2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBulletPower)
-                    .addComponent(lblBulletSpeed)
-                    .addComponent(lblFireRate)
-                    .addComponent(lblHitpoints)
-                    .addComponent(lblSpeed))
-                .addGap(74, 74, 74)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblUpgradeBarFireRate)
-                    .addComponent(lblUpgradeBarHitpoints)
-                    .addComponent(lblUpgradeBarBulletPower)
-                    .addComponent(lblUpgradeBarBulletSpeed)
-                    .addComponent(lblUpgradeBarSpeed))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnPlusSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPlusBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPlusFireRate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPlusHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlusBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFireRate)
+                            .addComponent(lblHitpoints)
+                            .addComponent(lblSpeed))
+                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(lblUpgradeBarHitpoints)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPlusHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(lblUpgradeBarSpeed)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPlusSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(lblUpgradeBarFireRate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPlusFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createSequentialGroup()
+                                .addComponent(lblBulletSpeed)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblUpgradeBarBulletSpeed))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createSequentialGroup()
+                                .addComponent(lblBulletPower)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblUpgradeBarBulletPower)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnPlusBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addComponent(btnPlusBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIconGemsHitpoints)
                     .addComponent(lblIconGemsFireRate)
-                    .addComponent(lblIconGemsSpeed)
                     .addComponent(lblIconGemsBulletSpeed)
-                    .addComponent(lblIconGemsBulletPower))
+                    .addComponent(lblIconGemsBulletPower)
+                    .addComponent(lblIconGemsSpeed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFireRateGems)
@@ -232,87 +255,91 @@ public class ShopFrame extends javax.swing.JFrame {
                     .addComponent(lblBulletSpeedGems)
                     .addComponent(lblBulletPowerGems)
                     .addComponent(lblSpeedGems))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelUpgradesLayout.setVerticalGroup(
             jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblUpgradeBarSpeed)
+                    .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSpeed)
+                        .addComponent(lblIconSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPlusSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblSpeedGems)
+                        .addComponent(lblIconGemsSpeed)))
                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
+                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
                         .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addComponent(lblIconGemsBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(5, 5, 5))
-                                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addComponent(lblBulletPowerGems)
-                                        .addGap(13, 13, 13)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
+                                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnPlusBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblIconGemsBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(lblBulletPowerGems)))
+                                        .addGap(1, 1, 1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblIconSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblBulletSpeed)))
+                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblBulletPower)
+                                            .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(24, 24, 24))
                                     .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addGap(174, 174, 174)
-                                        .addComponent(lblIconGemsHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
+                                        .addGap(46, 46, 46)
                                         .addComponent(lblBulletSpeedGems)
-                                        .addGap(49, 49, 49)
-                                        .addComponent(lblFireRateGems)
-                                        .addGap(52, 52, 52)
-                                        .addComponent(lblHitPointsGems))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addComponent(lblUpgradeBarBulletSpeed)
+                                .addGap(30, 30, 30)
                                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblIconGemsBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPlusBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(105, 105, 105)
-                                .addComponent(btnPlusHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblUpgradeBarSpeed)
-                                    .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblSpeed)
-                                        .addComponent(lblIconSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblUpgradeBarBulletPower)
                                     .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnPlusSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblSpeedGems)
-                                            .addComponent(lblIconGemsSpeed))))
-                                .addGap(25, 25, 25)
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblBulletSpeed)
-                                        .addComponent(lblIconSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lblUpgradeBarBulletSpeed)))
-                            .addComponent(btnPlusBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblBulletPower)
-                                .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblUpgradeBarBulletPower, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(23, 23, 23)
+                                        .addComponent(lblIconGemsBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPlusBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(30, 30, 30)))
                         .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblFireRate)
                                 .addComponent(lblIconSpeed3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblUpgradeBarFireRate)
-                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblIconGemsFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnPlusFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblUpgradeBarHitpoints)
-                                .addComponent(lblHitpoints))
-                            .addComponent(lblIconSpeed2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnPlusFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                        .addComponent(lblHitPointsGems)
+                                        .addGap(8, 8, 8))
+                                    .addComponent(lblUpgradeBarFireRate)))))
+                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblIconGemsFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblHitpoints)
+                                .addComponent(lblIconSpeed2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblUpgradeBarHitpoints)
+                            .addComponent(btnPlusHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblIconGemsHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(lblFireRateGems)))
+                .addContainerGap())
         );
 
         getContentPane().add(jPanelUpgrades);
-        jPanelUpgrades.setBounds(870, 320, 900, 400);
+        jPanelUpgrades.setBounds(60, 120, 660, 350);
 
         jPanelShip.setBackground(new java.awt.Color(0, 102, 0));
 
@@ -336,39 +363,47 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
 
+        btnUpgradeShip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/upgrade.png"))); // NOI18N
+        btnUpgradeShip.setText("Upgrade");
+        btnUpgradeShip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpgradeShipActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelShipLayout = new javax.swing.GroupLayout(jPanelShip);
         jPanelShip.setLayout(jPanelShipLayout);
         jPanelShipLayout.setHorizontalGroup(
             jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelShipLayout.createSequentialGroup()
-                .addComponent(btnPreviousShip)
-                .addGap(57, 57, 57)
-                .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(btnNextShip))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelShipLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnUpgradeShip, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblShipsName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(205, 205, 205))
+            .addGroup(jPanelShipLayout.createSequentialGroup()
+                .addComponent(btnPreviousShip)
+                .addGap(30, 30, 30)
+                .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(btnNextShip))
         );
         jPanelShipLayout.setVerticalGroup(
             jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelShipLayout.createSequentialGroup()
-                .addComponent(lblShipsName)
-                .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelShipLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnNextShip)
-                            .addComponent(btnPreviousShip)))
-                    .addGroup(jPanelShipLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblShipsName)
+                    .addComponent(btnUpgradeShip, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNextShip)
+                    .addComponent(btnPreviousShip))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelShip);
-        jPanelShip.setBounds(90, 320, 700, 400);
+        jPanelShip.setBounds(60, 120, 660, 350);
 
         jPanelCompanion.setBackground(new java.awt.Color(0, 102, 0));
 
@@ -381,37 +416,51 @@ public class ShopFrame extends javax.swing.JFrame {
 
         btnPreviousCompanion.setText("<");
 
+        btnUpgradeCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/upgrade.png"))); // NOI18N
+        btnUpgradeCompanion.setText("Upgrade");
+        btnUpgradeCompanion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpgradeCompanionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCompanionLayout = new javax.swing.GroupLayout(jPanelCompanion);
         jPanelCompanion.setLayout(jPanelCompanionLayout);
         jPanelCompanionLayout.setHorizontalGroup(
             jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                .addGap(171, 171, 171)
+                .addGap(6, 6, 6)
+                .addComponent(btnUpgradeCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCompanionName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPreviousCompanion)
-                .addGap(196, 196, 196)
-                .addComponent(lblAfbeeldingBuddy)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lblAfbeeldingBuddy, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(btnNextCompanion))
         );
         jPanelCompanionLayout.setVerticalGroup(
             jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                .addComponent(lblCompanionName)
-                .addGap(143, 143, 143)
-                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAfbeeldingBuddy)
+                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCompanionName)
+                    .addComponent(btnUpgradeCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAfbeeldingBuddy, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNextCompanion)
                     .addComponent(btnPreviousCompanion))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelCompanion);
-        jPanelCompanion.setBounds(90, 320, 700, 400);
+        jPanelCompanion.setBounds(60, 120, 660, 350);
 
         jPanelCurrency.setBackground(new java.awt.Color(0, 102, 0));
+        jPanelCurrency.setPreferredSize(new java.awt.Dimension(290, 50));
 
         lblCoins.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/coinSprite.png"))); // NOI18N
         lblCoins.setText("C:");
@@ -431,29 +480,29 @@ public class ShopFrame extends javax.swing.JFrame {
             .addGroup(jPanelCurrencyLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(lblCoins, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblContentCoins)
-                .addGap(44, 44, 44)
+                .addGap(34, 34, 34)
                 .addComponent(lblGems)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblContentGems)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanelCurrencyLayout.setVerticalGroup(
             jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCurrencyLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCoins, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblContentGems)
-                        .addComponent(lblGems))
-                    .addComponent(lblContentCoins))
-                .addGap(24, 24, 24))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCurrencyLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblContentGems)
+                    .addComponent(lblGems)
+                    .addGroup(jPanelCurrencyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblCoins, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblContentCoins)))
+                .addGap(33, 33, 33))
         );
 
         getContentPane().add(jPanelCurrency);
-        jPanelCurrency.setBounds(1440, 30, 320, 80);
+        jPanelCurrency.setBounds(450, 0, 270, 50);
 
         btnShip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/ship-nonActive.png"))); // NOI18N
         btnShip.addActionListener(new java.awt.event.ActionListener() {
@@ -462,7 +511,7 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnShip);
-        btnShip.setBounds(250, 270, 200, 50);
+        btnShip.setBounds(270, 90, 120, 30);
 
         btnCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/companion-nonActive.png"))); // NOI18N
         btnCompanion.addActionListener(new java.awt.event.ActionListener() {
@@ -471,39 +520,64 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCompanion);
-        btnCompanion.setBounds(450, 270, 200, 50);
+        btnCompanion.setBounds(390, 90, 120, 30);
 
         lblShip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/ship-active.png"))); // NOI18N
         getContentPane().add(lblShip);
-        lblShip.setBounds(250, 270, 200, 50);
+        lblShip.setBounds(270, 90, 120, 30);
 
         lblCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/companion-active.png"))); // NOI18N
         getContentPane().add(lblCompanion);
-        lblCompanion.setBounds(450, 270, 200, 50);
+        lblCompanion.setBounds(390, 90, 120, 30);
 
+        btnStartGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/start.png"))); // NOI18N
         btnStartGame.setText("Start Game");
+        btnStartGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartGameActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnStartGame);
-        btnStartGame.setBounds(1440, 770, 335, 100);
+        btnStartGame.setBounds(620, 540, 160, 50);
 
+        btnClan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/clan.png"))); // NOI18N
         btnClan.setText("Clan");
+        btnClan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClanActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnClan);
-        btnClan.setBounds(460, 770, 335, 100);
+        btnClan.setBounds(190, 540, 160, 50);
 
         btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/settings.png"))); // NOI18N
         btnSettings.setText("jButton1");
         getContentPane().add(btnSettings);
-        btnSettings.setBounds(90, 770, 335, 100);
+        btnSettings.setBounds(20, 540, 160, 50);
 
         btnHighscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/highscores.png"))); // NOI18N
+        btnHighscores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHighscoresActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnHighscores);
-        btnHighscores.setBounds(830, 770, 335, 100);
+        btnHighscores.setBounds(360, 540, 160, 50);
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/shop-bg.png"))); // NOI18N
-        lblBackground.setText("Achtergrond");
+        btnBackUpgrades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
+        btnBackUpgrades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackUpgradesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBackUpgrades);
+        btnBackUpgrades.setBounds(60, 480, 160, 50);
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/shop-bg1.png"))); // NOI18N
         lblBackground.setMaximumSize(new java.awt.Dimension(1920, 1080));
         lblBackground.setMinimumSize(new java.awt.Dimension(1920, 1080));
         getContentPane().add(lblBackground);
-        lblBackground.setBounds(0, 0, 1920, 1080);
+        lblBackground.setBounds(0, 0, 1920, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -512,6 +586,8 @@ public class ShopFrame extends javax.swing.JFrame {
         jPanelCompanion.setVisible(false);
         btnShip.setVisible(false);
         lblCompanion.setVisible(false);
+        jPanelUpgrades.setVisible(false);
+        btnBackUpgrades.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipActionPerformed
@@ -554,6 +630,38 @@ public class ShopFrame extends javax.swing.JFrame {
         lblAfbeeldingSchip.setBackground(Color.CYAN);
     }//GEN-LAST:event_btnPreviousShipActionPerformed
 
+    private void btnUpgradeShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpgradeShipActionPerformed
+        jPanelUpgrades.setVisible(true);
+        btnBackUpgrades.setVisible(true);
+        btnUpgradeShip.setVisible(false);
+    }//GEN-LAST:event_btnUpgradeShipActionPerformed
+
+    private void btnBackUpgradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpgradesActionPerformed
+        jPanelUpgrades.setVisible(false);
+        btnBackUpgrades.setVisible(false);
+        btnUpgradeShip.setVisible(true);
+    }//GEN-LAST:event_btnBackUpgradesActionPerformed
+
+    private void btnUpgradeCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpgradeCompanionActionPerformed
+        jPanelUpgrades.setVisible(true);
+        btnBackUpgrades.setVisible(true);
+        btnUpgradeCompanion.setVisible(false);
+    }//GEN-LAST:event_btnUpgradeCompanionActionPerformed
+
+    private void btnClanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClanActionPerformed
+        JOptionPane.showMessageDialog(null, "This is not implemented yet");
+    }//GEN-LAST:event_btnClanActionPerformed
+
+    private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
+        new StartGameFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnStartGameActionPerformed
+
+    private void btnHighscoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighscoresActionPerformed
+        new HighscoreFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHighscoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -590,6 +698,7 @@ public class ShopFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackUpgrades;
     private javax.swing.JButton btnClan;
     private javax.swing.JButton btnCompanion;
     private javax.swing.JButton btnHighscores;
@@ -605,6 +714,8 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnShip;
     private javax.swing.JButton btnStartGame;
+    private javax.swing.JButton btnUpgradeCompanion;
+    private javax.swing.JButton btnUpgradeShip;
     private javax.swing.JPanel jPanelCompanion;
     private javax.swing.JPanel jPanelCurrency;
     private javax.swing.JPanel jPanelShip;
