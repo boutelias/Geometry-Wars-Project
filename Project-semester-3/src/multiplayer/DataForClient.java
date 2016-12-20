@@ -5,14 +5,14 @@ import java.util.List;
 import model.Bullet;
 import model.Enemy;
 import model.Geom;
-import model.Mine;
+import model.Character;
 import model.Player;
 import model.companions.Companion;
 
 
 
 public class DataForClient implements Serializable{
-    private Player player;
+    private Character player;
     private List<Bullet> bullets;
     private List<Enemy> enemies;
     private List<Geom> geoms;
@@ -20,7 +20,7 @@ public class DataForClient implements Serializable{
         
     }
     
-    public void updateDataForClient(Player player, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+    public void updateDataForClient(Character player, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
         this.player = player;
         this.bullets = bullets;
         this.enemies = enemies;
@@ -28,7 +28,7 @@ public class DataForClient implements Serializable{
     }
 
     /*Getters and setters*/
-    public Player getPlayer() {
+    public Character getPlayer() {
         return player;
     }
 

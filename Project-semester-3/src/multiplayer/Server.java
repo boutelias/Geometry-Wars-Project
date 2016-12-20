@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
-
+import model.Character;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Server implements Runnable{
     
     boolean keepGoing;
     
-    private Player player;
+    private Character player;
     private List<Bullet> bullets;
     private List<Enemy> enemys;
     private List<Geom> geoms;
@@ -46,7 +46,7 @@ public class Server implements Runnable{
     InputHandler handler;
     
     
-    public Server(Player player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException {
+    public Server(Character player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException {
         
         //to send data
         serverSocket = new ServerSocket(7777);

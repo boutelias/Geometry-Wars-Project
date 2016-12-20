@@ -14,7 +14,7 @@ import model.companions.LifeSaver;
 import model.companions.Miner;
 import model.companions.Shooter;
 
-/*import multiplayer.Server;*/
+import multiplayer.Server;
 
 public class Game implements Serializable {
 
@@ -37,17 +37,19 @@ public class Game implements Serializable {
     private GameGui gameGui;
     private List<Player> players;
 
-    /*private Server server;*/
+    private Server server;
     private Companion companion;
     private GameDA db = GameDA.getInstance();
     private int characterid = 1;
     private long delaytime;
+    private boolean multiplayer;
 
     public static void main(String[] args) {
-        new Game();
+        new Game(true);
     }
 
-    public Game() {
+    public Game(boolean multiplayer) {
+        this.multiplayer = multiplayer;
         //TODO characterid , companionid en playerid uit GUI
         run();
         System.exit(-1);
@@ -66,11 +68,7 @@ public class Game implements Serializable {
 
             draw();
 
-            /*try {
-                sendDataToClient();
-            } catch (IOException ex) {
-                System.out.println("failed to send data");
-            }*/
+            
             time = (1000 / fps) - (System.currentTimeMillis() - time);
             if (time > 0) {
                 try {
@@ -84,11 +82,7 @@ public class Game implements Serializable {
     }
 
     private void init() {
-        /*try {
-            server = new Server();
-        } catch (IOException ex) {
-            System.out.println("failed to make server");
-        }*/
+       
 
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
@@ -99,10 +93,21 @@ public class Game implements Serializable {
 
         handler = new InputHandler(gameGui.getFrame());
 
-        //companion = new Miner(character, mines, handler, 30, 30, 10, 20);
-        companion = new LifeSaver(character, 30, 30, 60);
-        //companion = new Shooter(character, handler, bullets, 30, 30, 30, 60,5);
-        //companion = new AutoShooter(character,bullets,enemies,30,30,30,60,5);
+        if (!multiplayer) {
+            //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
+            //companion = new LifeSaver(player, 30, 30, 60);
+            //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
+            companion = new AutoShooter(character, bullets, enemies, 30, 30, 30, 60,2);
+        }
+        if (multiplayer) {
+            try {
+                server = new Server(character, bullets, enemies, geoms);
+                Thread t = new Thread(server);
+                t.start();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
         
         players = db.getPlayers();
         
@@ -114,13 +119,20 @@ public class Game implements Serializable {
         updatePlayerPos();
         updateBullets();
         updateEnemies();
-        companion.doMove();
+        if (!multiplayer) {
+            companion.doMove();
         companion.doSpecialAction();
+        }
+        
         collisionDetection();
     }
 
     private void draw() {
-        gameGui.draw(character, bullets, enemies, geoms, companion, mines);
+        if (multiplayer) {
+            gameGui.draw(character, bullets, enemies, geoms);
+        } else {
+            gameGui.draw(character, bullets, enemies, geoms, companion, mines);
+        }
     }
 
     private void randomSpawnGenerator() {
@@ -390,7 +402,4 @@ public class Game implements Serializable {
 
     }
 
-    /*private void sendDataToClient() throws IOException{
-        server.sendDataToClient(player, bullets, enemies, geoms);
-    }*/
 }
