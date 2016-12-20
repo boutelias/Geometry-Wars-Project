@@ -150,5 +150,13 @@ public class Character implements Serializable{
         return bulletspeed;
     }
     
+    public void increaseSpeed(int speed){
+        this.movementSpeed += speed;
+    }
+    
+    public void decreaseSpeed(int speed){
+        this.movementSpeed -= speed;
+    }
+    
     
 }
