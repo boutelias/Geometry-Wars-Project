@@ -1,6 +1,6 @@
 package model;
 
-import data.GameDA;
+
 import java.awt.Rectangle;
 import java.io.Serializable;
 
@@ -13,13 +13,14 @@ public class Character implements Serializable{
     private int maxY;
     //the sprite of the player would be nice to store here
     private int movementSpeed ;
-    private int damage = 30;
+    private int damage ;
     private int lives ;
     private int bulletsPerMinute;
     private long score = 0;
     private int numberOfGeoms = 0;
     private long lastBulletFired = 0;
     private int bulletspeed;
+    private String sprite;
     
    
     
@@ -38,6 +39,7 @@ public class Character implements Serializable{
         this.width = width;
         this.damage = bulletdamage;
         this.bulletspeed = bulletspeed;
+        this.sprite = sprite;
         
         lastBulletFired = System.currentTimeMillis();
         

@@ -98,10 +98,10 @@ public class Game implements Serializable {
 
         handler = new InputHandler(gameGui.getFrame());
 
-        //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
-        //companion = new LifeSaver(player, 30, 30, 60);
-        //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60,5);
-        companion = new AutoShooter(character,bullets,enemies,30,30,30,60,5);
+        //companion = new Miner(character, mines, handler, 30, 30, 10, 20);
+        companion = new LifeSaver(character, 30, 30, 60);
+        //companion = new Shooter(character, handler, bullets, 30, 30, 30, 60,5);
+        //companion = new AutoShooter(character,bullets,enemies,30,30,30,60,5);
         
         players = db.getPlayers();
         
@@ -170,11 +170,11 @@ public class Game implements Serializable {
         randomSpawnGenerator();
         Wave wave = waves.get(waveCounter);
         
-        wave.getEnemyID();
+        int enemyid = wave.getEnemyID();
         if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0) {
             
-            
-            enemies.add(new Enemy(spawnEnemyX, spawnEnemyY));
+            Enemy e = db.getEnemy(enemyid, spawnEnemyX, spawnEnemyY);
+            enemies.add(e);
             spawnTimer = System.currentTimeMillis();
             wave.reduceNumberOfEnemiesLeft();
 
@@ -278,7 +278,7 @@ public class Game implements Serializable {
                             Geom geom = new Geom(enemy.getPosX(), enemy.getPosY());
                             geoms.add(geom);
                         }
-                        if (drop(enemy.getDropRateSpeedBoost())) {
+                        /*if (drop(enemy.getDropRateSpeedBoost())) {
                             System.out.println("speed gaat omhoog !!");
                             character.setMovementSpeedHigher();
                         }
@@ -293,7 +293,7 @@ public class Game implements Serializable {
                         }
                         if (drop(enemy.getDroprateSpeedDown())) {
                             character.setMovementSpeedLower();
-                        }
+                        }*/
                         enemiesToRemove.add(enemy);
                         character.addPoints(enemy.getValue());
                     }

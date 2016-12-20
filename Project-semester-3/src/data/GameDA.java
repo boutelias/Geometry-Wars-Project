@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Character;
+import model.Enemy;
 import model.Player;
 import model.Wave;
 import util.GameException;
@@ -142,6 +143,36 @@ public class GameDA {
              Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
          }
          return waves;
+   }
+   
+   public Enemy getEnemy(int enemyid,int posx,int posy){
+       Enemy e;
+         try {
+             String sql = "select * from `Enemy` where enemyid = ? ";
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             prep.setInt(1, enemyid);
+             ResultSet rs = prep.executeQuery();
+             rs.next();
+             e = new Enemy(posx,posy,rs.getString("sprite"),rs.getInt("dropratepowerups"),rs.getInt("dropratepowerdowns"),rs.getInt("droprategeoms"),rs.getInt("width"),rs.getInt("height"),rs.getInt("hp"),rs.getInt("movementspeed"),rs.getInt("value"));
+         } catch (SQLException ex) {
+             throw new IllegalArgumentException(ex);
+         }
+         return e;
+   }
+   
+   public List<Player> getTop10HighscorePlayers(){
+        List<Player> players = new ArrayList<>();
+         try {
+             String sql = "SELECT * FROM `Player` order by highscore desc limit 10";
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             ResultSet rs = prep.executeQuery();
+             while(rs.next()){
+                 Player player = new Player(rs.getString("username"),rs.getString("password"),rs.getInt("highscore"),rs.getInt("geoms"),rs.getInt("premiumcoins"));
+                 players.add(player);
+             } } catch (SQLException ex) {
+             Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return players;
    }
    
     

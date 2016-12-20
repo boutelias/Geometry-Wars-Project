@@ -11,17 +11,27 @@ public class Enemy implements Serializable{
     private float deltaX;
     private float deltaY;
     private double dropRateGeom = 0.20; //TODO dit uit database 
-    private double dropRateSpeedBoost = 0.00001; // TODO dit ook uit database
-    private double dropRateBPM = 0.00001;
-    private double dropRateExtraEnemy = 0.00001;
-    private double dropRateSpeedDown = 0.00001;
+    private int dropratepowerups;
+    private int dropratepowerdowns; 
     private int value = 15;
     private int hp = 15;
+    private String sprite;
+    private int movementspeed;
     
     
-    public Enemy(int posX,int posY){
+    public Enemy(int posX,int posY,String sprite,int dropratepowerups,int dropratepowerdowns,int droprategeoms,int width, int height,int hp , int movementspeed,int value){
         this.posX = posX;
         this.posY = posY;
+        this.sprite = sprite;
+        this.dropratepowerups = dropratepowerups;
+        this.dropratepowerdowns = dropratepowerdowns;
+        this.dropRateGeom = droprategeoms;
+        this.width = width;
+        this.height = height;
+        this.hp = hp;
+        this.movementspeed = movementspeed;
+        this.value = value;
+        
     }
 
 
@@ -45,8 +55,8 @@ public class Enemy implements Serializable{
     
     public void updatePos(int playerX,int playerY){
         calculateDirection(playerX,playerY);
-        posX+= deltaX;
-        posY+= deltaY;
+        posX+= deltaX * movementspeed;
+        posY+= deltaY * movementspeed;
     }
     
     
@@ -75,20 +85,6 @@ public class Enemy implements Serializable{
         return dropRateGeom;
     }
     
-    public double getDropRateSpeedBoost(){
-        return dropRateSpeedBoost;
-    }
-    
-    public double getDropRateBPM(){
-        return dropRateBPM;
-    }
-    public double getDropRateExtraEnemy(){
-        return dropRateExtraEnemy;
-    }
-    public double getDroprateSpeedDown(){
-        return dropRateSpeedDown;
-    }
-
     public float getDeltaX() {
         return deltaX;
     }
