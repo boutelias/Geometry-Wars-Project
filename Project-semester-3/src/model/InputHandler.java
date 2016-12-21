@@ -99,5 +99,13 @@ public class InputHandler {
         return null;
     }
     
-    
+    /*public void setMouseDown(int button, boolean isDown){
+        this.mouse[button] = isDown;
+    }
+    public void setMouseEvent(int button, MouseEvent me){
+        this.mEvent[button] = me;
+    }
+    public void setButton(int button, boolean isDown){
+        this.keys[button] = isDown;
+    }*/
 }

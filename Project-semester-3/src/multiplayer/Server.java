@@ -3,6 +3,7 @@ package multiplayer;
 
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -44,7 +45,13 @@ public class Server implements Runnable{
     private List<Enemy> enemys;
     private List<Geom> geoms;
     
-    InputHandler handler;
+    
+    private boolean keyLeft;
+    private boolean keyRight ;
+    private boolean keyUp;
+    private boolean keyDown ;
+    private boolean leftClick;
+    private MouseEvent clickLeft;
     
     
     public Server(Character player,Character character2, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException {
@@ -95,13 +102,42 @@ public class Server implements Runnable{
         try {
             DataForServer data = (DataForServer) in.readObject();
             System.out.println(data.isKeyLeft());
+            this.keyLeft = data.isKeyLeft();
+            this.keyRight = data.isKeyRight();
+            this.keyUp = data.isKeyUp();
+            this.keyDown = data.isKeyDown();
+            this.leftClick = data.isLeftClick();
+            this.clickLeft = data.getClickLeft();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
+
+    
+    /*Getters */
+    public boolean isKeyLeft() {
+        return keyLeft;
+    }
+
+    public boolean isKeyRight() {
+        return keyRight;
+    }
+
+    public boolean isKeyUp() {
+        return keyUp;
+    }
+
+    public boolean isKeyDown() {
+        return keyDown;
+    }
+
+    public boolean isLeftClick() {
+        return leftClick;
+    }
+
+    public MouseEvent getClickLeft() {
+        return clickLeft;
+    }
     
     
-    public InputHandler getHandler(){
-        return this.handler;
-    }            
 }
