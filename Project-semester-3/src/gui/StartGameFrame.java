@@ -1,5 +1,7 @@
 package gui;
 
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,8 +17,14 @@ public class StartGameFrame extends javax.swing.JFrame {
     /**
      * Creates new form StartGameFrame
      */
-    public StartGameFrame() {
+    
+    private static String playername;
+    
+    
+    public StartGameFrame(String userId) {
         initComponents();
+        this.playername = userId;
+        //JOptionPane.showMessageDialog(null, "username:"+playername);
     }
 
     /**
@@ -109,7 +117,7 @@ public class StartGameFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShopActionPerformed
-        new ShopFrame().setVisible(true);
+        new ShopFrame(playername).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnShopActionPerformed
 
@@ -147,7 +155,8 @@ public class StartGameFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StartGameFrame().setVisible(true);
+                new StartGameFrame(playername).setVisible(true);
+                
             }
         });
     }

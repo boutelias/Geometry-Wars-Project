@@ -121,6 +121,25 @@ public class GameDA {
        return p; 
     }
     
+    public int getPLayerId(String playername){
+        try{
+            String sql = "select * from `Player` where username= ?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setString(1,playername);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int id = rs.getInt("id");
+            rs.close();
+            
+            return id;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+
+        }
+        
+    }
+    
    public Character getCharacter(int characterid,int maxX, int maxY){
        Character c;
          try {
@@ -297,4 +316,27 @@ public class GameDA {
         }
         return characters;
    }
+   
+   public int isBought(int playerid, int characterid){
+       
+       try{
+            String sql = "SELECT * FROM player_character WHERE playerid=? AND characterid =?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,playerid);
+            prep.setInt(2,characterid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int isbought = rs.getInt("isBought");
+            rs.close();
+            
+            return isbought;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+
+        }
+
+   }
+   
+   
 }

@@ -387,6 +387,7 @@ public class StartFrame extends javax.swing.JFrame {
         if (exists == true) {
 
             Player p = GameDA.getInstance().getPlayer(username);
+            String playername = p.getUsername();
             String passFromDb = p.getPassword();
 
             String hashedPassword = passFromDb;
@@ -394,8 +395,15 @@ public class StartFrame extends javax.swing.JFrame {
 
             if (BCrypt.checkpw(providedPassword, hashedPassword)) {
                 JOptionPane.showMessageDialog(null, "You are logged in");
+                
+                
+                //ophalen userid en meegeven naar startgameframe
+                
+                
+                
+                
                 logInPanel.setVisible(false);
-                new StartGameFrame().setVisible(true);
+                new StartGameFrame(playername).setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Password is not valid");

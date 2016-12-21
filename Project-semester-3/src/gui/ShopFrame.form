@@ -488,19 +488,28 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnUpgradeShip" min="-2" pref="160" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="lblShipsName" min="-2" pref="250" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Component id="btnPreviousShip" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblAfbeeldingSchip" min="-2" pref="520" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnNextShip" min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnUpgradeShip" min="-2" pref="160" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lblShipsName" min="-2" pref="250" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="current_ship" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="current_selected_ship" min="-2" pref="76" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="btnPreviousShip" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+                          <Component id="lblAfbeeldingSchip" min="-2" pref="210" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+                          <Component id="btnNextShip" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -510,14 +519,16 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblShipsName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnUpgradeShip" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="current_ship" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="current_selected_ship" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblAfbeeldingSchip" alignment="3" min="-2" pref="250" max="-2" attributes="0"/>
+                      <Component id="lblAfbeeldingSchip" alignment="3" min="-2" pref="210" max="-2" attributes="0"/>
                       <Component id="btnNextShip" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnPreviousShip" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -563,6 +574,16 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpgradeShipActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="current_ship">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Current Ship: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="current_selected_ship">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="shipname"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -664,7 +685,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="450" y="0" width="270" height="50"/>
+          <AbsoluteConstraints x="450" y="0" width="300" height="50"/>
         </Constraint>
       </Constraints>
 
@@ -680,7 +701,7 @@
                   <Component id="lblGems" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblContentGems" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

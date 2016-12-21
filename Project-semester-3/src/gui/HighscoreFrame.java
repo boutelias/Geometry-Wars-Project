@@ -1,5 +1,9 @@
 package gui;
 
+import data.GameDA;
+import java.util.List;
+import model.Player;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,9 +19,38 @@ public class HighscoreFrame extends javax.swing.JFrame {
     /**
      * Creates new form HigscoreFrame
      */
-    public HighscoreFrame() {
+    
+    private static String playername;
+    
+    public HighscoreFrame(String playername) {
         initComponents();
+        getHighscores();
+        this.playername = playername;
         //retrieveHighscores();
+    }
+    
+    public HighscoreFrame(){
+        initComponents();
+        getHighscores();
+        btnStartGameHighscores.setVisible(false);
+    
+    }
+    
+    public void getHighscores(){
+    
+        List<Player> highscores = GameDA.getInstance().getTop10HighscorePlayers();
+        
+        int counter = 1;
+        for(Player p: highscores){
+            
+            
+            String highscoreRow = "#"+counter+" "+p.getUsername()+": "+p.getHighscore()+"\n";
+            txtAreaHighscores.append(highscoreRow);
+            
+            counter += 1;
+        }
+        
+        
     }
     /*
     private void retrieveHighscores() {                                               
@@ -55,9 +88,8 @@ public class HighscoreFrame extends javax.swing.JFrame {
         txtAreaHighscores.setColumns(20);
         txtAreaHighscores.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtAreaHighscores.setRows(5);
-        txtAreaHighscores.setText("Arne - 3000 pts\n2\n3\n4\n5\n6\n7\n8\n9\n10");
         getContentPane().add(txtAreaHighscores);
-        txtAreaHighscores.setBounds(270, 200, 280, 220);
+        txtAreaHighscores.setBounds(270, 200, 300, 300);
 
         btnStartGameHighscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/img/buttons/start.png"))); // NOI18N
         btnStartGameHighscores.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +108,7 @@ public class HighscoreFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartGameHighscoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameHighscoresActionPerformed
-        new StartGameFrame().setVisible(true);
+        new StartGameFrame(playername).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnStartGameHighscoresActionPerformed
 
