@@ -10,16 +10,17 @@ public class Enemy implements Serializable{
     private float posY;
     private float deltaX;
     private float deltaY;
-    private double dropRateGeom = 0.20; //TODO dit uit database 
-    private int dropratepowerups;
-    private int dropratepowerdowns; 
+    private double dropRateGeom ; //TODO dit uit database 
+    private double dropratepowerups;
+    private double dropratepowerdowns; 
     private int value = 15;
     private int hp = 15;
     private String sprite;
     private int movementspeed;
     
     
-    public Enemy(int posX,int posY,String sprite,int dropratepowerups,int dropratepowerdowns,int droprategeoms,int width, int height,int hp , int movementspeed,int value){
+    
+    public Enemy(int posX,int posY,String sprite,double dropratepowerups,double dropratepowerdowns,double droprategeoms,int width, int height,int hp , int movementspeed,int value){
         this.posX = posX;
         this.posY = posY;
         this.sprite = sprite;
@@ -93,11 +94,11 @@ public class Enemy implements Serializable{
         return deltaY;
     }
 
-    public int getDropratepowerups() {
+    public double getDropratepowerups() {
         return dropratepowerups;
     }
 
-    public int getDropratepowerdowns() {
+    public double getDropratepowerdowns() {
         return dropratepowerdowns;
     }
 
