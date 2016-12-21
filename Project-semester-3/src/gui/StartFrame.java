@@ -371,43 +371,42 @@ public class StartFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHighscoresActionPerformed
 
     private void btnConfirmLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmLogInActionPerformed
-        
-        
+
         String username = txtUsernameLogIn.getText();
         String pass = new String(txtPasswordLogIn.getPassword());
-        
+
         boolean exists = false;
-        
+
         List<Player> players = GameDA.getInstance().getPlayers();
-        for(Player p: players){
-                if(p.getUsername().equals(username)){
+        for (Player p : players) {
+            if (p.getUsername().equals(username)) {
                 exists = true;
-                }
+            }
         }
-        
-        if(exists == true){
-        
+
+        if (exists == true) {
+
             Player p = GameDA.getInstance().getPlayer(username);
             String passFromDb = p.getPassword();
-            if(passFromDb.equals(pass)){
-                
+
+            String hashedPassword = passFromDb;
+            String providedPassword = pass;
+
+            if (BCrypt.checkpw(providedPassword, hashedPassword)) {
                 JOptionPane.showMessageDialog(null, "You are logged in");
                 logInPanel.setVisible(false);
                 new StartGameFrame().setVisible(true);
                 this.dispose();
-                
+            } else {
+                JOptionPane.showMessageDialog(null, "Password is not valid");
             }
-            else{
-            JOptionPane.showMessageDialog(null, "Password is not valid");
-            }
+
+           
+        } else {
+            JOptionPane.showMessageDialog(null, "Username does not exist");
         }
-        else{
-        JOptionPane.showMessageDialog(null, "Username does not exist");
-        }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnConfirmLogInActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -425,9 +424,9 @@ public class StartFrame extends javax.swing.JFrame {
             boolean exists = false;
             List<Player> players = GameDA.getInstance().getPlayers();
 
-            for(Player p: players){
-                if(p.getUsername().equals(username)){
-                exists = true;
+            for (Player p : players) {
+                if (p.getUsername().equals(username)) {
+                    exists = true;
                 }
             }
 
