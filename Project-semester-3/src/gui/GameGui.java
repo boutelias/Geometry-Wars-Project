@@ -80,7 +80,17 @@ public class GameGui {
         drawGame(character, bullets, enemies, geoms);
         g.setColor(Color.YELLOW);
         g.fillOval(character2.getPosX()-(character2.getHeight()/2), character2.getPosY()-(character2.getWidth()/2), character2.getHeight(), character2.getWidth());
+        Color kleur = new Color(25,139,193);
+        g.setFont(new Font("Comic Sans",Font.BOLD,26));
+        g.setColor(kleur);
+        g.drawString("PLAYER2--" + Integer.toString(character2.getLives()), 1115, 30);
+        
+        
+        g.drawString("PLAYER2--" + Long.toString(character2.getScore()), 390, 30);
+        
+        g.drawString("PLAYER2--" + Integer.toString(character2.getNumberOfGeoms()), 1735, 30);
         repaint();
+        
     }
     
     private void drawGame(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
@@ -112,12 +122,12 @@ public class GameGui {
         Color kleur = new Color(25,139,193);
         g.setFont(new Font("Comic Sans",Font.BOLD,26));
         g.setColor(kleur);
-        g.drawString(Integer.toString(character.getLives()), 1015, 30);
+        g.drawString("PLAYER1--" + Integer.toString(character.getLives()), 915, 30);
         
         
-        g.drawString(Long.toString(character.getScore()), 130, 30);
+        g.drawString("PLAYER1--" + Long.toString(character.getScore()), 130, 30);
         
-        g.drawString(Integer.toString(character.getNumberOfGeoms()), 1735, 30);
+        g.drawString("PLAYER1--" + Integer.toString(character.getNumberOfGeoms()), 1535, 30);
         
     }
     
