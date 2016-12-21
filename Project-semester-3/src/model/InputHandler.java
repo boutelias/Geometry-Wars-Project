@@ -15,7 +15,6 @@ public class InputHandler {
     
     
     public InputHandler(Component c){
-        this.mEvent[1] = new MouseEvent(c, 0, 0, 0, 0, 0, 0, false);
         c.addKeyListener(new KeyListener(){
             @Override
             public void keyTyped(KeyEvent e) {
@@ -100,13 +99,5 @@ public class InputHandler {
         return null;
     }
     
-    /*public void setMouseDown(int button, boolean isDown){
-        this.mouse[button] = isDown;
-    }
-    public void setMouseEvent(int button, MouseEvent me){
-        this.mEvent[button] = me;
-    }
-    public void setButton(int button, boolean isDown){
-        this.keys[button] = isDown;
-    }*/
+    
 }

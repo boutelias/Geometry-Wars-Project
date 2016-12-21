@@ -1,9 +1,16 @@
+package gui;
+
+import data.GameDA;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Player;
+import org.mindrot.jbcrypt.BCrypt;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Maxime
@@ -11,6 +18,7 @@
 public class StartFrame extends javax.swing.JFrame {
 
     /**
+     * e
      * Creates new form StartFrame
      */
     public StartFrame() {
@@ -30,7 +38,7 @@ public class StartFrame extends javax.swing.JFrame {
         btnLogIn = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
         btnHighscores = new javax.swing.JButton();
-        btnSettings = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         logInPanel = new javax.swing.JPanel();
         lblUsernameLogIn = new javax.swing.JLabel();
         lblPasswordLogIn = new javax.swing.JLabel();
@@ -45,12 +53,14 @@ public class StartFrame extends javax.swing.JFrame {
         txtPasswordSignUp = new javax.swing.JPasswordField();
         txtConfirmPasswordSignUp = new javax.swing.JPasswordField();
         btnConfirmSignUp = new javax.swing.JButton();
+        HighscoresPanel = new javax.swing.JPanel();
+        lblHighscores = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 255));
-        setMinimumSize(new java.awt.Dimension(1920, 1080));
-        setUndecorated(true);
+        setMinimumSize(new java.awt.Dimension(800, 650));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -70,7 +80,7 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
 
-        btnSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/singUp.png"))); // NOI18N
+        btnSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/signUp.png"))); // NOI18N
         btnSignUp.setText("jButton1");
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,9 +90,19 @@ public class StartFrame extends javax.swing.JFrame {
 
         btnHighscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/highscores.png"))); // NOI18N
         btnHighscores.setText("jButton1");
+        btnHighscores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHighscoresActionPerformed(evt);
+            }
+        });
 
-        btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/settings.png"))); // NOI18N
-        btnSettings.setText("jButton1");
+        btnExit.setText("Exit");
+        btnExit.setActionCommand("btnExit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
         startPanel.setLayout(startPanelLayout);
@@ -91,28 +111,28 @@ public class StartFrame extends javax.swing.JFrame {
             .addGroup(startPanelLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(100, 100, 100))
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         startPanelLayout.setVerticalGroup(
             startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(startPanelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(btnHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
         );
 
         getContentPane().add(startPanel);
-        startPanel.setBounds(1220, 300, 540, 640);
+        startPanel.setBounds(330, 120, 540, 660);
 
         logInPanel.setMinimumSize(new java.awt.Dimension(540, 750));
         logInPanel.setOpaque(false);
@@ -131,7 +151,6 @@ public class StartFrame extends javax.swing.JFrame {
         txtUsernameLogIn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtUsernameLogIn.setForeground(new java.awt.Color(255, 255, 255));
         txtUsernameLogIn.setText("Insert username here");
-        txtUsernameLogIn.setOpaque(false);
         txtUsernameLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameLogInActionPerformed(evt);
@@ -142,7 +161,13 @@ public class StartFrame extends javax.swing.JFrame {
         txtPasswordLogIn.setForeground(new java.awt.Color(255, 255, 255));
         txtPasswordLogIn.setText("Insertpasswordhere");
 
+        btnConfirmLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/confirm.png"))); // NOI18N
         btnConfirmLogIn.setText("Confirm");
+        btnConfirmLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmLogInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout logInPanelLayout = new javax.swing.GroupLayout(logInPanel);
         logInPanel.setLayout(logInPanelLayout);
@@ -151,31 +176,31 @@ public class StartFrame extends javax.swing.JFrame {
             .addGroup(logInPanelLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPasswordLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtUsernameLogIn)
-                        .addComponent(lblUsernameLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(lblPasswordLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUsernameLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(lblUsernameLogIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(99, 99, 99))
         );
         logInPanelLayout.setVerticalGroup(
             logInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(logInPanelLayout.createSequentialGroup()
-                .addComponent(lblUsernameLogIn)
+                .addComponent(lblUsernameLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtUsernameLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(lblPasswordLogIn)
+                .addComponent(lblPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtPasswordLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 250, Short.MAX_VALUE))
+                .addComponent(btnConfirmLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 400, Short.MAX_VALUE))
         );
 
         getContentPane().add(logInPanel);
-        logInPanel.setBounds(1220, 330, 540, 600);
+        logInPanel.setBounds(330, 150, 540, 620);
 
         SignUpPanel.setMinimumSize(new java.awt.Dimension(540, 750));
         SignUpPanel.setOpaque(false);
@@ -194,7 +219,6 @@ public class StartFrame extends javax.swing.JFrame {
         lblConfirmPasswordSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/password.png"))); // NOI18N
         lblConfirmPasswordSignUp.setText("Password:");
 
-        txtUsernameSignUp.setOpaque(false);
         txtUsernameSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameSignUpActionPerformed(evt);
@@ -202,17 +226,21 @@ public class StartFrame extends javax.swing.JFrame {
         });
 
         txtPasswordSignUp.setText("jPasswordField1");
-        txtPasswordSignUp.setOpaque(false);
 
         txtConfirmPasswordSignUp.setText("jPasswordField1");
-        txtConfirmPasswordSignUp.setOpaque(false);
         txtConfirmPasswordSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmPasswordSignUpActionPerformed(evt);
             }
         });
 
+        btnConfirmSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/confirm.png"))); // NOI18N
         btnConfirmSignUp.setText("Confirm");
+        btnConfirmSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmSignUpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SignUpPanelLayout = new javax.swing.GroupLayout(SignUpPanel);
         SignUpPanel.setLayout(SignUpPanelLayout);
@@ -221,42 +249,78 @@ public class StartFrame extends javax.swing.JFrame {
             .addGroup(SignUpPanelLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(SignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(SignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtConfirmPasswordSignUp)
-                        .addComponent(lblConfirmPasswordSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblConfirmPasswordSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtPasswordSignUp)
                         .addComponent(txtUsernameSignUp)
-                        .addComponent(lblUsernameSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addComponent(lblUsernameSignUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         SignUpPanelLayout.setVerticalGroup(
             SignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SignUpPanelLayout.createSequentialGroup()
-                .addComponent(lblUsernameSignUp)
+                .addComponent(lblUsernameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtUsernameSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(lblPasswordSignUp)
+                .addComponent(lblPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(lblConfirmPasswordSignUp)
+                .addComponent(lblConfirmPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtConfirmPasswordSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfirmSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         getContentPane().add(SignUpPanel);
-        SignUpPanel.setBounds(1220, 330, 540, 650);
+        SignUpPanel.setBounds(330, 150, 540, 670);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/start-bg.png"))); // NOI18N
-        background.setText("jLabel2");
+        HighscoresPanel.setMinimumSize(new java.awt.Dimension(540, 750));
+        HighscoresPanel.setOpaque(false);
+        HighscoresPanel.setPreferredSize(new java.awt.Dimension(540, 600));
+
+        lblHighscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/highscores.png"))); // NOI18N
+
+        javax.swing.GroupLayout HighscoresPanelLayout = new javax.swing.GroupLayout(HighscoresPanel);
+        HighscoresPanel.setLayout(HighscoresPanelLayout);
+        HighscoresPanelLayout.setHorizontalGroup(
+            HighscoresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HighscoresPanelLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(288, Short.MAX_VALUE))
+        );
+        HighscoresPanelLayout.setVerticalGroup(
+            HighscoresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HighscoresPanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lblHighscores, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(650, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(HighscoresPanel);
+        HighscoresPanel.setBounds(330, 150, 540, 620);
+
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
+        btnBack.setText("Back");
+        btnBack.setPreferredSize(new java.awt.Dimension(340, 100));
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(10, 550, 150, 40);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/start-bg1.png"))); // NOI18N
         getContentPane().add(background);
-        background.setBounds(0, 10, 1965, 1080);
+        background.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -264,17 +328,21 @@ public class StartFrame extends javax.swing.JFrame {
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         startPanel.setVisible(false);
         logInPanel.setVisible(true);
+        btnBack.setVisible(true);
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         startPanel.setVisible(false);
         SignUpPanel.setVisible(true);
+        btnBack.setVisible(true);
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         startPanel.setVisible(true);
         logInPanel.setVisible(false);
         SignUpPanel.setVisible(false);
+        HighscoresPanel.setVisible(false);
+        btnBack.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void txtUsernameLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameLogInActionPerformed
@@ -288,7 +356,96 @@ public class StartFrame extends javax.swing.JFrame {
     private void txtConfirmPasswordSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmPasswordSignUpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConfirmPasswordSignUpActionPerformed
-    
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        startPanel.setVisible(true);
+        logInPanel.setVisible(false);
+        SignUpPanel.setVisible(false);
+        HighscoresPanel.setVisible(false);
+        btnBack.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnHighscoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHighscoresActionPerformed
+        new HighscoreFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHighscoresActionPerformed
+
+    private void btnConfirmLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmLogInActionPerformed
+        
+        
+        String username = txtUsernameLogIn.getText();
+        String pass = new String(txtPasswordLogIn.getPassword());
+        
+        boolean exists = false;
+        
+        List<Player> players = GameDA.getInstance().getPlayers();
+        for(Player p: players){
+                if(p.getUsername().equals(username)){
+                exists = true;
+                }
+        }
+        
+        if(exists == true){
+        
+            Player p = GameDA.getInstance().getPlayer(username);
+            String passFromDb = p.getPassword();
+            if(passFromDb.equals(pass)){
+                
+                JOptionPane.showMessageDialog(null, "You are logged in");
+                logInPanel.setVisible(false);
+                new StartGameFrame().setVisible(true);
+                this.dispose();
+                
+            }
+            else{
+            JOptionPane.showMessageDialog(null, "Password is not valid");
+            }
+        }
+        else{
+        JOptionPane.showMessageDialog(null, "Username does not exist");
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnConfirmLogInActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnConfirmSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmSignUpActionPerformed
+
+        String username = txtUsernameSignUp.getText();
+        String pass1 = new String(txtPasswordSignUp.getPassword());
+        String pass2 = new String(txtConfirmPasswordSignUp.getPassword());
+
+        if (pass1.equals(pass2)) {
+            //boolean exists = GameDA.getInstance().usernameExist(username);
+            boolean exists = false;
+            List<Player> players = GameDA.getInstance().getPlayers();
+
+            for(Player p: players){
+                if(p.getUsername().equals(username)){
+                exists = true;
+                }
+            }
+
+            if (exists == false) {
+
+                String hashedpass = BCrypt.hashpw(pass1, BCrypt.gensalt());
+
+                GameDA.getInstance().addNewPlayer(username, hashedpass);
+                JOptionPane.showMessageDialog(null, "User has been added!");
+            }
+            if (exists == true) {
+                JOptionPane.showMessageDialog(null, "Username already exists");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Passwords do not match");
+        }
+    }//GEN-LAST:event_btnConfirmSignUpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,21 +478,24 @@ public class StartFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new StartFrame().setVisible(true);
-                
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel HighscoresPanel;
     private javax.swing.JPanel SignUpPanel;
     private javax.swing.JLabel background;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnConfirmLogIn;
     private javax.swing.JButton btnConfirmSignUp;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnHighscores;
     private javax.swing.JButton btnLogIn;
-    private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel lblConfirmPasswordSignUp;
+    private javax.swing.JLabel lblHighscores;
     private javax.swing.JLabel lblPasswordLogIn;
     private javax.swing.JLabel lblPasswordSignUp;
     private javax.swing.JLabel lblUsernameLogIn;
