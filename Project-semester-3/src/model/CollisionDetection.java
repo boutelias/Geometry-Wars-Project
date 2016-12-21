@@ -10,19 +10,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-
 /**
  *
  * @author Tobias
  */
 public class CollisionDetection {
+
     private Random randomGenerator = new Random();
-    public void doCollisionDetection(List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms,List<Mine> mines,Character character){
-        /*bullets vs enemiesdetection*/
+
+    public void doCollisionBetweenBulletsAndEnemys(List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms) {
         List<Bullet> bulletsToRemove = new LinkedList();
         List<Enemy> enemiesToRemove = new LinkedList();
-        List<Mine> minesToRemove = new LinkedList();
-
         for (Bullet bullet : bullets) {
             for (Enemy enemy : enemies) {
                 if (bullet.getBounds().intersects(enemy.getBounds())) {
@@ -45,18 +43,18 @@ public class CollisionDetection {
                     }
                     if (bullet.getDamage() == 0) {
                         bulletsToRemove.add(bullet);
-
                     }
 
                 }
             }
         }
 
-        for (Bullet bullet : bulletsToRemove) {
-            bullets.remove(bullet);
-        }
+        deleteObjectsFromList(enemies, enemiesToRemove);
+        deleteObjectsFromList(bullets, bulletsToRemove);
 
-        /*enemies vs player detection*/
+    }
+
+    public void doCollisionBetweenEnemiesAndCharacter(List<Bullet> bullets, List<Enemy> enemies,Character character) {
         Enemy hittedChar = null;
         for (Enemy enemy : enemies) {
             if (character.getBounds().intersects(enemy.getBounds())) {
@@ -67,8 +65,9 @@ public class CollisionDetection {
         if (hittedChar != null) {
             enemies.remove(hittedChar);
         }
-
-        /* player vs geoms */
+    }
+    
+    public void doCollisionBetweenCharacterAndGeom(List<Geom> geoms, Character character){
         List<Geom> hittedGeoms = new ArrayList();
         for (Geom geom : geoms) {
             if (character.getBounds().intersects(geom.getBounds())) {
@@ -76,11 +75,14 @@ public class CollisionDetection {
                 hittedGeoms.add(geom);
             }
         }
-        for (Geom geom : hittedGeoms) {
-            geoms.remove(geom);
-        }
-        /* enemies vs mine */
-
+        
+        deleteObjectsFromList(geoms, hittedGeoms);
+    }
+    
+    public void doCollisionBetweenEnemiesAndMine(List<Enemy> enemies, List<Mine> mines){
+        List<Enemy> enemiesToRemove = new LinkedList();
+        List<Mine> minesToRemove = new LinkedList();
+        
         for (Enemy enemy : enemies) {
             for (Mine mine : mines) {
                 if (enemy.getBounds().intersects(mine.getBounds())) {
@@ -96,11 +98,13 @@ public class CollisionDetection {
                 }
             }
         }
-        for (Enemy enemy : enemiesToRemove) {
-            enemies.remove(enemy);
-        }
-
-        /* player vs mine */
+        
+        deleteObjectsFromList(enemies, enemiesToRemove);
+        deleteObjectsFromList(mines, minesToRemove);
+    }
+    
+    public void doCollisionBetweenCharacterAndMine(List<Mine> mines, Character character){
+        List<Mine> minesToRemove = new LinkedList();
         for (Mine mine : mines) {
             if (mine.getBounds().intersects(character.getBounds())) {
                 character.removeLife();
@@ -108,12 +112,17 @@ public class CollisionDetection {
 
             }
         }
-        for (Mine mine : minesToRemove) {
-            mines.remove(mine);
-        }
+        deleteObjectsFromList(mines, minesToRemove);
     }
     
-     private void checkdamage(Bullet bullet, Enemy enemy) {
+
+    private <T> void deleteObjectsFromList(List<T> originalList, List<T> listToRemove) {
+        for (T elementToRemove : listToRemove) {
+            originalList.remove(elementToRemove);
+        }
+    }
+
+    private void checkdamage(Bullet bullet, Enemy enemy) {
         int bulletdamage = bullet.getDamage();
         int enemyhp = enemy.getHp();
 

@@ -50,7 +50,7 @@ public class Game implements Serializable {
     private CollisionDetection collisionDetection = new CollisionDetection();
 
     public static void main(String[] args) {
-        new Game(true);
+        new Game(false);
     }
 
     public Game(boolean multiplayer) {
@@ -105,25 +105,24 @@ public class Game implements Serializable {
         handler = new InputHandler(gameGui.getFrame());
 
         if (!multiplayer) {
-            int companionid = 4;
-            switch(companionid){
-                case 1 :
+            int companionid = 3;
+            switch (companionid) {
+                case 1:
                     companion = db.getCompanionAutoShooter(1, character, enemies, bullets);
                     break;
-                case 2 :
+                case 2:
                     companion = db.getCompanionLifeSaver(1, character);
                     break;
-                case 3 :
-                    companion = db.getCompanionMiner(1, character, mines,handler);
+                case 3:
+                    companion = db.getCompanionMiner(1, character, mines, handler);
                     break;
-                case 4 : 
+                case 4:
                     companion = db.getCompanionShooter(1, character, handler, bullets);
                     break;
             }
             //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
-            
+
             //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
-            
         }
         if (multiplayer) {
             character2 = db.getCharacter(characterid, gameWidth, gameHeight);
@@ -287,7 +286,7 @@ public class Game implements Serializable {
 
         if (handler.isMouseDown(1)) {
             if (character.getLastBulletFired() + (60.0 / character.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
-                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth, character.getBulletSpeed(),character);
+                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth, character.getBulletSpeed(), character);
                 bullets.add(newBullet);
                 character.setLastBulletFired(System.currentTimeMillis());
             }
@@ -296,7 +295,7 @@ public class Game implements Serializable {
         if (multiplayer) {
             if (server.isLeftClick()) {
                 if (character2.getLastBulletFired() + (60.0 / character2.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
-                    Bullet newBullet = new Bullet(character2.getPosX(), character2.getPosY(), server.getClickLeft().getX(), server.getClickLeft().getY(), character2.getDamage(), gameHeight, gameWidth, character2.getBulletSpeed(),character2);
+                    Bullet newBullet = new Bullet(character2.getPosX(), character2.getPosY(), server.getClickLeft().getX(), server.getClickLeft().getY(), character2.getDamage(), gameHeight, gameWidth, character2.getBulletSpeed(), character2);
                     bullets.add(newBullet);
                     character2.setLastBulletFired(System.currentTimeMillis());
                 }
@@ -330,9 +329,18 @@ public class Game implements Serializable {
     }
 
     private void collisionDetection() {
-        collisionDetection.doCollisionDetection(bullets, enemies, geoms, mines, character);
-    }
+        collisionDetection.doCollisionBetweenBulletsAndEnemys(bullets, enemies, geoms);
+        
+        collisionDetection.doCollisionBetweenEnemiesAndCharacter(bullets, enemies, character);
+        collisionDetection.doCollisionBetweenCharacterAndGeom(geoms, character);
 
-   
+        if (multiplayer) {
+            collisionDetection.doCollisionBetweenEnemiesAndCharacter(bullets, enemies, character2);
+            collisionDetection.doCollisionBetweenCharacterAndGeom(geoms, character2);            
+        } else {
+            collisionDetection.doCollisionBetweenEnemiesAndMine(enemies, mines);
+            collisionDetection.doCollisionBetweenCharacterAndMine(mines, character);
+        }
+    }
 
 }
