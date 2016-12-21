@@ -27,6 +27,7 @@ public class Game implements Serializable {
     private int waveCounter;
     private long spawnTimer;
     private Character character;
+    private Character character2;
     private InputHandler handler;
     private List<Bullet> bullets = new ArrayList();
     private List<Enemy> enemies = new ArrayList();
@@ -45,7 +46,7 @@ public class Game implements Serializable {
     private boolean multiplayer;
 
     public static void main(String[] args) {
-        new Game(false);
+        new Game(true);
     }
 
     public Game(boolean multiplayer) {
@@ -61,7 +62,8 @@ public class Game implements Serializable {
 
         long spawnTimer = System.currentTimeMillis();
         waveCounter = 0;
-        while (character.getLives() > 0) {
+        boolean keepGoing = true;
+        while (keepGoing) {
             long time = System.currentTimeMillis();
 
             update();
@@ -77,6 +79,16 @@ public class Game implements Serializable {
                     ex.printStackTrace();
                 }
 
+            }
+            
+            if(multiplayer){
+                if(character.getLives() < 0||character2.getLives() < 0){
+                    keepGoing = false;
+                }
+            }else{
+                if(character.getLives() < 0){
+                    keepGoing = false;
+                }
             }
         }
     }
@@ -95,13 +107,14 @@ public class Game implements Serializable {
 
         if (!multiplayer) {
             //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
-            //companion = new LifeSaver(player, 30, 30, 60);
+            companion = new LifeSaver(character, 30, 30, 60);
             //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
-            companion = new AutoShooter(character, bullets, enemies, 30, 30, 30, 60,2);
+            //companion = new AutoShooter(character, bullets, enemies, 30, 30, 30, 60,2);
         }
         if (multiplayer) {
+            character2 =  db.getCharacter(characterid,gameWidth,gameHeight);
             try {
-                server = new Server(character, bullets, enemies, geoms);
+                server = new Server(character,character2, bullets, enemies, geoms);
                 Thread t = new Thread(server);
                 t.start();
             } catch (Exception ex) {
@@ -129,7 +142,7 @@ public class Game implements Serializable {
 
     private void draw() {
         if (multiplayer) {
-            gameGui.draw(character, bullets, enemies, geoms);
+            gameGui.draw(character,character2, bullets, enemies, geoms);
         } else {
             gameGui.draw(character, bullets, enemies, geoms, companion, mines);
         }

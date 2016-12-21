@@ -39,6 +39,7 @@ public class Server implements Runnable{
     boolean keepGoing;
     
     private Character player;
+    private Character character2;
     private List<Bullet> bullets;
     private List<Enemy> enemys;
     private List<Geom> geoms;
@@ -46,7 +47,7 @@ public class Server implements Runnable{
     InputHandler handler;
     
     
-    public Server(Character player, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException {
+    public Server(Character player,Character character2, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException {
         
         //to send data
         serverSocket = new ServerSocket(7777);
@@ -64,6 +65,7 @@ public class Server implements Runnable{
         this.enemys = enemys;
         this.geoms = geoms;
         
+        this.character2 = character2;
         keepGoing = true;
         
     }
@@ -77,10 +79,10 @@ public class Server implements Runnable{
     }
     
     private void sendDataToClient(){
-        
+        //System.out.println(data.getCharacter2().getDamage());
         try {
             out.reset();
-            data.updateDataForClient(player, bullets, enemys, geoms);
+            data.updateDataForClient(player,character2, bullets, enemys, geoms);
             out.writeObject(data);
             out.flush();
         } catch (IOException ex) {

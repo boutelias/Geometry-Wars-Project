@@ -76,8 +76,10 @@ public class GameGui {
         repaint();
     }
     
-    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+    public void draw(Character character, Character character2, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
         drawGame(character, bullets, enemies, geoms);
+        g.setColor(Color.YELLOW);
+        g.fillOval(character2.getPosX()-(character2.getHeight()/2), character2.getPosY()-(character2.getWidth()/2), character2.getHeight(), character2.getWidth());
         repaint();
     }
     

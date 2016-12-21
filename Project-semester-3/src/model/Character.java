@@ -11,12 +11,12 @@ public class Character implements Serializable{
     private int posY;
     private int maxX;
     private int maxY;
-    //the sprite of the player would be nice to store here
     private int movementSpeed ;
     private int damage ;
     private int lives ;
     private int bulletsPerMinute;
     private long score = 0;
+    private int multiplier = 1;
     private int numberOfGeoms = 0;
     private long lastBulletFired = 0;
     private int bulletspeed;

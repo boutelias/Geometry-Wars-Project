@@ -67,8 +67,9 @@ public class Client {
                 dataForClient = (DataForClient) in.readObject();
                 //System.out.println("Data received");
                 //System.out.println(data.getPlayer().getPosX());
+                System.out.println(dataForClient.getCharacter2().getDamage());
 
-                gameGui.draw(dataForClient.getPlayer(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms());
+                gameGui.draw(dataForClient.getPlayer(),dataForClient.getCharacter2(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms());
             } catch (Exception e) {
                 e.printStackTrace();
             }
