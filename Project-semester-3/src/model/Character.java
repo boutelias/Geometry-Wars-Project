@@ -80,7 +80,7 @@ public class Character implements Serializable{
     }
     
     public void addPoints(int numberOfPoints){
-        score += numberOfPoints;
+        score += numberOfPoints * multiplier;
     }
     
     public void addGeom(){
@@ -133,10 +133,6 @@ public class Character implements Serializable{
             movementSpeed --;
         }
         
-    }
-    
-    public void setBPM(){
-        bulletsPerMinute += 5;
     }
 
     public long getLastBulletFired() {

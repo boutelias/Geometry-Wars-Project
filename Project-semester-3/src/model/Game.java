@@ -6,8 +6,11 @@ import java.util.List;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 import model.companions.AutoShooter;
 import model.companions.Companion;
 import model.companions.LifeSaver;
@@ -29,12 +32,12 @@ public class Game implements Serializable {
     private Character character;
     private Character character2;
     private InputHandler handler;
-    private List<Bullet> bullets = new ArrayList();
-    private List<Enemy> enemies = new ArrayList();
-    private List<Geom> geoms = new ArrayList();
+    private List<Bullet> bullets = new CopyOnWriteArrayList<>();
+    private List<Enemy> enemies = new CopyOnWriteArrayList<>();
+    private List<Geom> geoms = new CopyOnWriteArrayList<>();
     private List<Wave> waves = new ArrayList<>();
     private List<Mine> mines = new ArrayList<>();
-    
+
     private GameGui gameGui;
     private List<Player> players;
 
@@ -70,7 +73,6 @@ public class Game implements Serializable {
 
             draw();
 
-            
             time = (1000 / fps) - (System.currentTimeMillis() - time);
             if (time > 0) {
                 try {
@@ -80,28 +82,24 @@ public class Game implements Serializable {
                 }
 
             }
-            
-            if(multiplayer){
-                if(character.getLives() < 0||character2.getLives() < 0){
+
+            if (multiplayer) {
+                if (character.getLives() < 0 || character2.getLives() < 0) {
                     keepGoing = false;
                 }
-            }else{
-                if(character.getLives() < 0){
-                    keepGoing = false;
-                }
+            } else if (character.getLives() < 0) {
+                keepGoing = false;
             }
         }
     }
 
     private void init() {
-       
 
         gameGui = new GameGui();
         gameWidth = gameGui.getGameWidth();
         gameHeight = gameGui.getGameHeight();
-        
-        character =  db.getCharacter(characterid,gameWidth,gameHeight);
-        
+
+        character = db.getCharacter(characterid, gameWidth, gameHeight);
 
         handler = new InputHandler(gameGui.getFrame());
 
@@ -112,37 +110,37 @@ public class Game implements Serializable {
             //companion = new AutoShooter(character, bullets, enemies, 30, 30, 30, 60,2);
         }
         if (multiplayer) {
-            character2 =  db.getCharacter(characterid,gameWidth,gameHeight);
+            character2 = db.getCharacter(characterid, gameWidth, gameHeight);
             try {
-                server = new Server(character,character2, bullets, enemies, geoms);
+                server = new Server(character, character2, bullets, enemies, geoms);
                 Thread t = new Thread(server);
                 t.start();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-        
+
         players = db.getPlayers();
-        
+
     }
 
     private void update() {
-        
+
         spawnEnemy();
         updatePlayerPos();
         updateBullets();
         updateEnemies();
         if (!multiplayer) {
             companion.doMove();
-        companion.doSpecialAction();
+            companion.doSpecialAction();
         }
-        
+
         collisionDetection();
     }
 
     private void draw() {
         if (multiplayer) {
-            gameGui.draw(character,character2, bullets, enemies, geoms);
+            gameGui.draw(character, character2, bullets, enemies, geoms);
         } else {
             gameGui.draw(character, bullets, enemies, geoms, companion, mines);
         }
@@ -182,23 +180,22 @@ public class Game implements Serializable {
         waves.add(wave2);
         waves.add(wave3);
         waves.add(wave4);*/
-        
-        /*for (int i = 0; i < 200; i++) {
+
+ /*for (int i = 0; i < 200; i++) {
             Wave wave = new Wave(i, 1, enemies, 5);
             waves.add(wave);
         }*/
-        
         waves = db.getWaves();
-        
+
     }
 
     private void spawnEnemy() {
         randomSpawnGenerator();
         Wave wave = waves.get(waveCounter);
-        
+
         int enemyid = wave.getEnemyID();
         if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0 && System.currentTimeMillis() > delaytime) {
-            
+
             Enemy e = db.getEnemy(enemyid, spawnEnemyX, spawnEnemyY);
             enemies.add(e);
             spawnTimer = System.currentTimeMillis();
@@ -207,10 +204,9 @@ public class Game implements Serializable {
         }
         if (wave.getNumberOfEnemiesLeft() == 0 && waveCounter < waves.size() - 1) {
             int delay = wave.getDelay();
-            delaytime = System.currentTimeMillis() + delay ;
-            
-            // TODO use this delay (maybe an upgrade screen after 2 seconds ?
+            delaytime = System.currentTimeMillis() + delay;
 
+            // TODO use this delay (maybe an upgrade screen after 2 seconds ?
             waveCounter++;
 
         }
@@ -232,6 +228,24 @@ public class Game implements Serializable {
         if (handler.isKeyDown(KeyEvent.VK_DOWN)) {
             character.moveDown();
 
+        }
+
+        if (multiplayer) {
+            if (server.isKeyRight()) {
+                character2.moveRight();
+
+            }
+            if (server.isKeyLeft()) {
+                character2.moveLeft();
+
+            }
+            if (server.isKeyUp()) {
+                character2.moveUp();
+
+            }
+            if (server.isKeyDown()) {
+                character2.moveDown();
+            }
         }
     }
 
@@ -257,9 +271,19 @@ public class Game implements Serializable {
 
         if (handler.isMouseDown(1)) {
             if (character.getLastBulletFired() + (60.0 / character.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
-                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth,character.getBulletSpeed());
+                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth, character.getBulletSpeed());
                 bullets.add(newBullet);
                 character.setLastBulletFired(System.currentTimeMillis());
+            }
+        }
+
+        if (multiplayer) {
+            if (server.isLeftClick()) {
+                if (character2.getLastBulletFired() + (60.0 / character2.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
+                    Bullet newBullet = new Bullet(character2.getPosX(), character2.getPosY(), server.getClickLeft().getX(), server.getClickLeft().getY(), character2.getDamage(), gameHeight, gameWidth, character2.getBulletSpeed());
+                    bullets.add(newBullet);
+                    character2.setLastBulletFired(System.currentTimeMillis());
+                }
             }
         }
     }
@@ -306,11 +330,11 @@ public class Game implements Serializable {
                             Geom geom = new Geom(enemy.getPosX(), enemy.getPosY());
                             geoms.add(geom);
                         }
-                        if(drop(enemy.getDropratepowerups())){
-                            
+                        if (drop(enemy.getDropratepowerups())) {
+
                         }
-                        if(drop(enemy.getDropratepowerdowns())){
-                            
+                        if (drop(enemy.getDropratepowerdowns())) {
+
                         }
                         enemiesToRemove.add(enemy);
                         character.addPoints(enemy.getValue());
