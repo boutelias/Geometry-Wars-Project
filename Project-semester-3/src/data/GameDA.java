@@ -84,6 +84,7 @@ public class GameDA {
                 Player player = new Player(rs.getString("username"),rs.getString("password"),rs.getInt("highscore"),rs.getInt("geoms"),rs.getInt("premiumcoins"));
                 players.add(player);
             }
+            prep.close();
             rs.close();
             
             
@@ -103,7 +104,7 @@ public class GameDA {
             ResultSet rs = prep.executeQuery();
             
             p = new Player(rs.getString("username"),rs.getString("password"),rs.getInt("highscore"),rs.getInt("geoms"),rs.getInt("premiumcoins"));
-            
+            prep.close();
             rs.close();
             }    
         catch (SQLException ex){
@@ -148,7 +149,10 @@ public class GameDA {
              while (rs.next()){
                  Wave wave = new Wave(rs.getInt("numberofenemies"),rs.getInt("spawndelay"),rs.getInt("enemyid"),rs.getInt("timeafterwave"));
                  waves.add(wave);
-             } } catch (SQLException ex) {
+             }
+             prep.close();
+             rs.close();
+         } catch (SQLException ex) {
              Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
          }
          return waves;
@@ -163,6 +167,8 @@ public class GameDA {
              ResultSet rs = prep.executeQuery();
              rs.next();
              e = new Enemy(posx,posy,rs.getString("sprite"),rs.getInt("dropratepowerups"),rs.getInt("dropratepowerdowns"),rs.getInt("droprategeoms"),rs.getInt("width"),rs.getInt("height"),rs.getInt("hp"),rs.getInt("movementspeed"),rs.getInt("value"));
+             prep.close();
+             rs.close();
          } catch (SQLException ex) {
              throw new IllegalArgumentException(ex);
          }
@@ -178,10 +184,25 @@ public class GameDA {
              while(rs.next()){
                  Player player = new Player(rs.getString("username"),rs.getString("password"),rs.getInt("highscore"),rs.getInt("geoms"),rs.getInt("premiumcoins"));
                  players.add(player);
-             } } catch (SQLException ex) {
+             }
+             prep.close();
+             rs.close();
+         } catch (SQLException ex) {
              Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
          }
          return players;
+   }
+   public void addNewPlayer(String username,String password){
+         try {
+             String sql = "insert into `Player`(username,password,highscore,premiumcoins,geoms) Values(?,?,0,0,0)";
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             prep.setString(1, username);
+             prep.setString(2, password);
+             prep.executeUpdate();
+             prep.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
+         }
    }
    
     
