@@ -21,6 +21,8 @@ public class Character implements Serializable{
     private long lastBulletFired = 0;
     private int bulletspeed;
     private String sprite;
+    private int charId;
+    private int price;
     
    
     
@@ -43,6 +45,12 @@ public class Character implements Serializable{
         
         lastBulletFired = System.currentTimeMillis();
         
+    }
+    
+    public Character(int charId,String sprite,int price){
+    this.charId = charId;
+    this.sprite = sprite;
+    this.price = price;
     }
     
     
@@ -124,6 +132,16 @@ public class Character implements Serializable{
     public int getMovementSpeed(){
         return movementSpeed;
     }
+    
+    public int getCharId(){
+        return charId;
+    }
+    
+    public String getSprite(){
+        return sprite;
+    }
+    
+    
     public void setMovementSpeedHigher(){
         movementSpeed ++;
     }
@@ -153,6 +171,7 @@ public class Character implements Serializable{
     public void decreaseSpeed(int speed){
         this.movementSpeed -= speed;
     }
+   
     
     
 }
