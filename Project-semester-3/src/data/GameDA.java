@@ -22,9 +22,9 @@ import model.InputHandler;
 import model.Mine;
 import model.Player;
 import model.Wave;
-import model.companions.Autoshooter;
+import model.companions.AutoShooter;
 import model.companions.Companion;
-import model.companions.Lifesaver;
+import model.companions.LifeSaver;
 import model.companions.Miner;
 import model.companions.Shooter;
 import util.GameException;
@@ -170,7 +170,7 @@ public class GameDA {
              prep.setInt(1, enemyid);
              ResultSet rs = prep.executeQuery();
              rs.next();
-             e = new Enemy(posx,posy,rs.getString("sprite"),rs.getInt("dropratepowerups"),rs.getInt("dropratepowerdowns"),rs.getInt("droprategeoms"),rs.getInt("width"),rs.getInt("height"),rs.getInt("hp"),rs.getInt("movementspeed"),rs.getInt("value"));
+             e = new Enemy(posx,posy,rs.getString("sprite"),rs.getDouble("dropratepowerups"),rs.getDouble("dropratepowerdowns"),rs.getDouble("droprategeoms"),rs.getInt("width"),rs.getInt("height"),rs.getInt("hp"),rs.getInt("movementspeed"),rs.getInt("value"));
          } catch (SQLException ex) {
              throw new IllegalArgumentException(ex);
          }
@@ -215,7 +215,7 @@ public class GameDA {
              prep.setInt(1, playerid);
              ResultSet rs = prep.executeQuery();
              rs.next();
-             c = new Autoshooter(character,bullets,enemies,rs.getInt("height"),rs.getInt("width"),rs.getInt("bulletdamage"),rs.getInt("bulletsPerMinute"),rs.getInt("bulletspeed"));
+             c = new AutoShooter(character,bullets,enemies,rs.getInt("height"),rs.getInt("width"),rs.getInt("bulletdamage"),rs.getInt("bulletsPerMinute"),rs.getInt("bulletspeed"));
              
              
          } catch (SQLException ex) {
@@ -235,7 +235,7 @@ public class GameDA {
              prep.setInt(1, playerid);
              ResultSet rs = prep.executeQuery();
              rs.next();
-             c = new Lifesaver(character,rs.getInt("width"),rs.getInt("height"),rs.getInt("livesperminute"));
+             c = new LifeSaver(character,rs.getInt("width"),rs.getInt("height"),rs.getInt("livesperminute"));
          } catch (SQLException ex) {
              throw new IllegalArgumentException(ex);
          }
@@ -275,5 +275,26 @@ public class GameDA {
              throw new IllegalArgumentException(ex);
          }
     return c;     
+   }
+   
+   public List<Character> getShips(){
+       List<Character> characters = new ArrayList<>();
+        try{
+            String sql= "select * from `Character`";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            ResultSet rs = prep.executeQuery(sql);
+            
+            while(rs.next()){
+                Character character = new Character(rs.getInt("characterid"),rs.getString("sprite"),rs.getInt("price"));
+                characters.add(character);
+            }
+            rs.close();
+            
+            
+        }
+        catch (SQLException ex){
+            System.err.println(ex);
+        }
+        return characters;
    }
 }
