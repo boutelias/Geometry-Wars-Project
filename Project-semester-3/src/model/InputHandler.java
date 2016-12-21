@@ -15,6 +15,7 @@ public class InputHandler {
     
     
     public InputHandler(Component c){
+        this.mEvent[1] = new MouseEvent(c, 0, 0, 0, 0, 0, 0, false);
         c.addKeyListener(new KeyListener(){
             @Override
             public void keyTyped(KeyEvent e) {

@@ -107,6 +107,8 @@ public class Server implements Runnable{
             this.keyDown = data.isKeyDown();
             this.leftClick = data.isLeftClick();
             this.clickLeft = data.getClickLeft();
+            System.out.println(clickLeft.getX());
+            System.out.println(clickLeft.getY());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
