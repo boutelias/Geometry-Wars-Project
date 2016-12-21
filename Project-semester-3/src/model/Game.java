@@ -273,6 +273,14 @@ public class Game implements Serializable {
                 character.setLastBulletFired(System.currentTimeMillis());
             }
         }
+        
+        if(multiplayer){
+            if (character2.getLastBulletFired() + (60.0 / character2.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
+                Bullet newBullet = new Bullet(character2.getPosX(), character2.getPosY(),server.getClickLeft().getX(), server.getClickLeft().getY(), character2.getDamage(), gameHeight, gameWidth, character2.getBulletSpeed());
+                bullets.add(newBullet);
+                character2.setLastBulletFired(System.currentTimeMillis());
+            }
+        }
     }
 
     private void updateEnemies() {

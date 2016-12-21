@@ -101,7 +101,6 @@ public class Server implements Runnable{
         
         try {
             DataForServer data = (DataForServer) in.readObject();
-            System.out.println(data.isKeyLeft());
             this.keyLeft = data.isKeyLeft();
             this.keyRight = data.isKeyRight();
             this.keyUp = data.isKeyUp();
