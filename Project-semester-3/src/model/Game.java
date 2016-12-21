@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
-import model.companions.Autoshooter;
+import model.companions.AutoShooter;
 import model.companions.Companion;
-import model.companions.Lifesaver;
+import model.companions.LifeSaver;
 import model.companions.Miner;
 import model.companions.Shooter;
 
@@ -49,7 +49,7 @@ public class Game implements Serializable {
     private boolean multiplayer;
 
     public static void main(String[] args) {
-        new Game(false);
+        new Game(true);
     }
 
     public Game(boolean multiplayer) {
@@ -286,7 +286,7 @@ public class Game implements Serializable {
 
         if (handler.isMouseDown(1)) {
             if (character.getLastBulletFired() + (60.0 / character.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
-                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth, character.getBulletSpeed());
+                Bullet newBullet = new Bullet(character.getPosX(), character.getPosY(), handler.getEvent(1).getX(), handler.getEvent(1).getY(), character.getDamage(), gameHeight, gameWidth, character.getBulletSpeed(),character);
                 bullets.add(newBullet);
                 character.setLastBulletFired(System.currentTimeMillis());
             }
@@ -295,7 +295,7 @@ public class Game implements Serializable {
         if (multiplayer) {
             if (server.isLeftClick()) {
                 if (character2.getLastBulletFired() + (60.0 / character2.getBulletsPerMinute() * 1000) < System.currentTimeMillis()) {
-                    Bullet newBullet = new Bullet(character2.getPosX(), character2.getPosY(), server.getClickLeft().getX(), server.getClickLeft().getY(), character2.getDamage(), gameHeight, gameWidth, character2.getBulletSpeed());
+                    Bullet newBullet = new Bullet(character2.getPosX(), character2.getPosY(), server.getClickLeft().getX(), server.getClickLeft().getY(), character2.getDamage(), gameHeight, gameWidth, character2.getBulletSpeed(),character2);
                     bullets.add(newBullet);
                     character2.setLastBulletFired(System.currentTimeMillis());
                 }
@@ -352,7 +352,7 @@ public class Game implements Serializable {
 
                         }
                         enemiesToRemove.add(enemy);
-                        character.addPoints(enemy.getValue());
+                        bullet.getCharacter().addPoints(enemy.getValue());
                     }
                     if (bullet.getDamage() == 0) {
                         bulletsToRemove.add(bullet);

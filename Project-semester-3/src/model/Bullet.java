@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Rectangle;
 import java.io.Serializable;
+import model.Character;
 
 public class Bullet implements Serializable {
     private int width = 20;
@@ -19,17 +20,20 @@ public class Bullet implements Serializable {
     private int bulletSpeed ;
     
     private boolean isOutOfScreen = false;
-    
+   
     private int damage;
     //how to implement speed?
     
-    public Bullet(int startX, int startY, int clickX,int clickY, int bulletDamage , int maxY, int maxX, int bulletspeed){
+    private Character character;
+    
+    public Bullet(int startX, int startY, int clickX,int clickY, int bulletDamage , int maxY, int maxX, int bulletspeed, Character character){
         this.posX = startX;
         this.posY = startY;
         this.maxY = maxY;
         this.maxX = maxX;
         this.damage = bulletDamage;
         this.bulletSpeed = bulletspeed;
+        this.character = character;
         
         calculateDirection(clickX,clickY);
     }
@@ -85,6 +89,10 @@ public class Bullet implements Serializable {
     
     public void setDamage(int damage){
         this.damage = damage;
+    }
+    
+    public Character getCharacter(){
+        return this.character;
     }
     
 }
