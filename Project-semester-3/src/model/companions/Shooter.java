@@ -59,7 +59,7 @@ public class Shooter implements Companion {
     public void doSpecialAction() {
         if (handler.isMouseDown(1)) {
             if (this.lastBulletFired + (60.0 / this.bulletsPerMinute * 1000) < System.currentTimeMillis()) {
-                Bullet newBullet = new Bullet(posX, posY, handler.getEvent(1).getX(), handler.getEvent(1).getY(), this.damage, 1080, 1920,bulletspeed);
+                Bullet newBullet = new Bullet(posX, posY, handler.getEvent(1).getX(), handler.getEvent(1).getY(), this.damage, 1080, 1920,bulletspeed,player);
                 bullets.add(newBullet);
                 this.lastBulletFired = System.currentTimeMillis();
             }

@@ -74,7 +74,7 @@ public class AutoShooter implements Companion {
                 }
             }
             if(lastBulletFired + (60.0 / bulletsPerMinute * 1000) < System.currentTimeMillis()) {
-                Bullet newbullet = new Bullet(posX, posY, closestEnemy.getPosX(), closestEnemy.getPosY(), this.damage, 1080, 1920,bulletspeed);
+                Bullet newbullet = new Bullet(posX, posY, closestEnemy.getPosX(), closestEnemy.getPosY(), this.damage, 1080, 1920,bulletspeed,player);
                 bullets.add(newbullet);
                 lastBulletFired = System.currentTimeMillis();
             }
