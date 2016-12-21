@@ -89,7 +89,7 @@ public class Server implements Runnable{
         //System.out.println(data.getCharacter2().getDamage());
         try {
             out.reset();
-            data.updateDataForClient(player,character2, bullets, enemys, geoms);
+            data.updateDataForClient(player,character2, bullets, enemys, geoms,keepGoing);
             out.writeObject(data);
             out.flush();
         } catch (IOException ex) {
@@ -138,6 +138,10 @@ public class Server implements Runnable{
 
     public MouseEvent getClickLeft() {
         return clickLeft;
+    }
+    
+    public void SetKeepGoing(boolean keepGoing){
+        this.keepGoing = keepGoing;
     }
     
     

@@ -85,13 +85,16 @@ public class Game implements Serializable {
             }
 
             if (multiplayer) {
-                if (character.getLives() < 0 || character2.getLives() < 0) {
+                if (character.getLives() <= 0 || character2.getLives() <= 0) {
                     keepGoing = false;
+                    server.SetKeepGoing(false);
                 }
-            } else if (character.getLives() < 0) {
+            } else if (character.getLives() <= 0) {
                 keepGoing = false;
             }
         }
+        
+        
     }
 
     private void init() {
@@ -322,10 +325,6 @@ public class Game implements Serializable {
                 currentEnemy.updatePos(character.getPosX(), character.getPosY());
             }
         }
-
-//        for(Enemy enemy: enemies){
-//            enemy.updatePos(player.getPosX(),player.getPosY());
-//        }
     }
 
     private void collisionDetection() {

@@ -31,6 +31,8 @@ public class Client {
     private boolean keyUp;
     private boolean keyDown;
     private boolean leftClick;
+    
+    private boolean keepGoing = true;
 
     public Client() throws IOException {
         gameGui = new GameGui();
@@ -48,7 +50,7 @@ public class Client {
     }
 
     public void run() {
-        while (true) {
+        while (keepGoing) {
             try {
                 //System.out.println("left: "+handler.isKeyDown(KeyEvent.VK_LEFT));
                 m = handler.getEvent(1);
@@ -57,6 +59,7 @@ public class Client {
                 keyUp = handler.isKeyDown(KeyEvent.VK_UP);
                 keyDown = handler.isKeyDown(KeyEvent.VK_DOWN);
                 leftClick = handler.isMouseDown(1);
+                
                 out.reset();
                 //out.writeObject(handler);
                 System.out.println("left : " + keyLeft);
@@ -70,6 +73,7 @@ public class Client {
                 System.out.println(dataForClient.getCharacter2().getDamage());
 
                 gameGui.draw(dataForClient.getPlayer(),dataForClient.getCharacter2(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms());
+                this.keepGoing = dataForClient.isKeepGoing();
             } catch (Exception e) {
                 e.printStackTrace();
             }
