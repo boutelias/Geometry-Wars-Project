@@ -15,10 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Bullet;
 import model.Character;
 import model.Enemy;
+import model.InputHandler;
+import model.Mine;
 import model.Player;
 import model.Wave;
+import model.companions.Autoshooter;
+import model.companions.Companion;
+import model.companions.Lifesaver;
+import model.companions.Miner;
+import model.companions.Shooter;
 import util.GameException;
 
 /**
@@ -196,26 +204,76 @@ public class GameDA {
              Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
          }
    }
+   public Companion getCompanionAutoShooter(int playerid,Character character , List<Enemy> enemies,List<Bullet> bullets){
+       Companion c;
+         try {
+             String sql = "SELECT * FROM `player_companion`\n" +
+"join companionlevel on player_companion.level = companionlevel.companionlevelid\n" +
+"join Companion on player_companion.companionid = Companion.companionid\n" +
+"where player_companion.companionid = 1 and playerid = ?" ;
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             prep.setInt(1, playerid);
+             ResultSet rs = prep.executeQuery();
+             rs.next();
+             c = new Autoshooter(character,bullets,enemies,rs.getInt("height"),rs.getInt("width"),rs.getInt("bulletdamage"),rs.getInt("bulletsPerMinute"),rs.getInt("bulletspeed"));
+             
+             
+         } catch (SQLException ex) {
+             throw new IllegalArgumentException(ex);
+         }
+         return c;
+   }   
    
-//   public boolean usernameExist(String username){
-//       
-//       try {
-////             String sql = "select * from `Player` where username = ? ";
-////             PreparedStatement prep = this.con.prepareStatement(sql);
-////             prep.setString(1, username);
-////             ResultSet rs = prep.executeQuery();
-////             
-//             
-//             
-//             
-//             
-//             
-//             return true;
-//       }
-//       catch (SQLException ex){
-//        return false;
-//       }
-//   }
-   
-    
+   public Companion getCompanionLifeSaver(int playerid,Character character){
+       Companion c;
+         try {
+             String sql = "SELECT * FROM `player_companion`\n" +
+"join companionlevel on player_companion.level = companionlevel.companionlevelid\n" +
+"join Companion on player_companion.companionid = Companion.companionid\n" +
+"where player_companion.companionid = 2 and playerid = ?";
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             prep.setInt(1, playerid);
+             ResultSet rs = prep.executeQuery();
+             rs.next();
+             c = new Lifesaver(character,rs.getInt("width"),rs.getInt("height"),rs.getInt("livesperminute"));
+         } catch (SQLException ex) {
+             throw new IllegalArgumentException(ex);
+         }
+         return c;
+   }
+   public Companion getCompanionMiner(int playerid,Character character,List<Mine> mines, InputHandler handler){
+       Companion c;
+         try {
+             String sql ="SELECT * FROM `player_companion`\n" +
+                     "join companionlevel on player_companion.level = companionlevel.companionlevelid\n" +
+                     "join Companion on player_companion.companionid = Companion.companionid\n" +
+                     "where player_companion.companionid = 3 and playerid = ?";
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             prep.setInt(1, playerid);
+             ResultSet rs = prep.executeQuery();
+             rs.next();
+             c = new Miner(character,mines,handler,rs.getInt("width"),rs.getInt("height"),rs.getInt("minesperminute"),rs.getInt("minedamage"));
+         } catch (SQLException ex) {
+             throw new IllegalArgumentException(ex);
+         }
+    return c;
+       
+   }
+   public Companion getCompanionShooter(int playerid,Character character,InputHandler handler,List<Bullet> bullets){
+       Companion c;
+         try {
+             String sql ="SELECT * FROM `player_companion`\n" +
+                     "join companionlevel on player_companion.level = companionlevel.companionlevelid\n" +
+                     "join Companion on player_companion.companionid = Companion.companionid\n" +
+                     "where player_companion.companionid = 4 and playerid = ?";
+             PreparedStatement prep = this.con.prepareStatement(sql);
+             prep.setInt(1, playerid);
+             ResultSet rs = prep.executeQuery();
+             rs.next();
+             c = new Shooter(character,handler,bullets,rs.getInt("height"),rs.getInt("width"),rs.getInt("bulletdamage"),rs.getInt("bulletsperminute"),rs.getInt("bulletspeed"));
+         } catch (SQLException ex) {
+             throw new IllegalArgumentException(ex);
+         }
+    return c;     
+   }
 }

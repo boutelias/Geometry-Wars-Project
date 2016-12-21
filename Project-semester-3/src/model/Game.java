@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
-import model.companions.AutoShooter;
+import model.companions.Autoshooter;
 import model.companions.Companion;
-import model.companions.LifeSaver;
+import model.companions.Lifesaver;
 import model.companions.Miner;
 import model.companions.Shooter;
 
@@ -40,7 +40,7 @@ public class Game implements Serializable {
 
     private GameGui gameGui;
     private List<Player> players;
-
+    private int companionid;
     private Server server;
     private Companion companion;
     private GameDA db = GameDA.getInstance();
@@ -49,7 +49,7 @@ public class Game implements Serializable {
     private boolean multiplayer;
 
     public static void main(String[] args) {
-        new Game(true);
+        new Game(false);
     }
 
     public Game(boolean multiplayer) {
@@ -104,10 +104,25 @@ public class Game implements Serializable {
         handler = new InputHandler(gameGui.getFrame());
 
         if (!multiplayer) {
+            int companionid = 4;
+            switch(companionid){
+                case 1 :
+                    companion = db.getCompanionAutoShooter(1, character, enemies, bullets);
+                    break;
+                case 2 :
+                    companion = db.getCompanionLifeSaver(1, character);
+                    break;
+                case 3 :
+                    companion = db.getCompanionMiner(1, character, mines,handler);
+                    break;
+                case 4 : 
+                    companion = db.getCompanionShooter(1, character, handler, bullets);
+                    break;
+            }
             //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
-            companion = new LifeSaver(character, 30, 30, 60);
+            
             //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
-            //companion = new AutoShooter(character, bullets, enemies, 30, 30, 30, 60,2);
+            
         }
         if (multiplayer) {
             character2 = db.getCharacter(characterid, gameWidth, gameHeight);
