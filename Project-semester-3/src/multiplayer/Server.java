@@ -23,6 +23,7 @@ import model.InputHandler;
 import model.Mine;
 import model.Player;
 import model.companions.Companion;
+import model.power.Power;
 
 /**
  *
@@ -44,6 +45,7 @@ public class Server implements Runnable{
     private List<Bullet> bullets;
     private List<Enemy> enemys;
     private List<Geom> geoms;
+    private List<Power> powers;
     
     
     private boolean keyLeft;
@@ -54,7 +56,7 @@ public class Server implements Runnable{
     private MouseEvent clickLeft;
     
     
-    public Server(Character player,Character character2, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms) throws IOException {
+    public Server(Character player,Character character2, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms, List<Power> powers) throws IOException {
         
         //to send data
         serverSocket = new ServerSocket(7777);
@@ -71,6 +73,7 @@ public class Server implements Runnable{
         this.bullets = bullets;
         this.enemys = enemys;
         this.geoms = geoms;
+        this.powers = powers;
         
         this.character2 = character2;
         keepGoing = true;
@@ -90,7 +93,7 @@ public class Server implements Runnable{
         //System.out.println(data.getCharacter2().getDamage());
         try {
             out.reset();
-            data.updateDataForClient(player,character2, bullets, enemys, geoms,keepGoing);
+            data.updateDataForClient(player,character2, bullets, enemys, geoms,powers,keepGoing);
             out.writeObject(data);
             out.flush();
         } catch (IOException ex) {

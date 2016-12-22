@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.power;
 
 import java.awt.Rectangle;
 import model.Character;
 
-/**
- *
- * @author Maxime
- */
 public class SpeedBoost implements Power {
 
     private Character c;
@@ -26,7 +17,7 @@ public class SpeedBoost implements Power {
         speed = 2;
         this.posX = posX;
         this.posY = posY;
-        this.duration = 5000;
+        this.duration = 20000;
         System.out.println("power up dropped");
     }
 
@@ -36,7 +27,7 @@ public class SpeedBoost implements Power {
         startTime = System.currentTimeMillis();
         this.c = c;
         this.c.increaseSpeed(speed);
-        
+
         System.out.println("power up started");
     }
 
@@ -47,13 +38,17 @@ public class SpeedBoost implements Power {
 
     @Override
     public boolean isTheEnd() {
-        System.out.println("time to reach "+startTime+duration);
-        System.out.println("curr time "+ System.currentTimeMillis());
-        if (startTime + duration >= System.currentTimeMillis()) {
-            end();
-            System.out.println("ended");
-            return true;
-        } else {
+        System.out.println("time to reach " + startTime + duration);
+        System.out.println("curr time " + System.currentTimeMillis());
+        if (pickedUp) {
+            if ((startTime + duration) <= System.currentTimeMillis()) {
+                end();
+                System.out.println("ended");
+                return true;
+            } else {
+                return false;
+            }
+        }else{
             return false;
         }
     }

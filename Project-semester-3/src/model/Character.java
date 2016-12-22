@@ -172,6 +172,16 @@ public class Character implements Serializable{
         this.movementSpeed -= speed;
     }
    
+    public int getMultiplier(){
+        return this.multiplier;
+    }
+    public void increaseMultiplier(){
+        this.multiplier += 1;
+    }
+    
+    public int getPrice(){
+        return price;
+    }
     
     
 }

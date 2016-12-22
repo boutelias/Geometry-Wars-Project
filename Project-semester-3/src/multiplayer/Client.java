@@ -72,7 +72,7 @@ public class Client {
                 //System.out.println(data.getPlayer().getPosX());
                 System.out.println(dataForClient.getCharacter2().getDamage());
 
-                gameGui.draw(dataForClient.getPlayer(),dataForClient.getCharacter2(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms());
+                gameGui.draw(dataForClient.getPlayer(),dataForClient.getCharacter2(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms(), dataForClient.getPowers());
                 this.keepGoing = dataForClient.isKeepGoing();
             } catch (Exception e) {
                 e.printStackTrace();

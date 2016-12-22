@@ -132,7 +132,7 @@ public class Game implements Serializable {
         if (multiplayer) {
             character2 = db.getCharacter(characterid, gameWidth, gameHeight);
             try {
-                server = new Server(character, character2, bullets, enemies, geoms);
+                server = new Server(character, character2, bullets, enemies, geoms,powers);
                 Thread t = new Thread(server);
                 t.start();
             } catch (Exception ex) {
