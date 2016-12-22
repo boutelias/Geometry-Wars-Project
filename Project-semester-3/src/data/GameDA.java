@@ -5,6 +5,7 @@
  */
 package data;
 
+import gui.Upgrades;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -410,6 +411,110 @@ public class GameDA {
         }
 
    
+   }
+   
+   public Upgrades getUpgrades(int playerid,int characterid){
+        try{
+            String sql = "SELECT * FROM player_character WHERE playerid=? AND characterid =?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,playerid);
+            prep.setInt(2,characterid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            Upgrades upgrades = new Upgrades(rs.getInt("leveloflives"),rs.getInt("leveloffirerate"),rs.getInt("levelofmovementspeed"),rs.getInt("levelofbulletdamage"),rs.getInt("levelofbulletspeed"));
+            rs.close();
+            
+            return upgrades;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+
+        }
+   }
+   
+   public int getPriceLeveloflives(int leveloflives){
+    try{
+            String sql = "SELECT * FROM characterlives WHERE characterliveslevel=?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,leveloflives);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int price  = rs.getInt("price");
+            rs.close();
+            
+            return price;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+        }
+   }
+   
+   public int getPriceLeveloffirerate(int leveloffirerate){
+    try{
+            String sql = "SELECT * FROM characterfirerate WHERE characterfireratelevel=?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,leveloffirerate);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int price  = rs.getInt("price");
+            rs.close();
+            
+            return price;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+        }
+   }
+   
+   public int getPriceLevelofmovementspeed(int levelofmovementspeed){
+    try{
+            String sql = "SELECT * FROM charactermovementspeed WHERE charactermovementspeedid=?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,levelofmovementspeed);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int price  = rs.getInt("price");
+            rs.close();
+            
+            return price;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+        }
+   }
+   
+   public int getPriceLevelofbulletspeed(int levelofbulletspeed){
+    try{
+            String sql = "SELECT * FROM characterbulletspeed WHERE characterbulletspeedid=?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,levelofbulletspeed);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int price  = rs.getInt("price");
+            rs.close();
+            
+            return price;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+        }
+   }
+   
+   public int getPriceLevelofbulletdamage(int levelofbulletdamage){
+    try{
+            String sql = "SELECT * FROM characterbulletdamage WHERE characterbulletdamageid=?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,levelofbulletdamage);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int price  = rs.getInt("price");
+            rs.close();
+            
+            return price;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+        }
    }
    
    
