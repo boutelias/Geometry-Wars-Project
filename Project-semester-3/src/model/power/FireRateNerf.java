@@ -7,25 +7,23 @@ package model.power;
 
 import java.awt.Rectangle;
 import java.io.Serializable;
-import model.Character;
 
 /**
  *
  * @author Tobias
  */
-public class FireRateBoost implements Power, Serializable {
-
+public class FireRateNerf implements Power, Serializable{
     private model.Character c;
-    private int extraFireRate;
+    private int fireRateNerf;
     private long startTime;
     private int duration;
     private boolean pickedUp;
     private int posX;
     private int posY;
-    private String name = "Fire rate boost";
+    private String name = "Firerate nerf";
 
-    public FireRateBoost(int posX, int posY) {
-        extraFireRate = 25;
+    public FireRateNerf(int posX, int posY) {
+        fireRateNerf = 15;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;
@@ -36,12 +34,12 @@ public class FireRateBoost implements Power, Serializable {
         this.pickedUp = true;
         startTime = System.currentTimeMillis();
         this.c = c;
-        this.c.increaseFirerate(extraFireRate);
+        c.decreaseFireRate(fireRateNerf);
+
     }
 
     private void end() {
-
-        c.decreaseFireRate(extraFireRate);
+        this.c.increaseFirerate(fireRateNerf);        
     }
 
     @Override
@@ -53,7 +51,7 @@ public class FireRateBoost implements Power, Serializable {
             } else {
                 return false;
             }
-        } else {
+        }else{
             return false;
         }
     }
@@ -74,14 +72,14 @@ public class FireRateBoost implements Power, Serializable {
     public Rectangle getBounds() {
         return new Rectangle(posX - (20 / 2), posY - (20 / 2), 20, 20);
     }
-
+    
     @Override
-    public String getName() {
+    public String getName(){
         return this.name;
     }
-
+    
     @Override
-    public int getTimeLeft() {
-        return (int) (startTime + duration - System.currentTimeMillis()) / 1000;
+    public int getTimeLeft(){
+        return (int) (System.currentTimeMillis() - startTime + duration)/1000;
     }
 }

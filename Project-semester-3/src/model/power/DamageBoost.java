@@ -1,31 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.power;
 
 import java.awt.Rectangle;
 import java.io.Serializable;
-import model.Character;
 
-/**
- *
- * @author Tobias
- */
-public class FireRateBoost implements Power, Serializable {
+public class DamageBoost implements Power, Serializable {
 
     private model.Character c;
-    private int extraFireRate;
+    private int extraDamage;
     private long startTime;
     private int duration;
     private boolean pickedUp;
     private int posX;
     private int posY;
-    private String name = "Fire rate boost";
+    private String name = "Damage boost";
 
-    public FireRateBoost(int posX, int posY) {
-        extraFireRate = 25;
+    public DamageBoost(int posX, int posY) {
+        extraDamage = 10;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;
@@ -36,12 +26,12 @@ public class FireRateBoost implements Power, Serializable {
         this.pickedUp = true;
         startTime = System.currentTimeMillis();
         this.c = c;
-        this.c.increaseFirerate(extraFireRate);
+        this.c.increaseBulletDamage(extraDamage);
     }
 
     private void end() {
 
-        c.decreaseFireRate(extraFireRate);
+        c.decreaseBulletDamage(extraDamage);
     }
 
     @Override

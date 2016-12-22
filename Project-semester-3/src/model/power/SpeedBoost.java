@@ -20,7 +20,6 @@ public class SpeedBoost implements Power, Serializable {
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;
-        System.out.println("power up dropped");
     }
 
     @Override
@@ -30,7 +29,6 @@ public class SpeedBoost implements Power, Serializable {
         this.c = c;
         this.c.increaseSpeed(speed);
 
-        System.out.println("power up started");
     }
 
     private void end() {
@@ -43,7 +41,6 @@ public class SpeedBoost implements Power, Serializable {
         if (pickedUp) {
             if ((startTime + duration) <= System.currentTimeMillis()) {
                 end();
-                System.out.println("ended");
                 return true;
             } else {
                 return false;
