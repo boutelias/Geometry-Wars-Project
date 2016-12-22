@@ -58,9 +58,9 @@ public class GameOverFrame extends javax.swing.JFrame {
         lblGameOver.setBackground(new java.awt.Color(255, 255, 255));
         lblGameOver.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblGameOver.setForeground(new java.awt.Color(255, 255, 255));
-        lblGameOver.setText("GAME OVER");
+        lblGameOver.setText("YOU DIED!");
         getContentPane().add(lblGameOver);
-        lblGameOver.setBounds(290, 210, 200, 30);
+        lblGameOver.setBounds(300, 200, 200, 30);
 
         lblScore.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblScore.setForeground(new java.awt.Color(255, 255, 255));
@@ -78,7 +78,7 @@ public class GameOverFrame extends javax.swing.JFrame {
         lblValueScore.setForeground(new java.awt.Color(255, 255, 255));
         lblValueScore.setText("value");
         getContentPane().add(lblValueScore);
-        lblValueScore.setBounds(390, 300, 130, 16);
+        lblValueScore.setBounds(390, 300, 41, 16);
 
         lblValueGeom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblValueGeom.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,7 +96,7 @@ public class GameOverFrame extends javax.swing.JFrame {
         getContentPane().add(btnShop);
         btnShop.setBounds(600, 530, 160, 50);
 
-        lblBackgroundGameOver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/img/backgrounds/shop-bg1.png"))); // NOI18N
+        lblBackgroundGameOver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/game-bg-gameover.png"))); // NOI18N
         getContentPane().add(lblBackgroundGameOver);
         lblBackgroundGameOver.setBounds(0, 0, 800, 600);
 

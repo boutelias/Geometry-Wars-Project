@@ -27,13 +27,14 @@ public class HighscoreFrame extends javax.swing.JFrame {
         getHighscores();
         this.playername = playername;
         //retrieveHighscores();
+        btnBack.setVisible(false);
     }
     
     public HighscoreFrame(){
         initComponents();
         getHighscores();
         btnStartGameHighscores.setVisible(false);
-    
+        
     }
     
     public void getHighscores(){
@@ -77,6 +78,7 @@ public class HighscoreFrame extends javax.swing.JFrame {
 
         txtAreaHighscores = new javax.swing.JTextArea();
         btnStartGameHighscores = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         lblHighscoresBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,6 +102,15 @@ public class HighscoreFrame extends javax.swing.JFrame {
         getContentPane().add(btnStartGameHighscores);
         btnStartGameHighscores.setBounds(600, 520, 160, 50);
 
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(30, 520, 160, 50);
+
         lblHighscoresBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/img/backgrounds/highscores-bg.png"))); // NOI18N
         getContentPane().add(lblHighscoresBackground);
         lblHighscoresBackground.setBounds(0, 0, 800, 600);
@@ -111,6 +122,11 @@ public class HighscoreFrame extends javax.swing.JFrame {
         new StartGameFrame(playername).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnStartGameHighscoresActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new StartFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +167,7 @@ public class HighscoreFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnStartGameHighscores;
     private javax.swing.JLabel lblHighscoresBackground;
     private javax.swing.JTextArea txtAreaHighscores;

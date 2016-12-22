@@ -52,7 +52,7 @@ public class StartGameFrame extends javax.swing.JFrame {
         GameModePanel.setOpaque(false);
         GameModePanel.setPreferredSize(new java.awt.Dimension(540, 600));
 
-        btnSinglePlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/singlePlayer.png"))); // NOI18N
+        btnSinglePlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/singeplayer.png"))); // NOI18N
         btnSinglePlayer.setText("Single Player");
 
         btnMultiPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/multiplayer.png"))); // NOI18N
@@ -66,6 +66,7 @@ public class StartGameFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/exit.png"))); // NOI18N
         jButton1.setText("Exit");
         jButton1.setActionCommand("btnExit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

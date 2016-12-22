@@ -27,11 +27,12 @@ public class SettingsFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
-        lblBackgroundClan = new javax.swing.JLabel();
+        lblBackgroundSettings = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1920, 1080));
-        setSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
@@ -43,11 +44,11 @@ public class SettingsFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack);
-        btnBack.setBounds(40, 860, 330, 80);
+        btnBack.setBounds(40, 520, 160, 50);
 
-        lblBackgroundClan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/shop-bg.png"))); // NOI18N
-        getContentPane().add(lblBackgroundClan);
-        lblBackgroundClan.setBounds(0, 0, 1920, 1080);
+        lblBackgroundSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/game-bg-settings.png"))); // NOI18N
+        getContentPane().add(lblBackgroundSettings);
+        lblBackgroundSettings.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -93,6 +94,6 @@ public class SettingsFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel lblBackgroundClan;
+    private javax.swing.JLabel lblBackgroundSettings;
     // End of variables declaration//GEN-END:variables
 }

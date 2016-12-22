@@ -38,6 +38,7 @@ public class PauseFrame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(800, 650));
         getContentPane().setLayout(null);
 
+        Resume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/resume.png"))); // NOI18N
         Resume.setText("Resume");
         Resume.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +54,7 @@ public class PauseFrame extends javax.swing.JFrame {
         jButton1.setBounds(330, 300, 160, 50);
         jButton1.getAccessibleContext().setAccessibleName("btnShop");
 
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/exit.png"))); // NOI18N
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,9 +64,7 @@ public class PauseFrame extends javax.swing.JFrame {
         getContentPane().add(btnExit);
         btnExit.setBounds(330, 370, 160, 50);
 
-        lblBackgroundPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/img/backgrounds/shop-bg1.png"))); // NOI18N
-        lblBackgroundPause.setMinimumSize(new java.awt.Dimension(800, 600));
-        lblBackgroundPause.setPreferredSize(new java.awt.Dimension(800, 600));
+        lblBackgroundPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/game-bg-pause.png"))); // NOI18N
         getContentPane().add(lblBackgroundPause);
         lblBackgroundPause.setBounds(0, 0, 800, 600);
 

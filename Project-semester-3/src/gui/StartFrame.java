@@ -96,6 +96,7 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
 
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/exit.png"))); // NOI18N
         btnExit.setText("Exit");
         btnExit.setActionCommand("btnExit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +151,7 @@ public class StartFrame extends javax.swing.JFrame {
         txtUsernameLogIn.setBackground(new java.awt.Color(0, 0, 0));
         txtUsernameLogIn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtUsernameLogIn.setForeground(new java.awt.Color(255, 255, 255));
-        txtUsernameLogIn.setText("Insert username here");
+        txtUsernameLogIn.setText("Username");
         txtUsernameLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameLogInActionPerformed(evt);
@@ -159,7 +160,7 @@ public class StartFrame extends javax.swing.JFrame {
 
         txtPasswordLogIn.setBackground(new java.awt.Color(0, 0, 0));
         txtPasswordLogIn.setForeground(new java.awt.Color(255, 255, 255));
-        txtPasswordLogIn.setText("Insertpasswordhere");
+        txtPasswordLogIn.setText("Password");
 
         btnConfirmLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/confirm.png"))); // NOI18N
         btnConfirmLogIn.setText("Confirm");
