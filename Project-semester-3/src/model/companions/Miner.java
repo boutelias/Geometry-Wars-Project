@@ -18,7 +18,7 @@ import model.Character;
  */
 public class Miner implements Companion{
     List<Mine> mines;
-    Character player;
+    Character character;
     int movementSpeed;
     int posX;
     int posY;
@@ -31,9 +31,9 @@ public class Miner implements Companion{
     long timeBetween2Mines;
     long lastMineFired;
     
-    public Miner(Character player, List<Mine> mines, InputHandler handler,int width, int height, int minesPerMinute, int damage){
+    public Miner(Character character, List<Mine> mines, InputHandler handler,int width, int height, int minesPerMinute, int damage){
         this.mines = mines;
-        this.player= player;
+        this.character= character;
         this.movementSpeed = movementSpeed;
         
         this.width = width;
@@ -42,16 +42,17 @@ public class Miner implements Companion{
         this.damage = damage;
         this.minesPerMinute = minesPerMinute;
         
-        this.posX = player.getPosX();
-        this.posY = player.getPosY();
-        this.movementSpeed = player.getMovementSpeed();
+        this.posX = character.getPosX();
+        this.posY = character.getPosY();
+        this.movementSpeed = character.getMovementSpeed();
         
     }
 
     @Override
     public void doMove() {
-        if(!player.getBounds().intersects(this.getBounds())){       
-            moveCompanion(player.getPosX(),player.getPosY());
+        this.movementSpeed = character.getMovementSpeed();
+        if(!character.getBounds().intersects(this.getBounds())){       
+            moveCompanion(character.getPosX(),character.getPosY());
         }
     }
 

@@ -21,7 +21,7 @@ public class Shooter implements Companion {
     int posY;
     int width;
     int height;
-    Character player;
+    Character character;
     InputHandler handler;
     List<Bullet> bullets;
     int damage;
@@ -30,8 +30,8 @@ public class Shooter implements Companion {
     long lastBulletFired;
     int bulletspeed;
 
-    public Shooter(Character player, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute,int bulletspeed) {
-        this.player = player;
+    public Shooter(Character character, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute,int bulletspeed) {
+        this.character = character;
         this.handler = handler;
         this.height = height;
         this.width = width;
@@ -40,9 +40,9 @@ public class Shooter implements Companion {
         this.bulletsPerMinute = bulletsPerMinute;
         this.bulletspeed = bulletspeed;
 
-        this.movementSpeed = player.getMovementSpeed();
-        posX = player.getPosX();
-        posY = player.getPosY();
+        this.movementSpeed = character.getMovementSpeed();
+        posX = character.getPosX();
+        posY = character.getPosY();
 
         this.lastBulletFired = System.currentTimeMillis();
 
@@ -50,8 +50,9 @@ public class Shooter implements Companion {
 
     @Override
     public void doMove() {
-        if(!player.getBounds().intersects(this.getBounds())){       
-            moveCompanion(player.getPosX(),player.getPosY());
+        this.movementSpeed = character.getMovementSpeed();
+        if(!character.getBounds().intersects(this.getBounds())){       
+            moveCompanion(character.getPosX(),character.getPosY());
         }
     }
 
@@ -59,7 +60,7 @@ public class Shooter implements Companion {
     public void doSpecialAction() {
         if (handler.isMouseDown(1)) {
             if (this.lastBulletFired + (60.0 / this.bulletsPerMinute * 1000) < System.currentTimeMillis()) {
-                Bullet newBullet = new Bullet(posX, posY, handler.getEvent(1).getX(), handler.getEvent(1).getY(), this.damage, 1080, 1920,bulletspeed,player);
+                Bullet newBullet = new Bullet(posX, posY, handler.getEvent(1).getX(), handler.getEvent(1).getY(), this.damage, 1080, 1920,bulletspeed,character);
                 bullets.add(newBullet);
                 this.lastBulletFired = System.currentTimeMillis();
             }

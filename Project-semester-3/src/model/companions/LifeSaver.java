@@ -6,14 +6,14 @@ import model.Character;
 public class LifeSaver implements Companion{
     private long timeWhenLifeNeedsToBeAdded;
     private long timeBetweenLifes;
-    private Character player;
+    private Character character;
     int width;
     int height;
     int posX;
     int posY;
     
-    public LifeSaver(Character player, int width, int height, int livesPerMinute) {
-        this.player = player;
+    public LifeSaver(Character character, int width, int height, int livesPerMinute) {
+        
         this.width = width;
         this.height = height;
         
@@ -21,23 +21,24 @@ public class LifeSaver implements Companion{
         timeWhenLifeNeedsToBeAdded = System.currentTimeMillis() + timeBetweenLifes;
         
         
-        posX = player.getPosX();
-        posY = player.getPosY();
+        posX = character.getPosX();
+        posY = character.getPosY();
     }
 
   
     
     public void doSpecialAction(){
         if(timeWhenLifeNeedsToBeAdded<= System.currentTimeMillis()){
-            player.addLife();
+            character.addLife();
             timeWhenLifeNeedsToBeAdded += timeBetweenLifes;
         }
     }
 
     @Override
     public void doMove() {
-        this.posX = player.getPosX();
-        this.posY = player.getPosY();
+        
+        this.posX = character.getPosX();
+        this.posY = character.getPosY();
     }
 
     /* Getters and Setters */

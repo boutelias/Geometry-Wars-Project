@@ -19,7 +19,7 @@ public class AutoShooter implements Companion {
     double EnemyPosY;
     int width;
     int height;
-    Character player;
+    Character character;
     List<Bullet> bullets;
     List<Enemy> enemies;
     double closestEnemyDistance = width;
@@ -31,8 +31,8 @@ public class AutoShooter implements Companion {
     long lastBulletFired;
     int bulletspeed;
     
-    public AutoShooter(Character player, List<Bullet> bullets, List<Enemy> enemies, int height, int width, int damage, int bulletsPerMinute, int bulletspeed) {
-        this.player = player;
+    public AutoShooter(Character character, List<Bullet> bullets, List<Enemy> enemies, int height, int width, int damage, int bulletsPerMinute, int bulletspeed) {
+        this.character = character;
         this.height = height;
         this.width = width;
         this.bullets = bullets;
@@ -41,9 +41,9 @@ public class AutoShooter implements Companion {
         this.bulletsPerMinute = bulletsPerMinute;
         this.bulletspeed = bulletspeed;
 
-        this.movementSpeed = player.getMovementSpeed();
-        posX = player.getPosX();
-        posY = player.getPosY();
+        this.movementSpeed = character.getMovementSpeed();
+        posX = character.getPosX();
+        posY = character.getPosY();
 
         this.lastBulletFired = System.currentTimeMillis();
 
@@ -51,8 +51,9 @@ public class AutoShooter implements Companion {
     
     @Override
     public void doMove() {
-        if(!player.getBounds().intersects(this.getBounds())){       
-            moveCompanion(player.getPosX(),player.getPosY());
+        this.movementSpeed = character.getMovementSpeed();
+        if(!character.getBounds().intersects(this.getBounds())){       
+            moveCompanion(character.getPosX(),character.getPosY());
         }
     }
     
@@ -60,12 +61,12 @@ public class AutoShooter implements Companion {
     public void doSpecialAction() {
         if(!enemies.isEmpty() ){
             closestEnemy = enemies.get(0);
-            closestEnemyDistance = (double) Math.sqrt((Math.pow(player.getPosX() - closestEnemy.getPosX(),2)) + (Math.pow(player.getPosY() - closestEnemy.getPosY(),2)));
+            closestEnemyDistance = (double) Math.sqrt((Math.pow(character.getPosX() - closestEnemy.getPosX(),2)) + (Math.pow(character.getPosY() - closestEnemy.getPosY(),2)));
             for(Enemy e : enemies){
                 EnemyPosX = e.getPosX();
                 EnemyPosY = e.getPosY();
                 
-                double distance = (double) Math.sqrt((Math.pow(player.getPosX() - EnemyPosX,2)) + (Math.pow(player.getPosY() - EnemyPosY,2)));
+                double distance = (double) Math.sqrt((Math.pow(character.getPosX() - EnemyPosX,2)) + (Math.pow(character.getPosY() - EnemyPosY,2)));
                 if(distance < closestEnemyDistance){
 
                     closestEnemyDistance = distance;
@@ -74,7 +75,7 @@ public class AutoShooter implements Companion {
                 }
             }
             if(lastBulletFired + (60.0 / bulletsPerMinute * 1000) < System.currentTimeMillis()) {
-                Bullet newbullet = new Bullet(posX, posY, closestEnemy.getPosX(), closestEnemy.getPosY(), this.damage, 1080, 1920,bulletspeed,player);
+                Bullet newbullet = new Bullet(posX, posY, closestEnemy.getPosX(), closestEnemy.getPosY(), this.damage, 1080, 1920,bulletspeed,character);
                 bullets.add(newbullet);
                 lastBulletFired = System.currentTimeMillis();
             }
