@@ -55,6 +55,9 @@ public class Server implements Runnable{
     private boolean leftClick;
     private MouseEvent clickLeft;
     
+    private int clientPlayerId;
+    private int clientCharacterId;
+    
     
     public Server(Character player,Character character2, List<Bullet> bullets, List<Enemy> enemys, List<Geom> geoms, List<Power> powers) throws IOException {
         
@@ -78,6 +81,16 @@ public class Server implements Runnable{
         this.character2 = character2;
         keepGoing = true;
         
+        try{
+            clientPlayerId = (Integer) in.readObject();
+            //System.out.println(in.readObject());
+            clientCharacterId = (Integer) in.readObject();
+            System.out.println(clientPlayerId);
+            System.out.println(clientCharacterId);
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        
     }
 
     public void run(){
@@ -90,7 +103,6 @@ public class Server implements Runnable{
     }
     
     private void sendDataToClient(){
-        //System.out.println(data.getCharacter2().getDamage());
         try {
             out.reset();
             data.updateDataForClient(player,character2, bullets, enemys, geoms,powers,keepGoing);
@@ -111,8 +123,6 @@ public class Server implements Runnable{
             this.keyDown = data.isKeyDown();
             this.leftClick = data.isLeftClick();
             this.clickLeft = data.getClickLeft();
-            System.out.println(clickLeft.getX());
-            System.out.println(clickLeft.getY());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -146,6 +156,14 @@ public class Server implements Runnable{
     
     public void SetKeepGoing(boolean keepGoing){
         this.keepGoing = keepGoing;
+    }
+
+    public int getClientPlayerId() {
+        return clientPlayerId;
+    }
+
+    public int getClientCharacterId() {
+        return clientCharacterId;
     }
     
     
