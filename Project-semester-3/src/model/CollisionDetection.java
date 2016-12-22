@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import model.power.FireRateBoost;
-import model.power.Power;
-import model.power.SpeedBoost;
+import model.power.*;
 
 /**
  *
@@ -36,10 +34,34 @@ public class CollisionDetection {
                             geoms.add(geom);
                         }
                         if (drop(enemy.getDropratepowerups())) {
-                            //powers.add(new SpeedBoost(enemy.getPosX(), enemy.getPosY()));
-                            powers.add(new FireRateBoost(enemy.getPosX(), enemy.getPosY()));
+                            int rand = randomGenerator.nextInt(3);
+                            System.out.println("in powerup");
+                            System.out.println(rand);
+                            switch (rand) {
+                                case 0:
+                                    powers.add(new SpeedBoost(enemy.getPosX(), enemy.getPosY()));
+                                    break;
+                                case 1:
+                                    powers.add(new FireRateBoost(enemy.getPosX(), enemy.getPosY()));
+                                    break;
+                                case 2:
+                                    powers.add(new DamageBoost(enemy.getPosX(), enemy.getPosY()));
+                                    break;
+                            }
                         }
                         if (drop(enemy.getDropratepowerdowns())) {
+                            int rand = randomGenerator.nextInt(3);
+                            switch (rand) {
+                                case 0:
+                                    powers.add(new SpeedNerf(enemy.getPosX(), enemy.getPosY()));
+                                    break;
+                                case 1:
+                                    powers.add(new FireRateNerf(enemy.getPosX(), enemy.getPosY()));
+                                    break;
+                                case 2:
+                                    powers.add(new DamageNerf(enemy.getPosX(), enemy.getPosY()));
+                                    break;
+                            }
 
                         }
                         enemiesToRemove.add(enemy);
