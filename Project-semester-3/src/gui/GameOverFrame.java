@@ -14,10 +14,10 @@ public class GameOverFrame extends javax.swing.JFrame {
     /**
      * Creates new form GameOverFrame
      */
-    private static int score;
+    private static long score;
     private static int geom;
     
-    public GameOverFrame(int score, int geom) {
+    public GameOverFrame(long score, int geom) {
         initComponents();
         this.score = score;
         this.geom = geom;
@@ -25,8 +25,8 @@ public class GameOverFrame extends javax.swing.JFrame {
         setGeom(geom);
     }
     
-    public void setScore(int score){
-        lblValueScore.setText(Integer.toString(score));
+    public void setScore(long score){
+        lblValueScore.setText(Long.toString(score));
     }
     
     public void setGeom(int geom){
@@ -97,8 +97,6 @@ public class GameOverFrame extends javax.swing.JFrame {
         btnShop.setBounds(600, 530, 160, 50);
 
         lblBackgroundGameOver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/img/backgrounds/shop-bg1.png"))); // NOI18N
-        lblBackgroundGameOver.setMinimumSize(new java.awt.Dimension(800, 600));
-        lblBackgroundGameOver.setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().add(lblBackgroundGameOver);
         lblBackgroundGameOver.setBounds(0, 0, 800, 600);
 

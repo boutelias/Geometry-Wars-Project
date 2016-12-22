@@ -2,6 +2,8 @@ package model;
 
 import data.GameDA;
 import gui.GameGui;
+import gui.GameOverFrame;
+import java.awt.Frame;
 import java.util.List;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
@@ -59,7 +61,9 @@ public class Game implements Serializable {
         this.multiplayer = multiplayer;
         //TODO characterid , companionid en playerid uit GUI
         run();
-        System.exit(-1);
+        Frame frame = new GameOverFrame(character.getScore(),character.getNumberOfGeoms());
+        frame.setVisible(true);
+        gameGui.deleteGame();
     }
 
     private void run() {

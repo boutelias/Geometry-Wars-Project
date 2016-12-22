@@ -149,6 +149,10 @@ public class GameGui {
         g.fillOval(companion.getPosX() - (companion.getHeight() / 2), companion.getPosY() - (companion.getWidth() / 2), companion.getHeight(), companion.getWidth());
 
     }
+    
+    public void deleteGame(){
+        frame.dispose();
+    }
 
     private void repaint() {
         g2.drawImage(i, 0, 0, frame);
@@ -166,5 +170,6 @@ public class GameGui {
     public int getGameHeight() {
         return gameHeight;
     }
+    
 
 }
