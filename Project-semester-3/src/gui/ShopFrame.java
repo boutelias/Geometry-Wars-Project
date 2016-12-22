@@ -26,14 +26,23 @@ public class ShopFrame extends javax.swing.JFrame {
     private static String playername;
     private int playerId;
     private int charCounter;
+    private int charId;
+    
+    private int selectedCharCounter;
     
     public ShopFrame(String playername) {
         initComponents();
         this.playername = playername;
         playerId = GameDA.getInstance().getPLayerId(this.playername);
         allCharacters = GameDA.getInstance().getShips();
-        charCounter = 0;
+        charCounter = 1;
+        charId = 0;
+        selectedCharCounter = 0;
+        //System.out.println(charCounter);
+        showSelectedCharCounter();
         InitCharacters();
+        checkBoughtandSelect();
+        getGeomsAndCoins();
         
     }
 
@@ -46,6 +55,7 @@ public class ShopFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jPanelUpgrades = new javax.swing.JPanel();
         lblSpeed = new javax.swing.JLabel();
         lblBulletPower = new javax.swing.JLabel();
@@ -85,6 +95,9 @@ public class ShopFrame extends javax.swing.JFrame {
         btnUpgradeShip = new javax.swing.JButton();
         current_ship = new javax.swing.JLabel();
         current_selected_ship = new javax.swing.JLabel();
+        btnShipSelect = new javax.swing.JButton();
+        btnShipBuy = new javax.swing.JButton();
+        lblPrice = new javax.swing.JLabel();
         jPanelCompanion = new javax.swing.JPanel();
         lblCompanionName = new javax.swing.JLabel();
         lblAfbeeldingBuddy = new javax.swing.JLabel();
@@ -106,6 +119,17 @@ public class ShopFrame extends javax.swing.JFrame {
         btnHighscores = new javax.swing.JButton();
         btnBackUpgrades = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 650));
@@ -392,14 +416,32 @@ public class ShopFrame extends javax.swing.JFrame {
 
         current_selected_ship.setText("shipname");
 
+        btnShipSelect.setText("SELECT");
+        btnShipSelect.setSize(new java.awt.Dimension(160, 50));
+        btnShipSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShipSelectActionPerformed(evt);
+            }
+        });
+
+        btnShipBuy.setText("BUY");
+        btnShipBuy.setSize(new java.awt.Dimension(160, 50));
+        btnShipBuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShipBuyActionPerformed(evt);
+            }
+        });
+
+        lblPrice.setText("0");
+
         javax.swing.GroupLayout jPanelShipLayout = new javax.swing.GroupLayout(jPanelShip);
         jPanelShip.setLayout(jPanelShipLayout);
         jPanelShipLayout.setHorizontalGroup(
             jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelShipLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelShipLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnUpgradeShip, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblShipsName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,12 +450,20 @@ public class ShopFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(current_selected_ship, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelShipLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnPreviousShip)
                         .addGap(170, 170, 170)
                         .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(170, 170, 170)
-                        .addComponent(btnNextShip)))
+                        .addComponent(btnNextShip))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelShipLayout.createSequentialGroup()
+                        .addGap(179, 179, 179)
+                        .addComponent(btnShipBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnShipSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
         );
         jPanelShipLayout.setVerticalGroup(
@@ -429,7 +479,17 @@ public class ShopFrame extends javax.swing.JFrame {
                     .addComponent(lblAfbeeldingSchip, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNextShip)
                     .addComponent(btnPreviousShip))
-                .addGap(50, 50, 50))
+                .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelShipLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnShipSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPrice))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelShipLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnShipBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
 
         getContentPane().add(jPanelShip);
@@ -655,22 +715,38 @@ public class ShopFrame extends javax.swing.JFrame {
     private void btnNextShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextShipActionPerformed
         //lblAfbeeldingSchip.setBackground(Color.yellow);
         
-        model.Character nextShip = allCharacters.get(charCounter+1);
+        model.Character nextShip = null;
+        if(charId+1 < allCharacters.size()){
+        System.out.println(charCounter);
+        nextShip = allCharacters.get(charId + 1);
+        }
         if(nextShip != null){
             String spritename = nextShip.getSprite();
-            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename)));
+            
+            System.out.println("spritename:"+ spritename+"-");
+            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename+ ".png")));
+            lblShipsName.setText(spritename);
             charCounter += 1;
+            charId += 1;
+            checkBoughtandSelect();
         }    
     }//GEN-LAST:event_btnNextShipActionPerformed
 
     private void btnPreviousShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousShipActionPerformed
         //lblAfbeeldingSchip.setBackground(Color.CYAN);
-        
-         model.Character nextShip = allCharacters.get(charCounter-1);
+        model.Character nextShip = null;
+        System.out.println("charid:"+charId);
+        if(charId-1 >= 0){
+            System.out.println(charCounter);
+        nextShip = allCharacters.get(charId-1);
+        }
         if(nextShip != null){
             String spritename = nextShip.getSprite();
-            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename)));
+            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename+ ".png")));
+            lblShipsName.setText(spritename);
             charCounter -= 1;
+            charId -=1;
+            checkBoughtandSelect();
         }    
     
     }//GEN-LAST:event_btnPreviousShipActionPerformed
@@ -680,10 +756,28 @@ public class ShopFrame extends javax.swing.JFrame {
         int isBought = GameDA.getInstance().isBought(playerId, charCounter);
         if(isBought == 1){
             // show selectbutton
+            btnShipBuy.setVisible(false);
+            lblPrice.setVisible(false);
+            btnShipSelect.setVisible(true);
         }
         else{
             // show buy button + price
+            btnShipSelect.setVisible(false);
+            btnShipBuy.setVisible(true);
+            lblPrice.setVisible(true);
+            //show price
+            int shipPrice = allCharacters.get(charId).getPrice();
+            
+            lblPrice.setText(Integer.toString(shipPrice));
+            
+            
+            
         }
+    }
+    
+    private void getGeomsAndCoins(){
+        lblContentCoins.setText(Integer.toString(GameDA.getInstance().getPremiumcoins(playerId)));
+        lblContentGems.setText(Integer.toString(GameDA.getInstance().getGeoms(playerId)));
     }
     
     private void btnUpgradeShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpgradeShipActionPerformed
@@ -718,15 +812,48 @@ public class ShopFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnHighscoresActionPerformed
 
+    private void btnShipBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipBuyActionPerformed
+        
+        int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        int characterPrice = allCharacters.get(charId).getPrice();
+        
+        if(currentGeoms>characterPrice){
+        //koop character
+        GameDA.getInstance().buyCharacter(playerId,charCounter);
+        int newBalance = currentGeoms - characterPrice;
+        GameDA.getInstance().setNewGeomBalance(newBalance,playerId);
+        checkBoughtandSelect();
+        getGeomsAndCoins();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
+        }
+        
+    }//GEN-LAST:event_btnShipBuyActionPerformed
+
+    private void showSelectedCharCounter(){
+        
+        model.Character firstShip = allCharacters.get(charId);
+        String spritename = firstShip.getSprite();
+        current_selected_ship.setText(spritename);
+    }
+    
+    private void btnShipSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipSelectActionPerformed
+            //set global variable selected
+            
+            selectedCharCounter = charId;
+            showSelectedCharCounter();
+            
+    }//GEN-LAST:event_btnShipSelectActionPerformed
+
     private void InitCharacters(){  
         model.Character firstShip = allCharacters.get(0);
         String spritename = firstShip.getSprite();
-        lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename)));   
+        lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename+ ".png")));  
+        lblShipsName.setText(spritename);
     }
     
-    private void getCompanions(){
-    
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -778,11 +905,14 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnPreviousShip;
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnShip;
+    private javax.swing.JButton btnShipBuy;
+    private javax.swing.JButton btnShipSelect;
     private javax.swing.JButton btnStartGame;
     private javax.swing.JButton btnUpgradeCompanion;
     private javax.swing.JButton btnUpgradeShip;
     private javax.swing.JLabel current_selected_ship;
     private javax.swing.JLabel current_ship;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCompanion;
     private javax.swing.JPanel jPanelCurrency;
     private javax.swing.JPanel jPanelShip;
@@ -814,6 +944,7 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblIconSpeed2;
     private javax.swing.JLabel lblIconSpeed3;
     private javax.swing.JLabel lblIconSpeed4;
+    private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblShip;
     private javax.swing.JLabel lblShipsName;
     private javax.swing.JLabel lblSpeed;

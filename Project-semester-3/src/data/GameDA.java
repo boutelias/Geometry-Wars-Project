@@ -128,7 +128,7 @@ public class GameDA {
             prep.setString(1,playername);
             ResultSet rs = prep.executeQuery();
             rs.next();
-            int id = rs.getInt("id");
+            int id = rs.getInt("playerid");
             rs.close();
             
             return id;
@@ -336,6 +336,80 @@ public class GameDA {
 
         }
 
+   }
+   
+   public int getGeoms(int playerid){
+   try{
+            String sql = "SELECT * FROM Player WHERE playerid=?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,playerid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int geoms = rs.getInt("geoms");
+            rs.close();
+            
+            return geoms;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+
+        }
+   }
+   
+   public int getPremiumcoins(int playerid){
+   try{
+            String sql = "SELECT * FROM Player WHERE playerid=?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,playerid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int premiumcoins = rs.getInt("premiumcoins");
+            rs.close();
+            
+            return premiumcoins;
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+
+        }
+   }
+   
+   
+   public void buyCharacter(int playerid, int characterid){
+       
+       try{
+            String sql = "UPDATE player_character SET isBought=? WHERE playerid=? AND characterid =?";
+
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,1);
+            prep.setInt(2,playerid);
+            prep.setInt(3,characterid);
+            prep.executeUpdate();
+
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+
+        }
+
+   }
+   
+   public void setNewGeomBalance(int newBalance ,int playerid){
+       try{
+            String sql = "UPDATE Player SET geoms=? WHERE playerid=?";
+
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1,newBalance);
+            prep.setInt(2,playerid);
+            prep.executeUpdate();
+
+            }    
+        catch (SQLException ex){
+            throw new IllegalArgumentException(ex);
+
+        }
+
+   
    }
    
    
