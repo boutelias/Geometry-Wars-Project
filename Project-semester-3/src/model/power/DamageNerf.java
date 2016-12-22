@@ -82,6 +82,6 @@ public class DamageNerf implements Power, Serializable{
     
     @Override
     public int getTimeLeft(){
-        return (int) (System.currentTimeMillis() - startTime + duration)/1000;
+        return (int) (startTime + duration - System.currentTimeMillis())/1000;
     }
 }
