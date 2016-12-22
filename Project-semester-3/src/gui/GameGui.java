@@ -24,6 +24,7 @@ import model.InputHandler;
 import java.awt.Color;
 import model.Mine;
 import model.companions.Companion;
+import model.power.Power;
 
 /**
  *
@@ -70,14 +71,14 @@ public class GameGui {
     }
     
     //public void draw(Player character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, OldCompanionClass companion,List<Mine> mines){
-    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines){             
-        drawGame(character, bullets, enemies, geoms);
+    public void draw(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, Companion companion,List<Mine> mines, List<Power> powers){             
+        drawGame(character, bullets, enemies, geoms, powers);
         drawCompanion(mines, companion);
         repaint();
     }
     
-    public void draw(Character character, Character character2, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
-        drawGame(character, bullets, enemies, geoms);
+    public void draw(Character character, Character character2, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, List<Power> powers){
+        drawGame(character, bullets, enemies, geoms,powers);
         g.setColor(Color.YELLOW);
         g.fillOval(character2.getPosX()-(character2.getHeight()/2), character2.getPosY()-(character2.getWidth()/2), character2.getHeight(), character2.getWidth());
         Color kleur = new Color(25,139,193);
@@ -93,7 +94,7 @@ public class GameGui {
         
     }
     
-    private void drawGame(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms){
+    private void drawGame(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, List<Power> powers){
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, gameWidth, gameHeight);
         
@@ -119,6 +120,14 @@ public class GameGui {
             g.drawImage(enemySprite,enemy.getPosX()-(enemy.getWidth()/2), enemy.getPosY()-(enemy.getHeight()/2),enemy.getWidth(),enemy.getHeight(),null);
             
         }
+        
+        g.setColor(Color.pink);
+        for(Power power: powers){
+            if(!power.isPickedUp()){
+            g.fillOval(power.getPosX()-10,power.getPosY()-10,20,20);
+            }
+        }
+        
         Color kleur = new Color(25,139,193);
         g.setFont(new Font("Comic Sans",Font.BOLD,26));
         g.setColor(kleur);

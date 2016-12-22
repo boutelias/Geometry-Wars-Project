@@ -83,6 +83,7 @@ public class Server implements Runnable{
             sendDataToClient();
             getDataFromClient();
         }
+        sendDataToClient();
     }
     
     private void sendDataToClient(){

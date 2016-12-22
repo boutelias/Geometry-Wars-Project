@@ -16,6 +16,7 @@ import model.companions.Companion;
 import model.companions.LifeSaver;
 import model.companions.Miner;
 import model.companions.Shooter;
+import model.power.Power;
 
 import multiplayer.Server;
 
@@ -37,6 +38,7 @@ public class Game implements Serializable {
     private List<Geom> geoms = new CopyOnWriteArrayList<>();
     private List<Wave> waves = new ArrayList<>();
     private List<Mine> mines = new ArrayList<>();
+    private List<Power> powers = new CopyOnWriteArrayList<>();
 
     private GameGui gameGui;
     private List<Player> players;
@@ -152,15 +154,16 @@ public class Game implements Serializable {
             companion.doMove();
             companion.doSpecialAction();
         }
-
+        
+        checkPowerUpFinished();
         collisionDetection();
     }
 
     private void draw() {
         if (multiplayer) {
-            gameGui.draw(character, character2, bullets, enemies, geoms);
+            gameGui.draw(character, character2, bullets, enemies, geoms,powers);
         } else {
-            gameGui.draw(character, bullets, enemies, geoms, companion, mines);
+            gameGui.draw(character, bullets, enemies, geoms, companion, mines,powers);
         }
     }
 
@@ -328,10 +331,12 @@ public class Game implements Serializable {
     }
 
     private void collisionDetection() {
-        collisionDetection.doCollisionBetweenBulletsAndEnemys(bullets, enemies, geoms);
+        collisionDetection.doCollisionBetweenBulletsAndEnemys(bullets, enemies, geoms,powers);
         
         collisionDetection.doCollisionBetweenEnemiesAndCharacter(bullets, enemies, character);
         collisionDetection.doCollisionBetweenCharacterAndGeom(geoms, character);
+        
+        collisionDetection.doCollisionBetweenCharacterAndPowers(character, powers);
 
         if (multiplayer) {
             collisionDetection.doCollisionBetweenEnemiesAndCharacter(bullets, enemies, character2);
@@ -339,6 +344,20 @@ public class Game implements Serializable {
         } else {
             collisionDetection.doCollisionBetweenEnemiesAndMine(enemies, mines);
             collisionDetection.doCollisionBetweenCharacterAndMine(mines, character);
+        }
+    }
+    
+    private void checkPowerUpFinished(){
+        List<Power> powersToRemove = new ArrayList();
+        
+        for(Power power: powers){
+            if(power.isTheEnd()){
+                powersToRemove.add(power);
+            }
+        }
+        
+        for(Power p: powersToRemove){
+            powers.remove(p);
         }
     }
 

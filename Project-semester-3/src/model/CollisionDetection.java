@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import model.power.Power;
+import model.power.SpeedBoost;
 
 /**
  *
@@ -18,7 +20,7 @@ public class CollisionDetection {
 
     private Random randomGenerator = new Random();
 
-    public void doCollisionBetweenBulletsAndEnemys(List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms) {
+    public void doCollisionBetweenBulletsAndEnemys(List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, List<Power> powers) {
         List<Bullet> bulletsToRemove = new LinkedList();
         List<Enemy> enemiesToRemove = new LinkedList();
         for (Bullet bullet : bullets) {
@@ -33,7 +35,7 @@ public class CollisionDetection {
                             geoms.add(geom);
                         }
                         if (drop(enemy.getDropratepowerups())) {
-
+                            powers.add(new SpeedBoost(enemy.getPosX(), enemy.getPosY()));
                         }
                         if (drop(enemy.getDropratepowerdowns())) {
 
@@ -54,7 +56,7 @@ public class CollisionDetection {
 
     }
 
-    public void doCollisionBetweenEnemiesAndCharacter(List<Bullet> bullets, List<Enemy> enemies,Character character) {
+    public void doCollisionBetweenEnemiesAndCharacter(List<Bullet> bullets, List<Enemy> enemies, Character character) {
         Enemy hittedChar = null;
         for (Enemy enemy : enemies) {
             if (character.getBounds().intersects(enemy.getBounds())) {
@@ -66,8 +68,8 @@ public class CollisionDetection {
             enemies.remove(hittedChar);
         }
     }
-    
-    public void doCollisionBetweenCharacterAndGeom(List<Geom> geoms, Character character){
+
+    public void doCollisionBetweenCharacterAndGeom(List<Geom> geoms, Character character) {
         List<Geom> hittedGeoms = new ArrayList();
         for (Geom geom : geoms) {
             if (character.getBounds().intersects(geom.getBounds())) {
@@ -75,14 +77,14 @@ public class CollisionDetection {
                 hittedGeoms.add(geom);
             }
         }
-        
+
         deleteObjectsFromList(geoms, hittedGeoms);
     }
-    
-    public void doCollisionBetweenEnemiesAndMine(List<Enemy> enemies, List<Mine> mines){
+
+    public void doCollisionBetweenEnemiesAndMine(List<Enemy> enemies, List<Mine> mines) {
         List<Enemy> enemiesToRemove = new LinkedList();
         List<Mine> minesToRemove = new LinkedList();
-        
+
         for (Enemy enemy : enemies) {
             for (Mine mine : mines) {
                 if (enemy.getBounds().intersects(mine.getBounds())) {
@@ -98,12 +100,12 @@ public class CollisionDetection {
                 }
             }
         }
-        
+
         deleteObjectsFromList(enemies, enemiesToRemove);
         deleteObjectsFromList(mines, minesToRemove);
     }
-    
-    public void doCollisionBetweenCharacterAndMine(List<Mine> mines, Character character){
+
+    public void doCollisionBetweenCharacterAndMine(List<Mine> mines, Character character) {
         List<Mine> minesToRemove = new LinkedList();
         for (Mine mine : mines) {
             if (mine.getBounds().intersects(character.getBounds())) {
@@ -114,7 +116,16 @@ public class CollisionDetection {
         }
         deleteObjectsFromList(mines, minesToRemove);
     }
-    
+
+    public void doCollisionBetweenCharacterAndPowers(Character c, List<Power> powers) {
+        for (Power power : powers) {
+            if (!power.isPickedUp()) {
+                if (power.getBounds().intersects(c.getBounds())) {
+                    power.start(c);
+                }
+            }
+        }
+    }
 
     private <T> void deleteObjectsFromList(List<T> originalList, List<T> listToRemove) {
         for (T elementToRemove : listToRemove) {
