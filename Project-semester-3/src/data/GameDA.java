@@ -25,6 +25,7 @@ import model.Player;
 import model.Wave;
 import model.companions.AutoShooter;
 import model.companions.Companion;
+import gui.CompanionShop;
 import model.companions.LifeSaver;
 import model.companions.Miner;
 import model.companions.Shooter;
@@ -306,6 +307,26 @@ public class GameDA {
         }
         return characters;
     }
+    
+    public List<CompanionShop> getCompanions(){
+         List<CompanionShop> companions = new ArrayList<>();
+        try {
+            String sql = "select * from `Companion`";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            ResultSet rs = prep.executeQuery(sql);
+
+            while (rs.next()) {
+                CompanionShop companion = new CompanionShop(rs.getInt("companionid"), rs.getString("sprite"), rs.getInt("price"));
+                companions.add(companion);
+            }
+            rs.close();
+
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return companions;
+
+    }
 
     public int isBought(int playerid, int characterid) {
 
@@ -314,6 +335,26 @@ public class GameDA {
             PreparedStatement prep = this.con.prepareStatement(sql);
             prep.setInt(1, playerid);
             prep.setInt(2, characterid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int isbought = rs.getInt("isBought");
+            rs.close();
+
+            return isbought;
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+
+        }
+
+    }
+    
+    public int isBoughtCompanion(int playerid, int companionid) {
+
+        try {
+            String sql = "SELECT * FROM player_companion WHERE playerid=? AND companionid =?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, playerid);
+            prep.setInt(2, companionid);
             ResultSet rs = prep.executeQuery();
             rs.next();
             int isbought = rs.getInt("isBought");
@@ -370,6 +411,24 @@ public class GameDA {
             prep.setInt(1, 1);
             prep.setInt(2, playerid);
             prep.setInt(3, characterid);
+            prep.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+
+        }
+
+    }
+    
+    public void buyCompanion(int playerid, int companionid) {
+
+        try {
+            String sql = "UPDATE player_companion SET isBought=? WHERE playerid=? AND companionid =?";
+
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, 1);
+            prep.setInt(2, playerid);
+            prep.setInt(3, companionid);
             prep.executeUpdate();
 
         } catch (SQLException ex) {

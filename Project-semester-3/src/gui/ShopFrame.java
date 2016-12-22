@@ -21,26 +21,39 @@ import javax.swing.JOptionPane;
 public class ShopFrame extends javax.swing.JFrame {
 
     private int level = 0;
-    List<model.Character> allCharacters;
+    private List<model.Character> allCharacters;
+    private List<CompanionShop> allCompanions;
     private static String playername;
     private int playerId;
+    
     private int charCounter;
     private int charId;
-
     private int selectedCharCounter;
+    
+    private int companionCounter;
+    private int companionId;
+    private int selectedCompanionCounter;
 
     public ShopFrame(String playername) {
         initComponents();
         this.playername = playername;
         playerId = GameDA.getInstance().getPLayerId(this.playername);
         allCharacters = GameDA.getInstance().getShips();
+        allCompanions = GameDA.getInstance().getCompanions();
+        
         charCounter = 1;
         charId = 0;
         selectedCharCounter = 0;
+        
+        companionCounter = 1;
+        companionId = 0;
+        selectedCompanionCounter = 0;
         //System.out.println(charCounter);
         showSelectedCharCounter();
         InitCharacters();
+        InitCompanions();
         checkBoughtandSelect();
+        checkBoughtandSelectCompanion();
         getGeomsAndCoins();
 
     }
@@ -86,6 +99,14 @@ public class ShopFrame extends javax.swing.JFrame {
         lblBulletdamageGems = new javax.swing.JLabel();
         lblFirerateGems = new javax.swing.JLabel();
         lblHitpointsGems = new javax.swing.JLabel();
+        jPanelCompanionUpgrades = new javax.swing.JPanel();
+        lblBulletSpeed1 = new javax.swing.JLabel();
+        lblUpgradeBarCompanion = new javax.swing.JLabel();
+        lblIconSpeed6 = new javax.swing.JLabel();
+        lblIconGemsBulletSpeed1 = new javax.swing.JLabel();
+        btnPlusCompanion = new javax.swing.JButton();
+        lblCompanionGems = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanelShip = new javax.swing.JPanel();
         lblShipsName = new javax.swing.JLabel();
         lblAfbeeldingSchip = new javax.swing.JLabel();
@@ -99,10 +120,15 @@ public class ShopFrame extends javax.swing.JFrame {
         lblPrice = new javax.swing.JLabel();
         jPanelCompanion = new javax.swing.JPanel();
         lblCompanionName = new javax.swing.JLabel();
-        lblAfbeeldingBuddy = new javax.swing.JLabel();
+        lblAfbeeldingCompanion = new javax.swing.JLabel();
         btnNextCompanion = new javax.swing.JButton();
         btnPreviousCompanion = new javax.swing.JButton();
         btnUpgradeCompanion = new javax.swing.JButton();
+        current_ship1 = new javax.swing.JLabel();
+        current_selected_ship1 = new javax.swing.JLabel();
+        btnCompanionSelect = new javax.swing.JButton();
+        btnCompanionBuy = new javax.swing.JButton();
+        lblCompanionPrice = new javax.swing.JLabel();
         jPanelCurrency = new javax.swing.JPanel();
         lblCoins = new javax.swing.JLabel();
         lblContentCoins = new javax.swing.JLabel();
@@ -405,6 +431,75 @@ public class ShopFrame extends javax.swing.JFrame {
         getContentPane().add(jPanelUpgrades);
         jPanelUpgrades.setBounds(60, 120, 660, 350);
 
+        jPanelCompanionUpgrades.setBackground(new java.awt.Color(0, 102, 0));
+        jPanelCompanionUpgrades.setMinimumSize(new java.awt.Dimension(660, 350));
+
+        lblBulletSpeed1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblBulletSpeed1.setText("Companion");
+
+        lblUpgradeBarCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeBar/bar-0.png"))); // NOI18N
+
+        lblIconSpeed6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onderdelen/upgradeIcons/bulletSpeed.png"))); // NOI18N
+        lblIconSpeed6.setText("jLabel1");
+
+        lblIconGemsBulletSpeed1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sprites/geomSprite.png"))); // NOI18N
+
+        btnPlusCompanion.setText("+");
+        btnPlusCompanion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlusCompanionActionPerformed(evt);
+            }
+        });
+
+        lblCompanionGems.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblCompanionGems.setText("Gems");
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setText("Companion Upgrade");
+
+        javax.swing.GroupLayout jPanelCompanionUpgradesLayout = new javax.swing.GroupLayout(jPanelCompanionUpgrades);
+        jPanelCompanionUpgrades.setLayout(jPanelCompanionUpgradesLayout);
+        jPanelCompanionUpgradesLayout.setHorizontalGroup(
+            jPanelCompanionUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCompanionUpgradesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelCompanionUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCompanionUpgradesLayout.createSequentialGroup()
+                        .addComponent(lblIconSpeed6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblBulletSpeed1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblUpgradeBarCompanion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPlusCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCompanionGems, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblIconGemsBulletSpeed1))
+                    .addComponent(jLabel1))
+                .addContainerGap())
+        );
+        jPanelCompanionUpgradesLayout.setVerticalGroup(
+            jPanelCompanionUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCompanionUpgradesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addGroup(jPanelCompanionUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUpgradeBarCompanion)
+                    .addGroup(jPanelCompanionUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblIconSpeed6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblBulletSpeed1))
+                    .addGroup(jPanelCompanionUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnPlusCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCompanionGems))
+                    .addComponent(lblIconGemsBulletSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(173, 173, 173))
+        );
+
+        getContentPane().add(jPanelCompanionUpgrades);
+        jPanelCompanionUpgrades.setBounds(60, 120, 660, 350);
+
         jPanelShip.setBackground(new java.awt.Color(0, 102, 0));
 
         lblShipsName.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -523,11 +618,21 @@ public class ShopFrame extends javax.swing.JFrame {
         lblCompanionName.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblCompanionName.setText("Companion's Name");
 
-        lblAfbeeldingBuddy.setText("Afbeelding Buddy");
+        lblAfbeeldingCompanion.setText("Afbeelding Buddy");
 
         btnNextCompanion.setText(">");
+        btnNextCompanion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextCompanionActionPerformed(evt);
+            }
+        });
 
         btnPreviousCompanion.setText("<");
+        btnPreviousCompanion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousCompanionActionPerformed(evt);
+            }
+        });
 
         btnUpgradeCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/upgrade.png"))); // NOI18N
         btnUpgradeCompanion.setText("Upgrade");
@@ -537,36 +642,92 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
 
+        current_ship1.setText("Selected Companion: ");
+
+        current_selected_ship1.setText("companionName");
+
+        btnCompanionSelect.setText("SELECT");
+        btnCompanionSelect.setSize(new java.awt.Dimension(160, 50));
+        btnCompanionSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompanionSelectActionPerformed(evt);
+            }
+        });
+
+        btnCompanionBuy.setText("BUY");
+        btnCompanionBuy.setSize(new java.awt.Dimension(160, 50));
+        btnCompanionBuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompanionBuyActionPerformed(evt);
+            }
+        });
+
+        lblCompanionPrice.setText("0");
+
         javax.swing.GroupLayout jPanelCompanionLayout = new javax.swing.GroupLayout(jPanelCompanion);
         jPanelCompanion.setLayout(jPanelCompanionLayout);
         jPanelCompanionLayout.setHorizontalGroup(
             jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(btnUpgradeCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCompanionName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPreviousCompanion)
-                .addGap(18, 18, 18)
-                .addComponent(lblAfbeeldingBuddy, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnNextCompanion))
+                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(btnUpgradeCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPreviousCompanion)))
+                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                        .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(btnCompanionSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCompanionBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addComponent(lblAfbeeldingCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(btnNextCompanion))
+                            .addComponent(lblCompanionPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(current_ship1)
+                        .addGap(18, 18, 18)
+                        .addComponent(current_selected_ship1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(lblCompanionName, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
         jPanelCompanionLayout.setVerticalGroup(
             jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                        .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCompanionName)
+                            .addComponent(btnUpgradeCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAfbeeldingCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNextCompanion)
+                            .addComponent(btnPreviousCompanion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelCompanionLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(current_ship1)
+                            .addComponent(current_selected_ship1))
+                        .addGap(100, 100, 100)))
                 .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCompanionName)
-                    .addComponent(btnUpgradeCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAfbeeldingBuddy, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNextCompanion)
-                    .addComponent(btnPreviousCompanion))
-                .addGap(0, 20, Short.MAX_VALUE))
+                    .addComponent(lblCompanionPrice)
+                    .addComponent(btnCompanionSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCompanionBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
 
         getContentPane().add(jPanelCompanion);
@@ -700,6 +861,7 @@ public class ShopFrame extends javax.swing.JFrame {
         btnShip.setVisible(false);
         lblCompanion.setVisible(false);
         jPanelUpgrades.setVisible(false);
+        jPanelCompanionUpgrades.setVisible(false);
         btnBackUpgrades.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
@@ -815,6 +977,30 @@ public class ShopFrame extends javax.swing.JFrame {
 
         }
     }
+    
+    private void checkBoughtandSelectCompanion() {
+        //functie meegeven playerid en char id, ophalen isBought ja nee
+        int isBought = GameDA.getInstance().isBoughtCompanion(playerId, companionCounter);
+        if (isBought == 1) {
+            // show selectbutton
+            btnCompanionBuy.setVisible(false);
+            lblCompanionPrice.setVisible(false);
+            btnCompanionSelect.setVisible(true);
+            btnUpgradeCompanion.setVisible(true);
+
+        } else {
+            // show buy button + price
+            btnCompanionSelect.setVisible(false);
+            btnCompanionBuy.setVisible(true);
+            lblCompanionPrice.setVisible(true);
+            btnUpgradeCompanion.setVisible(false);
+            //show price
+            int companionPrice = allCompanions.get(companionId).getPrice();
+
+            lblCompanionPrice.setText(Integer.toString(companionPrice));
+
+        }
+    }
 
     private void getGeomsAndCoins() {
         lblContentCoins.setText(Integer.toString(GameDA.getInstance().getPremiumcoins(playerId)));
@@ -908,12 +1094,14 @@ public class ShopFrame extends javax.swing.JFrame {
     
     private void btnBackUpgradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpgradesActionPerformed
         jPanelUpgrades.setVisible(false);
+        jPanelCompanionUpgrades.setVisible(false);
         btnBackUpgrades.setVisible(false);
         btnUpgradeShip.setVisible(true);
+        btnUpgradeCompanion.setVisible(true);
     }//GEN-LAST:event_btnBackUpgradesActionPerformed
 
     private void btnUpgradeCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpgradeCompanionActionPerformed
-        jPanelUpgrades.setVisible(true);
+        jPanelCompanionUpgrades.setVisible(true);
         btnBackUpgrades.setVisible(true);
         btnUpgradeCompanion.setVisible(false);
     }//GEN-LAST:event_btnUpgradeCompanionActionPerformed
@@ -1017,12 +1205,85 @@ public class ShopFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPlusFireRateActionPerformed
 
+    private void btnPlusCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusCompanionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPlusCompanionActionPerformed
+
+    private void btnCompanionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanionSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCompanionSelectActionPerformed
+
+    private void btnCompanionBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanionBuyActionPerformed
+        
+        int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        int companionPrice = allCompanions.get(companionId).getPrice();
+
+        if (currentGeoms > companionPrice) {
+            //koop character
+            // buyCompanion da
+            GameDA.getInstance().buyCompanion(playerId, companionCounter);
+            int newBalance = currentGeoms - companionPrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            checkBoughtandSelectCompanion();
+            getGeomsAndCoins();
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
+        }       
+    }//GEN-LAST:event_btnCompanionBuyActionPerformed
+
+    private void btnNextCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextCompanionActionPerformed
+        CompanionShop nextCompanion = null;
+        if (companionId + 1 < allCompanions.size()) {
+            System.out.println(charCounter);
+            nextCompanion = allCompanions.get(companionId + 1);
+        }
+        if (nextCompanion != null) {
+            String spritename = nextCompanion.getSprite();
+            System.out.println("spritename-companion:"+spritename+"--");
+            lblAfbeeldingCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/companions/" + spritename + ".png")));
+            lblCompanionName.setText(spritename);
+            companionCounter += 1;
+            companionId += 1;
+            //checkBoughtandSelect();
+            checkBoughtandSelectCompanion();
+            
+            //checkBoughtandSelect-- companions
+        }        
+    }//GEN-LAST:event_btnNextCompanionActionPerformed
+
+    private void btnPreviousCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousCompanionActionPerformed
+        CompanionShop nextCompanion = null;
+        if (companionId - 1 >= 0) {
+            System.out.println(charCounter);
+            nextCompanion = allCompanions.get(companionId - 1);
+        }
+        if (nextCompanion != null) {
+            String spritename = nextCompanion.getSprite();
+            lblAfbeeldingCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/companions/" + spritename + ".png")));
+            lblCompanionName.setText(spritename);
+            companionCounter -= 1;
+            companionId -= 1;
+            //checkBoughtandSelect();
+            checkBoughtandSelectCompanion();
+            //checkBoughtandSelect-- companions
+        } 
+    }//GEN-LAST:event_btnPreviousCompanionActionPerformed
+
     private void InitCharacters() {
         model.Character firstShip = allCharacters.get(0);
         String spritename = firstShip.getSprite();
         lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename + ".png")));
         lblShipsName.setText(spritename);
     }
+    
+    private void InitCompanions(){
+        CompanionShop firstCompanion = allCompanions.get(0);
+        String spritename = firstCompanion.getSprite();
+        lblAfbeeldingCompanion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/companions/" + spritename + ".png")));
+        lblCompanionName.setText(spritename);
+    }
+    
+    
 
     /**
      * @param args the command line arguments
@@ -1063,11 +1324,14 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnBackUpgrades;
     private javax.swing.JButton btnClan;
     private javax.swing.JButton btnCompanion;
+    private javax.swing.JButton btnCompanionBuy;
+    private javax.swing.JButton btnCompanionSelect;
     private javax.swing.JButton btnHighscores;
     private javax.swing.JButton btnNextCompanion;
     private javax.swing.JButton btnNextShip;
     private javax.swing.JButton btnPlusBulletPower;
     private javax.swing.JButton btnPlusBulletSpeed;
+    private javax.swing.JButton btnPlusCompanion;
     private javax.swing.JButton btnPlusFireRate;
     private javax.swing.JButton btnPlusHitpoints;
     private javax.swing.JButton btnPlusSpeed;
@@ -1081,22 +1345,29 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnUpgradeCompanion;
     private javax.swing.JButton btnUpgradeShip;
     private javax.swing.JLabel current_selected_ship;
+    private javax.swing.JLabel current_selected_ship1;
     private javax.swing.JLabel current_ship;
+    private javax.swing.JLabel current_ship1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCompanion;
+    private javax.swing.JPanel jPanelCompanionUpgrades;
     private javax.swing.JPanel jPanelCurrency;
     private javax.swing.JPanel jPanelShip;
     private javax.swing.JPanel jPanelUpgrades;
-    private javax.swing.JLabel lblAfbeeldingBuddy;
+    private javax.swing.JLabel lblAfbeeldingCompanion;
     private javax.swing.JLabel lblAfbeeldingSchip;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblBulletPower;
     private javax.swing.JLabel lblBulletSpeed;
+    private javax.swing.JLabel lblBulletSpeed1;
     private javax.swing.JLabel lblBulletdamageGems;
     private javax.swing.JLabel lblBulletspeedGems;
     private javax.swing.JLabel lblCoins;
     private javax.swing.JLabel lblCompanion;
+    private javax.swing.JLabel lblCompanionGems;
     private javax.swing.JLabel lblCompanionName;
+    private javax.swing.JLabel lblCompanionPrice;
     private javax.swing.JLabel lblContentCoins;
     private javax.swing.JLabel lblContentGems;
     private javax.swing.JLabel lblFireRate;
@@ -1106,6 +1377,7 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblHitpointsGems;
     private javax.swing.JLabel lblIconGemsBulletPower;
     private javax.swing.JLabel lblIconGemsBulletSpeed;
+    private javax.swing.JLabel lblIconGemsBulletSpeed1;
     private javax.swing.JLabel lblIconGemsFireRate;
     private javax.swing.JLabel lblIconGemsHitpoints;
     private javax.swing.JLabel lblIconGemsSpeed;
@@ -1114,6 +1386,7 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblIconSpeed2;
     private javax.swing.JLabel lblIconSpeed3;
     private javax.swing.JLabel lblIconSpeed4;
+    private javax.swing.JLabel lblIconSpeed6;
     private javax.swing.JLabel lblMovementspeedGems;
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblShip;
@@ -1121,6 +1394,7 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblSpeed;
     private javax.swing.JLabel lblUpgradeBarBulletPower;
     private javax.swing.JLabel lblUpgradeBarBulletSpeed;
+    private javax.swing.JLabel lblUpgradeBarCompanion;
     private javax.swing.JLabel lblUpgradeBarFireRate;
     private javax.swing.JLabel lblUpgradeBarHitpoints;
     private javax.swing.JLabel lblUpgradeBarSpeed;
