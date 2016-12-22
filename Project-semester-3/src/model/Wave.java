@@ -11,9 +11,11 @@ public class Wave implements Serializable{
     private int spawnRate;
     private int enemyid;
     private int delayToNextWave;
+    private int numberOfEnemies;
     
     public Wave(int numberOfEnemies,int spawnRate , int enemyid, int delayToNextWave){
         this.numberOfEnemiesLeft = numberOfEnemies;
+        this.numberOfEnemies = numberOfEnemies;
         this.spawnRate = spawnRate;
         this.enemyid = enemyid;
         this.delayToNextWave = delayToNextWave;
@@ -45,5 +47,11 @@ public class Wave implements Serializable{
     }
     public int getEnemyID(){
         return enemyid;
+    }
+    public void setEnemiesLeft(){
+        numberOfEnemiesLeft = numberOfEnemies;
+    }
+    public void increaseEnemies(){
+        numberOfEnemies = numberOfEnemies + 1;
     }
 }

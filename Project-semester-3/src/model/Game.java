@@ -213,6 +213,7 @@ public class Game implements Serializable {
     private void spawnEnemy() {
         randomSpawnGenerator();
         Wave wave = waves.get(waveCounter);
+        
 
         int enemyid = wave.getEnemyID();
         if (System.currentTimeMillis() - spawnTimer > wave.getSpawnRateInMs() && wave.getNumberOfEnemiesLeft() != 0 && System.currentTimeMillis() > delaytime) {
@@ -223,13 +224,26 @@ public class Game implements Serializable {
             wave.reduceNumberOfEnemiesLeft();
 
         }
-        if (wave.getNumberOfEnemiesLeft() == 0 && waveCounter < waves.size() - 1) {
+        if (wave.getNumberOfEnemiesLeft() == 0 && waveCounter < waves.size()) {
             int delay = wave.getDelay();
             delaytime = System.currentTimeMillis() + delay;
 
             // TODO use this delay (maybe an upgrade screen after 2 seconds ?
             waveCounter++;
+            wave.setEnemiesLeft();
 
+        }
+        if(waveCounter == waves.size()){
+            System.out.println("hierin ?");
+            character.increaseMultiplier();
+            for(Wave v : waves){
+                v.increaseEnemies();
+            }
+            
+            waveCounter = 0;
+            if(multiplayer){
+                character2.increaseMultiplier();
+            }
         }
     }
 
@@ -340,7 +354,8 @@ public class Game implements Serializable {
 
         if (multiplayer) {
             collisionDetection.doCollisionBetweenEnemiesAndCharacter(bullets, enemies, character2);
-            collisionDetection.doCollisionBetweenCharacterAndGeom(geoms, character2);            
+            collisionDetection.doCollisionBetweenCharacterAndGeom(geoms, character2);
+            collisionDetection.doCollisionBetweenCharacterAndPowers(character2, powers);
         } else {
             collisionDetection.doCollisionBetweenEnemiesAndMine(enemies, mines);
             collisionDetection.doCollisionBetweenCharacterAndMine(mines, character);
