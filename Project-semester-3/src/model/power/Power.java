@@ -12,7 +12,7 @@ import model.Character;
  *
  * @author Maxime
  */
-public interface Power {
+public interface Power{
     
     public void start(Character c);
     public boolean isTheEnd();
@@ -20,4 +20,6 @@ public interface Power {
     public int getPosX();
     public int getPosY();
     public Rectangle getBounds();
+    public String getName();
+    public int getTimeLeft();
 }

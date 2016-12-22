@@ -179,6 +179,14 @@ public class Character implements Serializable{
         this.multiplier += 1;
     }
     
+    public void increaseFirerate(int amount){
+        this.bulletsPerMinute += amount;
+    }
+    
+    public void decreaseFireRate(int amount){
+        this.bulletsPerMinute -= amount;
+    }
+    
     public int getPrice(){
         return price;
     }

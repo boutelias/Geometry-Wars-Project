@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import model.power.FireRateBoost;
 import model.power.Power;
 import model.power.SpeedBoost;
 
@@ -35,7 +36,8 @@ public class CollisionDetection {
                             geoms.add(geom);
                         }
                         if (drop(enemy.getDropratepowerups())) {
-                            powers.add(new SpeedBoost(enemy.getPosX(), enemy.getPosY()));
+                            //powers.add(new SpeedBoost(enemy.getPosX(), enemy.getPosY()));
+                            powers.add(new FireRateBoost(enemy.getPosX(), enemy.getPosY()));
                         }
                         if (drop(enemy.getDropratepowerdowns())) {
 
