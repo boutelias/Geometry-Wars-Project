@@ -78,7 +78,7 @@ public class GameOverFrame extends javax.swing.JFrame {
         lblValueScore.setForeground(new java.awt.Color(255, 255, 255));
         lblValueScore.setText("value");
         getContentPane().add(lblValueScore);
-        lblValueScore.setBounds(390, 300, 41, 16);
+        lblValueScore.setBounds(390, 300, 130, 16);
 
         lblValueGeom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblValueGeom.setForeground(new java.awt.Color(255, 255, 255));
