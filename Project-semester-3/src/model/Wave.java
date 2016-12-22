@@ -54,4 +54,15 @@ public class Wave implements Serializable{
     public void increaseEnemies(){
         numberOfEnemies = numberOfEnemies + 1;
     }
+    public void setMoeilijkheidsgraad(String graad){
+        if(graad.equals("medium")){
+            spawnRate = spawnRate -200;
+            delayToNextWave = delayToNextWave -250;
+            
+        }
+        else if(graad.equals("hard")){
+            spawnRate = spawnRate -400;
+            delayToNextWave = delayToNextWave -750;
+        }
+    }
 }

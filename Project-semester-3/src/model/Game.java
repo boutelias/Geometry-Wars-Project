@@ -52,13 +52,15 @@ public class Game implements Serializable {
     private long delaytime;
     private boolean multiplayer;
     private CollisionDetection collisionDetection = new CollisionDetection();
+    private String moeilijkheidsgraad;
 
     public static void main(String[] args) {
         new Game(false);
     }
-
+    // meegeven in constructor : 
     public Game(boolean multiplayer) {
         this.multiplayer = multiplayer;
+        this.moeilijkheidsgraad = "hard";
         //TODO characterid , companionid en playerid uit GUI
         run();
         Frame frame = new GameOverFrame(character.getScore(),character.getNumberOfGeoms());
@@ -69,6 +71,9 @@ public class Game implements Serializable {
     private void run() {
         init();
         makeWaves();
+        for(Wave v: waves){
+            v.setMoeilijkheidsgraad(moeilijkheidsgraad);
+        }
 
         long spawnTimer = System.currentTimeMillis();
         waveCounter = 0;
