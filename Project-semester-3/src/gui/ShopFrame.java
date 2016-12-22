@@ -1,6 +1,5 @@
 package gui;
 
-
 import data.GameDA;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -15,21 +14,21 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Arne
  */
 public class ShopFrame extends javax.swing.JFrame {
+
     private int level = 0;
     List<model.Character> allCharacters;
     private static String playername;
     private int playerId;
     private int charCounter;
     private int charId;
-    
+
     private int selectedCharCounter;
-    
+
     public ShopFrame(String playername) {
         initComponents();
         this.playername = playername;
@@ -43,7 +42,7 @@ public class ShopFrame extends javax.swing.JFrame {
         InitCharacters();
         checkBoughtandSelect();
         getGeomsAndCoins();
-        
+
     }
 
     /**
@@ -205,8 +204,18 @@ public class ShopFrame extends javax.swing.JFrame {
         });
 
         btnPlusBulletSpeed.setText("+");
+        btnPlusBulletSpeed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlusBulletSpeedActionPerformed(evt);
+            }
+        });
 
         btnPlusFireRate.setText("+");
+        btnPlusFireRate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlusFireRateActionPerformed(evt);
+            }
+        });
 
         btnPlusHitpoints.setText("+");
         btnPlusHitpoints.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +225,11 @@ public class ShopFrame extends javax.swing.JFrame {
         });
 
         btnPlusBulletPower.setText("+");
+        btnPlusBulletPower.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlusBulletPowerActionPerformed(evt);
+            }
+        });
 
         lblBulletspeedGems.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         lblBulletspeedGems.setText("Gems");
@@ -245,6 +259,19 @@ public class ShopFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createSequentialGroup()
+                                        .addComponent(lblBulletSpeed)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblUpgradeBarBulletSpeed))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createSequentialGroup()
+                                        .addComponent(lblBulletPower)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblUpgradeBarBulletPower)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPlusBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
                                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFireRate)
                                     .addComponent(lblHitpoints)
@@ -256,34 +283,19 @@ public class ShopFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnPlusHitpoints, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addGap(44, 44, 44)
-                                        .addComponent(lblUpgradeBarSpeed)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnPlusSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
                                         .addGap(46, 46, 46)
                                         .addComponent(lblUpgradeBarFireRate)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnPlusFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createSequentialGroup()
-                                        .addComponent(lblBulletSpeed)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblUpgradeBarBulletSpeed))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelUpgradesLayout.createSequentialGroup()
-                                        .addComponent(lblBulletPower)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblUpgradeBarBulletPower)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnPlusFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btnPlusBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addComponent(btnPlusBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(2, 2, 2)
+                                        .addGap(44, 44, 44)
+                                        .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(btnPlusBulletSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanelUpgradesLayout.createSequentialGroup()
+                                                .addComponent(lblUpgradeBarSpeed)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnPlusSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(2, 2, 2)))
                         .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelUpgradesLayout.createSequentialGroup()
                                 .addComponent(lblMovementspeedGems, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,9 +364,7 @@ public class ShopFrame extends javax.swing.JFrame {
                                             .addComponent(lblBulletPower)
                                             .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(4, 4, 4))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblIconGemsBulletPower, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lblIconGemsBulletPower, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanelUpgradesLayout.createSequentialGroup()
                                 .addGap(30, 30, 30)
                                 .addComponent(lblUpgradeBarBulletSpeed)
@@ -694,88 +704,105 @@ public class ShopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipActionPerformed
-       jPanelCompanion.setVisible(false);
-       jPanelShip.setVisible(true);
-       btnShip.setVisible(false);
-       lblShip.setVisible(true);
-       btnCompanion.setVisible(true);
-       lblCompanion.setVisible(false);
+        jPanelCompanion.setVisible(false);
+        jPanelShip.setVisible(true);
+        btnShip.setVisible(false);
+        lblShip.setVisible(true);
+        btnCompanion.setVisible(true);
+        lblCompanion.setVisible(false);
     }//GEN-LAST:event_btnShipActionPerformed
 
     private void btnPlusHitpointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusHitpointsActionPerformed
-        // TODO add your handling code here:
+         int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId, charCounter);
+        int leveloflives = upgrades.getLeveloflives();
+        int livesPrice = GameDA.getInstance().getPriceLeveloflives(leveloflives + 1);
+        if (currentGeoms >= livesPrice) {
+            int newBalance = currentGeoms - livesPrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            GameDA.getInstance().setLivesUpgrade(playerId, charCounter, leveloflives + 1);
+            getGeomsAndCoins();
+            refreshUpgrades();
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
+        }
     }//GEN-LAST:event_btnPlusHitpointsActionPerformed
 
     private void btnPlusSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusSpeedActionPerformed
-        ImageIcon icon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-"+(level+1)+".png");
-        level++; 
-        lblUpgradeBarSpeed.setIcon(icon);
-        
-        if(level ==5){
-            btnPlusSpeed.setEnabled(false);
+        int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId, charCounter);
+        int levelofmovementspeed = upgrades.getLevelofmovementspeed();
+        int movementspeedPrice = GameDA.getInstance().getPriceLevelofmovementspeed(levelofmovementspeed + 1);
+        if (currentGeoms >= movementspeedPrice) {
+            int newBalance = currentGeoms - movementspeedPrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            GameDA.getInstance().setMovementspeedUpgrade(playerId, charCounter, levelofmovementspeed + 1);
+            getGeomsAndCoins();
+            refreshUpgrades();
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
         }
     }//GEN-LAST:event_btnPlusSpeedActionPerformed
 
     private void btnCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanionActionPerformed
-       jPanelCompanion.setVisible(true);
-       jPanelShip.setVisible(false);
-       btnShip.setVisible(true);
-       lblShip.setVisible(false);
-       btnCompanion.setVisible(false);
-       lblCompanion.setVisible(true);
+        jPanelCompanion.setVisible(true);
+        jPanelShip.setVisible(false);
+        btnShip.setVisible(true);
+        lblShip.setVisible(false);
+        btnCompanion.setVisible(false);
+        lblCompanion.setVisible(true);
     }//GEN-LAST:event_btnCompanionActionPerformed
 
     private void btnNextShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextShipActionPerformed
         //lblAfbeeldingSchip.setBackground(Color.yellow);
-        
+
         model.Character nextShip = null;
-        if(charId+1 < allCharacters.size()){
-        System.out.println(charCounter);
-        nextShip = allCharacters.get(charId + 1);
+        if (charId + 1 < allCharacters.size()) {
+            System.out.println(charCounter);
+            nextShip = allCharacters.get(charId + 1);
         }
-        if(nextShip != null){
+        if (nextShip != null) {
             String spritename = nextShip.getSprite();
-            
-            System.out.println("spritename:"+ spritename+"-");
-            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename+ ".png")));
+
+            System.out.println("spritename:" + spritename + "-");
+            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename + ".png")));
             lblShipsName.setText(spritename);
             charCounter += 1;
             charId += 1;
             checkBoughtandSelect();
-        }    
+        }
     }//GEN-LAST:event_btnNextShipActionPerformed
 
     private void btnPreviousShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousShipActionPerformed
         //lblAfbeeldingSchip.setBackground(Color.CYAN);
         model.Character nextShip = null;
-        System.out.println("charid:"+charId);
-        if(charId-1 >= 0){
+        System.out.println("charid:" + charId);
+        if (charId - 1 >= 0) {
             System.out.println(charCounter);
-        nextShip = allCharacters.get(charId-1);
+            nextShip = allCharacters.get(charId - 1);
         }
-        if(nextShip != null){
+        if (nextShip != null) {
             String spritename = nextShip.getSprite();
-            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename+ ".png")));
+            lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename + ".png")));
             lblShipsName.setText(spritename);
             charCounter -= 1;
-            charId -=1;
+            charId -= 1;
             checkBoughtandSelect();
-        }    
-    
+        }
+
     }//GEN-LAST:event_btnPreviousShipActionPerformed
-    
-    private void checkBoughtandSelect(){
+
+    private void checkBoughtandSelect() {
         //functie meegeven playerid en char id, ophalen isBought ja nee
         int isBought = GameDA.getInstance().isBought(playerId, charCounter);
-        if(isBought == 1){
+        if (isBought == 1) {
             // show selectbutton
             btnShipBuy.setVisible(false);
             lblPrice.setVisible(false);
             btnShipSelect.setVisible(true);
             btnUpgradeShip.setVisible(true);
-            
-        }
-        else{
+
+        } else {
             // show buy button + price
             btnShipSelect.setVisible(false);
             btnShipBuy.setVisible(true);
@@ -783,98 +810,102 @@ public class ShopFrame extends javax.swing.JFrame {
             btnUpgradeShip.setVisible(false);
             //show price
             int shipPrice = allCharacters.get(charId).getPrice();
-            
+
             lblPrice.setText(Integer.toString(shipPrice));
-            
-            
-            
-            
-            
+
         }
     }
-    
-    private void getGeomsAndCoins(){
+
+    private void getGeomsAndCoins() {
         lblContentCoins.setText(Integer.toString(GameDA.getInstance().getPremiumcoins(playerId)));
         lblContentGems.setText(Integer.toString(GameDA.getInstance().getGeoms(playerId)));
     }
-    
+
     private void btnUpgradeShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpgradeShipActionPerformed
         jPanelUpgrades.setVisible(true);
         btnBackUpgrades.setVisible(true);
         btnUpgradeShip.setVisible(false);
-        
-        
-        Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId,charCounter);
-        
-        
+        refreshUpgrades();
+
+    }//GEN-LAST:event_btnUpgradeShipActionPerformed
+
+    private void refreshUpgrades() {
+        Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId, charCounter);
+
         //imgicon leveloflives
         int leveloflives = upgrades.getLeveloflives();
-        if(leveloflives<6){
-        int livesPrice = GameDA.getInstance().getPriceLeveloflives(leveloflives+1);
-        lblHitpointsGems.setText(Integer.toString(livesPrice));
-        }else{
-        lblHitpointsGems.setText("N/A");
+        if (leveloflives < 6) {
+            int livesPrice = GameDA.getInstance().getPriceLeveloflives(leveloflives + 1);
+            lblHitpointsGems.setText(Integer.toString(livesPrice));
+            btnPlusHitpoints.setEnabled(true);
+        } else {
+            btnPlusHitpoints.setEnabled(false);
+            lblHitpointsGems.setText("N/A");
+
         }
         //System.out.println("level of lives: "+leveloflives);
         //System.out.println("level of lives: "+livesPrice);
-        ImageIcon leveloflivesicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-"+(leveloflives-1)+".png");
+        ImageIcon leveloflivesicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-" + (leveloflives - 1) + ".png");
         lblUpgradeBarHitpoints.setIcon(leveloflivesicon);
-        
+
         //imgicon leveloffirerate
         int leveloffirerate = upgrades.getLeveloffirerate();
-        if(leveloffirerate<6){
-        int fireratePrice = GameDA.getInstance().getPriceLeveloffirerate(leveloffirerate+1);
-        lblFirerateGems.setText(Integer.toString(fireratePrice));
-        }else{
-        lblFirerateGems.setText("N/A");
+        if (leveloffirerate < 6) {
+            int fireratePrice = GameDA.getInstance().getPriceLeveloffirerate(leveloffirerate + 1);
+            lblFirerateGems.setText(Integer.toString(fireratePrice));
+            btnPlusFireRate.setEnabled(true);
+        } else {
+            btnPlusFireRate.setEnabled(false);
+            lblFirerateGems.setText("N/A");
         }
         //System.out.println("level of lives: "+leveloflives);
-        ImageIcon leveloffirerateicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-"+(leveloffirerate-1)+".png");
+        ImageIcon leveloffirerateicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-" + (leveloffirerate - 1) + ".png");
         lblUpgradeBarFireRate.setIcon(leveloffirerateicon);
-        
+
         //imgicon levelofmovementspeed
         int levelofmovementspeed = upgrades.getLevelofmovementspeed();
-        if(levelofmovementspeed<6){
-        int movementspeedPrice = GameDA.getInstance().getPriceLevelofmovementspeed(levelofmovementspeed+1);
-        lblMovementspeedGems.setText(Integer.toString(movementspeedPrice));
-        }else{
-        lblMovementspeedGems.setText("N/A");
+        if (levelofmovementspeed < 6) {
+            int movementspeedPrice = GameDA.getInstance().getPriceLevelofmovementspeed(levelofmovementspeed + 1);
+            lblMovementspeedGems.setText(Integer.toString(movementspeedPrice));
+            btnPlusSpeed.setEnabled(true);
+        } else {
+            btnPlusSpeed.setEnabled(false);
+            lblMovementspeedGems.setText("N/A");
         }
-        ImageIcon levelofmovementspeedicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-"+(levelofmovementspeed-1)+".png");
+        ImageIcon levelofmovementspeedicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-" + (levelofmovementspeed - 1) + ".png");
         lblUpgradeBarSpeed.setIcon(levelofmovementspeedicon);
-        
+
         //imgicon levelofbulletspeed
         int levelofbulletspeed = upgrades.getLevelofbulletspeed();
-        if(levelofbulletspeed<6){
-        int bulletspeedPrice = GameDA.getInstance().getPriceLevelofbulletspeed(levelofbulletspeed+1);
-        lblBulletspeedGems.setText(Integer.toString(bulletspeedPrice));
-        }else{
-        lblBulletspeedGems.setText("N/A");
+        if (levelofbulletspeed < 6) {
+            int bulletspeedPrice = GameDA.getInstance().getPriceLevelofbulletspeed(levelofbulletspeed + 1);
+            lblBulletspeedGems.setText(Integer.toString(bulletspeedPrice));
+            btnPlusBulletSpeed.setEnabled(true);
+        } else {
+            lblBulletspeedGems.setText("N/A");
+            btnPlusBulletSpeed.setEnabled(false);
         }
-        ImageIcon levelofbulletspeedicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-"+(levelofbulletspeed-1)+".png");
+        ImageIcon levelofbulletspeedicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-" + (levelofbulletspeed - 1) + ".png");
         lblUpgradeBarBulletSpeed.setIcon(levelofbulletspeedicon);
-        
+
         //imgicon levelofbulletdamage
         int levelofbulletdamage = upgrades.getLevelofbulletdamage();
-        if(levelofbulletdamage<6){
-        int bulletdamagePrice = GameDA.getInstance().getPriceLevelofbulletdamage(levelofbulletdamage+1);
-        lblBulletdamageGems.setText(Integer.toString(bulletdamagePrice));
-        }else{
-        lblBulletdamageGems.setText("N/A");
+        if (levelofbulletdamage < 6) {
+            int bulletdamagePrice = GameDA.getInstance().getPriceLevelofbulletdamage(levelofbulletdamage + 1);
+            lblBulletdamageGems.setText(Integer.toString(bulletdamagePrice));
+            btnPlusBulletPower.setEnabled(true);
+        } else {
+            btnPlusBulletPower.setEnabled(false);
+            lblBulletdamageGems.setText("N/A");
         }
-        ImageIcon levelofbulletdamageicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-"+(levelofbulletdamage-1)+".png");
+        ImageIcon levelofbulletdamageicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-" + (levelofbulletdamage - 1) + ".png");
         lblUpgradeBarBulletPower.setIcon(levelofbulletdamageicon);
-        
-        //prices naast zetten
-        
-        
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_btnUpgradeShipActionPerformed
 
+        //prices naast zetten
+    }
+
+    ;
+    
     private void btnBackUpgradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpgradesActionPerformed
         jPanelUpgrades.setVisible(false);
         btnBackUpgrades.setVisible(false);
@@ -902,46 +933,96 @@ public class ShopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHighscoresActionPerformed
 
     private void btnShipBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipBuyActionPerformed
-        
+
         int currentGeoms = GameDA.getInstance().getGeoms(playerId);
         int characterPrice = allCharacters.get(charId).getPrice();
-        
-        if(currentGeoms>characterPrice){
-        //koop character
-        GameDA.getInstance().buyCharacter(playerId,charCounter);
-        int newBalance = currentGeoms - characterPrice;
-        GameDA.getInstance().setNewGeomBalance(newBalance,playerId);
-        checkBoughtandSelect();
-        getGeomsAndCoins();
-        }
-        else{
+
+        if (currentGeoms > characterPrice) {
+            //koop character
+            GameDA.getInstance().buyCharacter(playerId, charCounter);
+            int newBalance = currentGeoms - characterPrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            checkBoughtandSelect();
+            getGeomsAndCoins();
+        } else {
             JOptionPane.showMessageDialog(null, "Not enough geoms");
         }
-        
+
     }//GEN-LAST:event_btnShipBuyActionPerformed
 
-    private void showSelectedCharCounter(){
-        
+    private void showSelectedCharCounter() {
+
         model.Character firstShip = allCharacters.get(charId);
         String spritename = firstShip.getSprite();
         current_selected_ship.setText(spritename);
     }
-    
+
     private void btnShipSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipSelectActionPerformed
-            //set global variable selected
-            
-            selectedCharCounter = charId;
-            showSelectedCharCounter();
-            
+        //set global variable selected
+
+        selectedCharCounter = charId;
+        showSelectedCharCounter();
+
     }//GEN-LAST:event_btnShipSelectActionPerformed
 
-    private void InitCharacters(){  
+    private void btnPlusBulletSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusBulletSpeedActionPerformed
+        int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId, charCounter);
+        int levelofbulletspeed = upgrades.getLevelofbulletspeed();
+        int bulletspeedPrice = GameDA.getInstance().getPriceLevelofbulletspeed(levelofbulletspeed + 1);
+        if (currentGeoms >= bulletspeedPrice) {
+            int newBalance = currentGeoms - bulletspeedPrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            GameDA.getInstance().setBulletspeedUpgrade(playerId, charCounter, levelofbulletspeed + 1);
+
+            getGeomsAndCoins();
+            refreshUpgrades();
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
+        }
+
+    }//GEN-LAST:event_btnPlusBulletSpeedActionPerformed
+
+    private void btnPlusBulletPowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusBulletPowerActionPerformed
+        int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId, charCounter);
+        int levelofbulletdamage = upgrades.getLevelofbulletdamage();
+        int bulletdamagePrice = GameDA.getInstance().getPriceLevelofbulletdamage(levelofbulletdamage + 1);
+        if (currentGeoms >= bulletdamagePrice) {
+            int newBalance = currentGeoms - bulletdamagePrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            GameDA.getInstance().setBulletdamageUpgrade(playerId, charCounter, levelofbulletdamage + 1);
+
+            getGeomsAndCoins();
+            refreshUpgrades();
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
+        }
+    }//GEN-LAST:event_btnPlusBulletPowerActionPerformed
+
+    private void btnPlusFireRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusFireRateActionPerformed
+        int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId, charCounter);
+        int leveloffirerate = upgrades.getLeveloffirerate();
+        int fireratePrice = GameDA.getInstance().getPriceLeveloffirerate(leveloffirerate + 1);
+        if (currentGeoms >= fireratePrice) {
+            int newBalance = currentGeoms - fireratePrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            GameDA.getInstance().setFirerateUpgrade(playerId, charCounter, leveloffirerate + 1);
+
+            getGeomsAndCoins();
+            refreshUpgrades();
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
+        }
+    }//GEN-LAST:event_btnPlusFireRateActionPerformed
+
+    private void InitCharacters() {
         model.Character firstShip = allCharacters.get(0);
         String spritename = firstShip.getSprite();
-        lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename+ ".png")));  
+        lblAfbeeldingSchip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ships/" + spritename + ".png")));
         lblShipsName.setText(spritename);
     }
-    
 
     /**
      * @param args the command line arguments
