@@ -83,7 +83,6 @@ public class Server implements Runnable{
         
         try{
             clientPlayerId = (Integer) in.readObject();
-            //System.out.println(in.readObject());
             clientCharacterId = (Integer) in.readObject();
             System.out.println(clientPlayerId);
             System.out.println(clientCharacterId);
@@ -166,5 +165,8 @@ public class Server implements Runnable{
         return clientCharacterId;
     }
     
+    public void setCharacter2(Character character2){
+        this.character2 = character2;
+    }
     
 }

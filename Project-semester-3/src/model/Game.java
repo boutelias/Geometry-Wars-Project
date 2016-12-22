@@ -55,7 +55,7 @@ public class Game implements Serializable {
     private String moeilijkheidsgraad;
 
     public static void main(String[] args) {
-        new Game(true);
+        new Game(false);
     }
     // meegeven in constructor : 
     public Game(boolean multiplayer) {
@@ -139,7 +139,7 @@ public class Game implements Serializable {
             //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
         }
         if (multiplayer) {
-            character2 = db.getCharacter(server.getClientCharacterId(), gameWidth, gameHeight);
+            character2 = character;
             try {
                 server = new Server(character, character2, bullets, enemies, geoms,powers);
                 Thread t = new Thread(server);
@@ -147,6 +147,9 @@ public class Game implements Serializable {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            
+            character2 = db.getCharacter(server.getClientCharacterId(), gameWidth, gameHeight);       
+            server.setCharacter2(character2);
         }
 
         players = db.getPlayers();
