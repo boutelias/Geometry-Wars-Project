@@ -34,25 +34,31 @@ public class Client {
     
     private boolean keepGoing = true;
 
-    public Client() throws IOException {
+    public Client(int playerid, int characterid,String ip) throws IOException {
         gameGui = new GameGui();
         handler = new InputHandler(gameGui.getFrame());
 
         dataOut = new DataForServer();
 
         System.out.println("Connecting ...");
-        socket = new Socket("localhost", 7777);
+        socket = new Socket(ip, 7777);
         out = new ObjectOutputStream(socket.getOutputStream());
         in = new ObjectInputStream(socket.getInputStream());
 
         System.out.println("Connection succesfull");
         System.out.println("Receiving information...");
+        out.writeObject(new Integer(playerid));
+        out.flush();
+        
+        out.writeObject(new Integer(characterid));
+        out.flush();
+        
     }
 
     public void run() {
         while (keepGoing) {
             try {
-                //System.out.println("left: "+handler.isKeyDown(KeyEvent.VK_LEFT));
+                
                 m = handler.getEvent(1);
                 keyLeft = handler.isKeyDown(KeyEvent.VK_LEFT);
                 keyRight = handler.isKeyDown(KeyEvent.VK_RIGHT);
@@ -61,16 +67,15 @@ public class Client {
                 leftClick = handler.isMouseDown(1);
                 
                 out.reset();
-                //out.writeObject(handler);
-                System.out.println("left : " + keyLeft);
+                
+                
                 dataOut.updateDataForServer(keyLeft, keyRight, keyUp, keyDown, leftClick, m);
                 out.writeObject(dataOut);
-                //out.writeInt(15);
+                
                 out.flush();
                 dataForClient = (DataForClient) in.readObject();
-                //System.out.println("Data received");
-                //System.out.println(data.getPlayer().getPosX());
-                System.out.println(dataForClient.getCharacter2().getDamage());
+                
+                
 
                 gameGui.draw(dataForClient.getPlayer(),dataForClient.getCharacter2(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms(), dataForClient.getPowers());
                 this.keepGoing = dataForClient.isKeepGoing();
@@ -81,7 +86,7 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Client client = new Client();
+        Client client = new Client(1,1,"172.31.28.31");
         client.run();
     }
 }
