@@ -2,6 +2,8 @@ package multiplayer;
 
 import com.sun.glass.events.KeyEvent;
 import gui.GameGui;
+import gui.GameOverFrame;
+import java.awt.Frame;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -31,6 +33,8 @@ public class Client {
     private boolean keyUp;
     private boolean keyDown;
     private boolean leftClick;
+    private long score;
+    private int geoms;
     
     private boolean keepGoing = true;
 
@@ -77,16 +81,25 @@ public class Client {
                 
                 
 
+                
                 gameGui.draw(dataForClient.getPlayer(),dataForClient.getCharacter2(), dataForClient.getBullets(), dataForClient.getEnemies(), dataForClient.getGeoms(), dataForClient.getPowers());
                 this.keepGoing = dataForClient.isKeepGoing();
+                model.Character character2 = dataForClient.getCharacter2();
+                score = character2.getScore();
+                geoms = character2.getNumberOfGeoms();
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        Frame frame = new GameOverFrame(score,geoms);
+        frame.setVisible(true);
+        gameGui.deleteGame();
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Client client = new Client(1,1,"172.31.28.31");
         client.run();
+        
     }
 }
