@@ -720,7 +720,7 @@ public class GameDA {
     public int getPower(String name){
         int i;    
         try {
-            String sql = "select value from `powerup` where powerupname = name ";
+            String sql = "select value from `powerup` where powerupname = ?";
             PreparedStatement prep = this.con.prepareStatement(sql);
             prep.setString(1, name);
             ResultSet rs = prep.executeQuery();
