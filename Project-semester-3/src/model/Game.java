@@ -1,6 +1,6 @@
 package model;
 
-import data.ExtraDA;
+
 import data.GameDA;
 import gui.GameGui;
 import gui.GameOverFrame;

@@ -698,7 +698,7 @@ public class GameDA {
             prep.executeUpdate();
             prep.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ExtraDA.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IllegalArgumentException(ex);
         }
         
     }
