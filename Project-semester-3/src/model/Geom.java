@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 public class Geom implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private int posX;
     private int posY;
     

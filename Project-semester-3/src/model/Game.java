@@ -107,6 +107,10 @@ public class Game implements Serializable, Runnable {
         if(character.getScore() > p.getHighscore()  ){
             db.setHighscorePlayer(playerid, character.getScore());
         }
+        int currentGeoms = db.getGeoms(playerid);
+        int earnedGeoms = character.getNumberOfGeoms();
+        int newBalance = currentGeoms + earnedGeoms;
+        db.setNewGeomBalance(newBalance, playerid);
         Frame frame = new GameOverFrame(character.getScore(),character.getNumberOfGeoms());
         frame.setVisible(true);
         gameGui.deleteGame();
@@ -130,6 +134,7 @@ public class Game implements Serializable, Runnable {
                     break;
                 case 2:
                     companion = db.getCompanionLifeSaver(playerid, character);
+                    System.out.println(companion.getPosX());
                     break;
                 case 3:
                     companion = db.getCompanionMiner(playerid, character, mines, handler);

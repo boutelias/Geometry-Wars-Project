@@ -37,7 +37,7 @@ public class ShopFrame extends javax.swing.JFrame {
     public ShopFrame(String playername) {
         initComponents();
         this.playername = playername;
-        playerId = GameDA.getInstance().getPLayerId(this.playername);
+        playerId = GameDA.getInstance().getPlayerId(this.playername);
         allCharacters = GameDA.getInstance().getShips();
         allCompanions = GameDA.getInstance().getCompanions();
         
@@ -1135,7 +1135,7 @@ public class ShopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClanActionPerformed
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
-        new StartGameFrame(playername).setVisible(true);
+        new StartGameFrame(playername,charId,companionId).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnStartGameActionPerformed
 

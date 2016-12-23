@@ -5,6 +5,7 @@ import java.io.Serializable;
 import model.Character;
 
 public class Bullet implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private int width = 20;
     private int height = 20;
     

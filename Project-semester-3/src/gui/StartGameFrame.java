@@ -1,6 +1,11 @@
 package gui;
 
+import data.GameDA;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import multiplayer.Client;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,12 +24,27 @@ public class StartGameFrame extends javax.swing.JFrame {
      */
     
     private static String playername;
+    private int characterid;
+    private int companionid;
     
     
-    public StartGameFrame(String userId) {
+    public StartGameFrame(String playername) {
         initComponents();
-        this.playername = userId;
+        this.playername = playername;
+        this.characterid = 1;
+        this.companionid = 1;
+        
         //JOptionPane.showMessageDialog(null, "username:"+playername);
+        ServerClientPanel.setVisible(false);
+        ServerIPPanel.setVisible(false);
+    }
+    
+    public StartGameFrame(String playername, int characterid, int companionid){
+        
+        this.playername = playername;
+        this.characterid = characterid;
+        this.companionid = companionid;
+        
         ServerClientPanel.setVisible(false);
         ServerIPPanel.setVisible(false);
     }
@@ -280,12 +300,12 @@ public class StartGameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSinglePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSinglePlayerActionPerformed
-       new GameDifficultyFrame(playername).setVisible(true);
+       new GameDifficultyFrame(playername,characterid,companionid).setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btnSinglePlayerActionPerformed
 
     private void btnServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServerActionPerformed
-       new GameDifficultyFrame(playername).setVisible(true);
+       new GameDifficultyFrame(playername,characterid).setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btnServerActionPerformed
 
@@ -295,7 +315,18 @@ public class StartGameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackClientActionPerformed
 
     private void btnConfirmServerIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmServerIPActionPerformed
-       new GameDifficultyFrame(playername).setVisible(true);
+       //new GameDifficultyFrame(playername,characterid,companionid).setVisible(true);
+       
+       String ip = txtServerIP.getText();
+       int playerid = GameDA.getInstance().getPlayerId(playername);
+        try {
+            Client c = new Client(playerid,characterid,ip);
+            Thread t = new Thread(c);
+            t.start();
+        } catch (IOException ex) {
+            Logger.getLogger(StartGameFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
        this.dispose();
     }//GEN-LAST:event_btnConfirmServerIPActionPerformed
 

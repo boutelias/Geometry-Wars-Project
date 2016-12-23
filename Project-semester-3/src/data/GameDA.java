@@ -111,7 +111,7 @@ public class GameDA implements Serializable {
         return p;
     }
 
-    public int getPLayerId(String playername) {
+    public int getPlayerId(String playername) {
         try {
             String sql = "select * from `Player` where username= ?";
             PreparedStatement prep = this.con.prepareStatement(sql);
@@ -247,6 +247,7 @@ public class GameDA implements Serializable {
             ResultSet rs = prep.executeQuery();
             rs.next();
             c = new LifeSaver(character, rs.getInt("width"), rs.getInt("height"), rs.getInt("livesperminute"));
+            System.out.println(c.getPosX());
         } catch (SQLException ex) {
             throw new IllegalArgumentException(ex);
         }

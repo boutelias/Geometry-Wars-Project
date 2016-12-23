@@ -1,11 +1,12 @@
 
 package model.power;
 
-import data.GameDA;
+//import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
 public class FireRateNerf implements Power, Serializable{
+    private static final long serialVersionUID = 6529685098267757690L;
     private model.Character c;
     private int fireRateNerf;
     private long startTime;
@@ -14,7 +15,7 @@ public class FireRateNerf implements Power, Serializable{
     private int posX;
     private int posY;
     private String name = "Firerate nerf";
-    private GameDA db = GameDA.getInstance();
+//    private GameDA db = GameDA.getInstance();
 
     public FireRateNerf(int posX, int posY) {
         //fireRateNerf = db.getPower("fireratenerf");

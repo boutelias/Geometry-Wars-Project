@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 public class Enemy implements Serializable{
+    private static final long serialVersionUID = 6529685098267757690L;
     private int width ;
     private int height;
     private float posX;

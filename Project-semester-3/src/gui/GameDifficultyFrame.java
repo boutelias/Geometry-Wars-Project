@@ -5,6 +5,7 @@
  */
 package gui;
 
+import data.GameDA;
 import model.Game;
 
 /**
@@ -14,12 +15,29 @@ import model.Game;
 public class GameDifficultyFrame extends javax.swing.JFrame {
 
     private static String playername;
+    private int characterid;
+    private int companionid;
+    private int userid;
+    private boolean multiplayer;
     /**
      * Creates new form GameDifficultyFrame
      */
-    public GameDifficultyFrame(String userid) {
+    public GameDifficultyFrame(String playername, int characterid, int companionid) {
         initComponents();
-        this.playername = userid;
+        this.playername = playername;
+        this.characterid = characterid;
+        this.companionid = companionid;
+        this.userid = GameDA.getInstance().getPlayerId(playername);
+        this.multiplayer = false;
+    }
+    
+    public GameDifficultyFrame(String playername, int characterid) {
+        initComponents();
+        this.playername = playername;
+        this.characterid = characterid;
+        this.companionid = -1;
+        this.userid = GameDA.getInstance().getPlayerId(playername);
+        this.multiplayer = true;
     }
 
     /**
@@ -92,7 +110,8 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
 
     private void btnEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEasyActionPerformed
         //this.dispose();
-        Game g = new Game(false,"easy",1,1,1); //TODO playerid , characterid , companionid
+        
+        Game g = new Game(multiplayer,"easy",userid,characterid,companionid); //TODO playerid , characterid , companionid
         Thread t = new Thread(g);
         t.start();
         
@@ -105,13 +124,13 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnMediumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMediumActionPerformed
-        Game g = new Game(false,"medium",1,1,1);
+        Game g = new Game(multiplayer,"medium",userid,characterid,companionid);
         Thread t = new Thread(g);
         t.start();
     }//GEN-LAST:event_btnMediumActionPerformed
 
     private void btnHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHardActionPerformed
-        Game g = new Game(false,"hard",1,1,1);
+        Game g = new Game(multiplayer,"hard",userid,characterid,companionid);
         Thread t = new Thread(g);
         t.start();
     }//GEN-LAST:event_btnHardActionPerformed

@@ -1,11 +1,11 @@
 package model.power;
 
-import data.GameDA;
+//import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
 public class DamageBoost implements Power, Serializable {
-
+    private static final long serialVersionUID = 6529685098267757690L;
     private model.Character c;
     private int extraDamage;
     private long startTime;
@@ -14,7 +14,7 @@ public class DamageBoost implements Power, Serializable {
     private int posX;
     private int posY;
     private String name = "Damage boost";
-    private GameDA db = GameDA.getInstance();
+//    private GameDA db = GameDA.getInstance();
 
     public DamageBoost(int posX, int posY) {
         //extraDamage = db.getPower("bulletdamageboost");

@@ -1,12 +1,13 @@
 
 package model.power;
 
-import data.GameDA;
+//import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
 
 public class SpeedNerf implements Power,Serializable{
+    private static final long serialVersionUID = 6529685098267757690L;
     private model.Character c;
     private int speed;
     private long startTime;
@@ -15,7 +16,7 @@ public class SpeedNerf implements Power,Serializable{
     private int posX;
     private int posY;
     private String name = "Speed nerf";
-    private GameDA db = GameDA.getInstance();
+//    private GameDA db = GameDA.getInstance();
 
     public SpeedNerf(int posX, int posY) {
         //speed = db.getPower("movementspeednerf");

@@ -16,6 +16,7 @@ public class LifeSaver implements Companion{
         
         this.width = width;
         this.height = height;
+        this.character = character;
         
         timeBetweenLifes = (60 *1000) / livesPerMinute;
         timeWhenLifeNeedsToBeAdded = System.currentTimeMillis() + timeBetweenLifes;

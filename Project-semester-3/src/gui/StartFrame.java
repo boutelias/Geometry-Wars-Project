@@ -456,7 +456,7 @@ public class StartFrame extends javax.swing.JFrame {
 
                 db.addNewPlayer(username, hashedpass);
                 JOptionPane.showMessageDialog(null, "User has been added!");
-                int playerid = db.getPLayerId(username);
+                int playerid = db.getPlayerId(username);
                 List<model.Character> characters = db.getShips();
                 for(model.Character c : characters){
                     int charid = c.getCharId();

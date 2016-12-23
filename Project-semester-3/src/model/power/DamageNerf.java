@@ -1,12 +1,12 @@
 
 package model.power;
 
-import data.GameDA;
+//import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
 public class DamageNerf implements Power, Serializable{
-    
+    private static final long serialVersionUID = 6529685098267757690L;
     private model.Character c;
     private int damage;
     private long startTime;
@@ -15,7 +15,7 @@ public class DamageNerf implements Power, Serializable{
     private int posX;
     private int posY;
     private String name = "Damage nerf";
-    private GameDA db = GameDA.getInstance();
+//    private GameDA db = GameDA.getInstance();
 
     public DamageNerf(int posX, int posY) {
         //damage = db.getPower("bulletdamagenerf");

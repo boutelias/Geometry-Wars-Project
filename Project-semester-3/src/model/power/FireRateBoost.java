@@ -1,13 +1,13 @@
 
 package model.power;
 
-import data.GameDA;
+//import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import model.Character;
 
 public class FireRateBoost implements Power, Serializable {
-
+    private static final long serialVersionUID = 6529685098267757690L;
     private model.Character c;
     private int extraFireRate;
     private long startTime;
@@ -16,7 +16,7 @@ public class FireRateBoost implements Power, Serializable {
     private int posX;
     private int posY;
     private String name = "Fire rate boost";
-    private GameDA db = GameDA.getInstance();
+//    private GameDA db = GameDA.getInstance();
 
     public FireRateBoost(int posX, int posY) {
         //extraFireRate = db.getPower("firerateboost");

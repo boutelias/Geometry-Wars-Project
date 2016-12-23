@@ -1,13 +1,13 @@
 package model.power;
 
 
-import data.GameDA;
+//import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import model.Character;
 
 public class SpeedBoost implements Power, Serializable {
-
+    private static final long serialVersionUID = 6529685098267757690L;
     private Character c;
     private int speed;
     private long startTime;
@@ -16,7 +16,7 @@ public class SpeedBoost implements Power, Serializable {
     private int posX;
     private int posY;
     private String name = "Speedboost";
-    private GameDA db = GameDA.getInstance();
+//    private GameDA db = GameDA.getInstance();
 
     public SpeedBoost(int posX, int posY) {
         //speed =db.getPower("movementspeedboost");
