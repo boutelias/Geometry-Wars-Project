@@ -49,7 +49,7 @@ public class Game implements Serializable {
     private Server server;
     private Companion companion;
     private GameDA db = GameDA.getInstance();
-    private ExtraDA ex = ExtraDA.getInstance();
+    
     private int characterid = 1;
     private long delaytime;
     private boolean multiplayer;
@@ -66,9 +66,9 @@ public class Game implements Serializable {
         this.moeilijkheidsgraad = "hard";
         //TODO characterid , companionid en playerid uit GUI
         run();
-        Player p = ex.getPlayer(playerid);
+        Player p = db.getPlayer(playerid);
         if(character.getScore() > p.getHighscore()  ){
-            ex.setHighscorePlayer(playerid, character.getScore());
+            db.setHighscorePlayer(playerid, character.getScore());
         }
         Frame frame = new GameOverFrame(character.getScore(),character.getNumberOfGeoms());
         frame.setVisible(true);
@@ -129,21 +129,19 @@ public class Game implements Serializable {
             int companionid = 3;
             switch (companionid) {
                 case 1:
-                    companion = db.getCompanionAutoShooter(1, character, enemies, bullets);
+                    companion = db.getCompanionAutoShooter(playerid, character, enemies, bullets);
                     break;
                 case 2:
-                    companion = db.getCompanionLifeSaver(1, character);
+                    companion = db.getCompanionLifeSaver(playerid, character);
                     break;
                 case 3:
-                    companion = db.getCompanionMiner(1, character, mines, handler);
+                    companion = db.getCompanionMiner(playerid, character, mines, handler);
                     break;
                 case 4:
-                    companion = db.getCompanionShooter(1, character, handler, bullets);
+                    companion = db.getCompanionShooter(playerid, character, handler, bullets);
                     break;
             }
-            //companion = new Miner(player, mines, handler, 30, 30, 10, 20);
-
-            //companion = new Shooter(player, handler, bullets, 30, 30, 30, 60);
+           
         }
         if (multiplayer) {
             character2 = character;

@@ -5,6 +5,7 @@
  */
 package model.power;
 
+import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
@@ -21,9 +22,10 @@ public class FireRateNerf implements Power, Serializable{
     private int posX;
     private int posY;
     private String name = "Firerate nerf";
+    private GameDA db = GameDA.getInstance();
 
     public FireRateNerf(int posX, int posY) {
-        fireRateNerf = 15;
+        fireRateNerf = db.getPower("fireratenerf");
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

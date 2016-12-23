@@ -5,6 +5,7 @@
  */
 package model.power;
 
+import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import model.Character;
@@ -23,9 +24,10 @@ public class FireRateBoost implements Power, Serializable {
     private int posX;
     private int posY;
     private String name = "Fire rate boost";
+    private GameDA db = GameDA.getInstance();
 
     public FireRateBoost(int posX, int posY) {
-        extraFireRate = 25;
+        extraFireRate = db.getPower("firerateboost");
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

@@ -1,5 +1,6 @@
 package model.power;
 
+import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
@@ -13,9 +14,10 @@ public class DamageBoost implements Power, Serializable {
     private int posX;
     private int posY;
     private String name = "Damage boost";
+    private GameDA db = GameDA.getInstance();
 
     public DamageBoost(int posX, int posY) {
-        extraDamage = 10;
+        extraDamage = db.getPower("bulletdamageboost");
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

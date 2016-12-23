@@ -5,6 +5,7 @@
  */
 package model.power;
 
+import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
@@ -22,9 +23,10 @@ public class DamageNerf implements Power, Serializable{
     private int posX;
     private int posY;
     private String name = "Damage nerf";
+    private GameDA db = GameDA.getInstance();
 
     public DamageNerf(int posX, int posY) {
-        damage = 5;
+        damage = db.getPower("bulletdamagenerf");
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

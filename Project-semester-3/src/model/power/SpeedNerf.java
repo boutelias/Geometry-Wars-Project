@@ -5,6 +5,7 @@
  */
 package model.power;
 
+import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
@@ -21,9 +22,10 @@ public class SpeedNerf implements Power,Serializable{
     private int posX;
     private int posY;
     private String name = "Speed nerf";
+    private GameDA db = GameDA.getInstance();
 
     public SpeedNerf(int posX, int posY) {
-        speed = 1;
+        speed = db.getPower("movementspeednerf");
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

@@ -35,8 +35,6 @@ public class CollisionDetection {
                         }
                         if (drop(enemy.getDropratepowerups())) {
                             int rand = randomGenerator.nextInt(3);
-                            System.out.println("in powerup");
-                            System.out.println(rand);
                             switch (rand) {
                                 case 0:
                                     powers.add(new SpeedBoost(enemy.getPosX(), enemy.getPosY()));

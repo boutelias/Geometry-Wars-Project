@@ -1,5 +1,6 @@
 package model.power;
 
+import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import model.Character;
@@ -14,9 +15,10 @@ public class SpeedBoost implements Power, Serializable {
     private int posX;
     private int posY;
     private String name = "Speedboost";
+    private GameDA db = GameDA.getInstance();
 
     public SpeedBoost(int posX, int posY) {
-        speed = 2;
+        speed =db.getPower("movementspeedboost");
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

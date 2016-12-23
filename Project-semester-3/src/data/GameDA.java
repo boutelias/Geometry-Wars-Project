@@ -689,5 +689,47 @@ public class GameDA {
 
         }
     }
+    public void setHighscorePlayer(int playerid,long score){
+        try {
+            String sql = "update `Player` set highscore= ? where playerid = ?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setLong(1, score);
+            prep.setInt(2, playerid);
+            prep.executeUpdate();
+            prep.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExtraDA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public Player getPlayer(int playerid){
+        Player p;
+        try {
+            String sql = "select * from `Player` where playerid = ?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, playerid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            p = new Player(rs.getString("username"), rs.getString("password"), rs.getInt("highscore"), rs.getInt("geoms"), rs.getInt("premiumcoins"));
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+    return p;
+    }
+    public int getPower(String name){
+        int i;    
+        try {
+            String sql = "select value from `powerup` where powerupname = name ";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setString(1, name);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            i = rs.getInt("value");
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+     return i;   
+    }
 
 }

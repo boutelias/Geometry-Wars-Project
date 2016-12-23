@@ -80,7 +80,6 @@ public class Miner implements Companion{
     public void doSpecialAction() {
         if(handler.isMouseDown(MouseEvent.BUTTON3)){
             if(this.lastMineFired+ (60.0/this.minesPerMinute*1000)<System.currentTimeMillis()){
-                System.out.println("Dit mag maar 6 keer per minuut");
                 Mine newmine = new Mine(this.posX,this.posY,this.damage);
                 mines.add(newmine);
                 this.lastMineFired = System.currentTimeMillis();
