@@ -1,6 +1,7 @@
 package multiplayer;
 
 import com.sun.glass.events.KeyEvent;
+import data.ExtraDA;
 import gui.GameGui;
 import gui.GameOverFrame;
 import java.awt.Frame;
@@ -35,12 +36,15 @@ public class Client {
     private boolean leftClick;
     private long score;
     private int geoms;
+    private int playerid;
+    private ExtraDA ex = ExtraDA.getInstance();
     
     private boolean keepGoing = true;
 
     public Client(int playerid, int characterid,String ip) throws IOException {
         gameGui = new GameGui();
         handler = new InputHandler(gameGui.getFrame());
+        this.playerid = playerid;
 
         dataOut = new DataForServer();
 
@@ -91,6 +95,10 @@ public class Client {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        Player p = ex.getPlayer(playerid);
+        if(score > p.getHighscore()){
+            ex.setHighscorePlayer(playerid, score);
         }
         Frame frame = new GameOverFrame(score,geoms);
         frame.setVisible(true);

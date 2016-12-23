@@ -1,5 +1,6 @@
 package model;
 
+import data.ExtraDA;
 import data.GameDA;
 import gui.GameGui;
 import gui.GameOverFrame;
@@ -48,11 +49,13 @@ public class Game implements Serializable {
     private Server server;
     private Companion companion;
     private GameDA db = GameDA.getInstance();
+    private ExtraDA ex = ExtraDA.getInstance();
     private int characterid = 1;
     private long delaytime;
     private boolean multiplayer;
     private CollisionDetection collisionDetection = new CollisionDetection();
     private String moeilijkheidsgraad;
+    private int playerid = 1 ; // TODO 
 
     public static void main(String[] args) {
         new Game(false);
@@ -63,6 +66,10 @@ public class Game implements Serializable {
         this.moeilijkheidsgraad = "hard";
         //TODO characterid , companionid en playerid uit GUI
         run();
+        Player p = ex.getPlayer(playerid);
+        if(character.getScore() > p.getHighscore()  ){
+            ex.setHighscorePlayer(playerid, character.getScore());
+        }
         Frame frame = new GameOverFrame(character.getScore(),character.getNumberOfGeoms());
         frame.setVisible(true);
         gameGui.deleteGame();

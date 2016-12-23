@@ -7,7 +7,12 @@ package data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Player;
 import util.GameException;
 
 /**
@@ -60,5 +65,34 @@ public class ExtraDA {
         }
         
         return instance;
+    }
+    
+    public void setHighscorePlayer(int playerid,long score){
+        try {
+            String sql = "update `Player` set highscore= ? where playerid = ?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setLong(1, score);
+            prep.setInt(2, playerid);
+            prep.executeUpdate();
+            prep.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExtraDA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public Player getPlayer(int playerid){
+        Player p;
+        try {
+            String sql = "select * from `Player` where playerid = ?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, playerid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            p = new Player(rs.getString("username"), rs.getString("password"), rs.getInt("highscore"), rs.getInt("geoms"), rs.getInt("premiumcoins"));
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+    return p;
     }
 }
