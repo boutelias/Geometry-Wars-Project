@@ -19,7 +19,7 @@ import model.Enemy;
 import model.InputHandler;
 import model.Player;
 
-public class Client {
+public class Client implements Runnable{
 
     private Socket socket;
     private ObjectOutputStream out;
@@ -107,7 +107,7 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Client client = new Client(1,1,"172.31.28.31");
+        Client client = new Client(1,1,"172.31.16.22");
         client.run();
         
     }

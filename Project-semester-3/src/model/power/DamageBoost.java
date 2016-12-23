@@ -33,7 +33,6 @@ public class DamageBoost implements Power, Serializable {
     }
 
     private void end() {
-
         c.decreaseBulletDamage(extraDamage);
     }
 

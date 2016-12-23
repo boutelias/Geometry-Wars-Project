@@ -1,5 +1,6 @@
 package model.power;
 
+
 import data.GameDA;
 import java.awt.Rectangle;
 import java.io.Serializable;
