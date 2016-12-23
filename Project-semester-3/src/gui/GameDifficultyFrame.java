@@ -5,6 +5,8 @@
  */
 package gui;
 
+import model.Game;
+
 /**
  *
  * @author Arne
@@ -89,7 +91,9 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEasyActionPerformed
-        
+        this.dispose();
+        new Game(false);
+      
     }//GEN-LAST:event_btnEasyActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

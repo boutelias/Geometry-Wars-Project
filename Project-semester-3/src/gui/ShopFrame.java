@@ -415,7 +415,7 @@ public class ShopFrame extends javax.swing.JFrame {
                     .addGroup(jPanelUpgradesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblIconGemsFireRate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblHitpoints)
@@ -534,16 +534,16 @@ public class ShopFrame extends javax.swing.JFrame {
 
         current_selected_ship.setText("shipname");
 
+        btnShipSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/select.png"))); // NOI18N
         btnShipSelect.setText("SELECT");
-        btnShipSelect.setSize(new java.awt.Dimension(160, 50));
         btnShipSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShipSelectActionPerformed(evt);
             }
         });
 
+        btnShipBuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/buy.png"))); // NOI18N
         btnShipBuy.setText("BUY");
-        btnShipBuy.setSize(new java.awt.Dimension(160, 50));
         btnShipBuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShipBuyActionPerformed(evt);
@@ -562,8 +562,8 @@ public class ShopFrame extends javax.swing.JFrame {
                     .addGroup(jPanelShipLayout.createSequentialGroup()
                         .addComponent(btnUpgradeShip, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblShipsName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(lblShipsName, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(current_ship)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(current_selected_ship, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -646,16 +646,16 @@ public class ShopFrame extends javax.swing.JFrame {
 
         current_selected_companion.setText("companionName");
 
+        btnCompanionSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/select.png"))); // NOI18N
         btnCompanionSelect.setText("SELECT");
-        btnCompanionSelect.setSize(new java.awt.Dimension(160, 50));
         btnCompanionSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCompanionSelectActionPerformed(evt);
             }
         });
 
+        btnCompanionBuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/buy.png"))); // NOI18N
         btnCompanionBuy.setText("BUY");
-        btnCompanionBuy.setSize(new java.awt.Dimension(160, 50));
         btnCompanionBuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCompanionBuyActionPerformed(evt);

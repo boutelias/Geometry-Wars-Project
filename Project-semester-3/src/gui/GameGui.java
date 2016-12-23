@@ -52,7 +52,8 @@ public class GameGui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
+        frame.setAlwaysOnTop(true);
+        
         gameWidth = (int) frame.getBounds().getWidth();
         gameHeight = (int) frame.getBounds().getHeight();
 
