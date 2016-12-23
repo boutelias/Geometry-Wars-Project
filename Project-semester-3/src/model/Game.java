@@ -23,7 +23,7 @@ import model.power.Power;
 
 import multiplayer.Server;
 
-public class Game implements Serializable {
+public class Game implements Serializable, Runnable {
 
     private Random randomGenerator = new Random();
     private int fps = 60;
@@ -57,25 +57,14 @@ public class Game implements Serializable {
     private String moeilijkheidsgraad;
     private int playerid = 1 ; // TODO 
 
-    public static void main(String[] args) {
-        new Game(false);
-    }
     // meegeven in constructor : 
     public Game(boolean multiplayer) {
         this.multiplayer = multiplayer;
         this.moeilijkheidsgraad = "hard";
-        //TODO characterid , companionid en playerid uit GUI
-        run();
-        Player p = db.getPlayer(playerid);
-        if(character.getScore() > p.getHighscore()  ){
-            db.setHighscorePlayer(playerid, character.getScore());
-        }
-        Frame frame = new GameOverFrame(character.getScore(),character.getNumberOfGeoms());
-        frame.setVisible(true);
-        gameGui.deleteGame();
+        
     }
 
-    private void run() {
+    public void run() {
         init();
         makeWaves();
         for(Wave v: waves){
@@ -111,7 +100,13 @@ public class Game implements Serializable {
                 keepGoing = false;
             }
         }
-        
+        Player p = db.getPlayer(playerid);
+        if(character.getScore() > p.getHighscore()  ){
+            db.setHighscorePlayer(playerid, character.getScore());
+        }
+        Frame frame = new GameOverFrame(character.getScore(),character.getNumberOfGeoms());
+        frame.setVisible(true);
+        gameGui.deleteGame();
         
     }
 
