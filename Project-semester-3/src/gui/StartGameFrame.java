@@ -25,6 +25,8 @@ public class StartGameFrame extends javax.swing.JFrame {
         initComponents();
         this.playername = userId;
         //JOptionPane.showMessageDialog(null, "username:"+playername);
+        ServerClientPanel.setVisible(false);
+        ServerIPPanel.setVisible(false);
     }
 
     /**
@@ -41,6 +43,15 @@ public class StartGameFrame extends javax.swing.JFrame {
         btnMultiPlayer = new javax.swing.JButton();
         btnShop = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        ServerClientPanel = new javax.swing.JPanel();
+        btnServer = new javax.swing.JButton();
+        btnClient = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        ServerIPPanel = new javax.swing.JPanel();
+        lblServerIP = new javax.swing.JLabel();
+        txtServerIP = new javax.swing.JTextField();
+        btnConfirmServerIP = new javax.swing.JButton();
+        btnBackClient = new javax.swing.JButton();
         lblBackgroundStartGame = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,9 +65,19 @@ public class StartGameFrame extends javax.swing.JFrame {
 
         btnSinglePlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/singeplayer.png"))); // NOI18N
         btnSinglePlayer.setText("Single Player");
+        btnSinglePlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSinglePlayerActionPerformed(evt);
+            }
+        });
 
         btnMultiPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/multiplayer.png"))); // NOI18N
         btnMultiPlayer.setText("Multi Player");
+        btnMultiPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMultiPlayerActionPerformed(evt);
+            }
+        });
 
         btnShop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/shop.png"))); // NOI18N
         btnShop.setText("Shop");
@@ -110,6 +131,128 @@ public class StartGameFrame extends javax.swing.JFrame {
         getContentPane().add(GameModePanel);
         GameModePanel.setBounds(220, 160, 350, 360);
 
+        ServerClientPanel.setOpaque(false);
+
+        btnServer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/server.png"))); // NOI18N
+        btnServer.setText("Server");
+        btnServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServerActionPerformed(evt);
+            }
+        });
+
+        btnClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/client.png"))); // NOI18N
+        btnClient.setText("Client");
+        btnClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientActionPerformed(evt);
+            }
+        });
+
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ServerClientPanelLayout = new javax.swing.GroupLayout(ServerClientPanel);
+        ServerClientPanel.setLayout(ServerClientPanelLayout);
+        ServerClientPanelLayout.setHorizontalGroup(
+            ServerClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ServerClientPanelLayout.createSequentialGroup()
+                .addGroup(ServerClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ServerClientPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnClient, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ServerClientPanelLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addGroup(ServerClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnServer, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+        ServerClientPanelLayout.setVerticalGroup(
+            ServerClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ServerClientPanelLayout.createSequentialGroup()
+                .addContainerGap(98, Short.MAX_VALUE)
+                .addComponent(btnServer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnClient, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
+        );
+
+        getContentPane().add(ServerClientPanel);
+        ServerClientPanel.setBounds(220, 160, 350, 360);
+
+        ServerIPPanel.setOpaque(false);
+
+        lblServerIP.setBackground(new java.awt.Color(0, 0, 0));
+        lblServerIP.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblServerIP.setForeground(new java.awt.Color(255, 255, 255));
+        lblServerIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/serverip.png"))); // NOI18N
+        lblServerIP.setText("Server IP Adress");
+        lblServerIP.setMinimumSize(new java.awt.Dimension(160, 50));
+        lblServerIP.setPreferredSize(new java.awt.Dimension(160, 50));
+
+        txtServerIP.setBackground(new java.awt.Color(0, 0, 0));
+        txtServerIP.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtServerIP.setForeground(new java.awt.Color(255, 255, 255));
+        txtServerIP.setText("IP");
+
+        btnConfirmServerIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/confirm.png"))); // NOI18N
+        btnConfirmServerIP.setText("Confirm");
+        btnConfirmServerIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmServerIPActionPerformed(evt);
+            }
+        });
+
+        btnBackClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
+        btnBackClient.setText("Back");
+        btnBackClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackClientActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ServerIPPanelLayout = new javax.swing.GroupLayout(ServerIPPanel);
+        ServerIPPanel.setLayout(ServerIPPanelLayout);
+        ServerIPPanelLayout.setHorizontalGroup(
+            ServerIPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ServerIPPanelLayout.createSequentialGroup()
+                .addGroup(ServerIPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ServerIPPanelLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(btnBackClient, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ServerIPPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(ServerIPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblServerIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtServerIP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConfirmServerIP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ServerIPPanelLayout.setVerticalGroup(
+            ServerIPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ServerIPPanelLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(lblServerIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtServerIP, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnConfirmServerIP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBackClient, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
+        );
+
+        getContentPane().add(ServerIPPanel);
+        ServerIPPanel.setBounds(220, 160, 350, 360);
+
         lblBackgroundStartGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/start-game-bg.png"))); // NOI18N
         getContentPane().add(lblBackgroundStartGame);
         lblBackgroundStartGame.setBounds(0, 0, 800, 600);
@@ -125,6 +268,41 @@ public class StartGameFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnMultiPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiPlayerActionPerformed
+        ServerClientPanel.setVisible(true);
+        GameModePanel.setVisible(false);
+    }//GEN-LAST:event_btnMultiPlayerActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        ServerClientPanel.setVisible(false);
+        GameModePanel.setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSinglePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSinglePlayerActionPerformed
+       new GameDifficultyFrame(playername).setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btnSinglePlayerActionPerformed
+
+    private void btnServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServerActionPerformed
+       new GameDifficultyFrame(playername).setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btnServerActionPerformed
+
+    private void btnBackClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackClientActionPerformed
+        ServerIPPanel.setVisible(false);
+        ServerClientPanel.setVisible(true);
+    }//GEN-LAST:event_btnBackClientActionPerformed
+
+    private void btnConfirmServerIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmServerIPActionPerformed
+       new GameDifficultyFrame(playername).setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btnConfirmServerIPActionPerformed
+
+    private void btnClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientActionPerformed
+        ServerClientPanel.setVisible(false);
+        ServerIPPanel.setVisible(true);
+    }//GEN-LAST:event_btnClientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,10 +342,19 @@ public class StartGameFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel GameModePanel;
+    private javax.swing.JPanel ServerClientPanel;
+    private javax.swing.JPanel ServerIPPanel;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBackClient;
+    private javax.swing.JButton btnClient;
+    private javax.swing.JButton btnConfirmServerIP;
     private javax.swing.JButton btnMultiPlayer;
+    private javax.swing.JButton btnServer;
     private javax.swing.JButton btnShop;
     private javax.swing.JButton btnSinglePlayer;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblBackgroundStartGame;
+    private javax.swing.JLabel lblServerIP;
+    private javax.swing.JTextField txtServerIP;
     // End of variables declaration//GEN-END:variables
 }

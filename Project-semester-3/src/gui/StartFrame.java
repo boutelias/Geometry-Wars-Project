@@ -220,15 +220,25 @@ public class StartFrame extends javax.swing.JFrame {
         lblConfirmPasswordSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/password.png"))); // NOI18N
         lblConfirmPasswordSignUp.setText("Password:");
 
+        txtUsernameSignUp.setBackground(new java.awt.Color(0, 0, 0));
+        txtUsernameSignUp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtUsernameSignUp.setForeground(new java.awt.Color(255, 255, 255));
+        txtUsernameSignUp.setText("Username");
         txtUsernameSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameSignUpActionPerformed(evt);
             }
         });
 
-        txtPasswordSignUp.setText("jPasswordField1");
+        txtPasswordSignUp.setBackground(new java.awt.Color(0, 0, 0));
+        txtPasswordSignUp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPasswordSignUp.setForeground(new java.awt.Color(255, 255, 255));
+        txtPasswordSignUp.setText("Password");
 
-        txtConfirmPasswordSignUp.setText("jPasswordField1");
+        txtConfirmPasswordSignUp.setBackground(new java.awt.Color(0, 0, 0));
+        txtConfirmPasswordSignUp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtConfirmPasswordSignUp.setForeground(new java.awt.Color(255, 255, 255));
+        txtConfirmPasswordSignUp.setText("Password");
         txtConfirmPasswordSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmPasswordSignUpActionPerformed(evt);

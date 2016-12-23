@@ -11,11 +11,13 @@ package gui;
  */
 public class GameDifficultyFrame extends javax.swing.JFrame {
 
+    private static String playername;
     /**
      * Creates new form GameDifficultyFrame
      */
-    public GameDifficultyFrame() {
+    public GameDifficultyFrame(String userid) {
         initComponents();
+        this.playername = userid;
     }
 
     /**
@@ -30,6 +32,7 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
         btnEasy = new javax.swing.JButton();
         btnMedium = new javax.swing.JButton();
         btnHard = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         lblBackgrandGameDifficulty = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,18 +43,43 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
 
         btnEasy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/easy.png"))); // NOI18N
         btnEasy.setText("Easy");
+        btnEasy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEasyActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEasy);
         btnEasy.setBounds(310, 230, 160, 50);
 
         btnMedium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/medium.png"))); // NOI18N
         btnMedium.setText("Medium");
+        btnMedium.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMediumActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnMedium);
         btnMedium.setBounds(310, 320, 160, 50);
 
         btnHard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/hard.png"))); // NOI18N
         btnHard.setText("Hard");
+        btnHard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHardActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnHard);
         btnHard.setBounds(310, 410, 160, 50);
+
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/back.png"))); // NOI18N
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack);
+        btnBack.setBounds(310, 500, 160, 50);
+        btnBack.getAccessibleContext().setAccessibleName("btnBack");
 
         lblBackgrandGameDifficulty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/game-bg-gamedifficulty.png"))); // NOI18N
         getContentPane().add(lblBackgrandGameDifficulty);
@@ -59,6 +87,23 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEasyActionPerformed
+        
+    }//GEN-LAST:event_btnEasyActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new StartGameFrame(playername).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnMediumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMediumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMediumActionPerformed
+
+    private void btnHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,15 +132,16 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form */       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GameDifficultyFrame().setVisible(true);
+                new GameDifficultyFrame(playername).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnEasy;
     private javax.swing.JButton btnHard;
     private javax.swing.JButton btnMedium;
