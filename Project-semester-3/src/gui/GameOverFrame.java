@@ -49,8 +49,7 @@ public class GameOverFrame extends javax.swing.JFrame {
         lblGeom = new javax.swing.JLabel();
         lblValueScore = new javax.swing.JLabel();
         lblValueGeom = new javax.swing.JLabel();
-        btnStart = new javax.swing.JButton();
-        btnShop = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         lblBackgroundGameOver = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,32 +81,22 @@ public class GameOverFrame extends javax.swing.JFrame {
         lblValueScore.setForeground(new java.awt.Color(255, 255, 255));
         lblValueScore.setText("value");
         getContentPane().add(lblValueScore);
-        lblValueScore.setBounds(390, 300, 41, 16);
+        lblValueScore.setBounds(390, 300, 140, 16);
 
         lblValueGeom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblValueGeom.setForeground(new java.awt.Color(255, 255, 255));
         lblValueGeom.setText("value");
         getContentPane().add(lblValueGeom);
-        lblValueGeom.setBounds(390, 330, 41, 22);
+        lblValueGeom.setBounds(390, 330, 140, 22);
 
-        btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/start.png"))); // NOI18N
-        btnStart.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/exit.png"))); // NOI18N
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStart);
-        btnStart.setBounds(610, 520, 160, 50);
-
-        btnShop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/img/buttons/shop.png"))); // NOI18N
-        btnShop.setText("btnShop");
-        btnShop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShopActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnShop);
-        btnShop.setBounds(610, 440, 160, 50);
+        getContentPane().add(btnExit);
+        btnExit.setBounds(610, 520, 160, 50);
 
         lblBackgroundGameOver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/game-bg-gameover.png"))); // NOI18N
         getContentPane().add(lblBackgroundGameOver);
@@ -116,21 +105,13 @@ public class GameOverFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShopActionPerformed
-        // playername moet nog meegegeven wordenz
-        new ShopFrame(playername).setVisible(true);
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnShopActionPerformed
-
-    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        new StartGameFrame(playername).setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnStartActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnShop;
-    private javax.swing.JButton btnStart;
+    private javax.swing.JButton btnExit;
     private javax.swing.JLabel lblBackgroundGameOver;
     private javax.swing.JLabel lblGameOver;
     private javax.swing.JLabel lblGeom;
