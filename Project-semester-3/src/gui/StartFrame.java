@@ -4,6 +4,7 @@ import data.GameDA;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Player;
+import model.companions.Companion;
 import org.mindrot.jbcrypt.BCrypt;
 
 /*
@@ -450,11 +451,22 @@ public class StartFrame extends javax.swing.JFrame {
             }
 
             if (exists == false) {
-
+                GameDA db = GameDA.getInstance();
                 String hashedpass = BCrypt.hashpw(pass1, BCrypt.gensalt());
 
-                GameDA.getInstance().addNewPlayer(username, hashedpass);
+                db.addNewPlayer(username, hashedpass);
                 JOptionPane.showMessageDialog(null, "User has been added!");
+                int playerid = db.getPLayerId(username);
+                List<model.Character> characters = db.getShips();
+                for(model.Character c : characters){
+                    int charid = c.getCharId();
+                    db.addPlayer_Character(playerid, charid);
+                }
+                List<CompanionShop> companions = db.getCompanions();
+                for(CompanionShop c : companions){
+                    int compid = c.getId();
+                    db.addPlayer_Companion(playerid, compid);
+                }
             }
             if (exists == true) {
                 JOptionPane.showMessageDialog(null, "Username already exists");

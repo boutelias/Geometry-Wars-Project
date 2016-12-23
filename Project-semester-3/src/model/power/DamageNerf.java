@@ -26,7 +26,8 @@ public class DamageNerf implements Power, Serializable{
     private GameDA db = GameDA.getInstance();
 
     public DamageNerf(int posX, int posY) {
-        damage = db.getPower("bulletdamagenerf");
+        //damage = db.getPower("bulletdamagenerf");
+        damage = 5;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

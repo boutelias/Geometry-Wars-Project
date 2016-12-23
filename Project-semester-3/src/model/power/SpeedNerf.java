@@ -25,7 +25,8 @@ public class SpeedNerf implements Power,Serializable{
     private GameDA db = GameDA.getInstance();
 
     public SpeedNerf(int posX, int posY) {
-        speed = db.getPower("movementspeednerf");
+        //speed = db.getPower("movementspeednerf");
+        speed = 1;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

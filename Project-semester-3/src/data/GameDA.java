@@ -26,6 +26,7 @@ import model.Wave;
 import model.companions.AutoShooter;
 import model.companions.Companion;
 import gui.CompanionShop;
+import java.io.Serializable;
 import model.companions.LifeSaver;
 import model.companions.Miner;
 import model.companions.Shooter;
@@ -35,7 +36,7 @@ import util.GameException;
  *
  * @author Elias
  */
-public class GameDA {
+public class GameDA implements Serializable {
 
     private static final String URL = "jdbc:mysql://sql7.freemysqlhosting.net/sql7150035";
     private static final String USER = "sql7150035";
@@ -730,6 +731,30 @@ public class GameDA {
             throw new IllegalArgumentException(ex);
         }
      return i;   
+    }
+    
+    public void addPlayer_Character(int playerid,int characterid){
+        try {
+            String sql = "insert into `player_character`(playerid,characterid,leveloflives,leveloffirerate,levelofmovementspeed,levelofbulletdamage,levelofbulletspeed,isBought) Values (?,?,1,1,1,1,1,0)";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, playerid);
+            prep.setInt(2, characterid);
+            prep.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    public void addPlayer_Companion(int playerid,int companionid){
+        try {
+            String sql = "insert into `player_companion`(playerid,companionid,level,isBought) Values (?,?,1,0)";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, playerid);
+            prep.setInt(2, companionid);
+            prep.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

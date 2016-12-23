@@ -17,7 +17,8 @@ public class DamageBoost implements Power, Serializable {
     private GameDA db = GameDA.getInstance();
 
     public DamageBoost(int posX, int posY) {
-        extraDamage = db.getPower("bulletdamageboost");
+        //extraDamage = db.getPower("bulletdamageboost");
+        extraDamage = 10;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

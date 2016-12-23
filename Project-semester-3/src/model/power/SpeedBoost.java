@@ -18,7 +18,8 @@ public class SpeedBoost implements Power, Serializable {
     private GameDA db = GameDA.getInstance();
 
     public SpeedBoost(int posX, int posY) {
-        speed =db.getPower("movementspeedboost");
+        //speed =db.getPower("movementspeedboost");
+        speed = 2;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

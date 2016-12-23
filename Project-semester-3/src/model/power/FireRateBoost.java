@@ -27,7 +27,8 @@ public class FireRateBoost implements Power, Serializable {
     private GameDA db = GameDA.getInstance();
 
     public FireRateBoost(int posX, int posY) {
-        extraFireRate = db.getPower("firerateboost");
+        //extraFireRate = db.getPower("firerateboost");
+        extraFireRate = 25;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;

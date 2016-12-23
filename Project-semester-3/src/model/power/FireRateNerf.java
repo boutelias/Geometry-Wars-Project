@@ -25,7 +25,8 @@ public class FireRateNerf implements Power, Serializable{
     private GameDA db = GameDA.getInstance();
 
     public FireRateNerf(int posX, int posY) {
-        fireRateNerf = db.getPower("fireratenerf");
+        //fireRateNerf = db.getPower("fireratenerf");
+        fireRateNerf = 15;
         this.posX = posX;
         this.posY = posY;
         this.duration = 20000;
