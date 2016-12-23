@@ -30,12 +30,13 @@ public class Miner implements Companion{
     int damage;
     long timeBetween2Mines;
     long lastMineFired;
+    private String sprite;
     
-    public Miner(Character character, List<Mine> mines, InputHandler handler,int width, int height, int minesPerMinute, int damage){
+    public Miner(Character character, List<Mine> mines, InputHandler handler,int width, int height, int minesPerMinute, int damage, String sprite){
         this.mines = mines;
         this.character= character;
         this.movementSpeed = movementSpeed;
-        
+        this.sprite = sprite;
         this.width = width;
         this.height = height;
         this.handler = handler;
@@ -108,6 +109,11 @@ public class Miner implements Companion{
 
     public int getHeight() {
         return height;
+    }
+    
+    @Override
+    public String getSprite() {
+        return this.sprite;
     }
     
 }

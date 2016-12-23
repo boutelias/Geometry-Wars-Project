@@ -43,11 +43,11 @@ public class ShopFrame extends javax.swing.JFrame {
         
         charCounter = 1;
         charId = 0;
-        selectedCharCounter = 0;
+        selectedCharCounter = 1;
         
         companionCounter = 1;
         companionId = 0;
-        selectedCompanionCounter = 0;
+        selectedCompanionCounter = 1;
         //System.out.println(charCounter);
         showSelectedCharCounter();
         InitCharacters();
@@ -1135,7 +1135,7 @@ public class ShopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClanActionPerformed
 
     private void btnStartGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartGameActionPerformed
-        new StartGameFrame(playername,charId,companionId).setVisible(true);
+        new StartGameFrame(playername,selectedCharCounter,selectedCompanionCounter).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnStartGameActionPerformed
 
@@ -1179,7 +1179,7 @@ public class ShopFrame extends javax.swing.JFrame {
     private void btnShipSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipSelectActionPerformed
         //set global variable selected
 
-        selectedCharCounter = charId;
+        selectedCharCounter = charCounter;
         showSelectedCharCounter();
 
     }//GEN-LAST:event_btnShipSelectActionPerformed
@@ -1256,7 +1256,7 @@ public class ShopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlusCompanionActionPerformed
 
     private void btnCompanionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanionSelectActionPerformed
-        selectedCompanionCounter = companionId;
+        selectedCompanionCounter = companionCounter;
         showSelectedCompanionCounter();
     }//GEN-LAST:event_btnCompanionSelectActionPerformed
 

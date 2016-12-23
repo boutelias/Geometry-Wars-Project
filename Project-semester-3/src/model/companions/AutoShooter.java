@@ -30,8 +30,9 @@ public class AutoShooter implements Companion {
     int bulletsPerMinute;
     long lastBulletFired;
     int bulletspeed;
+    String sprite;
     
-    public AutoShooter(Character character, List<Bullet> bullets, List<Enemy> enemies, int height, int width, int damage, int bulletsPerMinute, int bulletspeed) {
+    public AutoShooter(Character character, List<Bullet> bullets, List<Enemy> enemies, int height, int width, int damage, int bulletsPerMinute, int bulletspeed, String sprite) {
         this.character = character;
         this.height = height;
         this.width = width;
@@ -46,6 +47,8 @@ public class AutoShooter implements Companion {
         posY = character.getPosY();
 
         this.lastBulletFired = System.currentTimeMillis();
+        
+        this.sprite = sprite;
 
     }
     
@@ -123,5 +126,10 @@ public class AutoShooter implements Companion {
     @Override
     public int getHeight() {
         return height;
+    }
+    
+    
+    public String getSprite(){
+    return this.sprite;
     }
 }

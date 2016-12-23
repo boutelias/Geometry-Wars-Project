@@ -18,4 +18,5 @@ public interface Companion {
     public int getPosY();
     public int getWidth();
     public int getHeight();
+    public String getSprite();
 }

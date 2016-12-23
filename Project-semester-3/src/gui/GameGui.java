@@ -5,6 +5,7 @@
  */
 package gui;
 
+import data.GameDA;
 import model.Character;
 import model.Bullet;
 
@@ -91,25 +92,38 @@ public class GameGui {
     }
 
     private void drawGame(Character character, List<Bullet> bullets, List<Enemy> enemies, List<Geom> geoms, List<Power> powers) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, gameWidth, gameHeight);
-
-        Image bannerTop = Toolkit.getDefaultToolkit().getImage("src/img/banner-top.jpg");
+        Image background = Toolkit.getDefaultToolkit().getImage("src/img/backgrounds/game-bg.jpg");
+        //g.setColor(Color.BLACK);
+        //g.fillRect(0, 0, gameWidth, gameHeight);
+        g.drawImage(background, 0, 0, null);
+        
+        Image bannerTop = Toolkit.getDefaultToolkit().getImage("src/img/backgrounds/banner-top.jpg");
         g.drawImage(bannerTop, 0, 0, null);
-
-        g.setColor(Color.YELLOW);
-        g.fillOval(character.getPosX() - (character.getHeight() / 2), character.getPosY() - (character.getWidth() / 2), character.getHeight(), character.getWidth());
-
-        g.setColor(Color.pink);
+        
+        
+        //get sprite
+        //String charactersprite = GameDA.getInstance().getCharacterSprite(1);
+        String characterSprite = character.getSprite();
+        Image characterImage = Toolkit.getDefaultToolkit().getImage("src/img/ships/"+characterSprite+".png");
+        //g.setColor(Color.YELLOW);
+        //g.fillOval(character.getPosX() - (character.getHeight() / 2), character.getPosY() - (character.getWidth() / 2), character.getHeight(), character.getWidth());
+        g.drawImage(characterImage, character.getPosX() - (character.getWidth() / 2), character.getPosY() - (character.getHeight() / 2), character.getWidth(), character.getHeight(), null);
+        
+        
+        
+        Image geomImage = Toolkit.getDefaultToolkit().getImage("src/img/sprites/geomSprite.png");
+        //g.setColor(Color.pink);
         for (Geom geom : geoms) {
-            g.fillOval(geom.getPosX() - (geom.getHeight() / 2), geom.getPosY() - (geom.getWidth() / 2), geom.getHeight(), geom.getWidth());
+            g.drawImage(geomImage, geom.getPosX() - (geom.getWidth() / 2), geom.getPosY() - (geom.getHeight() / 2), geom.getWidth(), geom.getHeight(), null);
+        
+            //g.fillOval(geom.getPosX() - (geom.getHeight() / 2), geom.getPosY() - (geom.getWidth() / 2), geom.getHeight(), geom.getWidth());
         }
 
         g.setColor(Color.green);
         for (Bullet bullet : bullets) {
             g.fillOval(bullet.getPosX() - 10, bullet.getPosY() - 10, 20, 20);
         }
-        Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/bomber.png");
+        Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/enemies/bomber.png");
 
         g.setColor(Color.red);
         for (Enemy enemy : enemies) {
@@ -120,8 +134,8 @@ public class GameGui {
         int startY = 55;
         for (Power power : powers) {
             if (!power.isPickedUp()) {
-                g.setColor(Color.pink);
-                g.fillOval(power.getPosX() - 10, power.getPosY() - 10, 20, 20);
+                Image powerImage = Toolkit.getDefaultToolkit().getImage("src/img/sprites/power.png");
+                g.drawImage(powerImage, power.getPosX()-15, power.getPosY()-15, 30, 30, null);
             } else {
                 g.setColor(Color.yellow);
                 g.drawString(power.getName() + " is active! " + power.getTimeLeft(), 10, startY);
@@ -141,13 +155,16 @@ public class GameGui {
     }
 
     private void drawCompanion(List<Mine> mines, Companion companion) {
-        g.setColor(Color.darkGray);
+        g.setColor(Color.yellow);
         for (Mine mine : mines) {
             g.fillOval(mine.getPosX() - (mine.getHeight() / 2), mine.getPosY() - (mine.getWidth() / 2), mine.getHeight(), mine.getWidth());
         }
-
-        g.setColor(Color.WHITE);
-        g.fillOval(companion.getPosX() - (companion.getHeight() / 2), companion.getPosY() - (companion.getWidth() / 2), companion.getHeight(), companion.getWidth());
+        
+        String companionSprite = companion.getSprite();
+        Image companionImage = Toolkit.getDefaultToolkit().getImage("src/img/companions/"+companionSprite+".png");
+        g.drawImage(companionImage, companion.getPosX() - (companion.getWidth() / 2), companion.getPosY() - (companion.getHeight() / 2), companion.getWidth(), companion.getHeight(), null);
+        //g.setColor(Color.WHITE);
+        //g.fillOval(companion.getPosX() - (companion.getHeight() / 2), companion.getPosY() - (companion.getWidth() / 2), companion.getHeight(), companion.getWidth());
 
     }
     

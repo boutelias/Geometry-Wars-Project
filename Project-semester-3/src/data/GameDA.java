@@ -129,7 +129,7 @@ public class GameDA implements Serializable {
 
     }
 
-    public Character getCharacter(int characterid, int maxX, int maxY) {
+    public Character getCharacter(int characterid,int playerId, int maxX, int maxY) {
         Character c;
         try {
             String sql = "SELECT sprite,firerate,movementspeed,height,width,bulletdamage,bulletspeed,numberOfLives\n"
@@ -140,18 +140,22 @@ public class GameDA implements Serializable {
                     + "join charactermovementspeed on player_character.levelofmovementspeed = charactermovementspeed.charactermovementspeedid\n"
                     + "join characterbulletdamage on player_character.levelofbulletdamage = characterbulletdamage.characterbulletdamageid\n"
                     + "join characterbulletspeed on player_character.levelofbulletspeed = characterbulletspeed.characterbulletspeedid\n"
-                    + "where playerid = 2 and sql7150035.Character.characterid = 1";
+                    + "where playerid = ? and sql7150035.Character.characterid = ?";
             PreparedStatement prep = this.con.prepareStatement(sql);
-            //prep.setInt(1,characterid);
+                prep.setInt(1, playerId);
+            prep.setInt(2,characterid);
 
             ResultSet rs = prep.executeQuery();
             rs.next();
+            System.out.println(playerId + "--" + characterid);
             c = new Character(maxX, maxY, rs.getInt("numberoflives"), rs.getString("sprite"), rs.getInt("firerate"), rs.getInt("movementspeed"), rs.getInt("height"), rs.getInt("width"), rs.getInt("bulletdamage"), rs.getInt("bulletspeed"));
 
             prep.close();
             rs.close();
         } catch (SQLException ex) {
+            ex.printStackTrace();
             throw new IllegalArgumentException(ex);
+            
         }
         return c;
     }
@@ -227,7 +231,7 @@ public class GameDA implements Serializable {
             prep.setInt(1, playerid);
             ResultSet rs = prep.executeQuery();
             rs.next();
-            c = new AutoShooter(character, bullets, enemies, rs.getInt("height"), rs.getInt("width"), rs.getInt("bulletdamage"), rs.getInt("bulletsPerMinute"), rs.getInt("bulletspeed"));
+            c = new AutoShooter(character, bullets, enemies, rs.getInt("height"), rs.getInt("width"), rs.getInt("bulletdamage"), rs.getInt("bulletsPerMinute"), rs.getInt("bulletspeed"), rs.getString("sprite"));
 
         } catch (SQLException ex) {
             throw new IllegalArgumentException(ex);
@@ -246,7 +250,7 @@ public class GameDA implements Serializable {
             prep.setInt(1, playerid);
             ResultSet rs = prep.executeQuery();
             rs.next();
-            c = new LifeSaver(character, rs.getInt("width"), rs.getInt("height"), rs.getInt("livesperminute"));
+            c = new LifeSaver(character, rs.getInt("width"), rs.getInt("height"), rs.getInt("livesperminute"), rs.getString("sprite"));
             System.out.println(c.getPosX());
         } catch (SQLException ex) {
             throw new IllegalArgumentException(ex);
@@ -265,7 +269,7 @@ public class GameDA implements Serializable {
             prep.setInt(1, playerid);
             ResultSet rs = prep.executeQuery();
             rs.next();
-            c = new Miner(character, mines, handler, rs.getInt("width"), rs.getInt("height"), rs.getInt("minesperminute"), rs.getInt("minedamage"));
+            c = new Miner(character, mines, handler, rs.getInt("width"), rs.getInt("height"), rs.getInt("minesperminute"), rs.getInt("minedamage"), rs.getString("sprite"));
         } catch (SQLException ex) {
             throw new IllegalArgumentException(ex);
         }
@@ -284,7 +288,7 @@ public class GameDA implements Serializable {
             prep.setInt(1, playerid);
             ResultSet rs = prep.executeQuery();
             rs.next();
-            c = new Shooter(character, handler, bullets, rs.getInt("height"), rs.getInt("width"), rs.getInt("bulletdamage"), rs.getInt("bulletsperminute"), rs.getInt("bulletspeed"));
+            c = new Shooter(character, handler, bullets, rs.getInt("height"), rs.getInt("width"), rs.getInt("bulletdamage"), rs.getInt("bulletsperminute"), rs.getInt("bulletspeed"),  rs.getString("sprite"));
         } catch (SQLException ex) {
             throw new IllegalArgumentException(ex);
         }
@@ -756,6 +760,36 @@ public class GameDA implements Serializable {
         } catch (SQLException ex) {
             Logger.getLogger(GameDA.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String getCharacterSprite(int charid){
+         String sprite;
+        try {
+            String sql = "select * from `Character` where characterid = ?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, charid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            sprite = rs.getString("sprite");
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+     return sprite;
+    }
+    
+    public String getCompanionSprite(int companionid){
+         String sprite;
+        try {
+            String sql = "select * from `Companion` where companionid = ?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, companionid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            sprite = rs.getString("sprite");
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+     return sprite;
     }
 
 }

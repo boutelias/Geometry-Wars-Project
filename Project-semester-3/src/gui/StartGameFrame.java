@@ -40,7 +40,7 @@ public class StartGameFrame extends javax.swing.JFrame {
     }
     
     public StartGameFrame(String playername, int characterid, int companionid){
-        
+        initComponents();
         this.playername = playername;
         this.characterid = characterid;
         this.companionid = companionid;

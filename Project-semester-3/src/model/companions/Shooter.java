@@ -29,8 +29,9 @@ public class Shooter implements Companion {
     int bulletsPerMinute;
     long lastBulletFired;
     int bulletspeed;
+    private String sprite;
 
-    public Shooter(Character character, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute,int bulletspeed) {
+    public Shooter(Character character, InputHandler handler, List<Bullet> bullets, int height, int width, int damage, int bulletsPerMinute,int bulletspeed, String sprite) {
         this.character = character;
         this.handler = handler;
         this.height = height;
@@ -39,6 +40,7 @@ public class Shooter implements Companion {
         this.damage = damage;
         this.bulletsPerMinute = bulletsPerMinute;
         this.bulletspeed = bulletspeed;
+        this.sprite= sprite;
 
         this.movementSpeed = character.getMovementSpeed();
         posX = character.getPosX();
@@ -109,6 +111,11 @@ public class Shooter implements Companion {
     @Override
     public int getHeight() {
         return height;
+    }
+    
+    @Override
+    public String getSprite() {
+        return this.sprite;
     }
 
 }

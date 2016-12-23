@@ -123,7 +123,7 @@ public class Game implements Serializable, Runnable {
         gameWidth = gameGui.getGameWidth();
         gameHeight = gameGui.getGameHeight();
 
-        character = db.getCharacter(characterid, gameWidth, gameHeight);
+        character = db.getCharacter(characterid,playerid, gameWidth, gameHeight);
 
         handler = new InputHandler(gameGui.getFrame());
 
@@ -155,7 +155,7 @@ public class Game implements Serializable, Runnable {
                 ex.printStackTrace();
             }
             
-            character2 = db.getCharacter(server.getClientCharacterId(), gameWidth, gameHeight);       
+            character2 = db.getCharacter(server.getClientCharacterId(),server.getClientPlayerId(), gameWidth, gameHeight);       
             server.setCharacter2(character2);
         }
 

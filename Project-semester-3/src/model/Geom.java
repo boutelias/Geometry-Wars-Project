@@ -9,8 +9,8 @@ public class Geom implements Serializable {
     private int posX;
     private int posY;
     
-    private int width = 5;
-    private int height = 5;
+    private int width = 20;
+    private int height = 30;
     
     public Geom(int posX, int posY){
         this.posX = posX;

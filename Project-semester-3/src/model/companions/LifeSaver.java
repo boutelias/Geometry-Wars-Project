@@ -11,12 +11,14 @@ public class LifeSaver implements Companion{
     int height;
     int posX;
     int posY;
+    String sprite;
     
-    public LifeSaver(Character character, int width, int height, int livesPerMinute) {
+    public LifeSaver(Character character, int width, int height, int livesPerMinute, String sprite) {
         
         this.width = width;
         this.height = height;
         this.character = character;
+        this.sprite = sprite;
         
         timeBetweenLifes = (60 *1000) / livesPerMinute;
         timeWhenLifeNeedsToBeAdded = System.currentTimeMillis() + timeBetweenLifes;
@@ -61,6 +63,11 @@ public class LifeSaver implements Companion{
     @Override
     public int getHeight() {
         return height;
+    }
+    
+    @Override
+    public String getSprite() {
+        return this.sprite;
     }
                 
 }
