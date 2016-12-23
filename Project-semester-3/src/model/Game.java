@@ -50,17 +50,20 @@ public class Game implements Serializable, Runnable {
     private Companion companion;
     private GameDA db = GameDA.getInstance();
     
-    private int characterid = 1;
+    private int characterid;
     private long delaytime;
     private boolean multiplayer;
     private CollisionDetection collisionDetection = new CollisionDetection();
     private String moeilijkheidsgraad;
-    private int playerid = 1 ; // TODO 
+    private int playerid; 
 
     // meegeven in constructor : 
-    public Game(boolean multiplayer) {
+    public Game(boolean multiplayer,String moeilijkheidsgraad,int playerid,int characterid, int companionid) {
         this.multiplayer = multiplayer;
-        this.moeilijkheidsgraad = "hard";
+        this.moeilijkheidsgraad = moeilijkheidsgraad;
+        this.companionid = companionid;
+        this.characterid = characterid;
+        this.playerid = playerid;
         
     }
 
@@ -121,7 +124,6 @@ public class Game implements Serializable, Runnable {
         handler = new InputHandler(gameGui.getFrame());
 
         if (!multiplayer) {
-            int companionid = 3;
             switch (companionid) {
                 case 1:
                     companion = db.getCompanionAutoShooter(playerid, character, enemies, bullets);

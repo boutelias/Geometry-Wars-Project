@@ -92,7 +92,7 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
 
     private void btnEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEasyActionPerformed
         //this.dispose();
-        Game g = new Game(false);
+        Game g = new Game(false,"easy",1,1,1); //TODO playerid , characterid , companionid
         Thread t = new Thread(g);
         t.start();
         
@@ -105,11 +105,15 @@ public class GameDifficultyFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnMediumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMediumActionPerformed
-        // TODO add your handling code here:
+        Game g = new Game(false,"medium",1,1,1);
+        Thread t = new Thread(g);
+        t.start();
     }//GEN-LAST:event_btnMediumActionPerformed
 
     private void btnHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHardActionPerformed
-        // TODO add your handling code here:
+        Game g = new Game(false,"hard",1,1,1);
+        Thread t = new Thread(g);
+        t.start();
     }//GEN-LAST:event_btnHardActionPerformed
 
 

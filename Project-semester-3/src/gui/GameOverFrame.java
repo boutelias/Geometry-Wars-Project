@@ -18,10 +18,12 @@ public class GameOverFrame extends javax.swing.JFrame {
     private static int geom;
     private static String playername;
     
+    
     public GameOverFrame(long score, int geom) {
         initComponents();
         this.score = score;
         this.geom = geom;
+        
         setScore(score);
         setGeom(geom);
     }
