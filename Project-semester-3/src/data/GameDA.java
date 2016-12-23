@@ -471,6 +471,26 @@ public class GameDA {
 
         }
     }
+    
+    public int getUpgradesCompanion(int playerid, int companionid){
+        try {
+            String sql = "SELECT * FROM player_companion WHERE playerid=? AND companionid =?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, playerid);
+            prep.setInt(2, companionid);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int level = rs.getInt("level");
+            rs.close();
+
+            return level;
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+
+        }
+        
+        
+            };
 
     public int getPriceLeveloflives(int leveloflives) {
         try {
@@ -541,6 +561,22 @@ public class GameDA {
             String sql = "SELECT * FROM characterbulletdamage WHERE characterbulletdamageid=?";
             PreparedStatement prep = this.con.prepareStatement(sql);
             prep.setInt(1, levelofbulletdamage);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            int price = rs.getInt("price");
+            rs.close();
+
+            return price;
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+    }
+    
+    public int getPriceLevelofCompanion(int level) {
+        try {
+            String sql = "SELECT * FROM companionlevel WHERE companionlevelid =?";
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, level);
             ResultSet rs = prep.executeQuery();
             rs.next();
             int price = rs.getInt("price");
@@ -629,6 +665,23 @@ public class GameDA {
             prep.setInt(1, lvl);
             prep.setInt(2, playerid);
             prep.setInt(3, charCounter);
+            prep.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new IllegalArgumentException(ex);
+
+        }
+    }
+    
+    public void setCompanionUpgrade(int playerid, int companionCounter, int lvl) {
+
+        try {
+            String sql = "UPDATE player_companion SET level = ? WHERE playerid=? AND companionid = ?";
+
+            PreparedStatement prep = this.con.prepareStatement(sql);
+            prep.setInt(1, lvl);
+            prep.setInt(2, playerid);
+            prep.setInt(3, companionCounter);
             prep.executeUpdate();
 
         } catch (SQLException ex) {

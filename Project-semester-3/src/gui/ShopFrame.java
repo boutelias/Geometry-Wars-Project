@@ -125,7 +125,7 @@ public class ShopFrame extends javax.swing.JFrame {
         btnPreviousCompanion = new javax.swing.JButton();
         btnUpgradeCompanion = new javax.swing.JButton();
         current_ship1 = new javax.swing.JLabel();
-        current_selected_ship1 = new javax.swing.JLabel();
+        current_selected_companion = new javax.swing.JLabel();
         btnCompanionSelect = new javax.swing.JButton();
         btnCompanionBuy = new javax.swing.JButton();
         lblCompanionPrice = new javax.swing.JLabel();
@@ -383,9 +383,9 @@ public class ShopFrame extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblIconSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblBulletSpeed)))
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelUpgradesLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUpgradesLayout.createSequentialGroup()
                                         .addGroup(jPanelUpgradesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(lblBulletPower)
                                             .addComponent(lblIconSpeed4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -644,7 +644,7 @@ public class ShopFrame extends javax.swing.JFrame {
 
         current_ship1.setText("Selected Companion: ");
 
-        current_selected_ship1.setText("companionName");
+        current_selected_companion.setText("companionName");
 
         btnCompanionSelect.setText("SELECT");
         btnCompanionSelect.setSize(new java.awt.Dimension(160, 50));
@@ -685,7 +685,7 @@ public class ShopFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCompanionBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelCompanionLayout.createSequentialGroup()
-                                .addGap(150, 150, 150)
+                                .addGap(100, 100, 100)
                                 .addComponent(lblAfbeeldingCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(33, 33, 33)
                         .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,7 +697,7 @@ public class ShopFrame extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addComponent(current_ship1)
                         .addGap(18, 18, 18)
-                        .addComponent(current_selected_ship1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(current_selected_companion, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelCompanionLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(lblCompanionName, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -715,14 +715,13 @@ public class ShopFrame extends javax.swing.JFrame {
                         .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAfbeeldingCompanion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNextCompanion)
-                            .addComponent(btnPreviousCompanion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnPreviousCompanion)))
                     .addGroup(jPanelCompanionLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(current_ship1)
-                            .addComponent(current_selected_ship1))
-                        .addGap(100, 100, 100)))
+                            .addComponent(current_selected_companion))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelCompanionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCompanionPrice)
                     .addComponent(btnCompanionSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1088,9 +1087,22 @@ public class ShopFrame extends javax.swing.JFrame {
         lblUpgradeBarBulletPower.setIcon(levelofbulletdamageicon);
 
         //prices naast zetten
+    };
+    
+    private void refreshUpgradesCompanion(){
+        int level = GameDA.getInstance().getUpgradesCompanion(playerId, companionCounter);
+        if (level< 6) {
+            int companionLevelPrice = GameDA.getInstance().getPriceLevelofCompanion(level + 1);
+            lblCompanionGems.setText(Integer.toString(companionLevelPrice));
+            btnPlusCompanion.setEnabled(true);
+        } else {
+            btnPlusCompanion.setEnabled(false);
+            lblCompanionGems.setText("N/A");
+        }
+        ImageIcon levelicon = new ImageIcon("src/img/onderdelen/upgradeBar/bar-" + (level - 1) + ".png");
+        lblUpgradeBarCompanion.setIcon(levelicon);
+        
     }
-
-    ;
     
     private void btnBackUpgradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpgradesActionPerformed
         jPanelUpgrades.setVisible(false);
@@ -1104,6 +1116,7 @@ public class ShopFrame extends javax.swing.JFrame {
         jPanelCompanionUpgrades.setVisible(true);
         btnBackUpgrades.setVisible(true);
         btnUpgradeCompanion.setVisible(false);
+        refreshUpgradesCompanion();
     }//GEN-LAST:event_btnUpgradeCompanionActionPerformed
 
     private void btnClanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClanActionPerformed
@@ -1143,6 +1156,13 @@ public class ShopFrame extends javax.swing.JFrame {
         model.Character firstShip = allCharacters.get(charId);
         String spritename = firstShip.getSprite();
         current_selected_ship.setText(spritename);
+    }
+    
+    private void showSelectedCompanionCounter(){
+        
+        CompanionShop companion = allCompanions.get(companionId );
+        String spritename = companion.getSprite();
+        current_selected_companion.setText(spritename);
     }
 
     private void btnShipSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShipSelectActionPerformed
@@ -1206,11 +1226,27 @@ public class ShopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlusFireRateActionPerformed
 
     private void btnPlusCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusCompanionActionPerformed
-        // TODO add your handling code here:
+        int currentGeoms = GameDA.getInstance().getGeoms(playerId);
+        //Upgrades upgrades = GameDA.getInstance().getUpgrades(playerId, charCounter);
+        int level = GameDA.getInstance().getUpgradesCompanion(playerId, companionCounter);
+       // int leveloffirerate = upgrades.getLeveloffirerate();
+        int companionUpgradePrice = GameDA.getInstance().getPriceLevelofCompanion(level + 1);
+        if (currentGeoms >= companionUpgradePrice) {
+            int newBalance = currentGeoms - companionUpgradePrice;
+            GameDA.getInstance().setNewGeomBalance(newBalance, playerId);
+            
+            GameDA.getInstance().setCompanionUpgrade(playerId, companionCounter, level + 1);
+
+            getGeomsAndCoins();
+            refreshUpgradesCompanion();
+        } else {
+            JOptionPane.showMessageDialog(null, "Not enough geoms");
+        }
     }//GEN-LAST:event_btnPlusCompanionActionPerformed
 
     private void btnCompanionSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanionSelectActionPerformed
-        // TODO add your handling code here:
+        selectedCompanionCounter = companionId;
+        showSelectedCompanionCounter();
     }//GEN-LAST:event_btnCompanionSelectActionPerformed
 
     private void btnCompanionBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanionBuyActionPerformed
@@ -1344,8 +1380,8 @@ public class ShopFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnStartGame;
     private javax.swing.JButton btnUpgradeCompanion;
     private javax.swing.JButton btnUpgradeShip;
+    private javax.swing.JLabel current_selected_companion;
     private javax.swing.JLabel current_selected_ship;
-    private javax.swing.JLabel current_selected_ship1;
     private javax.swing.JLabel current_ship;
     private javax.swing.JLabel current_ship1;
     private javax.swing.JLabel jLabel1;
