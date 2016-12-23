@@ -133,7 +133,7 @@ public class GameGui {
         g.setColor(kleur);
         g.drawString("PLAYER1--" + Integer.toString(character.getLives()), 915, 30);
 
-        g.drawString("PLAYER1--" + Long.toString(character.getScore()), 130, 30);
+        g.drawString("PLAYER1--" + Long.toString(character.getScore()) + "(x" + character.getMultiplier() + ")", 130, 30);
 
         g.drawString("PLAYER1--" + Integer.toString(character.getNumberOfGeoms()), 1535, 30);
 
