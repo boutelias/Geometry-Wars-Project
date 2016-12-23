@@ -264,7 +264,7 @@
                           <Component id="lblIconGemsFireRate" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" pref="18" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblHitpoints" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -773,9 +773,6 @@
         <Component class="javax.swing.JButton" name="btnShipSelect">
           <Properties>
             <Property name="text" type="java.lang.String" value="SELECT"/>
-            <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[160, 50]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShipSelectActionPerformed"/>
@@ -784,9 +781,6 @@
         <Component class="javax.swing.JButton" name="btnShipBuy">
           <Properties>
             <Property name="text" type="java.lang.String" value="BUY"/>
-            <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[160, 50]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShipBuyActionPerformed"/>
@@ -952,9 +946,6 @@
         <Component class="javax.swing.JButton" name="btnCompanionSelect">
           <Properties>
             <Property name="text" type="java.lang.String" value="SELECT"/>
-            <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[160, 50]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCompanionSelectActionPerformed"/>
@@ -963,9 +954,6 @@
         <Component class="javax.swing.JButton" name="btnCompanionBuy">
           <Properties>
             <Property name="text" type="java.lang.String" value="BUY"/>
-            <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[160, 50]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCompanionBuyActionPerformed"/>

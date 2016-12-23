@@ -16,6 +16,7 @@ public class GameOverFrame extends javax.swing.JFrame {
      */
     private static long score;
     private static int geom;
+    private static String playername;
     
     public GameOverFrame(long score, int geom) {
         initComponents();
@@ -46,6 +47,7 @@ public class GameOverFrame extends javax.swing.JFrame {
         lblGeom = new javax.swing.JLabel();
         lblValueScore = new javax.swing.JLabel();
         lblValueGeom = new javax.swing.JLabel();
+        btnStart = new javax.swing.JButton();
         btnShop = new javax.swing.JButton();
         lblBackgroundGameOver = new javax.swing.JLabel();
 
@@ -86,6 +88,15 @@ public class GameOverFrame extends javax.swing.JFrame {
         getContentPane().add(lblValueGeom);
         lblValueGeom.setBounds(390, 330, 41, 22);
 
+        btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buttons/start.png"))); // NOI18N
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnStart);
+        btnStart.setBounds(610, 520, 160, 50);
+
         btnShop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/img/buttons/shop.png"))); // NOI18N
         btnShop.setText("btnShop");
         btnShop.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +105,7 @@ public class GameOverFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnShop);
-        btnShop.setBounds(600, 530, 160, 50);
+        btnShop.setBounds(610, 440, 160, 50);
 
         lblBackgroundGameOver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backgrounds/game-bg-gameover.png"))); // NOI18N
         getContentPane().add(lblBackgroundGameOver);
@@ -104,8 +115,15 @@ public class GameOverFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShopActionPerformed
-        // TODO add your handling code here:
+        // playername moet nog meegegeven wordenz
+        new ShopFrame(playername).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnShopActionPerformed
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        new StartGameFrame(playername).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnStartActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,6 +162,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShop;
+    private javax.swing.JButton btnStart;
     private javax.swing.JLabel lblBackgroundGameOver;
     private javax.swing.JLabel lblGameOver;
     private javax.swing.JLabel lblGeom;

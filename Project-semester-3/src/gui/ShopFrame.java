@@ -1011,7 +1011,9 @@ public class ShopFrame extends javax.swing.JFrame {
         btnBackUpgrades.setVisible(true);
         btnUpgradeShip.setVisible(false);
         refreshUpgrades();
-
+        btnShipSelect.setVisible(false);
+        btnPreviousShip.setVisible(false);
+        btnNextShip.setVisible(false);
     }//GEN-LAST:event_btnUpgradeShipActionPerformed
 
     private void refreshUpgrades() {
@@ -1110,6 +1112,12 @@ public class ShopFrame extends javax.swing.JFrame {
         btnBackUpgrades.setVisible(false);
         btnUpgradeShip.setVisible(true);
         btnUpgradeCompanion.setVisible(true);
+        btnShipSelect.setVisible(true);
+        btnCompanionSelect.setVisible(true);
+        btnPreviousCompanion.setVisible(true);
+        btnNextCompanion.setVisible(true);
+        btnPreviousShip.setVisible(true);
+        btnNextShip.setVisible(true);
     }//GEN-LAST:event_btnBackUpgradesActionPerformed
 
     private void btnUpgradeCompanionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpgradeCompanionActionPerformed
@@ -1117,6 +1125,9 @@ public class ShopFrame extends javax.swing.JFrame {
         btnBackUpgrades.setVisible(true);
         btnUpgradeCompanion.setVisible(false);
         refreshUpgradesCompanion();
+        btnCompanionSelect.setVisible(false);
+        btnPreviousCompanion.setVisible(false);
+        btnNextCompanion.setVisible(false);
     }//GEN-LAST:event_btnUpgradeCompanionActionPerformed
 
     private void btnClanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClanActionPerformed
