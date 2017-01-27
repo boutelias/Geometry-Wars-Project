@@ -327,7 +327,7 @@ public class StartGameFrame extends javax.swing.JFrame {
             Logger.getLogger(StartGameFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-       this.dispose();
+       //this.dispose();
     }//GEN-LAST:event_btnConfirmServerIPActionPerformed
 
     private void btnClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientActionPerformed
