@@ -110,6 +110,10 @@ public class Enemy implements Serializable{
     public int getHeight() {
         return height;
     }
+
+    public String getSprite() {
+        return sprite;
+    }
     
     
     

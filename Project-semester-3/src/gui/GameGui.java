@@ -123,10 +123,11 @@ public class GameGui {
         for (Bullet bullet : bullets) {
             g.fillOval(bullet.getPosX() - 10, bullet.getPosY() - 10, 20, 20);
         }
-        Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/enemies/bomber.png");
+        //Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/enemies/bomber.png");
 
         g.setColor(Color.red);
         for (Enemy enemy : enemies) {
+            Image enemySprite = Toolkit.getDefaultToolkit().getImage("src/img/enemies/"+enemy.getSprite());
             g.drawImage(enemySprite, enemy.getPosX() - (enemy.getWidth() / 2), enemy.getPosY() - (enemy.getHeight() / 2), enemy.getWidth(), enemy.getHeight(), null);
 
         }
